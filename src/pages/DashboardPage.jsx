@@ -1,8 +1,9 @@
 import { Typography } from "@mui/material"
+import DashboardContainer from "containers/DashboardContainer";
 
 const DashboardPage = () => {
     return (
-        <Typography>Dashboard Page Called</Typography>
+       <DashboardContainer/>
     )
 }
 

@@ -15,6 +15,8 @@ import {
   Stack,
   Toolbar,
 } from '@mui/material';
+import Header from 'components/header/Header';
+import Footer from 'components/footer/Footer';
 
 const AppLayoutContainer = () => {
   const navigate = useNavigate();
@@ -28,7 +30,7 @@ const AppLayoutContainer = () => {
         navigate('/');
       },
     },
-   
+
     {
       key: 'REPORTS',
       label: 'Reports',
@@ -50,7 +52,7 @@ const AppLayoutContainer = () => {
 
   return (
     <Stack>
-      <AppBar
+      {/* <AppBar
         position="sticky"
         color="transparent"
         sx={{ backgroundColor: 'white' }}
@@ -81,10 +83,30 @@ const AppLayoutContainer = () => {
             </Menu>
           </div>
         </Toolbar>
-      </AppBar>
+      </AppBar> */}
+      <Box
+        sx={{
+          width: '100%',
+          height: '130px',
+          background: '#f7f7f7',
+          marginBottom: '1rem',
+          textAlign: 'center',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+   
+       <Box sx={{maxWidth:'70%'}}>
+       <img style={{width:'100%'}} src="/advertise.jpg" />
+        </Box>
+       
+      </Box>
+      <Header />
       <Stack>
         <Outlet />
       </Stack>
+      <Footer />
     </Stack>
   );
 };
