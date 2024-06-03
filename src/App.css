@@ -1,0 +1,55 @@
+.mobileHeader{
+    display: none;
+}
+.sideNewCardsWidth{
+    max-width: 280px;
+}
+.MobileViewRemove{
+    display: flex;
+    }
+    .bottomSubHeadingCardWidth{
+        max-width: 200px;
+    }
+    .SubheadingImage{
+        width:320px; 
+        height: 120px
+    }
+@media (max-width: 775px) {
+    .sideNewCardsWidth{
+        max-width: 320px;
+    }
+    .SubheadingImage{
+        width:150px; 
+        height: auto
+    }
+    .DownlaodAppSection{
+        margin-left:10rem;
+    }
+    .MobileViewRemove{
+    display: none;
+    }
+    .mobileHeader{
+        display: block;
+    }
+    .BigNewsCardContainer{
+        flex-wrap: wrap;
+    }
+    .SideNewCards{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .bottomSubHeadingCardWidth{
+        max-width: 500px;
+    }
+  }
+@media (max-width: 1200px) {
+   .headCard{
+    flex-wrap:wrap;
+   }
+  }
+@media (max-width: 1000px) {
+   .BigNewsCardSection{
+    flex-wrap: wrap;
+   }
+  
+  }
