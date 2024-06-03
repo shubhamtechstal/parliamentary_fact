@@ -3,17 +3,17 @@ import React from 'react';
 import Text from '../Text';
 import images from 'helpers/images';
 
-export default function BottomSubHeadingCards({ type }) {
+export default function CenterBackgroudNewsCard() {
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
       <Box
         sx={{
-          width: type ? '200px' : '240px',
-          height: type ? '140px' : '160px',
+          width: '200px',
+          height: '120px',
         }}
       >
         <img
-          src={images.dummyNews3}
+          src={images.dummyNews4}
           style={{ height: '100%', width: '100%' }}
         />
       </Box>
@@ -34,20 +34,21 @@ export default function BottomSubHeadingCards({ type }) {
               fontSize: '0.625rem',
               fontWeight: 700,
             }}
-            text={'Cars'}
+            text={'Coronavirus'}
           ></Text>
         </Box>
         <Box>
           <Text
+            font={'Roboto'}
             sx={{
-              fontSize: '0.9rem',
+              fontSize: '0.8rem',
               fontWeight: 500,
               cursor: 'pointer',
               '&:hover': {
                 color: '#162eb7',
               },
             }}
-            text={`ऐसा कौन करता है! BMW वाले लूट ले गए Audi, रोका फिर लाठी लेकर गाड़ी से उतरे और कर डाला लाल-पीला`}
+            text={`APSC JE Recruitment 2024: लोक निर्माण विभाग में 80 जूनियर इंजीनियर की भर्ती, आवेदन 5 जून तक`}
           />
           <Box
             sx={{

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
-
+import '../../App.css';
 import {
   AccountCircleOutlined,
   NotificationsOutlined,
@@ -9,6 +9,7 @@ import {
   AppBar,
   Box,
   Button,
+  Container,
   IconButton,
   Menu,
   MenuItem,
@@ -17,6 +18,8 @@ import {
 } from '@mui/material';
 import Header from 'components/header/Header';
 import Footer from 'components/footer/Footer';
+import MobileHeader from 'components/header/MobileHeader';
+import Text from 'components/common/Text';
 
 const AppLayoutContainer = () => {
   const navigate = useNavigate();
@@ -84,25 +87,43 @@ const AppLayoutContainer = () => {
           </div>
         </Toolbar>
       </AppBar> */}
-      <Box
-        sx={{
-          width: '100%',
-          height: '130px',
-          background: '#f7f7f7',
-          marginBottom: '1rem',
-          textAlign: 'center',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-   
-       <Box sx={{maxWidth:'70%'}}>
-       <img style={{width:'100%'}} src="/advertise.jpg" />
+      <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+        <Box
+          className="MobileViewRemove"
+          sx={{
+            width: '92%',
+            background: '#f7f7f7',
+            padding: '0.3rem 0 1.2rem 0',
+            marginBottom: '1rem',
+            textAlign: 'center',
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundImage: 'url(Assets/circleblues.webp)', // Add your image URL here
+            backgroundSize: 'fill',
+            backgroundRepeat: 'repeat',
+            backgroundPosition: 'centerTop',
+          }}
+        >
+          <Box>
+            <Text
+              sx={{ color: '#767676', marginBottom: '5px', fontSize: '10px' }}
+              text={'-Advertisement-'}
+            />
+            <Box sx={{ maxWidth: '728px', height: '90px' }}>
+              <img
+                style={{ width: '100%', height: '100%' }}
+                src="/advertise.jpg"
+              />
+            </Box>
+          </Box>
         </Box>
-       
       </Box>
-      <Header />
+      <Box className="MobileViewRemove">
+        <Header />
+      </Box>
+      <Box className="mobileHeader">
+        <MobileHeader />
+      </Box>
       <Stack>
         <Outlet />
       </Stack>
