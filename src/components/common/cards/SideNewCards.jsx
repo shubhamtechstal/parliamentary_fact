@@ -12,7 +12,10 @@ export default function SideNewCards() {
           height: '60px',
         }}
       >
-        <img src={images.dummyNews5} style={{ height: '100%', width: '100%' }} />
+        <img
+          src={images.dummyNews5}
+          style={{ height: '100%', width: '100%' }}
+        />
       </Box>
       <Box
         sx={{
@@ -24,9 +27,15 @@ export default function SideNewCards() {
       >
         <Box>
           <Text
-            sx={{ fontSize: '0.8rem', fontWeight: 500, lineHeight: '17px',cursor:'pointer', '&:hover': {
-              color: '#162eb7',
-            }, }}
+            sx={{
+              fontSize: '0.8rem',
+              fontWeight: 500,
+              lineHeight: '17px',
+              cursor: 'pointer',
+              '&:hover': {
+                color: '#162eb7',
+              },
+            }}
             text={`
             विकसित देश के सपने को तोड़ते हादसे, नियम-कानून उल्लंघन पर विचार का समय`}
           />

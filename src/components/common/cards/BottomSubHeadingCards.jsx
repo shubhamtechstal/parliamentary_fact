@@ -12,7 +12,10 @@ export default function BottomSubHeadingCards({ type }) {
           height: type ? '140px' : '160px',
         }}
       >
-        <img src={images.dummyNews3} style={{ height: '100%', width: '100%' }} />
+        <img
+          src={images.dummyNews3}
+          style={{ height: '100%', width: '100%' }}
+        />
       </Box>
       <Box
         sx={{
@@ -35,10 +38,15 @@ export default function BottomSubHeadingCards({ type }) {
           ></Text>
         </Box>
         <Box>
-          <Text 
-            sx={{ fontSize: '0.9rem', fontWeight: 500,cursor:'pointer', '&:hover': {
-              color: '#162eb7',
-            }, }}
+          <Text
+            sx={{
+              fontSize: '0.9rem',
+              fontWeight: 500,
+              cursor: 'pointer',
+              '&:hover': {
+                color: '#162eb7',
+              },
+            }}
             text={`ऐसा कौन करता है! BMW वाले लूट ले गए Audi, रोका फिर लाठी लेकर गाड़ी से उतरे और कर डाला लाल-पीला`}
           />
           <Box

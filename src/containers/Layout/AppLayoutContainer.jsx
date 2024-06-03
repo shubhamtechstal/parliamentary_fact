@@ -87,32 +87,36 @@ const AppLayoutContainer = () => {
           </div>
         </Toolbar>
       </AppBar> */}
-      <Box sx={{width:'100%',display:'flex',justifyContent:'center'}}>
-      <Box
-        className="MobileViewRemove"
-        sx={{
-          width: '92%',
-          background: '#f7f7f7',
-          padding: '0.3rem 0 1.2rem 0',
-          marginBottom:'1rem',
-          textAlign: 'center',
-          alignItems: 'center',
-          justifyContent: 'center',
-          backgroundImage:
-          'url(Assets/circleblues.webp)', // Add your image URL here
-        backgroundSize: 'fill', 
-        backgroundRepeat: 'repeat', 
-        backgroundPosition: 'centerTop',
-        }}
-      >
-        <Box>
-        <Text sx={{color: '#767676',marginBottom:'5px',
-    fontSize: '10px'}} text={'-Advertisement-'}/>
-        <Box sx={{ maxWidth: '728px', height: '90px' }}>
-          <img style={{ width: '100%', height: '100%' }} src="/advertise.jpg" />
+      <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+        <Box
+          className="MobileViewRemove"
+          sx={{
+            width: '92%',
+            background: '#f7f7f7',
+            padding: '0.3rem 0 1.2rem 0',
+            marginBottom: '1rem',
+            textAlign: 'center',
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundImage: 'url(Assets/circleblues.webp)', // Add your image URL here
+            backgroundSize: 'fill',
+            backgroundRepeat: 'repeat',
+            backgroundPosition: 'centerTop',
+          }}
+        >
+          <Box>
+            <Text
+              sx={{ color: '#767676', marginBottom: '5px', fontSize: '10px' }}
+              text={'-Advertisement-'}
+            />
+            <Box sx={{ maxWidth: '728px', height: '90px' }}>
+              <img
+                style={{ width: '100%', height: '100%' }}
+                src="/advertise.jpg"
+              />
+            </Box>
+          </Box>
         </Box>
-        </Box>
-      </Box>
       </Box>
       <Box className="MobileViewRemove">
         <Header />

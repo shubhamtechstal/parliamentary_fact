@@ -24,7 +24,7 @@ export default function CategoriesContainer() {
           className="MobileViewRemove"
           sx={{ width: '8rem', height: '43.5rem', background: '#0d0b52' }}
         ></Box>
-        <Box  sx={{width:'100%',}}>
+        <Box sx={{ width: '100%' }}>
           <Box
             sx={{
               background: '#f7f7f7',
@@ -41,7 +41,10 @@ export default function CategoriesContainer() {
               sx={{ height: '250px', width: '300px', background: '#abb8c3' }}
             ></Box>
           </Box>
-          <Box className="BigNewsCardContainer" sx={{ display: 'flex',gap:'1rem' }}>
+          <Box
+            className="BigNewsCardContainer"
+            sx={{ display: 'flex', gap: '1rem' }}
+          >
             <Box sx={{ padding: '1rem', maxWidth: '750px' }}>
               <Text
                 text={'Virus confronts'}
@@ -64,13 +67,22 @@ export default function CategoriesContainer() {
                         justifyContent: 'center',
                       }}
                     >
-                        <Box>
-        <Text sx={{color: '#767676',marginBottom:'5px',
-    fontSize: '10px'}} text={'-Advertisement-'}/>
-        <Box sx={{ maxWidth: '650px', height: '80px' }}>
-          <img style={{ width: '100%', height: '100%' }} src="/advertise.jpg" />
-        </Box>
-        </Box>
+                      <Box>
+                        <Text
+                          sx={{
+                            color: '#767676',
+                            marginBottom: '5px',
+                            fontSize: '10px',
+                          }}
+                          text={'-Advertisement-'}
+                        />
+                        <Box sx={{ maxWidth: '650px', height: '80px' }}>
+                          <img
+                            style={{ width: '100%', height: '100%' }}
+                            src="/advertise.jpg"
+                          />
+                        </Box>
+                      </Box>
                     </Box>
                   )}
                 </>
@@ -155,12 +167,17 @@ export default function CategoriesContainer() {
           justifyContent: 'center',
         }}
       >
-       <Box>
-        <Text sx={{color: '#767676',marginBottom:'5px',
-    fontSize: '10px'}} text={'-Advertisement-'}/>
-        <Box sx={{ maxWidth: '728px', height: '90px' }}>
-          <img style={{ width: '100%', height: '100%' }} src="/advertise.jpg" />
-        </Box>
+        <Box>
+          <Text
+            sx={{ color: '#767676', marginBottom: '5px', fontSize: '10px' }}
+            text={'-Advertisement-'}
+          />
+          <Box sx={{ maxWidth: '728px', height: '90px' }}>
+            <img
+              style={{ width: '100%', height: '100%' }}
+              src="/advertise.jpg"
+            />
+          </Box>
         </Box>
       </Box>
     </>

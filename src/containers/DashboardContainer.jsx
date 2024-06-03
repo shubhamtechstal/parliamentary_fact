@@ -26,7 +26,7 @@ export default function DashboardContainer() {
           className="MobileViewRemove"
           sx={{ width: '8rem', height: '43.5rem', background: '#0d0b52' }}
         ></Box>
-        <Box sx={{width:'100%',}}>
+        <Box sx={{ width: '100%' }}>
           <Box
             sx={{
               background: '#f7f7f7',
@@ -48,7 +48,10 @@ export default function DashboardContainer() {
               }}
             ></Box>
           </Box>
-          <Box className="BigNewsCardContainer" sx={{ display: 'flex',gap:'1rem' }}>
+          <Box
+            className="BigNewsCardContainer"
+            sx={{ display: 'flex', gap: '1rem' }}
+          >
             <Box sx={{ padding: '1rem', maxWidth: '750px' }}>
               <Text
                 text={'Virus confronts'}
@@ -97,19 +100,24 @@ export default function DashboardContainer() {
           height: '130px',
           background: '#f7f7f7',
           marginBottom: '1rem',
-          padding:'1rem 0',
+          padding: '1rem 0',
           textAlign: 'center',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
         }}
       >
-         <Box>
-        <Text sx={{color: '#767676',marginBottom:'5px',
-    fontSize: '10px'}} text={'-Advertisement-'}/>
-        <Box sx={{ maxWidth: '728px', height: '90px' }}>
-          <img style={{ width: '100%', height: '100%' }} src="/advertise.jpg" />
-        </Box>
+        <Box>
+          <Text
+            sx={{ color: '#767676', marginBottom: '5px', fontSize: '10px' }}
+            text={'-Advertisement-'}
+          />
+          <Box sx={{ maxWidth: '728px', height: '90px' }}>
+            <img
+              style={{ width: '100%', height: '100%' }}
+              src="/advertise.jpg"
+            />
+          </Box>
         </Box>
       </Box>
       <Box
@@ -153,7 +161,7 @@ export default function DashboardContainer() {
 
       <Box
         className="BigNewsCardContainer"
-        sx={{ display: 'flex', justifyContent: 'center',gap:'1rem' }}
+        sx={{ display: 'flex', justifyContent: 'center', gap: '1rem' }}
       >
         <Box sx={{ padding: '1rem', maxWidth: '750px' }}>
           <Text
@@ -188,13 +196,18 @@ export default function DashboardContainer() {
               justifyContent: 'center',
             }}
           >
-          <Box>
-        <Text sx={{color: '#767676',marginBottom:'5px',
-    fontSize: '10px'}} text={'-Advertisement-'}/>
-        <Box sx={{ maxWidth: '650px', height: '80px' }}>
-          <img style={{ width: '100%', height: '100%' }} src="/advertise.jpg" />
-        </Box>
-        </Box>
+            <Box>
+              <Text
+                sx={{ color: '#767676', marginBottom: '5px', fontSize: '10px' }}
+                text={'-Advertisement-'}
+              />
+              <Box sx={{ maxWidth: '650px', height: '80px' }}>
+                <img
+                  style={{ width: '100%', height: '100%' }}
+                  src="/advertise.jpg"
+                />
+              </Box>
+            </Box>
           </Box>
           <Box sx={{ background: '#f7f7f7', padding: '0.5rem 1rem' }}>
             <Text
@@ -225,16 +238,16 @@ export default function DashboardContainer() {
               </Box>
             </Box>
           </Box>
-        
+
           <Box
             className="BigNewsCardContainer"
-            sx={{ display: 'flex', gap: '1rem',marginTop:'1rem' }}
+            sx={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}
           >
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            <Text
-            text={'Virus confronts'}
-            sx={{ fontWeight: 700, margin: '0.5rem 0' }}
-          />
+              <Text
+                text={'Virus confronts'}
+                sx={{ fontWeight: 700, margin: '0.5rem 0' }}
+              />
               <SubHeadingNewCard textWidth={'280px'} />
               <SubHeadingNewCard textWidth={'280px'} />
               <SubHeadingNewCard textWidth={'280px'} />
@@ -285,7 +298,7 @@ export default function DashboardContainer() {
               borderRight: '7px solid #f7f7f7',
             }}
           ></Box>
-          <Box className = 'sideNewCardsWidth'>
+          <Box className="sideNewCardsWidth">
             <Text
               text={'Virus confronts'}
               sx={{ fontWeight: 700, margin: '1rem 0rem' }}
@@ -306,7 +319,7 @@ export default function DashboardContainer() {
                 borderRight: '7px solid #f7f7f7',
               }}
             ></Box>
-             <Text
+            <Text
               text={'Virus confronts'}
               sx={{ fontWeight: 700, margin: '1rem 0rem' }}
             />
@@ -327,16 +340,21 @@ export default function DashboardContainer() {
           textAlign: 'center',
           display: 'flex',
           alignItems: 'center',
-          padding:'1rem 0',
+          padding: '1rem 0',
           justifyContent: 'center',
         }}
       >
         <Box>
-        <Text sx={{color: '#767676',marginBottom:'5px',
-    fontSize: '10px'}} text={'-Advertisement-'}/>
-        <Box sx={{ maxWidth: '728px', height: '90px' }}>
-          <img style={{ width: '100%', height: '100%' }} src="/advertise.jpg" />
-        </Box>
+          <Text
+            sx={{ color: '#767676', marginBottom: '5px', fontSize: '10px' }}
+            text={'-Advertisement-'}
+          />
+          <Box sx={{ maxWidth: '728px', height: '90px' }}>
+            <img
+              style={{ width: '100%', height: '100%' }}
+              src="/advertise.jpg"
+            />
+          </Box>
         </Box>
       </Box>
     </>

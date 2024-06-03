@@ -19,15 +19,15 @@ export default function HeadingNewCards() {
           maxHeight: '240px',
         }}
       >
-         <iframe
-        width="100%"
-        height="100%"
-        src={"https://www.youtube.com/embed/mcJvi7GVpy0?si=MCATw8rJ5DwH93uk"}
-        title="YouTube video player"
-        frameBorder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-      ></iframe>
+        <iframe
+          width="100%"
+          height="100%"
+          src={'https://www.youtube.com/embed/mcJvi7GVpy0?si=MCATw8rJ5DwH93uk'}
+          title="YouTube video player"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        ></iframe>
       </Box>
       <Box
         sx={{
@@ -41,10 +41,17 @@ export default function HeadingNewCards() {
       >
         <Box>
           <Text
-            sx={{ fontSize: '1.5rem', fontWeight: 700,cursor:'pointer', '&:hover': {
-              color: '#162eb7',
-            }, }}
-            text={'Lok Sabha Election 2024: आपके राज्‍य में किस सीट पर कब होगा मतदान; यहां देखिए चुनावी शेड्यूल'}
+            sx={{
+              fontSize: '1.5rem',
+              fontWeight: 700,
+              cursor: 'pointer',
+              '&:hover': {
+                color: '#162eb7',
+              },
+            }}
+            text={
+              'Lok Sabha Election 2024: आपके राज्‍य में किस सीट पर कब होगा मतदान; यहां देखिए चुनावी शेड्यूल'
+            }
           />
           <Box sx={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
             <Text
@@ -71,12 +78,17 @@ export default function HeadingNewCards() {
             ></Text>
           </Box>
         </Box>
-        <Text font={"Roboto"}
-          sx={{ color: '#767676', fontSize: '0.75rem', display: '-webkit-box',
-          WebkitBoxOrient: 'vertical',
-          WebkitLineClamp: 3,
-          overflow: 'hidden',
-          textOverflow: 'ellipsis', }}
+        <Text
+          font={'Roboto'}
+          sx={{
+            color: '#767676',
+            fontSize: '0.75rem',
+            display: '-webkit-box',
+            WebkitBoxOrient: 'vertical',
+            WebkitLineClamp: 3,
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+          }}
           text={
             'देश में 18वीं लोकसभा के लिए सात चरणों में चुनाव हो रहा है। पहले चरण में 21 राज्‍यों की 102 सीटों पर मतदान 19 अप्रैल को हुआ। दूसरे चरण में 13 राज्‍यों की 89 लोकसभा सीट पर 26 अप्रैल को चुनाव होना है।'
           }

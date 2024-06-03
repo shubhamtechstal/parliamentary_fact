@@ -12,7 +12,10 @@ export default function CenterBackgroudNewsCard() {
           height: '120px',
         }}
       >
-        <img src={images.dummyNews4} style={{ height: '100%', width: '100%' }} />
+        <img
+          src={images.dummyNews4}
+          style={{ height: '100%', width: '100%' }}
+        />
       </Box>
       <Box
         sx={{
@@ -35,10 +38,16 @@ export default function CenterBackgroudNewsCard() {
           ></Text>
         </Box>
         <Box>
-          <Text font={"Roboto"}
-            sx={{ fontSize: '0.8rem', fontWeight: 500 ,cursor:'pointer', '&:hover': {
-              color: '#162eb7',
-            },}}
+          <Text
+            font={'Roboto'}
+            sx={{
+              fontSize: '0.8rem',
+              fontWeight: 500,
+              cursor: 'pointer',
+              '&:hover': {
+                color: '#162eb7',
+              },
+            }}
             text={`APSC JE Recruitment 2024: लोक निर्माण विभाग में 80 जूनियर इंजीनियर की भर्ती, आवेदन 5 जून तक`}
           />
           <Box

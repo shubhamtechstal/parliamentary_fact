@@ -4,7 +4,7 @@ import '../../App.css';
 import React from 'react';
 
 export default function DownloadAppSection() {
-  const arr = [1,2,3,4,5,6,7,8,9,10,11];
+  const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
   return (
     <Box
       sx={{
@@ -33,29 +33,36 @@ export default function DownloadAppSection() {
           justifyContent: 'center',
         }}
       >
-       {arr.map((val)=>(
-        <Box key={val} sx={{display:'flex',flexDirection:'column',alignItems:'center'}}>
+        {arr.map((val) => (
           <Box
+            key={val}
             sx={{
-              height: '60px',
-              width: '60px',
-              borderRadius: '500px',
-              background: '#abb8c3',
-              textAlign: 'center',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
             }}
-          ></Box>
-          <Text
-            text={'Download App'}
-            sx={{
-              maxWidth: '5rem',
-              textAlign: 'center',
-              color: '#767676',
-              fontSize: '0.75rem',
-              textWrap:'wrap'
-            }}
-          />
-        </Box>
-       ))} 
+          >
+            <Box
+              sx={{
+                height: '60px',
+                width: '60px',
+                borderRadius: '500px',
+                background: '#abb8c3',
+                textAlign: 'center',
+              }}
+            ></Box>
+            <Text
+              text={'Download App'}
+              sx={{
+                maxWidth: '5rem',
+                textAlign: 'center',
+                color: '#767676',
+                fontSize: '0.75rem',
+                textWrap: 'wrap',
+              }}
+            />
+          </Box>
+        ))}
       </Box>
     </Box>
   );

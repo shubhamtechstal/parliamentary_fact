@@ -32,7 +32,7 @@ export default function Footer() {
   ];
 
   return (
-    <Box sx={{ width: '100%', background: '#bdbdbd',padding:'0 1rem' }}>
+    <Box sx={{ width: '100%', background: '#bdbdbd', padding: '0 1rem' }}>
       <Box
         sx={{
           margin: '2rem 0',
@@ -50,9 +50,9 @@ export default function Footer() {
                 color: '#abb8c3',
                 background: '#000',
                 padding: '0 0.4rem',
-                height:'30px',
-                width:'30px',
-                textAlign:'center',
+                height: '30px',
+                width: '30px',
+                textAlign: 'center',
                 fontSize: '1.3rem',
                 fontWeight: 800,
               }}
@@ -63,9 +63,9 @@ export default function Footer() {
                 color: '#abb8c3',
                 background: '#000',
                 padding: '0 0.4rem',
-                height:'30px',
-                width:'30px',
-                textAlign:'center',
+                height: '30px',
+                width: '30px',
+                textAlign: 'center',
                 fontSize: '1.3rem',
                 fontWeight: 800,
               }}
@@ -76,9 +76,9 @@ export default function Footer() {
                 color: '#abb8c3',
                 background: '#000',
                 padding: '0 0.4rem',
-                height:'30px',
-                width:'30px',
-                textAlign:'center',
+                height: '30px',
+                width: '30px',
+                textAlign: 'center',
                 fontSize: '1.3rem',
                 fontWeight: 800,
               }}
@@ -156,9 +156,14 @@ export default function Footer() {
               }}
             />
             <Text
-              sx={{ fontWeight: 800, fontSize: '0.8rem', cursor: 'pointer', '&:hover': {
-                color: '#162eb7',
-              }, }}
+              sx={{
+                fontWeight: 800,
+                fontSize: '0.8rem',
+                cursor: 'pointer',
+                '&:hover': {
+                  color: '#162eb7',
+                },
+              }}
               text={'Read about our approach to external linking'}
             />
           </Box>

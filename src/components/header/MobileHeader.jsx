@@ -30,16 +30,16 @@ export default function MobileHeader() {
     left: 0;
   }
 `;
-const options = [
-  { head: 'Home',link:'/' },
-  { head: 'News', subhead: 'check' },
-  { head: 'Coronavirus', subhead: 'check' },
-  { head: 'Videos',link:'/categories' },
-  { head: 'Health' },
-  { head: 'Stories' },
-  { head: 'Local news' },
-  { head: 'More', subhead: 'check' },
-];
+  const options = [
+    { head: 'Home', link: '/' },
+    { head: 'News', subhead: 'check' },
+    { head: 'Coronavirus', subhead: 'check' },
+    { head: 'Videos', link: '/categories' },
+    { head: 'Health' },
+    { head: 'Stories' },
+    { head: 'Local news' },
+    { head: 'More', subhead: 'check' },
+  ];
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [Search, setSearch] = useState(false);
   const open = Boolean(anchorEl);
@@ -185,7 +185,11 @@ const options = [
                   />
                 </Box>
                 {options.map((option) => (
-                  <Box onClick={()=>{navigate(option.link),handleClose()}}>
+                  <Box
+                    onClick={() => {
+                      navigate(option.link), handleClose();
+                    }}
+                  >
                     <Text
                       sx={{
                         width: '100%',

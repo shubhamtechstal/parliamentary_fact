@@ -7,7 +7,10 @@ export default function SubHeadingNewCard({ textWidth }) {
   return (
     <Box sx={{ display: 'flex', gap: '1rem' }}>
       <Box className="SubheadingImage">
-        <img src={images.dummyNews2} style={{ height: '100%', width: '100%' }} />
+        <img
+          src={images.dummyNews2}
+          style={{ height: '100%', width: '100%' }}
+        />
       </Box>
       <Box
         sx={{
@@ -31,9 +34,14 @@ export default function SubHeadingNewCard({ textWidth }) {
         </Box>
         <Box>
           <Text
-            sx={{ fontSize: '0.9rem', fontWeight: 600,cursor:'pointer', '&:hover': {
-              color: '#162eb7',
-            }, }}
+            sx={{
+              fontSize: '0.9rem',
+              fontWeight: 600,
+              cursor: 'pointer',
+              '&:hover': {
+                color: '#162eb7',
+              },
+            }}
             text={`Mango Bubble Tea Recipe: घर पर बनाकर पिएं ठंडी-ठंडी बबल टी, ये रही इसकी आसान रेसिपी`}
           />
           <Box
