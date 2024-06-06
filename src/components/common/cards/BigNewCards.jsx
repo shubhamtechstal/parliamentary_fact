@@ -1,10 +1,11 @@
 import { Box, Card, CardContent, CardMedia } from '@mui/material';
 import React from 'react';
 import Text from '../Text';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import images from 'helpers/images';
 
 export default function BigNewCards() {
+  const navigate = useNavigate();
   return (
     <Card sx={{ maxWidth: 450, boxShadow: 'none', borderRadius: '0' }}>
       <CardMedia
@@ -26,9 +27,9 @@ export default function BigNewCards() {
             text={'Coronavirus'}
           ></Text>
         </Box>
-        <Text
+        <Text onClick={()=>navigate('/details')}
           sx={{
-            fontWeight: '600',
+            fontWeight: '700',
             marginTop: '1rem',
             fontSize: '1.5rem',
             lineHeight: '1.8rem',

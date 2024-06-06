@@ -23,8 +23,8 @@ import Text from 'components/common/Text';
 
 const AppLayoutContainer = () => {
   const navigate = useNavigate();
-  const [accountAnchorEl, setAccountAnchorEl] = useState(null);
-
+  const [menuOpen, setMenuOpen] = useState(false);
+  
   const menuOptions = [
     {
       key: 'DASHBOARD',
@@ -43,18 +43,18 @@ const AppLayoutContainer = () => {
     },
   ];
 
-  const handleAccountMenuClick = () => {
-    setAccountAnchorEl(event.currentTarget);
-  };
+  // const handleAccountMenuClick = () => {
+  //   setAccountAnchorEl(event.currentTarget);
+  // };
 
-  const handleAccountMenuClose = () => {
-    setAccountAnchorEl(null);
-  };
+  // const handleAccountMenuClose = () => {
+  //   setAccountAnchorEl(null);
+  // };
 
   const handleLogoutClick = () => {};
 
   return (
-    <Stack>
+    <Stack className="MainContainer"sx={{maxHeight:menuOpen?'100vh':'100%'}}>
       {/* <AppBar
         position="sticky"
         color="transparent"
@@ -122,9 +122,9 @@ const AppLayoutContainer = () => {
         <Header />
       </Box>
       <Box className="mobileHeader">
-        <MobileHeader />
+        <MobileHeader menuOpen={setMenuOpen} />
       </Box>
-      <Stack>
+      <Stack sx={{overflow:'visible'}}>
         <Outlet />
       </Stack>
       <Footer />
