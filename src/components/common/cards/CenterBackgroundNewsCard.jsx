@@ -2,8 +2,10 @@ import { Box } from '@mui/material';
 import React from 'react';
 import Text from '../Text';
 import images from 'helpers/images';
+import { useNavigate } from 'react-router-dom';
 
 export default function CenterBackgroudNewsCard() {
+  const navigate = useNavigate();
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
       <Box
@@ -37,8 +39,8 @@ export default function CenterBackgroudNewsCard() {
             text={'Coronavirus'}
           ></Text>
         </Box>
-        <Box>
-          <Text
+        <Box> 
+          <Text onClick={()=>navigate('/details')}
             font={'Roboto'}
             sx={{
               fontSize: '0.8rem',

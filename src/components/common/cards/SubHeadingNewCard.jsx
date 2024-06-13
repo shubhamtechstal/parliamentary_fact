@@ -2,8 +2,10 @@ import { Box } from '@mui/material';
 import Text from '../Text';
 import images from 'helpers/images';
 import '../../../App.css';
+import { useNavigate } from 'react-router-dom';
 
 export default function SubHeadingNewCard({ textWidth }) {
+  const navigate = useNavigate()
   return (
     <Box sx={{ display: 'flex', gap: '1rem' }}>
       <Box className="SubheadingImage">
@@ -33,7 +35,7 @@ export default function SubHeadingNewCard({ textWidth }) {
           ></Text>
         </Box>
         <Box>
-          <Text
+          <Text onClick={()=>navigate('/details')}
             sx={{
               fontSize: '0.9rem',
               fontWeight: 600,

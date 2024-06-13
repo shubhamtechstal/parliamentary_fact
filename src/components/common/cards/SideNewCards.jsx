@@ -2,8 +2,10 @@ import { Box } from '@mui/material';
 import React from 'react';
 import Text from '../Text';
 import images from 'helpers/images';
+import { useNavigate } from 'react-router-dom';
 
 export default function SideNewCards() {
+  const navigate = useNavigate();
   return (
     <Box sx={{ display: 'flex', gap: '1rem' }}>
       <Box
@@ -26,7 +28,7 @@ export default function SideNewCards() {
         }}
       >
         <Box>
-          <Text
+          <Text onClick={()=>navigate('/details')}
             sx={{
               fontSize: '0.8rem',
               fontWeight: 500,

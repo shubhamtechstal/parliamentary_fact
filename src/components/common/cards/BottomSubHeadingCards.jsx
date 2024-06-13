@@ -2,8 +2,10 @@ import { Box } from '@mui/material';
 import React from 'react';
 import Text from '../Text';
 import images from 'helpers/images';
+import { useNavigate } from 'react-router-dom';
 
 export default function BottomSubHeadingCards({ type }) {
+  const navigate = useNavigate();
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
       <Box
@@ -38,7 +40,7 @@ export default function BottomSubHeadingCards({ type }) {
           ></Text>
         </Box>
         <Box>
-          <Text
+          <Text onClick={()=>navigate('/details')}
             sx={{
               fontSize: '0.9rem',
               fontWeight: 500,

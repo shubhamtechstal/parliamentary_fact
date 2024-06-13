@@ -1,6 +1,15 @@
 .mobileHeader{
     display: none;
 }
+.DetailsContainer{
+    width: 60%;
+}
+.sticky {
+    position: -webkit-sticky; /* For Safari */
+    position: sticky;
+    top: 1rem; /* Adjust as needed to provide spacing from the top */
+  }
+  
 .sideNewCardsWidth{
     max-width: 280px;
 }
@@ -15,6 +24,12 @@
         height: 120px
     }
 @media (max-width: 775px) {
+    .MainContainer{
+        overflow-y: hidden;
+    }
+    .DetailsContainer{
+        width: 100%;
+    }
     .sideNewCardsWidth{
         max-width: 320px;
     }

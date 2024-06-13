@@ -1,20 +1,9 @@
 import { useState } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import '../../App.css';
 import {
-  AccountCircleOutlined,
-  NotificationsOutlined,
-} from '@mui/icons-material';
-import {
-  AppBar,
   Box,
-  Button,
-  Container,
-  IconButton,
-  Menu,
-  MenuItem,
   Stack,
-  Toolbar,
 } from '@mui/material';
 import Header from 'components/header/Header';
 import Footer from 'components/footer/Footer';
@@ -22,71 +11,10 @@ import MobileHeader from 'components/header/MobileHeader';
 import Text from 'components/common/Text';
 
 const AppLayoutContainer = () => {
-  const navigate = useNavigate();
-  const [accountAnchorEl, setAccountAnchorEl] = useState(null);
-
-  const menuOptions = [
-    {
-      key: 'DASHBOARD',
-      label: 'Dashboard',
-      onClick: () => {
-        navigate('/');
-      },
-    },
-
-    {
-      key: 'REPORTS',
-      label: 'Reports',
-      onClick: () => {
-        navigate('/reports');
-      },
-    },
-  ];
-
-  const handleAccountMenuClick = () => {
-    setAccountAnchorEl(event.currentTarget);
-  };
-
-  const handleAccountMenuClose = () => {
-    setAccountAnchorEl(null);
-  };
-
-  const handleLogoutClick = () => {};
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <Stack>
-      {/* <AppBar
-        position="sticky"
-        color="transparent"
-        sx={{ backgroundColor: 'white' }}
-      >
-        <Toolbar>
-          {menuOptions.map((menu) => (
-            <Button onClick={() => menu.onClick()} size="large" variant="text" key={`menu_${menu.key}`}>
-              {menu.label}
-            </Button>
-          ))}
-          <Box sx={{ flexGrow: 1 }} />
-          <IconButton color="primary">
-            <NotificationsOutlined />
-          </IconButton>
-          <div>
-            <IconButton onClick={handleAccountMenuClick}>
-              <AccountCircleOutlined />
-            </IconButton>
-            <Menu
-              keepMounted
-              onClose={handleAccountMenuClose}
-              anchorEl={accountAnchorEl}
-              anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-              transformOrigin={{ horizontal: 'right', vertical: 'center' }}
-              open={Boolean(accountAnchorEl)}
-            >
-              <MenuItem onClick={handleLogoutClick}>Logout</MenuItem>
-            </Menu>
-          </div>
-        </Toolbar>
-      </AppBar> */}
+    <Stack className="MainContainer"sx={{maxHeight:menuOpen?'100vh':'100%'}}>
       <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
         <Box
           className="MobileViewRemove"
@@ -122,9 +50,9 @@ const AppLayoutContainer = () => {
         <Header />
       </Box>
       <Box className="mobileHeader">
-        <MobileHeader />
+        <MobileHeader menuOpen={setMenuOpen} />
       </Box>
-      <Stack>
+      <Stack sx={{overflow:'visible'}}>
         <Outlet />
       </Stack>
       <Footer />

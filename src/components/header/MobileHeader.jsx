@@ -4,15 +4,11 @@ import React, { useState } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
 import IconButton from '@mui/material/IconButton';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { Typography } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import images from 'helpers/images';
 import { useNavigate } from 'react-router-dom';
 
-export default function MobileHeader() {
+export default function MobileHeader({menuOpen}) {
   const navigate = useNavigate();
   const slideInFromLeft = keyframes`
   from {
@@ -45,10 +41,12 @@ export default function MobileHeader() {
   const open = Boolean(anchorEl);
   const handleClick = () => {
     setAnchorEl(!anchorEl);
+    menuOpen(!anchorEl)
   };
   const handleClose = () => {
     setAnchorEl(null);
     setSearch(false);
+    menuOpen(false)
   };
   const ITEM_HEIGHT = 100;
   return (
@@ -100,7 +98,7 @@ export default function MobileHeader() {
               'url(https://demo.tagdiv.com/newspaper_covid19_news_pro/wp-content/uploads/2020/03/17.jpg)', // Add your image URL here
             backgroundSize: 'cover', // Cover the entire area
             backgroundRepeat: 'no-repeat', // Avoid repeating the image
-            backgroundPosition: 'centerTop',
+            backgroundPosition: 'center',
             zIndex: 999,
             animation: Search
               ? `${slideInFromRight} 0.5s ease-out forwards`

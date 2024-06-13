@@ -2,8 +2,10 @@ import { Box } from '@mui/material';
 import React from 'react';
 import Text from '../Text';
 import '../../../App.css';
+import { useNavigate } from 'react-router-dom';
 
 export default function HeadingNewCards() {
+  const navigate = useNavigate();
   return (
     <Box
       className="headCard"
@@ -40,7 +42,7 @@ export default function HeadingNewCards() {
         }}
       >
         <Box>
-          <Text
+          <Text onClick={()=>navigate('/details')}
             sx={{
               fontSize: '1.5rem',
               fontWeight: 700,
