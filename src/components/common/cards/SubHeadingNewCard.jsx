@@ -4,14 +4,14 @@ import images from 'helpers/images';
 import '../../../App.css';
 import { useNavigate } from 'react-router-dom';
 
-export default function SubHeadingNewCard({ textWidth }) {
+export default function SubHeadingNewCard({ textWidth,data }) {
   const navigate = useNavigate()
   return (
     <Box sx={{ display: 'flex', gap: '1rem' }}>
       <Box className="SubheadingImage">
         <img
           src={images.dummyNews2}
-          style={{ height: '100%', width: '100%' }}
+          style={{ height: '100%', width: '200px' }}
         />
       </Box>
       <Box
@@ -31,7 +31,7 @@ export default function SubHeadingNewCard({ textWidth }) {
               fontSize: '0.625rem',
               fontWeight: 700,
             }}
-            text={'Coronavirus'}
+            text={data?.category}
           ></Text>
         </Box>
         <Box>
@@ -44,7 +44,7 @@ export default function SubHeadingNewCard({ textWidth }) {
                 color: '#162eb7',
               },
             }}
-            text={`Mango Bubble Tea Recipe: घर पर बनाकर पिएं ठंडी-ठंडी बबल टी, ये रही इसकी आसान रेसिपी`}
+            text={data?.title}
           />
           <Box
             sx={{
@@ -56,11 +56,11 @@ export default function SubHeadingNewCard({ textWidth }) {
           >
             <Text
               sx={{ fontWeight: 700, fontSize: '0.7rem' }}
-              text={'Stephen Romero'}
+              text={data?.author}
             ></Text>
             <Text
               sx={{ textAlign: 'center', color: '#767676', fontSize: '0.7rem' }}
-              text={'19/03/2020 - 10:48'}
+              text={data?.date}
             ></Text>
           </Box>
         </Box>

@@ -26,7 +26,7 @@ const AppLayoutContainer = () => {
             textAlign: 'center',
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundImage: 'url(Assets/circleblues.webp)', // Add your image URL here
+            backgroundImage: 'url(Assets/circleblues.webp)',
             backgroundSize: 'fill',
             backgroundRepeat: 'repeat',
             backgroundPosition: 'centerTop',

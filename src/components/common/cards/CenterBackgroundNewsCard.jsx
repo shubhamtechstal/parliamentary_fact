@@ -4,7 +4,7 @@ import Text from '../Text';
 import images from 'helpers/images';
 import { useNavigate } from 'react-router-dom';
 
-export default function CenterBackgroudNewsCard() {
+export default function CenterBackgroudNewsCard({ data }) {  // Destructure 'data' prop here
   const navigate = useNavigate();
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
@@ -36,11 +36,11 @@ export default function CenterBackgroudNewsCard() {
               fontSize: '0.625rem',
               fontWeight: 700,
             }}
-            text={'Coronavirus'}
+            text={data?.category}
           ></Text>
         </Box>
-        <Box> 
-          <Text onClick={()=>navigate('/details')}
+        <Box>
+          <Text onClick={() => navigate('/details')}
             font={'Roboto'}
             sx={{
               fontSize: '0.8rem',
@@ -50,7 +50,7 @@ export default function CenterBackgroudNewsCard() {
                 color: '#162eb7',
               },
             }}
-            text={`APSC JE Recruitment 2024: लोक निर्माण विभाग में 80 जूनियर इंजीनियर की भर्ती, आवेदन 5 जून तक`}
+            text={data?.title}
           />
           <Box
             sx={{
@@ -62,7 +62,7 @@ export default function CenterBackgroudNewsCard() {
           >
             <Text
               sx={{ textAlign: 'center', color: '#767676', fontSize: '0.7rem' }}
-              text={'19/03/2020 - 10:48'}
+              text={data?.date}
             ></Text>
           </Box>
         </Box>

@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 const appConstants = {
-    apiBaseURL: process.env.API_ENDPOINT,
+    apiBaseURL:"http://parliamenteryfact.crest-india.com/API/",
   
     localStorage: {
       tokenKey: 'token',

@@ -4,8 +4,9 @@ import Text from '../Text';
 import { Link, useNavigate } from 'react-router-dom';
 import images from 'helpers/images';
 
-export default function BigNewCards() {
+export default function BigNewCards({ data }) {
   const navigate = useNavigate();
+
   return (
     <Card sx={{ maxWidth: 450, boxShadow: 'none', borderRadius: '0' }}>
       <CardMedia
@@ -24,10 +25,11 @@ export default function BigNewCards() {
               fontSize: '0.625rem',
               fontWeight: 700,
             }}
-            text={'Coronavirus'}
+            text={data?.category}
           ></Text>
         </Box>
-        <Text onClick={()=>navigate('/details')}
+        <Text 
+          onClick={() => navigate('/details')}
           sx={{
             fontWeight: '700',
             marginTop: '1rem',
@@ -38,17 +40,16 @@ export default function BigNewCards() {
               color: '#162eb7',
             },
           }}
-          text={`'PoK हमारा नहीं है', Pakistan का बड़ा कबूलनामा! इस्लामाबाद हाईकोर्ट ने पूछा- फिर विदेशी जमीन पर क्यों तैनात किए सैनिक?`}
+          text={data?.title}
         />
-
         <Text
-          text={' 22/05/2024'}
+          text={data?.date}
           sx={{ color: '#9e9e9e', margin: '0.6rem 0' }}
         />
         <Text
           font={'Roboto'}
           sx={{ fontSize: '0.8rem' }}
-          text={`Pakistan big confession on PoK इस्लामाबाद हाईकोर्ट में पाकिस्तान के एक सरकारी वकील ने ही चौंकाने वाला दावा किया है। पाकिस्तान के कब्जे वाले कश्मीर (पीओके) को पाकिस्तान आजाद कश्मीर कहता है जिसपर अब उसने बड़ा बयान दिया है। भारत इसे अपना अभिन्न अंग मानता है। अब पाकिस्तान ने खुद माना है कि पीओके उसके क्षेत्राधिकार में नहीं है और विदेशी जमीन है।`}
+          text={data?.description}
         />
         <Box sx={{ margin: '1rem 0' }}>
           <Link>Know More</Link>

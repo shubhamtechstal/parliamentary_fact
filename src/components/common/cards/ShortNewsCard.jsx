@@ -4,18 +4,19 @@ import Text from '../Text';
 import images from 'helpers/images';
 import { useNavigate } from 'react-router-dom';
 
-export default function BottomSubHeadingCards({ type ,data}) {
+export default function ShortNewsCard({ data }) {  
+    
   const navigate = useNavigate();
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
       <Box
         sx={{
-          width: type ? '200px' : '240px',
-          height: type ? '140px' : '160px',
+          width: '200px',
+          height: '120px',
         }}
       >
         <img
-          src={images.dummyNews3}
+          src={images.dummyNews4}
           style={{ height: '100%', width: '100%' }}
         />
       </Box>
@@ -40,9 +41,10 @@ export default function BottomSubHeadingCards({ type ,data}) {
           ></Text>
         </Box>
         <Box>
-          <Text onClick={()=>navigate('/details')}
+          <Text onClick={() => navigate('/details')}
+            font={'Roboto'}
             sx={{
-              fontSize: '0.9rem',
+              fontSize: '0.8rem',
               fontWeight: 500,
               cursor: 'pointer',
               '&:hover': {

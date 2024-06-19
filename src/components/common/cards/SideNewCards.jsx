@@ -4,7 +4,7 @@ import Text from '../Text';
 import images from 'helpers/images';
 import { useNavigate } from 'react-router-dom';
 
-export default function SideNewCards() {
+export default function SideNewCards({ data }) {
   const navigate = useNavigate();
   return (
     <Box sx={{ display: 'flex', gap: '1rem' }}>
@@ -15,8 +15,9 @@ export default function SideNewCards() {
         }}
       >
         <img
-          src={images.dummyNews5}
-          style={{ height: '100%', width: '100%' }}
+         src={images.dummyNews5}
+          // src={data.image || 'path/to/default-image.jpg'} 
+          style={{ height: '80px', width: '100px' }}
         />
       </Box>
       <Box
@@ -28,7 +29,8 @@ export default function SideNewCards() {
         }}
       >
         <Box>
-          <Text onClick={()=>navigate('/details')}
+          <Text 
+            onClick={() => navigate('/details')}
             sx={{
               fontSize: '0.8rem',
               fontWeight: 500,
@@ -38,8 +40,7 @@ export default function SideNewCards() {
                 color: '#162eb7',
               },
             }}
-            text={`
-            विकसित देश के सपने को तोड़ते हादसे, नियम-कानून उल्लंघन पर विचार का समय`}
+            text={data?.title}
           />
           <Box
             sx={{
@@ -51,7 +52,7 @@ export default function SideNewCards() {
           >
             <Text
               sx={{ textAlign: 'center', color: '#767676', fontSize: '0.7rem' }}
-              text={'19/03/2020 - 10:48'}
+              text={data?.date}
             ></Text>
           </Box>
         </Box>

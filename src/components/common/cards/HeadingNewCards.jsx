@@ -1,11 +1,13 @@
 import { Box } from '@mui/material';
 import React from 'react';
 import Text from '../Text';
-import '../../../App.css';
 import { useNavigate } from 'react-router-dom';
 
-export default function HeadingNewCards() {
+export default function HeadingNewCards({ data }) {
   const navigate = useNavigate();
+  let newsItem;
+  if (data) newsItem = data[0];
+  // console.log(data,'hjshdjs');
   return (
     <Box
       className="headCard"
@@ -42,7 +44,8 @@ export default function HeadingNewCards() {
         }}
       >
         <Box>
-          <Text onClick={()=>navigate('/details')}
+          <Text
+            onClick={() => navigate('/details')}
             sx={{
               fontSize: '1.5rem',
               fontWeight: 700,
@@ -51,11 +54,16 @@ export default function HeadingNewCards() {
                 color: '#162eb7',
               },
             }}
-            text={
-              'Lok Sabha Election 2024: आपके राज्‍य में किस सीट पर कब होगा मतदान; यहां देखिए चुनावी शेड्यूल'
-            }
+            text={newsItem?.title}
           />
-          <Box sx={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+          <Box
+            sx={{
+              display: 'flex',
+              gap: '0.5rem',
+              alignItems: 'center',
+              marginTop: '10px',
+            }}
+          >
             <Text
               sx={{
                 background: '#0d0b52',
@@ -64,11 +72,11 @@ export default function HeadingNewCards() {
                 fontSize: '0.625rem',
                 fontWeight: 700,
               }}
-              text={'Video'}
+              text={newsItem?.sub_category}
             ></Text>
             <Text
               sx={{ fontWeight: 700, fontSize: '0.7rem' }}
-              text={'दीप्ति मिश्रा, नई दिल्‍ली'}
+              text={newsItem?.city}
             ></Text>
             <Text
               sx={{
@@ -76,7 +84,7 @@ export default function HeadingNewCards() {
                 color: '#767676',
                 fontSize: '0.75rem',
               }}
-              text={'19/03/2024 - 10:48'}
+              text={newsItem?.date}
             ></Text>
           </Box>
         </Box>
@@ -91,9 +99,7 @@ export default function HeadingNewCards() {
             overflow: 'hidden',
             textOverflow: 'ellipsis',
           }}
-          text={
-            'देश में 18वीं लोकसभा के लिए सात चरणों में चुनाव हो रहा है। पहले चरण में 21 राज्‍यों की 102 सीटों पर मतदान 19 अप्रैल को हुआ। दूसरे चरण में 13 राज्‍यों की 89 लोकसभा सीट पर 26 अप्रैल को चुनाव होना है।'
-          }
+          text={newsItem?.description}
         />
       </Box>
     </Box>
