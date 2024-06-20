@@ -8,7 +8,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import images from 'helpers/images';
 import { useNavigate } from 'react-router-dom';
 
-export default function MobileHeader({menuOpen}) {
+export default function MobileHeader({ menuOpen, data }) {
   const navigate = useNavigate();
   const slideInFromLeft = keyframes`
   from {
@@ -26,27 +26,28 @@ export default function MobileHeader({menuOpen}) {
     left: 0;
   }
 `;
-  const options = [
-    { head: 'Home', link: '/' },
-    { head: 'News', subhead: 'check' },
-    { head: 'Coronavirus', subhead: 'check' },
-    { head: 'Videos', link: '/categories' },
-    { head: 'Health' },
-    { head: 'Stories' },
-    { head: 'Local news' },
-    { head: 'More', subhead: 'check' },
-  ];
+  const options = data;
+  // const options = [
+  //   { head: 'Home', link: '/' },
+  //   { head: 'News', subhead: 'check' },
+  //   { head: 'Coronavirus', subhead: 'check' },
+  //   { head: 'Videos', link: '/categories' },
+  //   { head: 'Health' },
+  //   { head: 'Stories' },
+  //   { head: 'Local news' },
+  //   { head: 'More', subhead: 'check' },
+  // ];
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [Search, setSearch] = useState(false);
   const open = Boolean(anchorEl);
   const handleClick = () => {
     setAnchorEl(!anchorEl);
-    menuOpen(!anchorEl)
+    menuOpen(!anchorEl);
   };
   const handleClose = () => {
     setAnchorEl(null);
     setSearch(false);
-    menuOpen(false)
+    menuOpen(false);
   };
   const ITEM_HEIGHT = 100;
   return (
@@ -182,21 +183,27 @@ export default function MobileHeader({menuOpen}) {
                     alt="youtube"
                   />
                 </Box>
-                {options.map((option) => (
-                  <Box
-                    onClick={() => {
-                      navigate(option.link), handleClose();
+                <Box sx={{ display: 'flex' }} onClick={() => navigate('/')}>
+                  <Text
+                    text={'Home'}
+                    sx={{
+                      width: '100%',
+                      cursor: 'pointer',
+                      color: '#FFF',
+                      fontWeight: 700,
                     }}
-                  >
+                  />
+                </Box>
+                {options.map((val) => (
+                  <Box onClick={() => navigate(`/categories/${val?.id}`)}>
                     <Text
                       sx={{
                         width: '100%',
-                        // textAlign: 'center',
                         cursor: 'pointer',
                         color: '#FFF',
                         fontWeight: 700,
                       }}
-                      text={option.head}
+                      text={val?.category}
                     ></Text>
                   </Box>
                 ))}

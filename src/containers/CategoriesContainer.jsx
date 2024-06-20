@@ -1,15 +1,21 @@
 import { Box, Divider } from '@mui/material';
 import Text from 'components/common/Text';
-import BottomSubHeadingCards from 'components/common/cards/BottomSubHeadingCards';
+// import BottomSubHeadingCards from 'components/common/cards/BottomSubHeadingCards';
 import CenterBackgroudNewsCard from 'components/common/cards/CenterBackgroundNewsCard';
 import HeadingNewCards from 'components/common/cards/HeadingNewCards';
 import SideNewCards from 'components/common/cards/SideNewCards';
 import SubHeadingNewCard from 'components/common/cards/SubHeadingNewCard';
-import DownloadAppSection from 'components/homePage/DownloadAppSection';
-import React from 'react';
+// import DownloadAppSection from 'components/homePage/DownloadAppSection';
+// import React from 'react';
 import '../App.css';
+import { dashboardNewsApiAction } from 'stores/redux/apiSlices/DashboardNewsSlice/dashboardNewsApiSlice';
+
 export default function CategoriesContainer() {
-  const cardsData = [1, 2, 3, 4, 5, 6];
+  // const cardsData = [1, 2, 3, 4, 5, 6];
+
+  const { data: dashboardNewsDataApi } =
+    dashboardNewsApiAction.getDashboardNews();
+
   return (
     <>
       {/* <DownloadAppSection /> */}
@@ -28,14 +34,13 @@ export default function CategoriesContainer() {
           <Box
             sx={{
               background: '#f7f7f7',
-              // height: '18rem',
               width: '100%',
               padding: '1rem',
               display: 'flex',
               justifyContent: 'space-between',
             }}
           >
-            <HeadingNewCards />
+            <HeadingNewCards data={dashboardNewsDataApi?.reviews} />
             <Box
               className="MobileViewRemove"
               sx={{ height: '250px', width: '300px', background: '#abb8c3' }}
@@ -43,16 +48,16 @@ export default function CategoriesContainer() {
           </Box>
           <Box
             className="BigNewsCardContainer"
-            sx={{ display: 'flex', gap: '1rem' }}
+            sx={{ display: 'flex', justifyContent:'space-between' }}
           >
-            <Box sx={{ padding: '1rem', maxWidth: '750px' }}>
+            <Box sx={{ padding: '1rem', maxWidth:'65%' }}>
               <Text
                 text={'Virus confronts'}
                 sx={{ fontWeight: 700, margin: '0 0 1rem 0rem' }}
               />
-              {cardsData.map((val, index) => (
+              {dashboardNewsDataApi?.reviews.map((val, index) => (
                 <>
-                  <SubHeadingNewCard key={val} />
+                  <SubHeadingNewCard data={dashboardNewsDataApi?.reviews} />
                   <Divider sx={{ margin: '1rem' }} />
                   {index === 3 && (
                     <Box
@@ -96,35 +101,24 @@ export default function CategoriesContainer() {
                   className="BigNewsCardContainer"
                   sx={{ display: 'flex', gap: '0.5rem' }}
                 >
-                  <Box
-                    className="bottomSubHeadingCardWidth"
-                    sx={{ margin: '0.5rem' }}
-                  >
-                    <CenterBackgroudNewsCard />
-                  </Box>
-                  <Box
-                    className="bottomSubHeadingCardWidth"
-                    sx={{ margin: '0.5rem' }}
-                  >
-                    <CenterBackgroudNewsCard />
-                  </Box>
-                  <Box
-                    className="bottomSubHeadingCardWidth"
-                    sx={{ margin: '0.5rem' }}
-                  >
-                    <CenterBackgroudNewsCard />
-                  </Box>
+                  {dashboardNewsDataApi?.reviews?.slice(0, 3).map((data) => (
+                    <Box key={data.id} sx={{ marginTop: '1rem' }}>
+                      <CenterBackgroudNewsCard
+                        data={dashboardNewsDataApi?.reviews}
+                      />
+                    </Box>
+                  ))}
                 </Box>
               </Box>
             </Box>
-            <Box className="sideNewCardsWidth">
+            <Box className="sideNewCardsWidth" sx={{maxWidth:'35%'}}>
               <Text
                 text={'Virus confronts'}
                 sx={{ fontWeight: 700, margin: '1rem 0rem' }}
               />
-              {cardsData.map((val) => (
+              {dashboardNewsDataApi?.reviews?.slice(0, 6).map((data) => (
                 <Box sx={{ marginTop: '1rem' }}>
-                  <SideNewCards key={val} />
+                  <SideNewCards data={dashboardNewsDataApi?.reviews} />
                 </Box>
               ))}
               <Box
@@ -142,9 +136,9 @@ export default function CategoriesContainer() {
                 text={'Virus confronts'}
                 sx={{ fontWeight: 700, margin: '1rem 0rem' }}
               />
-              {cardsData.map((val) => (
+              {dashboardNewsDataApi?.reviews?.slice(0, 6).map((data) => (
                 <Box sx={{ marginTop: '1rem' }}>
-                  <SideNewCards key={val} />
+                  <SideNewCards data={dashboardNewsDataApi?.reviews} />
                 </Box>
               ))}
             </Box>

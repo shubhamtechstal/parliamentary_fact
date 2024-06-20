@@ -7,13 +7,17 @@ import { useNavigate } from 'react-router-dom';
 export default function ShortNewsCard({ data }) {  
     
   const navigate = useNavigate();
+
+  let newsItem;
+  if (data) newsItem = data[4];
+
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-      <Box
-        sx={{
-          width: '200px',
-          height: '120px',
-        }}
+      <Box className='centercard_box'
+        // sx={{
+        //   width: '200px',
+        //   height: '120px',
+        // }}
       >
         <img
           src={images.dummyNews4}
@@ -37,7 +41,7 @@ export default function ShortNewsCard({ data }) {
               fontSize: '0.625rem',
               fontWeight: 700,
             }}
-            text={data?.category}
+            text={newsItem?.category}
           ></Text>
         </Box>
         <Box>
@@ -51,7 +55,7 @@ export default function ShortNewsCard({ data }) {
                 color: '#162eb7',
               },
             }}
-            text={data?.title}
+            text={newsItem?.title}
           />
           <Box
             sx={{
@@ -63,7 +67,7 @@ export default function ShortNewsCard({ data }) {
           >
             <Text
               sx={{ textAlign: 'center', color: '#767676', fontSize: '0.7rem' }}
-              text={data?.date}
+              text={newsItem?.date}
             ></Text>
           </Box>
         </Box>

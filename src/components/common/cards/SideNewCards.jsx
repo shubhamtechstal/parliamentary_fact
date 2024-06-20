@@ -6,17 +6,19 @@ import { useNavigate } from 'react-router-dom';
 
 export default function SideNewCards({ data }) {
   const navigate = useNavigate();
+  let newsItem;
+  if (data) newsItem = data[1];
   return (
-    <Box sx={{ display: 'flex', gap: '1rem' }}>
+    <Box sx={{ display: 'flex', gap: '1rem',marginRight:'6px' }}>
       <Box
-        sx={{
-          width: '230px',
-          height: '60px',
-        }}
+        // sx={{
+        //   width: '230px',
+        //   height: '60px',
+        // }}
       >
         <img
-         src={images.dummyNews5}
-          // src={data.image || 'path/to/default-image.jpg'} 
+          src={images.dummyNews5}
+          // src={data.image || 'path/to/default-image.jpg'}
           style={{ height: '80px', width: '100px' }}
         />
       </Box>
@@ -29,7 +31,7 @@ export default function SideNewCards({ data }) {
         }}
       >
         <Box>
-          <Text 
+          <Text
             onClick={() => navigate('/details')}
             sx={{
               fontSize: '0.8rem',
@@ -40,7 +42,7 @@ export default function SideNewCards({ data }) {
                 color: '#162eb7',
               },
             }}
-            text={data?.title}
+            text={newsItem?.title}
           />
           <Box
             sx={{
@@ -52,7 +54,7 @@ export default function SideNewCards({ data }) {
           >
             <Text
               sx={{ textAlign: 'center', color: '#767676', fontSize: '0.7rem' }}
-              text={data?.date}
+              text={newsItem?.date}
             ></Text>
           </Box>
         </Box>

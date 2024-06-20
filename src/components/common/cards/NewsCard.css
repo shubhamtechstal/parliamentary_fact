@@ -1,0 +1,60 @@
+.Subheading_card_img {
+  width: 200px;
+  height: 100%;
+}
+.centercard_box {
+  width: 200px;
+  height: 120px;
+}
+.Bottom_card_box {
+  width: 240px;
+  height: 160px;
+}
+.CenterVirusConfrontSection {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.bottomSubHeadingCardBox{
+    display: flex;
+    margin: 0.5rem;
+}
+.advertise_img{
+    width: 100%;
+    height: 100%;
+}
+/* .Description_text{
+    color: red !important;
+    font-size: 34px !important;
+    font-family: Poppins,sans-serif !important;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 600;
+} */
+
+@media (min-device-width: 300px) and (max-device-width: 768px) {
+    .advertise_img{
+        width: 95%;
+    }
+    .bottomSubHeadingCardBox{
+        display: block;
+    }
+  .CenterVirusConfrontSection {
+    display: block;
+  }
+  .Subheading_card_img {
+    width: 130px;
+    height: 130px;
+  }
+  .centercard_box {
+    width: 100%;
+    height: 120px;
+  }
+  .Bottom_card_box {
+    width: 100%;
+    height: 160px;
+  }
+}

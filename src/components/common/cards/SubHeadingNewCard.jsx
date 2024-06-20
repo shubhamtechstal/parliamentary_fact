@@ -3,15 +3,20 @@ import Text from '../Text';
 import images from 'helpers/images';
 import '../../../App.css';
 import { useNavigate } from 'react-router-dom';
+import './NewsCard.css';
 
 export default function SubHeadingNewCard({ textWidth,data }) {
   const navigate = useNavigate()
+
+  let newsItem;
+  if (data) newsItem = data[2];
+
   return (
     <Box sx={{ display: 'flex', gap: '1rem' }}>
       <Box className="SubheadingImage">
         <img
           src={images.dummyNews2}
-          style={{ height: '100%', width: '200px' }}
+          className='Subheading_card_img'
         />
       </Box>
       <Box
@@ -31,7 +36,7 @@ export default function SubHeadingNewCard({ textWidth,data }) {
               fontSize: '0.625rem',
               fontWeight: 700,
             }}
-            text={data?.category}
+            text={newsItem?.category}
           ></Text>
         </Box>
         <Box>
@@ -44,23 +49,22 @@ export default function SubHeadingNewCard({ textWidth,data }) {
                 color: '#162eb7',
               },
             }}
-            text={data?.title}
+            text={newsItem?.title}
           />
           <Box
             sx={{
               display: 'flex',
-              gap: '1rem',
               alignItems: 'center',
               marginTop: '0.5rem',
             }}
           >
             <Text
               sx={{ fontWeight: 700, fontSize: '0.7rem' }}
-              text={data?.author}
+              text={newsItem?.author}
             ></Text>
             <Text
               sx={{ textAlign: 'center', color: '#767676', fontSize: '0.7rem' }}
-              text={data?.date}
+              text={newsItem?.date}
             ></Text>
           </Box>
         </Box>

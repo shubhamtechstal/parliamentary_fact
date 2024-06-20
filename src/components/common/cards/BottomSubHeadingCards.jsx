@@ -3,17 +3,15 @@ import React from 'react';
 import Text from '../Text';
 import images from 'helpers/images';
 import { useNavigate } from 'react-router-dom';
+import './NewsCard.css';
 
 export default function BottomSubHeadingCards({ type ,data}) {
   const navigate = useNavigate();
+  let newsItem;
+  if (data) newsItem = data[3];
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-      <Box
-        sx={{
-          width: type ? '200px' : '240px',
-          height: type ? '140px' : '160px',
-        }}
-      >
+      <Box className='Bottom_card_box'>
         <img
           src={images.dummyNews3}
           style={{ height: '100%', width: '100%' }}
@@ -36,7 +34,7 @@ export default function BottomSubHeadingCards({ type ,data}) {
               fontSize: '0.625rem',
               fontWeight: 700,
             }}
-            text={data?.category}
+            text={newsItem?.category}
           ></Text>
         </Box>
         <Box>
@@ -49,7 +47,7 @@ export default function BottomSubHeadingCards({ type ,data}) {
                 color: '#162eb7',
               },
             }}
-            text={data?.title}
+            text={newsItem?.title}
           />
           <Box
             sx={{
@@ -61,7 +59,7 @@ export default function BottomSubHeadingCards({ type ,data}) {
           >
             <Text
               sx={{ textAlign: 'center', color: '#767676', fontSize: '0.7rem' }}
-              text={data?.date}
+              text={newsItem?.date}
             ></Text>
           </Box>
         </Box>

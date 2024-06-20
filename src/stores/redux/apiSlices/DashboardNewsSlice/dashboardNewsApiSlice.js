@@ -7,6 +7,7 @@ const dashboardNews = createApi({
   baseQuery: apiSliceInterceptor.baseQueryWithInterceptor,
   tagTypes: [
     'DASHBOARD_NEWS',
+    'HEADER_CATEGORY',
   ],
   endpoints: (qb) => ({
     getDashboardNews: qb.query({
@@ -23,8 +24,24 @@ const dashboardNews = createApi({
        
         return `/fetch_news.php?${new URLSearchParams(params).toString()}`;
       },
-      // transformResponse: (response,meta,arg) => dashboardNewsParser.parseDashboardNews(response,meta,arg),
       providesTags: ['DASHBOARD_NEWS'],
+    }),
+
+    getHeaderCategories: qb.query({
+
+      query: ({
+        page,
+        pageSize,
+      } = {}) => {
+        const params = {};
+        if (pageSize && page) {
+          params['page'] = page + 1;
+          params['pageSize'] = pageSize;
+        }
+       
+        return `/fetch_category.php?${new URLSearchParams(params).toString()}`;
+      },
+      providesTags: ['HEADER_CATEGORY'],
     }),
 
   }),
@@ -38,6 +55,7 @@ export const dashboardNewsApiAction = {
   
   reducerPath: dashboardNews.reducerPath,
   getDashboardNews: dashboardNews.useGetDashboardNewsQuery,
+  getHeaderCategories: dashboardNews.useGetHeaderCategoriesQuery,
 };
 
 export default dashboardNews;

@@ -7,7 +7,8 @@ import React, { useEffect, useState } from 'react';
 import images from 'helpers/images';
 import { Navigate, useNavigate } from 'react-router-dom';
 
-export default function Header() {
+export default function Header({data}) {
+
   const navigate = useNavigate();
 
   const fadeInSlideIn = keyframes`
@@ -45,16 +46,18 @@ export default function Header() {
     'Doors slam shut across borderless Europe as coronavirus spreads',
     'Fearing coronavirus recession, France announces €45 billion in business aid',
   ];
-  const header = [
-    { head: 'Home', link: '/' },
-    { head: 'News', subhead: 'check' },
-    { head: 'Coronavirus', subhead: 'check' },
-    { head: 'Videos', link: '/categories' },
-    { head: 'Health' },
-    { head: 'Stories' },
-    { head: 'Local news' },
-    { head: 'More', subhead: 'check' },
-  ];
+  // const header = [
+  //   { head: 'Home', link: '/' },
+  //   { head: 'News', subhead: 'check' },
+  //   { head: 'Coronavirus', subhead: 'check' },
+  //   { head: 'Videos', link: '/categories' },
+  //   { head: 'Health' },
+  //   { head: 'Stories' },
+  //   { head: 'Local news' },
+  //   { head: 'More', subhead: 'check' },
+  // ];
+  const header = data;
+  
   const handleRightClick = () => {
     if (trendingNews === arrNews.length - 1) setTrendingNews(0);
     else setTrendingNews(trendingNews + 1);
@@ -248,10 +251,23 @@ export default function Header() {
           sx={{ display: 'flex', justifyContent: 'center', marginTop: '1rem' }}
         >
           <Box sx={{ display: 'flex', gap: '1.5rem' }}>
-            {header.map((val, index) => (
-              <Box sx={{ display: 'flex' }} onClick={() => navigate(val.link)}>
+          <Box sx={{ display: 'flex' }}  onClick={() => navigate('/')}>
                 <Text
-                  text={val.head}
+                  text={"Home"}
+                  sx={{
+                    fontSize: '0.9rem',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                    '&:hover': {
+                      color: '#162eb7',
+                    },
+                  }}
+                />
+              </Box>
+            {header?.map((val, index) => (
+              <Box sx={{ display: 'flex' }} onClick={() => navigate(`/categories/${val?.id}`)}>
+                <Text
+                  text={val?.category}
                   key={index}
                   sx={{
                     fontSize: '0.9rem',

@@ -7,6 +7,9 @@ import images from 'helpers/images';
 export default function BigNewCards({ data }) {
   const navigate = useNavigate();
 
+  let newsItem;
+  if (data) newsItem = data[5];
+
   return (
     <Card sx={{ maxWidth: 450, boxShadow: 'none', borderRadius: '0' }}>
       <CardMedia
@@ -25,7 +28,7 @@ export default function BigNewCards({ data }) {
               fontSize: '0.625rem',
               fontWeight: 700,
             }}
-            text={data?.category}
+            text={newsItem?.category}
           ></Text>
         </Box>
         <Text 
@@ -40,19 +43,29 @@ export default function BigNewCards({ data }) {
               color: '#162eb7',
             },
           }}
-          text={data?.title}
+          text={newsItem?.title}
         />
         <Text
-          text={data?.date}
+          text={newsItem?.date}
           sx={{ color: '#9e9e9e', margin: '0.6rem 0' }}
         />
         <Text
-          font={'Roboto'}
-          sx={{ fontSize: '0.8rem' }}
-          text={data?.description}
+        font={'Roboto'}
+          sx={{
+            color: '#767676',
+            fontSize: '14px',
+            display: '-webkit-box',
+            WebkitBoxOrient: 'vertical',
+            WebkitLineClamp: 3,
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            fontWeight:'600',
+            // fontFamily:'Poppins,sans-serif !important'
+          }}
+          text={newsItem?.description}
         />
         <Box sx={{ margin: '1rem 0' }}>
-          <Link>Know More</Link>
+          <Link>Read More</Link>
         </Box>
       </CardContent>
     </Card>

@@ -1,20 +1,25 @@
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import '../../App.css';
-import {
-  Box,
-  Stack,
-} from '@mui/material';
+import { Box, Stack } from '@mui/material';
 import Header from 'components/header/Header';
 import Footer from 'components/footer/Footer';
 import MobileHeader from 'components/header/MobileHeader';
 import Text from 'components/common/Text';
+import { dashboardNewsApiAction } from 'stores/redux/apiSlices/DashboardNewsSlice/dashboardNewsApiSlice';
 
 const AppLayoutContainer = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
+  const { data: headerCategoryApi } =
+    dashboardNewsApiAction.getHeaderCategories();
+  // console.log(headerCategoryApi,'headerCategoryApi');
+
   return (
-    <Stack className="MainContainer"sx={{maxHeight:menuOpen?'100vh':'100%'}}>
+    <Stack
+      className="MainContainer"
+      sx={{ maxHeight: menuOpen ? '100vh' : '100%' }}
+    >
       <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
         <Box
           className="MobileViewRemove"
@@ -47,12 +52,12 @@ const AppLayoutContainer = () => {
         </Box>
       </Box>
       <Box className="MobileViewRemove">
-        <Header />
+        <Header data={headerCategoryApi?.categories} />
       </Box>
       <Box className="mobileHeader">
-        <MobileHeader menuOpen={setMenuOpen} />
+        <MobileHeader menuOpen={setMenuOpen} data={headerCategoryApi?.categories} />
       </Box>
-      <Stack sx={{overflow:'visible'}}>
+      <Stack sx={{ overflow: 'visible' }}>
         <Outlet />
       </Stack>
       <Footer />
