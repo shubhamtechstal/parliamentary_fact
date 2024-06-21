@@ -1,15 +1,14 @@
 import { Box, Divider } from '@mui/material';
 import Text from 'components/common/Text';
-// import BottomSubHeadingCards from 'components/common/cards/BottomSubHeadingCards';
 import CenterBackgroudNewsCard from 'components/common/cards/CenterBackgroundNewsCard';
 import HeadingNewCards from 'components/common/cards/HeadingNewCards';
 import SideNewCards from 'components/common/cards/SideNewCards';
 import SubHeadingNewCard from 'components/common/cards/SubHeadingNewCard';
-// import DownloadAppSection from 'components/homePage/DownloadAppSection';
-// import React from 'react';
 import '../App.css';
 import { dashboardNewsApiAction } from 'stores/redux/apiSlices/DashboardNewsSlice/dashboardNewsApiSlice';
 import { useParams } from 'react-router-dom';
+import '../components/common/cards/NewsCard.css';
+// import DownloadAppSection from 'components/homePage/DownloadAppSection';
 
 export default function CategoriesContainer() {
   // const cardsData = [1, 2, 3, 4, 5, 6];
@@ -57,7 +56,7 @@ export default function CategoriesContainer() {
             className="BigNewsCardContainer"
             sx={{ display: 'flex', justifyContent:'space-between' }}
           >
-            <Box sx={{ padding: '1rem', maxWidth:'65%' }}>
+            <Box className='categories_subheading_card'>
               <Text
                 text={'Virus confronts'}
                 sx={{ fontWeight: 700, margin: '0 0 1rem 0rem' }}
@@ -118,7 +117,7 @@ export default function CategoriesContainer() {
                 </Box>
               </Box>
             </Box>
-            <Box className="sideNewCardsWidth" sx={{maxWidth:'35%'}}>
+            <Box className="categories_subheading_side_card">
               <Text
                 text={'Virus confronts'}
                 sx={{ fontWeight: 700, margin: '1rem 0rem' }}

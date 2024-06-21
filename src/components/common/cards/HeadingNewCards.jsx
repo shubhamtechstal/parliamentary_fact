@@ -10,19 +10,26 @@ export default function HeadingNewCards({ data }) {
   let newsItem;
   if (data) newsItem = data[0];
   // console.log(data,'hjshdjs');
+
+  const formattedDate = new Date(newsItem?.date).toLocaleString('en-GB', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: true,
+  });
+
   return (
     <Box
       className="headCard"
       sx={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}
     >
       <Box
-        // component="video"
-        // src="/Assets/Image.png"
-        // controls
         sx={{
           width: '100%',
           maxWidth: '300px',
-          maxHeight: '240px',
+          maxHeight: '250px',
         }}
       >
         <iframe
@@ -34,8 +41,7 @@ export default function HeadingNewCards({ data }) {
           referrerpolicy="strict-origin-when-cross-origin"
           allowfullscreen
           src={newsItem?.video}
-          ></iframe>
-
+        ></iframe>
       </Box>
       <Box
         sx={{
@@ -50,6 +56,7 @@ export default function HeadingNewCards({ data }) {
         <Box>
           <Text
             onClick={() => navigate(`/details/${newsItem?.id}`)}
+            //  font={'Inter'}
             sx={{
               lineHeight: '33px',
               fontSize: '1.5rem',
@@ -90,7 +97,7 @@ export default function HeadingNewCards({ data }) {
                 color: '#767676',
                 fontSize: '0.75rem',
               }}
-              text={newsItem?.date}
+              text={formattedDate}
             ></Text>
           </Box>
         </Box>

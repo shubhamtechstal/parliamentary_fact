@@ -3,16 +3,30 @@ import React from 'react';
 import Text from '../Text';
 import images from 'helpers/images';
 import { useNavigate } from 'react-router-dom';
+import { appConstants } from 'helpers/constants/appConstants';
 
 export default function CenterBackgroudNewsCard({ data }) {  
   const navigate = useNavigate();
+
   let newsItem;
-  if (data) newsItem = data[4];
+  if (data) newsItem = data[7];
+
+  const imageUrl = appConstants.BACKEND_IMAGE_URL;
+  const formattedDate = new Date(newsItem?.date).toLocaleString('en-GB', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: true,
+  });
+
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
       <Box className='centercard_box'>
         <img
-          src={images.dummyNews4}
+          // src={images.dummyNews4}
+          src={imageUrl + newsItem?.image}
           style={{ height: '100%', width: '100%' }}
         />
       </Box>
@@ -37,7 +51,7 @@ export default function CenterBackgroudNewsCard({ data }) {
           ></Text>
         </Box>
         <Box>
-          <Text onClick={() => navigate('/details')}
+          <Text onClick={() => navigate(`/details/${newsItem?.id}`)}
             font={'Roboto'}
             sx={{
               fontSize: '0.8rem',
@@ -59,7 +73,7 @@ export default function CenterBackgroudNewsCard({ data }) {
           >
             <Text
               sx={{ textAlign: 'center', color: '#767676', fontSize: '0.7rem' }}
-              text={newsItem?.date}
+              text={formattedDate}
             ></Text>
           </Box>
         </Box>

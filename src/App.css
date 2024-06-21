@@ -5,9 +5,9 @@
     width: 60%;
 }
 .sticky {
-    position: -webkit-sticky; /* For Safari */
+    position: -webkit-sticky; 
     position: sticky;
-    top: 1rem; /* Adjust as needed to provide spacing from the top */
+    top: 1rem; 
   }
   
 .sideNewCardsWidth{

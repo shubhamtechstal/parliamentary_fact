@@ -4,19 +4,31 @@ import images from 'helpers/images';
 import '../../../App.css';
 import { useNavigate } from 'react-router-dom';
 import './NewsCard.css';
+import { appConstants } from 'helpers/constants/appConstants';
 
-export default function SubHeadingNewCard({ textWidth,data }) {
-  const navigate = useNavigate()
+export default function SubHeadingNewCard({ textWidth, data }) {
+  const navigate = useNavigate();
 
   let newsItem;
-  if (data) newsItem = data[2];
+  if (data) newsItem = data[7];
+
+  const imageUrl = appConstants.BACKEND_IMAGE_URL;
+  const formattedDate = new Date(newsItem?.date).toLocaleString('en-GB', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: true,
+  });
 
   return (
     <Box sx={{ display: 'flex', gap: '1rem' }}>
       <Box className="SubheadingImage">
         <img
-          src={images.dummyNews2}
-          className='Subheading_card_img'
+          // src={images.dummyNews2}
+          src={imageUrl + newsItem?.image}
+          className="Subheading_card_img"
         />
       </Box>
       <Box
@@ -40,7 +52,8 @@ export default function SubHeadingNewCard({ textWidth,data }) {
           ></Text>
         </Box>
         <Box>
-          <Text onClick={()=>navigate('/details')}
+          <Text
+            onClick={() => navigate(`/details/${newsItem?.id}`)}
             sx={{
               fontSize: '0.9rem',
               fontWeight: 600,
@@ -64,7 +77,7 @@ export default function SubHeadingNewCard({ textWidth,data }) {
             ></Text>
             <Text
               sx={{ textAlign: 'center', color: '#767676', fontSize: '0.7rem' }}
-              text={newsItem?.date}
+              text={formattedDate}
             ></Text>
           </Box>
         </Box>

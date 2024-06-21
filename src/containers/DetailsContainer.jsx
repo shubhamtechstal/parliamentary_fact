@@ -10,15 +10,24 @@ import '../App.css';
 import SideNewCards from 'components/common/cards/SideNewCards';
 import { dashboardNewsApiAction } from 'stores/redux/apiSlices/DashboardNewsSlice/dashboardNewsApiSlice';
 import { useParams } from 'react-router-dom';
+import { appConstants } from 'helpers/constants/appConstants';
 
 export default function DetailsContainer() {
   const relatedNews = [1, 2, 3, 4];
   const {id} = useParams();
+
   const { data: headerNewsDataApi } =
     dashboardNewsApiAction.getNewsById({
       id: id,
     });
-    console.log(headerNewsDataApi?.news?.title,'idhhh');
+
+    // console.log(headerNewsDataApi?.news?.title,'idhhh');
+
+    const { data: dashboardNewsDataApi } =
+    dashboardNewsApiAction.getDashboardNews();
+
+    const imageUrl = appConstants.BACKEND_IMAGE_URL;
+
   return (
     <Container
       sx={{
@@ -105,7 +114,9 @@ export default function DetailsContainer() {
               }}
             >
               {/* <ShareIcon sx={{fontSize:'0.8rem'}}/> */}
-              <img src={images.facebookWhite} />
+              <img 
+              src={images.facebookWhite}
+               />
               <Divider
                 orientation="vertical"
                 sx={{ height: '20px', backgroundColor: '#FFF' }}
@@ -196,6 +207,7 @@ export default function DetailsContainer() {
         />
         <img
           src={images.dummyNews3}
+          // src={imageUrl?.image}
           style={{ height: 'auto', width: '100%' }}
         />
         <Box
@@ -301,7 +313,7 @@ An eyewitness described the scene at a packed branch of Asda in the Wirral, Mers
           <Box sx={{ marginTop: '1rem' }}>
             {relatedNews.map((val) => (
               <>
-                <SubHeadingNewCard />
+                <SubHeadingNewCard  data={dashboardNewsDataApi?.reviews}/>
                 <Divider sx={{ margin: '1rem' }} />
               </>
             ))}
@@ -319,7 +331,7 @@ An eyewitness described the scene at a packed branch of Asda in the Wirral, Mers
           />
           {relatedNews.map((val) => (
             <Box sx={{ marginTop: '1rem' }}>
-              <SideNewCards key={val} />
+              <SideNewCards key={val} data={dashboardNewsDataApi?.reviews} />
             </Box>
           ))}
           <Box
@@ -339,7 +351,7 @@ An eyewitness described the scene at a packed branch of Asda in the Wirral, Mers
           />
           {relatedNews.map((val) => (
             <Box sx={{ marginTop: '1rem' }}>
-              <SideNewCards key={val} />
+              <SideNewCards key={val} data={dashboardNewsDataApi?.reviews}/>
             </Box>
           ))}
         </Box>

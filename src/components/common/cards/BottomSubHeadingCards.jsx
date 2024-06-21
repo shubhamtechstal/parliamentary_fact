@@ -4,17 +4,32 @@ import Text from '../Text';
 import images from 'helpers/images';
 import { useNavigate } from 'react-router-dom';
 import './NewsCard.css';
+import { appConstants } from 'helpers/constants/appConstants';
 
-export default function BottomSubHeadingCards({ type ,data}) {
+export default function BottomSubHeadingCards({ type, data }) {
   const navigate = useNavigate();
+
   let newsItem;
   if (data) newsItem = data[3];
+
+  const imageUrl = appConstants.BACKEND_IMAGE_URL;
+
+  const formattedDate = new Date(newsItem?.date).toLocaleString('en-GB', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: true,
+  });
+
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-      <Box className='Bottom_card_box'>
+      <Box className="Bottom_card_box">
         <img
-          src={images.dummyNews3}
-          style={{ height: '100%', width: '100%' }}
+          // src={images.dummyNews3}
+          src={imageUrl + newsItem?.image}
+          style={{ height: '100px', width: '100%' }}
         />
       </Box>
       <Box
@@ -38,7 +53,8 @@ export default function BottomSubHeadingCards({ type ,data}) {
           ></Text>
         </Box>
         <Box>
-          <Text onClick={()=>navigate('/details')}
+          <Text
+            onClick={() => navigate(`/details/${newsItem?.id}`)}
             sx={{
               fontSize: '0.9rem',
               fontWeight: 500,
@@ -59,7 +75,7 @@ export default function BottomSubHeadingCards({ type ,data}) {
           >
             <Text
               sx={{ textAlign: 'center', color: '#767676', fontSize: '0.7rem' }}
-              text={newsItem?.date}
+              text={formattedDate}
             ></Text>
           </Box>
         </Box>

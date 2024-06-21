@@ -4,21 +4,41 @@ import Text from '../Text';
 import { Link, useNavigate } from 'react-router-dom';
 import images from 'helpers/images';
 import parse from 'html-react-parser';
+import { appConstants } from 'helpers/constants/appConstants';
 
 export default function BigNewCards({ data }) {
   const navigate = useNavigate();
 
+  // console.log(data);
+
   let newsItem;
   if (data) newsItem = data[5];
+
+  const imageUrl = appConstants.BACKEND_IMAGE_URL;
+
+  const formattedDate = new Date(newsItem?.date).toLocaleString('en-GB', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: true,
+  });
 
   return (
     <Card sx={{ maxWidth: 450, boxShadow: 'none', borderRadius: '0' }}>
       <CardMedia
         sx={{ height: 300 }}
+        src={imageUrl + newsItem?.image}
+        image={imageUrl + newsItem?.image}
+        title="green iguana"
+      />
+      {/* <CardMedia
+        sx={{ height: 300 }}
         src={images.dummyNews1}
         image={images.dummyNews1}
         title="green iguana"
-      />
+      /> */}
       <CardContent sx={{ margin: 0, padding: '1rem 0rem' }}>
         <Box sx={{ display: 'flex' }}>
           <Text
@@ -32,8 +52,8 @@ export default function BigNewCards({ data }) {
             text={newsItem?.category}
           ></Text>
         </Box>
-        <Text 
-          onClick={() => navigate('/details')}
+        <Text
+          onClick={() => navigate(`/details/${newsItem?.id}`)}
           sx={{
             fontWeight: '700',
             marginTop: '1rem',
@@ -47,11 +67,11 @@ export default function BigNewCards({ data }) {
           text={newsItem?.title}
         />
         <Text
-          text={newsItem?.date}
+          text={formattedDate}
           sx={{ color: '#9e9e9e', margin: '0.6rem 0' }}
         />
         <Text
-        font={'Poppins'}
+          font={'Poppins'}
           sx={{
             color: '#767676',
             fontSize: '14px',
@@ -60,10 +80,10 @@ export default function BigNewCards({ data }) {
             WebkitLineClamp: 3,
             overflow: 'hidden',
             textOverflow: 'ellipsis',
-            fontWeight:'600',
+            fontWeight: '600',
           }}
           // text={newsItem?.description}
-          text = {newsItem ? parse(newsItem.description) : ''}
+          text={newsItem ? parse(newsItem.description) : ''}
         />
         <Box sx={{ margin: '1rem 0' }}>
           <Link>Read More</Link>

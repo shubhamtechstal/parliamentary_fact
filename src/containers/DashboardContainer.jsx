@@ -10,60 +10,9 @@ import CenterBackgroudNewsCard from 'components/common/cards/CenterBackgroundNew
 import { dashboardNewsApiAction } from 'stores/redux/apiSlices/DashboardNewsSlice/dashboardNewsApiSlice';
 import ShortNewsCard from 'components/common/cards/ShortNewsCard';
 import '../components/common/cards/NewsCard.css';
+import images from 'helpers/images';
 
 export default function DashboardContainer() {
-  // const cardsData = [1, 2, 3, 4, 5, 6];
-
-  // const staticData = [
-  //   {
-  //     id: 1,
-  //     title:
-  //       'Lok Sabha Election 2024: आपके राज्‍य में किस सीट पर कब होगा मतदान; यहां देखिए चुनावी शेड्यूल',
-  //     author: 'दीप्ति मिश्रा, नई दिल्‍ली',
-  //     date: '19/03/2024 - 10:48',
-  //     description:
-  //       'देश में 18वीं लोकसभा के लिए सात चरणों में चुनाव हो रहा है। पहले चरण में 21 राज्‍यों की 102 सीटों पर मतदान 19 अप्रैल को हुआ। दूसरे चरण में 13 राज्‍यों की 89 लोकसभा सीट पर 26 अप्रैल को चुनाव होना है।',
-  //     category: 'Elections',
-  //     // image: 'path/to/image3.jpg'
-  //     author: 'Stephen Romero',
-  //   },
-  //   {
-  //     id: 2,
-  //     category: 'Coronavirus',
-  //     title:
-  //       '"PoK हमारा नहीं है", Pakistan का बड़ा कबूलनामा! इस्लामाबाद हाईकोर्ट ने पूछा- फिर विदेशी जमीन पर क्यों तैनात किए सैनिक?',
-  //     date: '22/05/2024',
-  //     description:
-  //       'Pakistan big confession on PoK इस्लामाबाद हाईकोर्ट में पाकिस्तान के एक सरकारी वकील ने ही चौंकाने वाला दावा किया है। पाकिस्तान के कब्जे वाले कश्मीर (पीओके) को पाकिस्तान आजाद कश्मीर कहता है जिसपर अब उसने बड़ा बयान दिया है। भारत इसे अपना अभिन्न अंग मानता है। अब पाकिस्तान ने खुद माना है कि पीओके उसके क्षेत्राधिकार में नहीं है और विदेशी जमीन है।',
-  //     // image: 'path/to/image1.jpg'
-  //     author: 'Stephen Romero',
-  //   },
-  //   {
-  //     id: 3,
-  //     category: 'Cars',
-  //     title:
-  //       'ऐसा कौन करता है! BMW वाले लूट ले गए Audi, रोका फिर लाठी लेकर गाड़ी से उतरे और कर डाला लाल-पीला',
-  //     date: '19/03/2020 - 10:48',
-  //     author: 'Stephen Romero',
-  //   },
-  //   {
-  //     id: 4,
-  //     title:
-  //       'विकसित देश के सपने को तोड़ते हादसे, नियम-कानून उल्लंघन पर विचार का समय',
-  //     date: '09/06/2024 - 09:48',
-  //     category: 'Coronavirus',
-  //   },
-  //   {
-  //     id: 5,
-  //     category: 'Vaccancy',
-  //     title:
-  //       'APSC JE Recruitment 2024: लोक निर्माण विभाग में 80 जूनियर इंजीनियर की भर्ती, आवेदन 5 जून तक',
-  //     date: '19/06/2024 - 09:48',
-  //   },
-  // ];
-
-  // const dashboardNewsData = { records: staticData };
-
   const { data: dashboardNewsDataApi } =
     dashboardNewsApiAction.getDashboardNews();
   // console.log(dashboardNewsDataApi, 'checkdata');
@@ -99,7 +48,12 @@ export default function DashboardContainer() {
                 width: '100%',
                 background: '#abb8c3',
               }}
-            ></Box>
+            >
+              {/* <img
+                src={images.dummyNews5}
+                style={{ height: '250px', maxWidth: '300px', width: '100%' }}
+              /> */}
+            </Box>
           </Box>
           <Box
             className="BigNewsCardContainer"
@@ -112,11 +66,16 @@ export default function DashboardContainer() {
               />
               <Box
                 className="BigNewsCardSection"
-                sx={{ display: 'flex', gap: '1.5rem' }}
+                sx={{ display: 'flex', gap: '1rem' }}
               >
                 <BigNewCards data={dashboardNewsDataApi?.reviews} />
                 <Box
-                  sx={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '1rem',
+                    maxWidth: '410px',
+                  }}
                 >
                   <Box>
                     <BottomSubHeadingCards
@@ -266,9 +225,15 @@ export default function DashboardContainer() {
 
           <Box
             className="BigNewsCardContainer"
-            sx={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}
+            sx={{ display: 'flex', marginTop: '1rem' }}
           >
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                maxWidth: '500px',
+              }}
+            >
               <Text
                 text={'Virus confronts'}
                 sx={{ fontWeight: 700, margin: '0.5rem 0' }}
@@ -283,13 +248,14 @@ export default function DashboardContainer() {
               <Box
                 sx={{
                   background: '#f7f7f7',
-                  height: '100%',
-                  padding: '0.5rem 1rem',
+                  // height: '100%',
+                  // padding: '0.5rem 1rem',
+                  padding: '1px 10px 10px 10px',
                 }}
               >
                 <Text
                   text={'Virus confronts'}
-                  sx={{ fontWeight: 700, margin: '1rem 0' }}
+                  sx={{ fontWeight: 700, margin: '10px 0' }}
                 />
                 <Box className="bottomSubHeadingCardWidth">
                   <BottomSubHeadingCards

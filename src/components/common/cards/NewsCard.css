@@ -6,10 +6,10 @@
   width: 200px;
   height: 120px;
 }
-.Bottom_card_box {
+/* .Bottom_card_box {
   width: 240px;
   height: 160px;
-}
+} */
 .CenterVirusConfrontSection {
   display: flex;
   gap: 1rem;
@@ -35,7 +35,21 @@
     font-weight: 600;
 } */
 
+.categories_subheading_card{
+  padding: 1rem;
+  max-width: 65%;
+}
+.categories_subheading_side_card{
+  max-width: 35%;
+}
+
 @media (min-device-width: 300px) and (max-device-width: 768px) {
+  .categories_subheading_card{
+    max-width: 100%;
+  }
+  .categories_subheading_side_card{
+    max-width: 100%;
+  }
     .advertise_img{
         width: 95%;
     }
