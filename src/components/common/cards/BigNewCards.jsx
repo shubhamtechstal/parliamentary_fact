@@ -3,6 +3,7 @@ import React from 'react';
 import Text from '../Text';
 import { Link, useNavigate } from 'react-router-dom';
 import images from 'helpers/images';
+import parse from 'html-react-parser';
 
 export default function BigNewCards({ data }) {
   const navigate = useNavigate();
@@ -50,7 +51,7 @@ export default function BigNewCards({ data }) {
           sx={{ color: '#9e9e9e', margin: '0.6rem 0' }}
         />
         <Text
-        font={'Roboto'}
+        font={'Poppins'}
           sx={{
             color: '#767676',
             fontSize: '14px',
@@ -60,9 +61,9 @@ export default function BigNewCards({ data }) {
             overflow: 'hidden',
             textOverflow: 'ellipsis',
             fontWeight:'600',
-            // fontFamily:'Poppins,sans-serif !important'
           }}
-          text={newsItem?.description}
+          // text={newsItem?.description}
+          text = {newsItem ? parse(newsItem.description) : ''}
         />
         <Box sx={{ margin: '1rem 0' }}>
           <Link>Read More</Link>

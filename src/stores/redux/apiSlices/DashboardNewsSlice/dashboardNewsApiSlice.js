@@ -8,21 +8,18 @@ const dashboardNews = createApi({
   tagTypes: [
     'DASHBOARD_NEWS',
     'HEADER_CATEGORY',
+    'FETCH_NEWS_BY_ID'
   ],
   endpoints: (qb) => ({
     getDashboardNews: qb.query({
 
       query: ({
-        page,
-        pageSize,
+        category
       } = {}) => {
         const params = {};
-        if (pageSize && page) {
-          params['page'] = page + 1;
-          params['pageSize'] = pageSize;
-        }
-       
-        return `/fetch_news.php?${new URLSearchParams(params).toString()}`;
+        if(category)params['category'] = category;
+
+        return `/fetch_news.php?${encodeURI(new URLSearchParams(params).toString())}`;
       },
       providesTags: ['DASHBOARD_NEWS'],
     }),
@@ -44,6 +41,17 @@ const dashboardNews = createApi({
       providesTags: ['HEADER_CATEGORY'],
     }),
 
+    getNewsById: qb.query({
+
+      query: ({id} ) => {
+        const params = {};
+        if(id)params['id'] = id;
+       
+        return `/get_news_by_id.php?${encodeURI(new URLSearchParams(params).toString())}`;
+      },
+      providesTags: ['FETCH_NEWS_BY_ID'],
+    }),
+
   }),
 });
 
@@ -56,6 +64,7 @@ export const dashboardNewsApiAction = {
   reducerPath: dashboardNews.reducerPath,
   getDashboardNews: dashboardNews.useGetDashboardNewsQuery,
   getHeaderCategories: dashboardNews.useGetHeaderCategoriesQuery,
+  getNewsById: dashboardNews.useGetNewsByIdQuery
 };
 
 export default dashboardNews;

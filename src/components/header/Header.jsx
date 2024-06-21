@@ -8,6 +8,7 @@ import images from 'helpers/images';
 import { Navigate, useNavigate } from 'react-router-dom';
 
 export default function Header({data}) {
+  console.log('data',data);
 
   const navigate = useNavigate();
 
@@ -265,7 +266,7 @@ export default function Header({data}) {
                 />
               </Box>
             {header?.map((val, index) => (
-              <Box sx={{ display: 'flex' }} onClick={() => navigate(`/categories/${val?.id}`)}>
+              <Box sx={{ display: 'flex' }} onClick={() => navigate(`/categories/${val?.category}`)}>
                 <Text
                   text={val?.category}
                   key={index}

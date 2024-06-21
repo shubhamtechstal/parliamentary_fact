@@ -9,12 +9,19 @@ import SubHeadingNewCard from 'components/common/cards/SubHeadingNewCard';
 // import React from 'react';
 import '../App.css';
 import { dashboardNewsApiAction } from 'stores/redux/apiSlices/DashboardNewsSlice/dashboardNewsApiSlice';
+import { useParams } from 'react-router-dom';
 
 export default function CategoriesContainer() {
   // const cardsData = [1, 2, 3, 4, 5, 6];
-
+  const {id} = useParams();
   const { data: dashboardNewsDataApi } =
     dashboardNewsApiAction.getDashboardNews();
+
+  const { data: headerNewsDataApi } =
+    dashboardNewsApiAction.getDashboardNews({
+      category: id,
+    });
+    console.log(headerNewsDataApi,'idhhh');
 
   return (
     <>

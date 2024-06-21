@@ -30,11 +30,11 @@ const routes = [
         element: <PrivateRoute component={<ReportsPage />} />,
       },
       {
-        path: 'categories/*',
+        path: 'categories/:id',
         element: <PrivateRoute component={<CategoriesPage />} />,
       },
       {
-        path: 'details',
+        path: 'details/:id',
         element: <PrivateRoute component={<DetailsPage />} />,
       },
     ],

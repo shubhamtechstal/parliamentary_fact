@@ -3,7 +3,7 @@ import React from 'react';
 import Text from '../Text';
 import { useNavigate } from 'react-router-dom';
 import './NewsCard.css';
-
+import parse from 'html-react-parser';
 
 export default function HeadingNewCards({ data }) {
   const navigate = useNavigate();
@@ -28,13 +28,14 @@ export default function HeadingNewCards({ data }) {
         <iframe
           width="100%"
           height="100%"
-          // src={'https://www.youtube.com/embed/mcJvi7GVpy0?si=MCATw8rJ5DwH93uk'}
-          src={newsItem?.video}
           title="YouTube video player"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        ></iframe>
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
+          src={newsItem?.video}
+          ></iframe>
+
       </Box>
       <Box
         sx={{
@@ -42,15 +43,15 @@ export default function HeadingNewCards({ data }) {
           maxHeight: '250px',
           display: 'flex',
           flexDirection: 'column',
-          gap: '1rem',
+          // gap: '1rem',
           justifyContent: 'center',
         }}
       >
         <Box>
           <Text
-            onClick={() => navigate('/details')}
+            onClick={() => navigate(`/details/${newsItem?.id}`)}
             sx={{
-              lineHeight:'33px',
+              lineHeight: '33px',
               fontSize: '1.5rem',
               fontWeight: 700,
               cursor: 'pointer',
@@ -59,6 +60,7 @@ export default function HeadingNewCards({ data }) {
               },
             }}
             text={newsItem?.title}
+            // text={'रोका फिर लाठी लेकर गाड़ी से उतरे और कर डाला लाल-पीला'}
           />
           <Box
             sx={{
@@ -92,9 +94,8 @@ export default function HeadingNewCards({ data }) {
             ></Text>
           </Box>
         </Box>
-        <Text 
-        // className='Description_text'
-          // font={'Roboto'}
+        <Text
+          font={'Roboto'}
           sx={{
             color: '#767676',
             fontSize: '14px',
@@ -103,11 +104,10 @@ export default function HeadingNewCards({ data }) {
             WebkitLineClamp: 3,
             overflow: 'hidden',
             textOverflow: 'ellipsis',
-            fontWeight:'600',
-            // fontFamily:'Poppins,sans-serif !important'
+            fontWeight: '600',
           }}
-          text={newsItem?.description}
-          // text={'देश में 18वीं लोकसभा के लिए सात चरणों में चुनाव हो रहा है। पहले चरण में 21 राज्‍यों की 102 सीटों पर मतदान 19 अप्रैल को हुआ। दूसरे ddddd'}
+          // text={newsItem?.description}
+          text={newsItem ? parse(newsItem.description) : ''}
         />
       </Box>
     </Box>

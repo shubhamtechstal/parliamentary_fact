@@ -6,10 +6,19 @@ import React from 'react';
 import ShareIcon from '@mui/icons-material/Share';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import PinterestIcon from '@mui/icons-material/Pinterest';
-import '../App.css'
+import '../App.css';
 import SideNewCards from 'components/common/cards/SideNewCards';
+import { dashboardNewsApiAction } from 'stores/redux/apiSlices/DashboardNewsSlice/dashboardNewsApiSlice';
+import { useParams } from 'react-router-dom';
+
 export default function DetailsContainer() {
   const relatedNews = [1, 2, 3, 4];
+  const {id} = useParams();
+  const { data: headerNewsDataApi } =
+    dashboardNewsApiAction.getNewsById({
+      id: id,
+    });
+    console.log(headerNewsDataApi?.news?.title,'idhhh');
   return (
     <Container
       sx={{
@@ -26,7 +35,7 @@ export default function DetailsContainer() {
           flexDirection: 'column',
           gap: '1rem',
         }}
-        className= "DetailsContainer"
+        className="DetailsContainer"
       >
         <Text
           sx={{
@@ -39,7 +48,7 @@ export default function DetailsContainer() {
             //   color: '#162eb7',
             // },
           }}
-          text={`'PoK हमारा नहीं है', Pakistan का बड़ा कबूलनामा! इस्लामाबाद हाईकोर्ट ने पूछा- फिर विदेशी जमीन पर क्यों तैनात किए सैनिक?`}
+          text={headerNewsDataApi?.news[0]?.title }
         />
         <Box
           sx={{
@@ -90,9 +99,9 @@ export default function DetailsContainer() {
                 alignItems: 'center',
                 gap: '10px',
                 cursor: 'pointer',
-                "&:hover": {
-                   opacity:0.8
-                  },
+                '&:hover': {
+                  opacity: 0.8,
+                },
               }}
             >
               {/* <ShareIcon sx={{fontSize:'0.8rem'}}/> */}
@@ -115,9 +124,9 @@ export default function DetailsContainer() {
                 alignItems: 'center',
                 gap: '10px',
                 cursor: 'pointer',
-                "&:hover": {
-                    opacity:0.8
-                   },
+                '&:hover': {
+                  opacity: 0.8,
+                },
               }}
             >
               <img src={images.twitterXWhite} />
@@ -139,9 +148,9 @@ export default function DetailsContainer() {
                 alignItems: 'center',
                 gap: '10px',
                 cursor: 'pointer',
-                "&:hover": {
-                    opacity:0.8
-                   },
+                '&:hover': {
+                  opacity: 0.8,
+                },
               }}
             >
               <PinterestIcon sx={{ fontSize: '1rem', color: '#FFF' }} />
@@ -163,9 +172,9 @@ export default function DetailsContainer() {
                 alignItems: 'center',
                 gap: '10px',
                 cursor: 'pointer',
-                "&:hover": {
-                    opacity:0.8
-                   },
+                '&:hover': {
+                  opacity: 0.8,
+                },
               }}
             >
               <WhatsAppIcon sx={{ fontSize: '1rem', color: '#FFF' }} />
@@ -300,7 +309,10 @@ An eyewitness described the scene at a packed branch of Asda in the Wirral, Mers
         </Box>
       </Box>
       <Box>
-        <Box className="sideNewCardsWidth" sx={{position:'sticky',top:'1rem'}}>
+        <Box
+          className="sideNewCardsWidth"
+          sx={{ position: 'sticky', top: '1rem' }}
+        >
           <Text
             text={'Virus confronts'}
             sx={{ fontWeight: 700, margin: '1rem 0rem' }}
