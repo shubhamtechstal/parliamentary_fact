@@ -14,19 +14,18 @@ import { appConstants } from 'helpers/constants/appConstants';
 
 export default function DetailsContainer() {
   const relatedNews = [1, 2, 3, 4];
-  const {id} = useParams();
+  const { id } = useParams();
 
-  const { data: headerNewsDataApi } =
-    dashboardNewsApiAction.getNewsById({
-      id: id,
-    });
+  const { data: headerNewsDataApi } = dashboardNewsApiAction.getNewsById({
+    id: id,
+  });
 
-    // console.log(headerNewsDataApi?.news?.title,'idhhh');
+  // console.log(headerNewsDataApi?.news?.title,'idhhh');
 
-    const { data: dashboardNewsDataApi } =
+  const { data: dashboardNewsDataApi } =
     dashboardNewsApiAction.getDashboardNews();
 
-    const imageUrl = appConstants.BACKEND_IMAGE_URL;
+  const imageUrl = appConstants.BACKEND_IMAGE_URL;
 
   return (
     <Container
@@ -57,7 +56,7 @@ export default function DetailsContainer() {
             //   color: '#162eb7',
             // },
           }}
-          text={headerNewsDataApi?.news[0]?.title }
+          text={headerNewsDataApi?.news[0]?.title}
         />
         <Box
           sx={{
@@ -114,9 +113,7 @@ export default function DetailsContainer() {
               }}
             >
               {/* <ShareIcon sx={{fontSize:'0.8rem'}}/> */}
-              <img 
-              src={images.facebookWhite}
-               />
+              <img src={images.facebookWhite} />
               <Divider
                 orientation="vertical"
                 sx={{ height: '20px', backgroundColor: '#FFF' }}
@@ -237,16 +234,21 @@ export default function DetailsContainer() {
         </Box>
         <Text
           font={'Roboto'}
-          sx={{ color: '#767676' }}
-          text={`A supermarket worker was spat at by a customer attempting to stockpile Pot Noodles while another was told: “I hope you get the virus and die”, as panic-buying blighted the nations response to coronavirus pandemic.
-`}
+          sx={{ color: '#767676', display: '-webkit-box',
+          WebkitLineClamp: 3,
+          WebkitBoxOrient: 'vertical',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis', }}
+          text={`A supermarket worker was spat at by a customer attempting to stockpile Pot 
+          Noodles while another was told: “I hope you get the virus and die”, as panic-buying
+           blighted the nations response to coronavirus pandemic.`}
         />
         <Text
           font={'Roboto'}
           sx={{ color: '#767676' }}
-          text={`
-An eyewitness described the scene at a packed branch of Asda in the Wirral, Merseyside, on Saturday, as a man in his 30s attempted to buy more than the three Pot Noodles allowed by the store.
-`}
+          text={`An eyewitness described the scene at a packed branch of Asda in 
+          the Wirral, Merseyside, on Saturday, as a man in his 30s attempted to buy
+           more than the three Pot Noodles allowed by the store.`}
         />
         <Text
           font={'Roboto'}
@@ -313,7 +315,7 @@ An eyewitness described the scene at a packed branch of Asda in the Wirral, Mers
           <Box sx={{ marginTop: '1rem' }}>
             {relatedNews.map((val) => (
               <>
-                <SubHeadingNewCard  data={dashboardNewsDataApi?.reviews}/>
+                <SubHeadingNewCard data={dashboardNewsDataApi?.reviews} />
                 <Divider sx={{ margin: '1rem' }} />
               </>
             ))}
@@ -351,7 +353,7 @@ An eyewitness described the scene at a packed branch of Asda in the Wirral, Mers
           />
           {relatedNews.map((val) => (
             <Box sx={{ marginTop: '1rem' }}>
-              <SideNewCards key={val} data={dashboardNewsDataApi?.reviews}/>
+              <SideNewCards key={val} data={dashboardNewsDataApi?.reviews} />
             </Box>
           ))}
         </Box>

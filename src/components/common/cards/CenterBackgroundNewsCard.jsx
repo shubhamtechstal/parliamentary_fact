@@ -57,6 +57,11 @@ export default function CenterBackgroudNewsCard({ data }) {
               fontSize: '0.8rem',
               fontWeight: 500,
               cursor: 'pointer',
+              display: '-webkit-box',
+              WebkitLineClamp: 3,
+              WebkitBoxOrient: 'vertical',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
               '&:hover': {
                 color: '#162eb7',
               },

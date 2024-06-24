@@ -47,10 +47,6 @@ export default function CategoriesContainer() {
             }}
           >
             <HeadingNewCards data={dashboardNewsDataApi?.reviews} />
-            <Box
-              className="MobileViewRemove"
-              sx={{ height: '250px', width: '300px', background: '#abb8c3' }}
-            ></Box>
           </Box>
           <Box
             className="BigNewsCardContainer"

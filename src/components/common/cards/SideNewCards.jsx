@@ -9,7 +9,7 @@ export default function SideNewCards({ data }) {
   const navigate = useNavigate();
 
   let newsItem;
-  if (data) newsItem = data[2];
+  if (data) newsItem = data[7];
 
   const imageUrl = appConstants.BACKEND_IMAGE_URL;
 
@@ -23,12 +23,12 @@ export default function SideNewCards({ data }) {
   });
 
   return (
-    <Box sx={{ display: 'flex', gap: '1rem',marginRight:'6px' }}>
+    <Box sx={{ display: 'flex', gap: '1rem', marginRight: '6px' }}>
       <Box
-        // sx={{
-        //   width: '230px',
-        //   height: '60px',
-        // }}
+      // sx={{
+      //   width: '230px',
+      //   height: '60px',
+      // }}
       >
         <img
           // src={images.dummyNews5}
@@ -52,6 +52,11 @@ export default function SideNewCards({ data }) {
               fontWeight: 500,
               lineHeight: '17px',
               cursor: 'pointer',
+              display: '-webkit-box',
+              WebkitLineClamp: 3,
+              WebkitBoxOrient: 'vertical',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
               '&:hover': {
                 color: '#162eb7',
               },

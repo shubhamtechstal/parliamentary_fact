@@ -11,6 +11,7 @@ import { dashboardNewsApiAction } from 'stores/redux/apiSlices/DashboardNewsSlic
 import ShortNewsCard from 'components/common/cards/ShortNewsCard';
 import '../components/common/cards/NewsCard.css';
 import images from 'helpers/images';
+import Stack from 'components/common/Stack';
 
 export default function DashboardContainer() {
   const { data: dashboardNewsDataApi } =
@@ -29,8 +30,9 @@ export default function DashboardContainer() {
           className="MobileViewRemove"
           sx={{ width: '8rem', height: '43.5rem', background: '#0d0b52' }}
         ></Box>
+
         <Box sx={{ width: '100%' }}>
-          <Box
+          {/* <Box
             sx={{
               background: '#f7f7f7',
               width: '100%',
@@ -38,9 +40,9 @@ export default function DashboardContainer() {
               display: 'flex',
               justifyContent: 'space-between',
             }}
-          >
-            <HeadingNewCards data={dashboardNewsDataApi?.reviews} />
-            <Box
+          > */}
+          <HeadingNewCards data={dashboardNewsDataApi?.reviews} />
+          {/* <Box
               className="MobileViewRemove"
               sx={{
                 height: '250px',
@@ -49,52 +51,41 @@ export default function DashboardContainer() {
                 background: '#abb8c3',
               }}
             >
-              {/* <img
-                src={images.dummyNews5}
-                style={{ height: '250px', maxWidth: '300px', width: '100%' }}
-              /> */}
-            </Box>
-          </Box>
+            </Box> */}
+          {/* </Box> */}
+
           <Box
-            className="BigNewsCardContainer"
-            sx={{ display: 'flex', justifyContent: 'space-between' }}
+            className="container"
+            sx={{
+              display: 'flex',
+              width: '100%',
+              justifyContent: 'space-between',
+              padding: '12px',
+            }}
           >
-            <Box sx={{ padding: '1rem', maxWidth: '750px' }}>
-              <Text
-                text={'Virus confronts'}
-                sx={{ fontWeight: 700, margin: '0 0 1rem 0' }}
-              />
-              <Box
-                className="BigNewsCardSection"
-                sx={{ display: 'flex', gap: '1rem' }}
-              >
+            <Box sx={{ maxWidth: '38%' }}>
+              <Box>
+                <Text
+                  text={'Virus confronts'}
+                  sx={{ fontWeight: 700, margin: '0 0 1rem 0' }}
+                ></Text>
+              </Box>
+              <Box>
                 <BigNewCards data={dashboardNewsDataApi?.reviews} />
-                <Box
-                  sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '1rem',
-                    maxWidth: '410px',
-                  }}
-                >
-                  <Box>
-                    <BottomSubHeadingCards
-                      data={dashboardNewsDataApi?.reviews}
-                    />
-                  </Box>
-                  <Box>
-                    <BottomSubHeadingCards
-                      data={dashboardNewsDataApi?.reviews}
-                    />
-                  </Box>
-                </Box>
               </Box>
             </Box>
-            <Box sx={{ marginRight: '1rem' }}>
-              <Text
-                text={'Virus confronts'}
-                sx={{ fontWeight: 700, margin: '1rem 0rem' }}
-              />
+
+            <Box sx={{ maxWidth: '31%', margin: '42px 10px' }}>
+              <Box>
+                <BottomSubHeadingCards data={dashboardNewsDataApi?.reviews} />
+              </Box>
+              <Box>
+                <BottomSubHeadingCards data={dashboardNewsDataApi?.reviews} />
+              </Box>
+            </Box>
+
+            <Box sx={{ maxWidth: '31%' }}>
+              <Text text={'Virus confronts'} sx={{ fontWeight: 700 }} />
               <Box className="SideNewCards">
                 {dashboardNewsDataApi?.reviews?.slice(0, 6).map((data) => (
                   <Box key={data.id} sx={{ marginTop: '1rem' }}>

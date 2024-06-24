@@ -60,6 +60,11 @@ export default function BigNewCards({ data }) {
             fontSize: '1.5rem',
             lineHeight: '1.8rem',
             cursor: 'pointer',
+            display: '-webkit-box',
+            WebkitLineClamp: 3,
+            WebkitBoxOrient: 'vertical',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
             '&:hover': {
               color: '#162eb7',
             },

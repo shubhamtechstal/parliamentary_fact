@@ -59,6 +59,11 @@ export default function BottomSubHeadingCards({ type, data }) {
               fontSize: '0.9rem',
               fontWeight: 500,
               cursor: 'pointer',
+              display: '-webkit-box',
+              WebkitLineClamp: 3,
+              WebkitBoxOrient: 'vertical',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
               '&:hover': {
                 color: '#162eb7',
               },
