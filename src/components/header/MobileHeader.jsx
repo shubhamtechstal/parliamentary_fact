@@ -7,6 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import images from 'helpers/images';
 import { useNavigate } from 'react-router-dom';
+import '../../components/common/cards/NewsCard.css';
 
 export default function MobileHeader({ menuOpen, data }) {
   const navigate = useNavigate();
@@ -67,10 +68,7 @@ export default function MobileHeader({ menuOpen, data }) {
           />
         </Box>
         <Box sx={{ textAlign: 'center' }}>
-          <Text
-            text={'ParliamentaryFact'}
-            sx={{ color: '#0d0b52', fontSize: '1.5rem', fontWeight: 700 }}
-          />
+          <img src="../public/pf_logo.png" alt="logo" className="pf_logo" />
           <Text
             text={'Local Coronavirus informations'}
             sx={{ color: '#767676', fontSize: '0.75rem' }}
@@ -97,8 +95,8 @@ export default function MobileHeader({ menuOpen, data }) {
             left: 0,
             backgroundImage:
               'url(https://demo.tagdiv.com/newspaper_covid19_news_pro/wp-content/uploads/2020/03/17.jpg)', // Add your image URL here
-            backgroundSize: 'cover', // Cover the entire area
-            backgroundRepeat: 'no-repeat', // Avoid repeating the image
+            backgroundSize: 'cover', 
+            backgroundRepeat: 'no-repeat', 
             backgroundPosition: 'center',
             zIndex: 999,
             animation: Search

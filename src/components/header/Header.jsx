@@ -6,9 +6,10 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import React, { useEffect, useState } from 'react';
 import images from 'helpers/images';
 import { Navigate, useNavigate } from 'react-router-dom';
+import '../../components/common/cards/NewsCard.css';
 
-export default function Header({data}) {
-  console.log('data',data);
+export default function Header({ data }) {
+  console.log('data', data);
 
   const navigate = useNavigate();
 
@@ -58,7 +59,7 @@ export default function Header({data}) {
   //   { head: 'More', subhead: 'check' },
   // ];
   const header = data;
-  
+
   const handleRightClick = () => {
     if (trendingNews === arrNews.length - 1) setTrendingNews(0);
     else setTrendingNews(trendingNews + 1);
@@ -89,7 +90,7 @@ export default function Header({data}) {
               display: 'flex',
               gap: '0.7rem',
               alignItems: 'center',
-              marginLeft: '1rem',
+              // marginLeft: '1rem',
             }}
           >
             <Text
@@ -160,7 +161,7 @@ export default function Header({data}) {
           }}
         >
           <Text
-            sx={{ maxWidth: '1rem', color: '#767676', fontSize: '0.75rem' }}
+            sx={{ minWidth: '9rem', color: '#767676', fontSize: '0.75rem' }}
             text={'Download App'}
           />
 
@@ -169,14 +170,7 @@ export default function Header({data}) {
               onClick={() => navigate('/')}
               sx={{ display: 'flex', cursor: 'pointer' }}
             >
-              <Text
-                text={'Parliamentary'}
-                sx={{ color: '#0d0b52', fontSize: '3.125rem', fontWeight: 700 }}
-              />
-              <Text
-                text={'Fact'}
-                sx={{ color: 'red', fontSize: '3.125rem', fontWeight: 700 }}
-              />
+              <img src="../public/pf_logo.png" alt="logo" className="pf_logo" />
             </Box>
             <Text
               text={'Local Coronavirus informations'}
@@ -252,21 +246,24 @@ export default function Header({data}) {
           sx={{ display: 'flex', justifyContent: 'center', marginTop: '1rem' }}
         >
           <Box sx={{ display: 'flex', gap: '1.5rem' }}>
-          <Box sx={{ display: 'flex' }}  onClick={() => navigate('/')}>
-                <Text
-                  text={"Home"}
-                  sx={{
-                    fontSize: '0.9rem',
-                    fontWeight: 700,
-                    cursor: 'pointer',
-                    '&:hover': {
-                      color: '#162eb7',
-                    },
-                  }}
-                />
-              </Box>
+            <Box sx={{ display: 'flex' }} onClick={() => navigate('/')}>
+              <Text
+                text={'Home'}
+                sx={{
+                  fontSize: '0.9rem',
+                  fontWeight: 700,
+                  cursor: 'pointer',
+                  '&:hover': {
+                    color: '#162eb7',
+                  },
+                }}
+              />
+            </Box>
             {header?.map((val, index) => (
-              <Box sx={{ display: 'flex' }} onClick={() => navigate(`/categories/${val?.category}`)}>
+              <Box
+                sx={{ display: 'flex' }}
+                onClick={() => navigate(`/categories/${val?.category}`)}
+              >
                 <Text
                   text={val?.category}
                   key={index}

@@ -66,9 +66,8 @@ export default function HeadingNewCards({ data }) {
             <Box>
               <Text
                 onClick={() => navigate(`/details/${newsItem?.id}`)}
-                //  font={'Inter'}
                 sx={{
-                  lineHeight: '33px',
+                  lineHeight: '30px',
                   fontSize: '1.5rem',
                   fontWeight: 700,
                   cursor: 'pointer',
@@ -77,13 +76,28 @@ export default function HeadingNewCards({ data }) {
                   WebkitBoxOrient: 'vertical',
                   overflow: 'hidden',
                   textOverflow: 'ellipsis',
+                  paddingBottom: '3px',
+                  position: 'relative',
                   '&:hover': {
-                    color: '#162eb7',
+                    color: '#da251d',
+                    '&::before': {
+                      width: '90%',
+                    },
+                  },
+                  '&::before': {
+                    content: '""',
+                    position: 'absolute',
+                    bottom: 0,
+                    left: 0,
+                    width: '0%',
+                    height: '1px',
+                    backgroundColor: '#da251d',
+                    transition: 'width 0.4s ease-out',
                   },
                 }}
                 text={newsItem?.title}
-                // text={'रोका फिर लाठी लेकर गाड़ी से उतरे और कर डाला लाल-पीला'}
               />
+
               <Box
                 sx={{
                   display: 'flex',

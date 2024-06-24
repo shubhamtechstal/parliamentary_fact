@@ -57,8 +57,23 @@ export default function SideNewCards({ data }) {
               WebkitBoxOrient: 'vertical',
               overflow: 'hidden',
               textOverflow: 'ellipsis',
+              position: 'relative',
+              paddingBottom:'3px',
               '&:hover': {
-                color: '#162eb7',
+                color: '#da251d',
+                '&::before': {
+                  width: '100%',
+                },
+              },
+              '&::before': {
+                content: '""',
+                position: 'absolute',
+                bottom: 0,
+                left: 0,
+                width: '0%',
+                height: '1px',
+                backgroundColor: '#da251d',
+                transition: 'width 0.4s ease-out',
               },
             }}
             text={newsItem?.title}

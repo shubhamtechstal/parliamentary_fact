@@ -10,8 +10,8 @@ import CenterBackgroudNewsCard from 'components/common/cards/CenterBackgroundNew
 import { dashboardNewsApiAction } from 'stores/redux/apiSlices/DashboardNewsSlice/dashboardNewsApiSlice';
 import ShortNewsCard from 'components/common/cards/ShortNewsCard';
 import '../components/common/cards/NewsCard.css';
-import images from 'helpers/images';
-import Stack from 'components/common/Stack';
+// import images from 'helpers/images';
+// import Stack from 'components/common/Stack';
 
 export default function DashboardContainer() {
   const { data: dashboardNewsDataApi } =
@@ -32,38 +32,9 @@ export default function DashboardContainer() {
         ></Box>
 
         <Box sx={{ width: '100%' }}>
-          {/* <Box
-            sx={{
-              background: '#f7f7f7',
-              width: '100%',
-              padding: '1rem',
-              display: 'flex',
-              justifyContent: 'space-between',
-            }}
-          > */}
           <HeadingNewCards data={dashboardNewsDataApi?.reviews} />
-          {/* <Box
-              className="MobileViewRemove"
-              sx={{
-                height: '250px',
-                maxWidth: '300px',
-                width: '100%',
-                background: '#abb8c3',
-              }}
-            >
-            </Box> */}
-          {/* </Box> */}
-
-          <Box
-            className="container"
-            sx={{
-              display: 'flex',
-              width: '100%',
-              justifyContent: 'space-between',
-              padding: '12px',
-            }}
-          >
-            <Box sx={{ maxWidth: '38%' }}>
+          <Box className="home_page_news_container">
+            <Box className="home_page_news_subBox1">
               <Box>
                 <Text
                   text={'Virus confronts'}
@@ -75,7 +46,7 @@ export default function DashboardContainer() {
               </Box>
             </Box>
 
-            <Box sx={{ maxWidth: '31%', margin: '42px 10px' }}>
+            <Box className='home_page_news_subBox2'>
               <Box>
                 <BottomSubHeadingCards data={dashboardNewsDataApi?.reviews} />
               </Box>
@@ -84,7 +55,7 @@ export default function DashboardContainer() {
               </Box>
             </Box>
 
-            <Box sx={{ maxWidth: '31%' }}>
+            <Box className='home_page_news_subBox3'>
               <Text text={'Virus confronts'} sx={{ fontWeight: 700 }} />
               <Box className="SideNewCards">
                 {dashboardNewsDataApi?.reviews?.slice(0, 6).map((data) => (
@@ -239,8 +210,6 @@ export default function DashboardContainer() {
               <Box
                 sx={{
                   background: '#f7f7f7',
-                  // height: '100%',
-                  // padding: '0.5rem 1rem',
                   padding: '1px 10px 10px 10px',
                 }}
               >

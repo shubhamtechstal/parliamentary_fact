@@ -1,8 +1,8 @@
+import React, { useState } from 'react';
 import { Box, Container, Divider } from '@mui/material';
 import Text from 'components/common/Text';
 import SubHeadingNewCard from 'components/common/cards/SubHeadingNewCard';
 import images from 'helpers/images';
-import React from 'react';
 import ShareIcon from '@mui/icons-material/Share';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import PinterestIcon from '@mui/icons-material/Pinterest';
@@ -11,6 +11,7 @@ import SideNewCards from 'components/common/cards/SideNewCards';
 import { dashboardNewsApiAction } from 'stores/redux/apiSlices/DashboardNewsSlice/dashboardNewsApiSlice';
 import { useParams } from 'react-router-dom';
 import { appConstants } from 'helpers/constants/appConstants';
+import '../components/common/cards/NewsCard.css';
 
 export default function DetailsContainer() {
   const relatedNews = [1, 2, 3, 4];
@@ -26,6 +27,12 @@ export default function DetailsContainer() {
     dashboardNewsApiAction.getDashboardNews();
 
   const imageUrl = appConstants.BACKEND_IMAGE_URL;
+
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const toggleReadMore = () => {
+    setIsExpanded(!isExpanded);
+  };
 
   return (
     <Container
@@ -50,11 +57,6 @@ export default function DetailsContainer() {
             fontWeight: '700',
             marginTop: '1rem',
             fontSize: '1.5rem',
-            // lineHeight: '1.8rem',
-            // cursor: 'pointer',
-            // '&:hover': {
-            //   color: '#162eb7',
-            // },
           }}
           text={headerNewsDataApi?.news[0]?.title}
         />
@@ -234,57 +236,43 @@ export default function DetailsContainer() {
         </Box>
         <Text
           font={'Roboto'}
-          sx={{ color: '#767676', display: '-webkit-box',
-          WebkitLineClamp: 3,
-          WebkitBoxOrient: 'vertical',
-          overflow: 'hidden',
-          textOverflow: 'ellipsis', }}
+          sx={{
+            color: '#767676',
+            display: '-webkit-box',
+            WebkitLineClamp: isExpanded ? 'none' : 5,
+            WebkitBoxOrient: 'vertical',
+            overflow: isExpanded ? 'visible' : 'hidden',
+            textOverflow: isExpanded ? 'unset' : 'ellipsis',
+          }}
           text={`A supermarket worker was spat at by a customer attempting to stockpile Pot 
           Noodles while another was told: “I hope you get the virus and die”, as panic-buying
-           blighted the nations response to coronavirus pandemic.`}
-        />
-        <Text
-          font={'Roboto'}
-          sx={{ color: '#767676' }}
-          text={`An eyewitness described the scene at a packed branch of Asda in 
+           blighted the nations response to coronavirus pandemic.
+
+           An eyewitness described the scene at a packed branch of Asda in 
           the Wirral, Merseyside, on Saturday, as a man in his 30s attempted to buy
-           more than the three Pot Noodles allowed by the store.`}
-        />
-        <Text
-          font={'Roboto'}
-          sx={{ color: '#767676' }}
-          text={`
+           more than the three Pot Noodles allowed by the store.
 
-          EVERYONE WAS SO WRAPPED UP IN MAKING SURE EVERYBODY
-`}
-        />
-        <Text
-          font={'Roboto'}
-          sx={{ color: '#767676' }}
-          text={`
+           EVERYONE WAS SO WRAPPED UP IN MAKING SURE EVERYBODY
 
-         
-          A woman in her 40s working behind the checkout attempted to enforce the rules, brought in to ensure stocks could be maintained, and the gentleman objected to it and spat at her, according to businessman Andy Smith, who was in the store.
-          
-`}
-        />
-        <Text
-          font={'Roboto'}
-          sx={{ color: '#767676' }}
-          text={`
+           A woman in her 40s working behind the checkout attempted to enforce the rules,
+           brought in to ensure stocks could be maintained, and the gentleman objected to it
+            and spat at her, according to businessman Andy Smith, who was in the store.
+
+            Supermarkets have been overwhelmed with unprecedented demand amid the coronavirus crisis.
+          The incident, which was raised in parliament by Labour MP Bill Esterson, was just one of the 
+          horrendous cases of abuse revealed by supermarket workers in recent days as some customers 
+          grow angry over restrictions and empty shelves.
+
           Supermarkets have been overwhelmed with unprecedented demand amid the coronavirus crisis.
-          The incident, which was raised in parliament by Labour MP Bill Esterson, was just one of the horrendous cases of abuse revealed by supermarket workers in recent days as some customers grow angry over restrictions and empty shelves.
-`}
+          The incident, which was raised in parliament by Labour MP Bill Esterson, was just one of 
+          the horrendous cases of abuse revealed by supermarket workers in recent days as some 
+          customers grow angry over restrictions and empty shelves.
+           `}
         />
-        <Text
-          font={'Roboto'}
-          sx={{ color: '#767676' }}
-          text={`
-           
-          The doctor was exposed to the virus when the 38-year-old woman visited the clinic on March 12, the minister said. Five days later, she tested positive. That day, the doctor was also admitted in hospital.
+        <span className="read-more-button" onClick={toggleReadMore}>
+          {isExpanded ? 'Read Less' : 'Read More'}
+        </span>
 
-`}
-        />
         <Box
           sx={{
             width: '100%',

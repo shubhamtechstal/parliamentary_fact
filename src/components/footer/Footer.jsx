@@ -42,46 +42,12 @@ export default function Footer() {
           alignItems: 'center',
         }}
       >
-        <Box sx={{}}>
+        <Box>
           <Box sx={{ display: 'flex', gap: '0.5rem', cursor: 'pointer' }}>
-            <Text
-              text={'B'}
-              sx={{
-                color: '#abb8c3',
-                background: '#000',
-                padding: '0 0.4rem',
-                height: '30px',
-                width: '30px',
-                textAlign: 'center',
-                fontSize: '1.3rem',
-                fontWeight: 800,
-              }}
-            />
-            <Text
-              text={'B'}
-              sx={{
-                color: '#abb8c3',
-                background: '#000',
-                padding: '0 0.4rem',
-                height: '30px',
-                width: '30px',
-                textAlign: 'center',
-                fontSize: '1.3rem',
-                fontWeight: 800,
-              }}
-            />
-            <Text
-              text={'C'}
-              sx={{
-                color: '#abb8c3',
-                background: '#000',
-                padding: '0 0.4rem',
-                height: '30px',
-                width: '30px',
-                textAlign: 'center',
-                fontSize: '1.3rem',
-                fontWeight: 800,
-              }}
+            <img
+              src="../public/pf_logo.png"
+              alt="logo"
+              className="pf_logo_footer"
             />
           </Box>
           <Box>
@@ -90,7 +56,7 @@ export default function Footer() {
                 display: 'flex',
                 flexWrap: 'wrap',
                 gap: '1rem',
-                marginTop: '2rem',
+                marginTop: '1rem',
               }}
             >
               {footer.map((val) => (
@@ -98,7 +64,6 @@ export default function Footer() {
                   key={val}
                   text={val}
                   sx={{
-                    //   background: '#000',
                     padding: '0 0.4rem',
                     fontSize: '0.8rem',
                     fontWeight: 700,
@@ -147,7 +112,7 @@ export default function Footer() {
           >
             <Text
               text={
-                'Copyright 2024 BBC. All rights reserved. The BBC is not responsible for the content of external sites.'
+                'Copyright 2024 Parliamentary Fact. All rights reserved. The Parliamentary Fact is not responsible for the content of external sites.'
               }
               sx={{
                 padding: '0 0.4rem',
