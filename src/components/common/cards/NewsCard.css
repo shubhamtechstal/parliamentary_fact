@@ -6,93 +6,112 @@
   width: 200px;
   height: 120px;
 }
-/* .Bottom_card_box {
-  width: 240px;
-  height: 160px;
-} */
 .CenterVirusConfrontSection {
   display: flex;
   gap: 1rem;
   margin-top: 1rem;
 }
-.bottomSubHeadingCardBox{
-    display: flex;
-    margin: 0.5rem;
+.bottomSubHeadingCardBox {
+  display: flex;
+  margin: 0.5rem;
 }
-.advertise_img{
-    width: 100%;
-    height: 100%;
+.advertise_img {
+  width: 100%;
+  height: 100%;
 }
 
-.categories_subheading_card{
+.categories_subheading_card {
   padding: 1rem;
   max-width: 65%;
 }
-.categories_subheading_side_card{
+.categories_subheading_side_card {
   max-width: 35%;
 }
-.pf_logo{
+.pf_logo {
   width: 100%;
   height: 60px;
 }
-.home_page_news_container{
+.home_page_news_container {
   display: flex;
   width: 100%;
   justify-content: space-between;
   padding: 12px;
 }
-.home_page_news_subBox1{
+.home_page_news_subBox1 {
   max-width: 38%;
 }
-.home_page_news_subBox2{
+.home_page_news_subBox2 {
   max-width: 31%;
   margin: 42px 10px;
 }
-.home_page_news_subBox3{
+.home_page_news_subBox3 {
   max-width: 31%;
 }
-.pf_logo_footer{
+.pf_logo_footer {
   width: 230px;
   height: 30px;
 }
 
 .read-more-button {
-  color: #1a73e8;
+  color: #0d0b52;
   cursor: pointer;
   font-weight: bold;
-  margin-top: 10px;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  width: 120px;
+  font-size: 16px;
+  line-height: 20px;
+  position: relative;
+}
+.read-more-button .arrow-icon {
+  margin-left: 5px;
+  font-size: 1.5em;
+}
+
+.read-more-button:hover::before {
+  width: 100%;
+}
+
+.read-more-button::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 1px;
+  background-color: #0d0b52;
+  transition: width 0.3s ease-out;
 }
 
 @media (min-device-width: 300px) and (max-device-width: 768px) {
-  .home_page_news_subBox1{
+  .home_page_news_subBox1 {
     max-width: 100%;
   }
-  .home_page_news_subBox2{
+  .home_page_news_subBox2 {
     max-width: 100%;
   }
-  .home_page_news_subBox3{
+  .home_page_news_subBox3 {
     max-width: 100%;
   }
-  .home_page_news_container{
+  .home_page_news_container {
     display: block;
   }
-  .pf_logo{
+  .pf_logo {
     height: 32px;
     margin-top: 20px;
   }
-  .categories_subheading_card{
+  .categories_subheading_card {
     max-width: 100%;
   }
-  .categories_subheading_side_card{
+  .categories_subheading_side_card {
     max-width: 100%;
   }
-    .advertise_img{
-        width: 95%;
-    }
-    .bottomSubHeadingCardBox{
-        display: block;
-    }
+  .advertise_img {
+    width: 95%;
+  }
+  .bottomSubHeadingCardBox {
+    display: block;
+  }
   .CenterVirusConfrontSection {
     display: block;
   }

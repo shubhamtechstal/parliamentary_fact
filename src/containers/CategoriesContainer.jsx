@@ -6,19 +6,21 @@ import SideNewCards from 'components/common/cards/SideNewCards';
 import SubHeadingNewCard from 'components/common/cards/SubHeadingNewCard';
 import '../App.css';
 import { dashboardNewsApiAction } from 'stores/redux/apiSlices/DashboardNewsSlice/dashboardNewsApiSlice';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import '../components/common/cards/NewsCard.css';
 // import DownloadAppSection from 'components/homePage/DownloadAppSection';
 
 export default function CategoriesContainer() {
   // const cardsData = [1, 2, 3, 4, 5, 6];
   const {id} = useParams();
+  const location = useLocation();
+  const {category} = location.state || {};
   const { data: dashboardNewsDataApi } =
     dashboardNewsApiAction.getDashboardNews();
 
   const { data: headerNewsDataApi } =
     dashboardNewsApiAction.getDashboardNews({
-      category: id,
+      category: category,
     });
     console.log(headerNewsDataApi,'idhhh');
 
@@ -37,16 +39,13 @@ export default function CategoriesContainer() {
           sx={{ width: '8rem', height: '43.5rem', background: '#0d0b52' }}
         ></Box>
         <Box sx={{ width: '100%' }}>
-          <Box
-            sx={{
-              background: '#f7f7f7',
-              width: '100%',
-              padding: '1rem',
-              display: 'flex',
-              justifyContent: 'space-between',
-            }}
-          >
-            <HeadingNewCards data={dashboardNewsDataApi?.reviews} />
+          <Box>
+            {headerNewsDataApi?.reviews?.slice(0, 1).map((data) => (
+              <Box key={data.id}>
+                <HeadingNewCards data={data} />
+              </Box>
+            ))}
+            {/* <HeadingNewCards data={dashboardNewsDataApi?.reviews} /> */}
           </Box>
           <Box
             className="BigNewsCardContainer"
@@ -54,12 +53,13 @@ export default function CategoriesContainer() {
           >
             <Box className='categories_subheading_card'>
               <Text
-                text={'Virus confronts'}
+                text={id}
                 sx={{ fontWeight: 700, margin: '0 0 1rem 0rem' }}
               />
-              {dashboardNewsDataApi?.reviews.map((val, index) => (
+              {headerNewsDataApi?.reviews.map((val, index) => (
                 <>
-                  <SubHeadingNewCard data={dashboardNewsDataApi?.reviews} />
+                {/* {console.log(val,'checkconsole')} */}
+                  <SubHeadingNewCard data={val} />
                   <Divider sx={{ margin: '1rem' }} />
                   {index === 3 && (
                     <Box
@@ -96,17 +96,17 @@ export default function CategoriesContainer() {
               ))}
               <Box sx={{ background: '#f7f7f7', padding: '1rem' }}>
                 <Text
-                  text={'Virus confronts'}
+                  text={id}
                   sx={{ fontWeight: 700, margin: '1rem 0.5rem' }}
                 />
                 <Box
                   className="BigNewsCardContainer"
                   sx={{ display: 'flex', gap: '0.5rem' }}
                 >
-                  {dashboardNewsDataApi?.reviews?.slice(0, 3).map((data) => (
+                  {headerNewsDataApi?.reviews?.slice(0, 3).map((data) => (
                     <Box key={data.id} sx={{ marginTop: '1rem' }}>
                       <CenterBackgroudNewsCard
-                        data={dashboardNewsDataApi?.reviews}
+                        data={data}
                       />
                     </Box>
                   ))}
@@ -115,12 +115,12 @@ export default function CategoriesContainer() {
             </Box>
             <Box className="categories_subheading_side_card">
               <Text
-                text={'Virus confronts'}
+                text={"Trending News"}
                 sx={{ fontWeight: 700, margin: '1rem 0rem' }}
               />
-              {dashboardNewsDataApi?.reviews?.slice(0, 6).map((data) => (
+              {dashboardNewsDataApi?.reviews?.slice(0, 6).map((val) => (
                 <Box sx={{ marginTop: '1rem' }}>
-                  <SideNewCards data={dashboardNewsDataApi?.reviews} />
+                  <SideNewCards data={val} />
                 </Box>
               ))}
               <Box
@@ -135,12 +135,12 @@ export default function CategoriesContainer() {
                 }}
               ></Box>
               <Text
-                text={'Virus confronts'}
+                text={id}
                 sx={{ fontWeight: 700, margin: '1rem 0rem' }}
               />
-              {dashboardNewsDataApi?.reviews?.slice(0, 6).map((data) => (
+              {dashboardNewsDataApi?.reviews?.slice(6, 12).map((val) => (
                 <Box sx={{ marginTop: '1rem' }}>
-                  <SideNewCards data={dashboardNewsDataApi?.reviews} />
+                  <SideNewCards data={val} />
                 </Box>
               ))}
             </Box>

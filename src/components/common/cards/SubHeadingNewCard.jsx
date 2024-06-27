@@ -10,7 +10,7 @@ export default function SubHeadingNewCard({ textWidth, data }) {
   const navigate = useNavigate();
 
   let newsItem;
-  if (data) newsItem = data[7];
+  if (data) newsItem = data;
 
   const imageUrl = appConstants.BACKEND_IMAGE_URL;
   const formattedDate = new Date(newsItem?.date).toLocaleString('en-GB', {
@@ -26,8 +26,8 @@ export default function SubHeadingNewCard({ textWidth, data }) {
     <Box sx={{ display: 'flex', gap: '1rem' }}>
       <Box className="SubheadingImage">
         <img
-          // src={images.dummyNews2}
-          src={imageUrl + newsItem?.image}
+          src={imageUrl + newsItem?.news_description[0]?.image}
+          image={imageUrl + newsItem?.news_description[0]?.image}
           className="Subheading_card_img"
         />
       </Box>
@@ -53,7 +53,8 @@ export default function SubHeadingNewCard({ textWidth, data }) {
         </Box>
         <Box>
           <Text
-            onClick={() => navigate(`/details/${newsItem?.id}`)}
+            onClick={() => navigate(`/details/${newsItem?.url}`,{state : {id:newsItem?.id}})}
+
             sx={{
               fontSize: '0.9rem',
               fontWeight: 600,
@@ -82,7 +83,7 @@ export default function SubHeadingNewCard({ textWidth, data }) {
                 transition: 'width 0.4s ease-out',
               },
             }}
-            text={newsItem?.title}
+            text={newsItem ? (newsItem?.news_description[0]?.title ?? ' ') : ''  }
           />
           <Box
             sx={{

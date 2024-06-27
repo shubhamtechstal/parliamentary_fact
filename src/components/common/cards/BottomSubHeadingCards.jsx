@@ -1,7 +1,5 @@
 import { Box } from '@mui/material';
-import React from 'react';
 import Text from '../Text';
-import images from 'helpers/images';
 import { useNavigate } from 'react-router-dom';
 import './NewsCard.css';
 import { appConstants } from 'helpers/constants/appConstants';
@@ -10,7 +8,7 @@ export default function BottomSubHeadingCards({ type, data }) {
   const navigate = useNavigate();
 
   let newsItem;
-  if (data) newsItem = data[3];
+  if (data) newsItem = data;
 
   const imageUrl = appConstants.BACKEND_IMAGE_URL;
 
@@ -27,9 +25,9 @@ export default function BottomSubHeadingCards({ type, data }) {
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
       <Box className="Bottom_card_box">
         <img
-          // src={images.dummyNews3}
-          src={imageUrl + newsItem?.image}
-          style={{ height: '100px', width: '100%' }}
+          src={imageUrl + newsItem?.news_description[0]?.image}
+          image={imageUrl + newsItem?.news_description[0]?.image}
+          style={{ width: '100%', height: '170px' }}
         />
       </Box>
       <Box
@@ -49,12 +47,16 @@ export default function BottomSubHeadingCards({ type, data }) {
               fontSize: '0.625rem',
               fontWeight: 700,
             }}
-            text={newsItem?.category}
+            text={newsItem?.sub_category}
           ></Text>
         </Box>
         <Box>
           <Text
-            onClick={() => navigate(`/details/${newsItem?.id}`)}
+            onClick={() =>
+              navigate(`/details/${newsItem?.url}`, {
+                state: { id: newsItem?.id },
+              })
+            }
             sx={{
               fontSize: '0.9rem',
               fontWeight: 500,
@@ -65,7 +67,7 @@ export default function BottomSubHeadingCards({ type, data }) {
               overflow: 'hidden',
               textOverflow: 'ellipsis',
               position: 'relative',
-              paddingBottom:'3px',
+              paddingBottom: '3px',
               '&:hover': {
                 color: '#da251d',
                 '&::before': {
@@ -83,7 +85,7 @@ export default function BottomSubHeadingCards({ type, data }) {
                 transition: 'width 0.4s ease-out',
               },
             }}
-            text={newsItem?.title}
+            text={newsItem ? newsItem?.news_description[0]?.title ?? ' ' : ''}
           />
           <Box
             sx={{

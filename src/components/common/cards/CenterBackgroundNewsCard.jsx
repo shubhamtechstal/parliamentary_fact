@@ -1,15 +1,13 @@
 import { Box } from '@mui/material';
-import React from 'react';
 import Text from '../Text';
-import images from 'helpers/images';
 import { useNavigate } from 'react-router-dom';
 import { appConstants } from 'helpers/constants/appConstants';
 
-export default function CenterBackgroudNewsCard({ data }) {  
+export default function CenterBackgroudNewsCard({ data }) {
   const navigate = useNavigate();
 
   let newsItem;
-  if (data) newsItem = data[7];
+  if (data) newsItem = data;
 
   const imageUrl = appConstants.BACKEND_IMAGE_URL;
   const formattedDate = new Date(newsItem?.date).toLocaleString('en-GB', {
@@ -23,10 +21,10 @@ export default function CenterBackgroudNewsCard({ data }) {
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-      <Box className='centercard_box'>
+      <Box className="centercard_box">
         <img
-          // src={images.dummyNews4}
-          src={imageUrl + newsItem?.image}
+          src={imageUrl + newsItem?.news_description[0]?.image}
+          image={imageUrl + newsItem?.news_description[0]?.image}
           style={{ height: '100%', width: '100%' }}
         />
       </Box>
@@ -51,7 +49,12 @@ export default function CenterBackgroudNewsCard({ data }) {
           ></Text>
         </Box>
         <Box>
-          <Text onClick={() => navigate(`/details/${newsItem?.id}`)}
+          <Text
+            onClick={() =>
+              navigate(`/details/${newsItem?.url}`, {
+                state: { id: newsItem?.id },
+              })
+            }
             font={'Roboto'}
             sx={{
               fontSize: '0.8rem',
@@ -63,7 +66,7 @@ export default function CenterBackgroudNewsCard({ data }) {
               overflow: 'hidden',
               textOverflow: 'ellipsis',
               position: 'relative',
-              paddingBottom:'3px',
+              paddingBottom: '3px',
               '&:hover': {
                 color: '#da251d',
                 '&::before': {
@@ -81,7 +84,7 @@ export default function CenterBackgroudNewsCard({ data }) {
                 transition: 'width 0.4s ease-out',
               },
             }}
-            text={newsItem?.title}
+            text={newsItem ? newsItem?.news_description[0]?.title ?? ' ' : ''}
           />
           <Box
             sx={{

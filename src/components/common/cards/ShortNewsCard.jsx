@@ -1,7 +1,5 @@
 import { Box } from '@mui/material';
-import React from 'react';
 import Text from '../Text';
-import images from 'helpers/images';
 import { useNavigate } from 'react-router-dom';
 import { appConstants } from 'helpers/constants/appConstants';
 
@@ -10,7 +8,7 @@ export default function ShortNewsCard({ data }) {
   const navigate = useNavigate();
 
   let newsItem;
-  if (data) newsItem = data[4];
+  if (data) newsItem = data;
 
   const imageUrl = appConstants.BACKEND_IMAGE_URL;
 
@@ -25,15 +23,10 @@ export default function ShortNewsCard({ data }) {
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-      <Box className='centercard_box'
-        // sx={{
-        //   width: '200px',
-        //   height: '120px',
-        // }}
-      >
+      <Box className='centercard_box'>
         <img
-          // src={images.dummyNews4}
-          src={imageUrl + newsItem?.image}
+          src={imageUrl + newsItem?.news_description[0]?.image}
+          image={imageUrl + newsItem?.news_description[0]?.image}
           style={{ height: '100%', width: '100%' }}
         />
       </Box>
@@ -54,11 +47,13 @@ export default function ShortNewsCard({ data }) {
               fontSize: '0.625rem',
               fontWeight: 700,
             }}
-            text={newsItem?.category}
+            text={newsItem?.sub_category}
           ></Text>
         </Box>
         <Box>
-          <Text onClick={() => navigate(`/details/${newsItem?.id}`)}
+          <Text 
+           onClick={() => navigate(`/details/${newsItem?.url}`,{state : {id:newsItem?.id}})}
+
             font={'Roboto'}
             sx={{
               fontSize: '0.8rem',
@@ -88,7 +83,7 @@ export default function ShortNewsCard({ data }) {
                 transition: 'width 0.4s ease-out',
               },
             }}
-            text={newsItem?.title}
+            text={newsItem ? (newsItem?.news_description[0]?.title ?? ' ') : ''  }
           />
           <Box
             sx={{

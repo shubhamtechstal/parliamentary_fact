@@ -1,18 +1,14 @@
 import { Box, Card, CardContent, CardMedia } from '@mui/material';
-import React from 'react';
 import Text from '../Text';
-import { Link, useNavigate } from 'react-router-dom';
-import images from 'helpers/images';
+import { useNavigate } from 'react-router-dom';
 import parse from 'html-react-parser';
 import { appConstants } from 'helpers/constants/appConstants';
 
 export default function BigNewCards({ data }) {
   const navigate = useNavigate();
 
-  // console.log(data);
-
   let newsItem;
-  if (data) newsItem = data[5];
+  if (data) newsItem = data;
 
   const imageUrl = appConstants.BACKEND_IMAGE_URL;
 
@@ -29,16 +25,12 @@ export default function BigNewCards({ data }) {
     <Card sx={{ maxWidth: 450, boxShadow: 'none', borderRadius: '0' }}>
       <CardMedia
         sx={{ height: 300 }}
-        src={imageUrl + newsItem?.image}
-        image={imageUrl + newsItem?.image}
+        // src={imageUrl + newsItem?.image}
+        // image={imageUrl + newsItem?.image}
+        src={imageUrl + newsItem?.news_description[0]?.image}
+        image={imageUrl + newsItem?.news_description[0]?.image}
         title="green iguana"
       />
-      {/* <CardMedia
-        sx={{ height: 300 }}
-        src={images.dummyNews1}
-        image={images.dummyNews1}
-        title="green iguana"
-      /> */}
       <CardContent sx={{ margin: 0, padding: '1rem 0rem' }}>
         <Box sx={{ display: 'flex' }}>
           <Text
@@ -49,11 +41,12 @@ export default function BigNewCards({ data }) {
               fontSize: '0.625rem',
               fontWeight: 700,
             }}
-            text={newsItem?.category}
+            text={newsItem?.sub_category}
           ></Text>
         </Box>
         <Text
-          onClick={() => navigate(`/details/${newsItem?.id}`)}
+        // onClick={() => navigate(`/details/${newsItem?.id}`)}
+          onClick={() => navigate(`/details/${newsItem?.url}`,{state : {id:newsItem?.id}})}
           sx={{
             fontWeight: '700',
             marginTop: '1rem',
@@ -63,14 +56,13 @@ export default function BigNewCards({ data }) {
             display: '-webkit-box',
             WebkitLineClamp: 3,
             WebkitBoxOrient: 'vertical',
-            overflow: 'hidden',
             textOverflow: 'ellipsis',
             position: 'relative',
-            paddingBottom:'3px',
+            paddingBottom: '3px',
             '&:hover': {
               color: '#da251d',
               '&::before': {
-                width: '90%',
+                width: '100%',
               },
             },
             '&::before': {
@@ -84,7 +76,8 @@ export default function BigNewCards({ data }) {
               transition: 'width 0.4s ease-out',
             },
           }}
-          text={newsItem?.title}
+          // text={newsItem?.title}
+          text={newsItem ? (newsItem?.news_description[0]?.title ?? ' ') : ''  }
         />
         <Text
           text={formattedDate}
@@ -102,11 +95,17 @@ export default function BigNewCards({ data }) {
             textOverflow: 'ellipsis',
             fontWeight: '600',
           }}
-          // text={newsItem?.description}
-          text={newsItem ? parse(newsItem.description) : ''}
+          // text={newsItem ? parse(newsItem?.description ?? '') : ''}
+          text={newsItem ? parse(newsItem?.news_description[0]?.description ?? ' ') : ''}
         />
-        <Box sx={{ margin: '1rem 0' }}>
-          <Link>Read More</Link>
+        <Box>
+          <span
+            className="read-more-button"
+            onClick={() => navigate(`/details/${newsItem?.url}`,{state : {id:newsItem?.id}})}
+          >
+            Read more
+            <span className="arrow-icon">→</span>
+          </span>
         </Box>
       </CardContent>
     </Card>

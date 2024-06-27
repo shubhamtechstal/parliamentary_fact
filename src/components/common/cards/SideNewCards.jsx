@@ -1,7 +1,5 @@
 import { Box } from '@mui/material';
-import React from 'react';
 import Text from '../Text';
-import images from 'helpers/images';
 import { useNavigate } from 'react-router-dom';
 import { appConstants } from 'helpers/constants/appConstants';
 
@@ -9,7 +7,7 @@ export default function SideNewCards({ data }) {
   const navigate = useNavigate();
 
   let newsItem;
-  if (data) newsItem = data[7];
+  if (data) newsItem = data;
 
   const imageUrl = appConstants.BACKEND_IMAGE_URL;
 
@@ -24,15 +22,10 @@ export default function SideNewCards({ data }) {
 
   return (
     <Box sx={{ display: 'flex', gap: '1rem', marginRight: '6px' }}>
-      <Box
-      // sx={{
-      //   width: '230px',
-      //   height: '60px',
-      // }}
-      >
-        <img
-          // src={images.dummyNews5}
-          src={imageUrl + newsItem?.image}
+      <Box>
+        <img 
+          src={imageUrl + newsItem?.news_description[0]?.image}
+          image={imageUrl + newsItem?.news_description[0]?.image}
           style={{ height: '80px', width: '100px' }}
         />
       </Box>
@@ -46,7 +39,8 @@ export default function SideNewCards({ data }) {
       >
         <Box>
           <Text
-            onClick={() => navigate(`/details/${newsItem?.id}`)}
+           onClick={() => navigate(`/details/${newsItem?.url}`,{state : {id:newsItem?.id}})}
+
             sx={{
               fontSize: '0.8rem',
               fontWeight: 500,
@@ -76,7 +70,7 @@ export default function SideNewCards({ data }) {
                 transition: 'width 0.4s ease-out',
               },
             }}
-            text={newsItem?.title}
+            text={newsItem ? (newsItem?.news_description[0]?.title ?? ' ') : ''  }
           />
           <Box
             sx={{

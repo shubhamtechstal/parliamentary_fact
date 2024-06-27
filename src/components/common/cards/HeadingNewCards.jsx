@@ -1,5 +1,4 @@
 import { Box } from '@mui/material';
-import React from 'react';
 import Text from '../Text';
 import { useNavigate } from 'react-router-dom';
 import './NewsCard.css';
@@ -8,8 +7,7 @@ import parse from 'html-react-parser';
 export default function HeadingNewCards({ data }) {
   const navigate = useNavigate();
   let newsItem;
-  if (data) newsItem = data[0];
-  // console.log(data,'hjshdjs');
+  if (data) newsItem = data;
 
   const formattedDate = new Date(newsItem?.date).toLocaleString('en-GB', {
     day: '2-digit',
@@ -59,13 +57,13 @@ export default function HeadingNewCards({ data }) {
               maxHeight: '250px',
               display: 'flex',
               flexDirection: 'column',
-              // gap: '1rem',
               justifyContent: 'center',
             }}
           >
             <Box>
               <Text
-                onClick={() => navigate(`/details/${newsItem?.id}`)}
+                onClick={() => navigate(`/details/${newsItem?.url}`,{state : {id:newsItem?.id}})}
+
                 sx={{
                   lineHeight: '30px',
                   fontSize: '1.5rem',
@@ -95,7 +93,7 @@ export default function HeadingNewCards({ data }) {
                     transition: 'width 0.4s ease-out',
                   },
                 }}
-                text={newsItem?.title}
+                text={newsItem ? (newsItem?.news_description[0]?.title ?? ' ') : ''  }
               />
 
               <Box
@@ -142,8 +140,7 @@ export default function HeadingNewCards({ data }) {
                 textOverflow: 'ellipsis',
                 fontWeight: '600',
               }}
-              // text={newsItem?.description}
-              text={newsItem ? parse(newsItem.description) : ''}
+              text={newsItem ? parse(newsItem?.news_description[0]?.description ?? ' ') : ''}
             />
           </Box>
         </Box>

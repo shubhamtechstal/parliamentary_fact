@@ -10,13 +10,10 @@ import CenterBackgroudNewsCard from 'components/common/cards/CenterBackgroundNew
 import { dashboardNewsApiAction } from 'stores/redux/apiSlices/DashboardNewsSlice/dashboardNewsApiSlice';
 import ShortNewsCard from 'components/common/cards/ShortNewsCard';
 import '../components/common/cards/NewsCard.css';
-// import images from 'helpers/images';
-// import Stack from 'components/common/Stack';
 
 export default function DashboardContainer() {
   const { data: dashboardNewsDataApi } =
-    dashboardNewsApiAction.getDashboardNews();
-  // console.log(dashboardNewsDataApi, 'checkdata');
+    dashboardNewsApiAction.getDashboardNews({limit:30});
   return (
     <>
       <Box
@@ -32,7 +29,9 @@ export default function DashboardContainer() {
         ></Box>
 
         <Box sx={{ width: '100%' }}>
-          <HeadingNewCards data={dashboardNewsDataApi?.reviews} />
+            <Box >
+              <HeadingNewCards data={dashboardNewsDataApi?.reviews[0]} />
+            </Box>
           <Box className="home_page_news_container">
             <Box className="home_page_news_subBox1">
               <Box>
@@ -42,25 +41,28 @@ export default function DashboardContainer() {
                 ></Text>
               </Box>
               <Box>
-                <BigNewCards data={dashboardNewsDataApi?.reviews} />
+                <BigNewCards data={dashboardNewsDataApi?.reviews[1]} />
               </Box>
             </Box>
 
-            <Box className='home_page_news_subBox2'>
-              <Box>
-                <BottomSubHeadingCards data={dashboardNewsDataApi?.reviews} />
-              </Box>
-              <Box>
-                <BottomSubHeadingCards data={dashboardNewsDataApi?.reviews} />
+            <Box className="home_page_news_subBox2">
+              <Box
+                sx={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}
+              >
+                {dashboardNewsDataApi?.reviews?.slice(2, 4).map((data) => (
+                  <Box>
+                    <BottomSubHeadingCards data={data} />
+                  </Box>
+                ))}
               </Box>
             </Box>
 
-            <Box className='home_page_news_subBox3'>
-              <Text text={'Virus confronts'} sx={{ fontWeight: 700 }} />
+            <Box className="home_page_news_subBox3">
+              <Text text={'Trending News'} sx={{ fontWeight: 700 }} />
               <Box className="SideNewCards">
-                {dashboardNewsDataApi?.reviews?.slice(0, 6).map((data) => (
+                {dashboardNewsDataApi?.reviews?.slice(0,4).map((data) => (
                   <Box key={data.id} sx={{ marginTop: '1rem' }}>
-                    <SideNewCards data={dashboardNewsDataApi?.reviews} />
+                    <SideNewCards data={data} />
                   </Box>
                 ))}
               </Box>
@@ -105,11 +107,11 @@ export default function DashboardContainer() {
         }}
       >
         <Box sx={{ width: '80%' }}>
-          <Text text={'Virus confronts'} sx={{ fontWeight: 700 }} />
+          <Text text={'Political News'} sx={{ fontWeight: 700 }} />
           <Box className="CenterVirusConfrontSection">
             {dashboardNewsDataApi?.reviews?.slice(0, 5).map((data) => (
               <Box key={data.id} sx={{ marginTop: '1rem' }}>
-                <CenterBackgroudNewsCard data={dashboardNewsDataApi?.reviews} />
+                <CenterBackgroudNewsCard data={data} />
               </Box>
             ))}
           </Box>
@@ -129,16 +131,15 @@ export default function DashboardContainer() {
             className="BigNewsCardSection"
             sx={{ display: 'flex', gap: '1.5rem' }}
           >
-            <BigNewCards data={dashboardNewsDataApi?.reviews} />
+            <BigNewCards data={dashboardNewsDataApi?.reviews[2]} />
             <Box
               sx={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}
             >
-              <Box>
-                <BottomSubHeadingCards data={dashboardNewsDataApi?.reviews} />
-              </Box>
-              <Box>
-                <BottomSubHeadingCards data={dashboardNewsDataApi?.reviews} />
-              </Box>
+              {dashboardNewsDataApi?.reviews?.slice(0, 2).map((data) => (
+                <Box>
+                  <BottomSubHeadingCards data={data} />
+                </Box>
+              ))}
             </Box>
           </Box>
           <Box
@@ -173,12 +174,12 @@ export default function DashboardContainer() {
               sx={{ display: 'flex', gap: '0.5rem' }}
             >
               <Box className="bottomSubHeadingCardBox">
-                {dashboardNewsDataApi?.reviews?.slice(0, 3).map((data) => (
+                {dashboardNewsDataApi?.reviews?.slice(0,3).map((data) => (
                   <Box
                     key={data.id}
                     sx={{ flex: '1 1 calc(33.33% - 1rem)', margin: '0.5rem' }}
                   >
-                    <ShortNewsCard data={dashboardNewsDataApi?.reviews} />
+                    <ShortNewsCard data={data} />
                   </Box>
                 ))}
               </Box>
@@ -202,7 +203,7 @@ export default function DashboardContainer() {
               />
               {dashboardNewsDataApi?.reviews?.slice(0, 3).map((data) => (
                 <Box key={data.id} sx={{ margin: '0.5rem' }}>
-                  <SubHeadingNewCard data={dashboardNewsDataApi?.reviews} />
+                  <SubHeadingNewCard data={data} />
                 </Box>
               ))}
             </Box>
@@ -218,10 +219,11 @@ export default function DashboardContainer() {
                   sx={{ fontWeight: 700, margin: '10px 0' }}
                 />
                 <Box className="bottomSubHeadingCardWidth">
-                  <BottomSubHeadingCards
-                    type={'withbg'}
-                    data={dashboardNewsDataApi?.reviews}
-                  />
+                  {dashboardNewsDataApi?.reviews?.slice(0, 1).map((data) => (
+                    <Box>
+                      <BottomSubHeadingCards type={'withbg'} data={data} />
+                    </Box>
+                  ))}
                 </Box>
               </Box>
             </Box>
@@ -234,7 +236,7 @@ export default function DashboardContainer() {
 
           {dashboardNewsDataApi?.reviews?.slice(0, 3).map((data) => (
             <Box key={data.id} sx={{ margin: '0.5rem' }}>
-              <SubHeadingNewCard data={dashboardNewsDataApi?.reviews} />
+              <SubHeadingNewCard data={data} />
               <Divider sx={{ margin: '1rem' }} />
             </Box>
           ))}
@@ -259,7 +261,7 @@ export default function DashboardContainer() {
             />
             {dashboardNewsDataApi?.reviews?.slice(0, 5).map((data) => (
               <Box key={data.id} sx={{ marginTop: '1rem' }}>
-                <SideNewCards data={dashboardNewsDataApi?.reviews} />
+                <SideNewCards data={data} />
               </Box>
             ))}
             <Box
@@ -279,7 +281,7 @@ export default function DashboardContainer() {
             />
             {dashboardNewsDataApi?.reviews?.slice(0, 6).map((data) => (
               <Box key={data.id} sx={{ marginTop: '1rem' }}>
-                <SideNewCards data={dashboardNewsDataApi?.reviews} />
+                <SideNewCards data={data} />
               </Box>
             ))}
           </Box>

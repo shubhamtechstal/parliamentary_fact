@@ -14,10 +14,12 @@ const dashboardNews = createApi({
     getDashboardNews: qb.query({
 
       query: ({
-        category
+        category,
+        limit
       } = {}) => {
         const params = {};
         if(category)params['category'] = category;
+        if(limit)params['limit'] = limit;
 
         return `/fetch_news.php?${encodeURI(new URLSearchParams(params).toString())}`;
       },

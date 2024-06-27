@@ -170,12 +170,12 @@ export default function Header({ data }) {
               onClick={() => navigate('/')}
               sx={{ display: 'flex', cursor: 'pointer' }}
             >
-              <img src="../public/pf_logo.png" alt="logo" className="pf_logo" />
+              <img src="/pf_logo.png" alt="logo" className="pf_logo" />
             </Box>
-            <Text
+            {/* <Text
               text={'Local Coronavirus informations'}
               sx={{ color: '#767676', fontSize: '0.75rem' }}
-            />
+            /> */}
           </Box>
           <Box sx={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
             <Box sx={{ display: 'flex', gap: '0.5rem' }}>
@@ -262,7 +262,7 @@ export default function Header({ data }) {
             {header?.map((val, index) => (
               <Box
                 sx={{ display: 'flex' }}
-                onClick={() => navigate(`/categories/${val?.category}`)}
+                onClick={() => navigate(`/categories/${val?.url}`,{state:{"category":val?.category}})}
               >
                 <Text
                   text={val?.category}
