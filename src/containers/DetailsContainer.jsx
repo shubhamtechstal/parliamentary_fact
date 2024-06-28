@@ -95,7 +95,7 @@ export default function DetailsContainer() {
         <Text
           // font={'Roboto'}
           sx={{
-            color: '#767676',
+            // color: '#767676',
             display: '-webkit-box',
             WebkitLineClamp: isExpanded ? 'none' : 2,
             WebkitBoxOrient: 'vertical',

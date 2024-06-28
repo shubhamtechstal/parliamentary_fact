@@ -74,7 +74,6 @@ export default function HeadingNewCards({ data }) {
                   WebkitBoxOrient: 'vertical',
                   overflow: 'hidden',
                   textOverflow: 'ellipsis',
-                  paddingBottom: '3px',
                   position: 'relative',
                   '&:hover': {
                     color: '#da251d',
