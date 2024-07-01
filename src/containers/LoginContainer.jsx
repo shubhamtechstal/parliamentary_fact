@@ -34,7 +34,7 @@ const LoginContainer = () => {
     }, [otpTimer])
 
     const handleLoginSubmit = (formData) => {
-        console.log({ formData });
+        // console.log({ formData });
         // API call for login and verify OTP here
     }
 

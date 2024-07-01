@@ -8,7 +8,8 @@ const dashboardNews = createApi({
   tagTypes: [
     'DASHBOARD_NEWS',
     'HEADER_CATEGORY',
-    'FETCH_NEWS_BY_ID'
+    'FETCH_NEWS_BY_ID',
+    'TOP_FIVE_NEWS',
   ],
   endpoints: (qb) => ({
     getDashboardNews: qb.query({
@@ -54,6 +55,16 @@ const dashboardNews = createApi({
       providesTags: ['FETCH_NEWS_BY_ID'],
     }),
 
+    getTopFiveNews: qb.query({
+
+      query: ({} = {}) => {
+        const params = {};
+
+        return `/get_top_news.php?${encodeURI(new URLSearchParams(params).toString())}`;
+      },
+      providesTags: ['TOP_FIVE_NEWS'],
+    }),
+
   }),
 });
 
@@ -66,7 +77,9 @@ export const dashboardNewsApiAction = {
   reducerPath: dashboardNews.reducerPath,
   getDashboardNews: dashboardNews.useGetDashboardNewsQuery,
   getHeaderCategories: dashboardNews.useGetHeaderCategoriesQuery,
-  getNewsById: dashboardNews.useGetNewsByIdQuery
+  getNewsById: dashboardNews.useGetNewsByIdQuery,
+  getTopFiveNews: dashboardNews.useGetTopFiveNewsQuery,
+
 };
 
 export default dashboardNews;

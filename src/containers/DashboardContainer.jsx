@@ -14,6 +14,14 @@ import '../components/common/cards/NewsCard.css';
 export default function DashboardContainer() {
   const { data: dashboardNewsDataApi } =
     dashboardNewsApiAction.getDashboardNews({limit:30});
+
+
+  const { data: topFiveNewsDataApi } =
+    dashboardNewsApiAction.getTopFiveNews();
+
+    // console.log(topFiveNewsDataApi,'topFiveNewsDataApijsjsdjs');
+
+
   return (
     <>
       <Box
@@ -41,7 +49,7 @@ export default function DashboardContainer() {
                 ></Text>
               </Box>
               <Box>
-                <BigNewCards data={dashboardNewsDataApi?.reviews[1]} />
+                <BigNewCards data={topFiveNewsDataApi?.top_news[0]} />
               </Box>
             </Box>
 
@@ -49,7 +57,7 @@ export default function DashboardContainer() {
               <Box
                 sx={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}
               >
-                {dashboardNewsDataApi?.reviews?.slice(2, 4).map((data) => (
+                {topFiveNewsDataApi?.top_news?.slice(1, 3).map((data) => (
                   <Box>
                     <BottomSubHeadingCards data={data} />
                   </Box>
@@ -60,7 +68,7 @@ export default function DashboardContainer() {
             <Box className="home_page_news_subBox3">
               <Text text={'Trending News'} sx={{ fontWeight: 700 }} />
               <Box className="SideNewCards">
-                {dashboardNewsDataApi?.reviews?.slice(0,4).map((data) => (
+                {dashboardNewsDataApi?.reviews?.slice(0,6).map((data) => (
                   <Box key={data.id} sx={{ marginTop: '1rem' }}>
                     <SideNewCards data={data} />
                   </Box>

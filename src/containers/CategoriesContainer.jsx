@@ -22,7 +22,7 @@ export default function CategoriesContainer() {
     dashboardNewsApiAction.getDashboardNews({
       category: category,
     });
-    console.log(headerNewsDataApi,'idhhh');
+    // console.log(headerNewsDataApi,'idhhh');
 
   return (
     <>

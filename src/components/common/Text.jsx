@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material';
 import React from 'react';
 
-export default function Text({ text, sx,font,onClick }) {
+export default function Text({ text, sx,font,onClick ,className}) {
   const style = { ...sx, fontFamily: font?`"${font}", sans-serif`:'"Poppins", sans-serif !important' };
-  return <Typography onClick ={onClick} sx={style}>{text}</Typography>;
+  return <Typography onClick ={onClick}  className={className} sx={style}>{text} </Typography>;
 }

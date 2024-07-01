@@ -9,7 +9,6 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import '../../components/common/cards/NewsCard.css';
 
 export default function Header({ data }) {
-  console.log('data', data);
 
   const navigate = useNavigate();
 
@@ -90,7 +89,6 @@ export default function Header({ data }) {
               display: 'flex',
               gap: '0.7rem',
               alignItems: 'center',
-              // marginLeft: '1rem',
             }}
           >
             <Text
@@ -162,7 +160,7 @@ export default function Header({ data }) {
         >
           <Text
             sx={{ minWidth: '9rem', color: '#767676', fontSize: '0.75rem' }}
-            text={'Download App'}
+            // text={'Download App'}
           />
 
           <Box sx={{ textAlign: 'center' }}>

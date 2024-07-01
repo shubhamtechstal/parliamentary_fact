@@ -58,6 +58,7 @@ export default function HeadingNewCards({ data }) {
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',
+              gap:'10px',
             }}
           >
             <Box>
@@ -65,7 +66,7 @@ export default function HeadingNewCards({ data }) {
                 onClick={() => navigate(`/details/${newsItem?.url}`,{state : {id:newsItem?.id}})}
 
                 sx={{
-                  lineHeight: '30px',
+                  lineHeight: '33px',
                   fontSize: '1.5rem',
                   fontWeight: 700,
                   cursor: 'pointer',
@@ -128,16 +129,17 @@ export default function HeadingNewCards({ data }) {
               </Box>
             </Box>
             <Text
+            className="news_desc"
               font={'Roboto'}
               sx={{
                 color: '#767676',
-                fontSize: '14px',
+                // fontSize: '14px',
                 display: '-webkit-box',
                 WebkitBoxOrient: 'vertical',
                 WebkitLineClamp: 3,
                 overflow: 'hidden',
                 textOverflow: 'ellipsis',
-                fontWeight: '600',
+                // fontWeight: '600',
               }}
               text={newsItem ? parse(newsItem?.news_description[0]?.description ?? ' ') : ''}
             />

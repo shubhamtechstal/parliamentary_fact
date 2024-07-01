@@ -3,6 +3,7 @@ import Text from '../Text';
 import { useNavigate } from 'react-router-dom';
 import parse from 'html-react-parser';
 import { appConstants } from 'helpers/constants/appConstants';
+import './NewsCard.css';
 
 export default function BigNewCards({ data }) {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ export default function BigNewCards({ data }) {
   return (
     <Card sx={{ maxWidth: 450, boxShadow: 'none', borderRadius: '0' }}>
       <CardMedia
-        sx={{ height: 300 }}
+        sx={{ height: 250 }}
         // src={imageUrl + newsItem?.image}
         // image={imageUrl + newsItem?.image}
         src={imageUrl + newsItem?.news_description[0]?.image}
@@ -48,10 +49,10 @@ export default function BigNewCards({ data }) {
         // onClick={() => navigate(`/details/${newsItem?.id}`)}
           onClick={() => navigate(`/details/${newsItem?.url}`,{state : {id:newsItem?.id}})}
         sx={{
+          lineHeight:'33px',
         fontWeight: '700',
         marginTop: '1rem',
         fontSize: '1.5rem',
-        lineHeight: '1.8rem',
         cursor: 'pointer',
         display: '-webkit-box',
         WebkitLineClamp: 3,
@@ -81,20 +82,19 @@ export default function BigNewCards({ data }) {
         />
         <Text
           text={formattedDate}
-          sx={{ color: '#9e9e9e', margin: '0.6rem 0' }}
+          sx={{ color: '#9e9e9e', margin: '0.6rem 0',fontSize:'0.75rem' }}
         />
         <Text
           font={'Poppins'}
           sx={{
             color: '#767676',
-            fontSize: '14px',
             display: '-webkit-box',
             WebkitBoxOrient: 'vertical',
-            WebkitLineClamp: 4,
+            WebkitLineClamp: 3,
             overflow: 'hidden',
             textOverflow: 'ellipsis',
-            fontWeight: '600',
           }}
+          className="news_desc"
           // text={newsItem ? parse(newsItem?.description ?? '') : ''}
           text={newsItem ? parse(newsItem?.news_description[0]?.description ?? ' ') : ''}
         />

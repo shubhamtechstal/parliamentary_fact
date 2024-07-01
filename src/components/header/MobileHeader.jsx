@@ -28,16 +28,6 @@ export default function MobileHeader({ menuOpen, data }) {
   }
 `;
   const options = data;
-  // const options = [
-  //   { head: 'Home', link: '/' },
-  //   { head: 'News', subhead: 'check' },
-  //   { head: 'Coronavirus', subhead: 'check' },
-  //   { head: 'Videos', link: '/categories' },
-  //   { head: 'Health' },
-  //   { head: 'Stories' },
-  //   { head: 'Local news' },
-  //   { head: 'More', subhead: 'check' },
-  // ];
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [Search, setSearch] = useState(false);
   const open = Boolean(anchorEl);
@@ -95,8 +85,8 @@ export default function MobileHeader({ menuOpen, data }) {
             left: 0,
             backgroundImage:
               'url(https://demo.tagdiv.com/newspaper_covid19_news_pro/wp-content/uploads/2020/03/17.jpg)', // Add your image URL here
-            backgroundSize: 'cover', 
-            backgroundRepeat: 'no-repeat', 
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
             backgroundPosition: 'center',
             zIndex: 999,
             animation: Search
@@ -133,10 +123,8 @@ export default function MobileHeader({ menuOpen, data }) {
                     justifyContent: 'center',
                     alignItems: 'center',
                     background: '#FFF',
-                    // top: 250,
                     boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.2)',
                     width: '300px',
-                    // right: '10px',
                     height: '50px',
                   }}
                 >
@@ -181,7 +169,12 @@ export default function MobileHeader({ menuOpen, data }) {
                     alt="youtube"
                   />
                 </Box>
-                <Box sx={{ display: 'flex' }} onClick={() => navigate('/')}>
+                <Box
+                  sx={{ display: 'flex' }}
+                  onClick={() => {
+                    navigate('/'), handleClose();
+                  }}
+                >
                   <Text
                     text={'Home'}
                     sx={{
@@ -193,7 +186,14 @@ export default function MobileHeader({ menuOpen, data }) {
                   />
                 </Box>
                 {options.map((val) => (
-                  <Box onClick={() => navigate(`/categories/${val?.id}`)}>
+                  <Box
+                    onClick={() => {
+                      navigate(`/categories/${val?.url}`, {
+                        state: { category: val?.category },
+                      }),
+                        handleClose();
+                    }}
+                  >
                     <Text
                       sx={{
                         width: '100%',
