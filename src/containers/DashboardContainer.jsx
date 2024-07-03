@@ -13,14 +13,13 @@ import '../components/common/cards/NewsCard.css';
 
 export default function DashboardContainer() {
   const { data: dashboardNewsDataApi } =
-    dashboardNewsApiAction.getDashboardNews({limit:30});
+    dashboardNewsApiAction.getDashboardNews({ limit: 30 });
 
+  const { data: topFiveNewsDataApi } = dashboardNewsApiAction.getTopFiveNews();
 
-  const { data: topFiveNewsDataApi } =
-    dashboardNewsApiAction.getTopFiveNews();
+  const { data: topLatestNewsApi } = dashboardNewsApiAction.getLatestTopNews();
 
-    // console.log(topFiveNewsDataApi,'topFiveNewsDataApijsjsdjs');
-
+  // console.log(topLatestNewsApi,'topLatestNewsApiskskdsk');
 
   return (
     <>
@@ -37,9 +36,9 @@ export default function DashboardContainer() {
         ></Box>
 
         <Box sx={{ width: '100%' }}>
-            <Box >
-              <HeadingNewCards data={dashboardNewsDataApi?.reviews[0]} />
-            </Box>
+          <Box>
+            <HeadingNewCards data={topLatestNewsApi?.latest_top_news[0]} />
+          </Box>
           <Box className="home_page_news_container">
             <Box className="home_page_news_subBox1">
               <Box>
@@ -68,7 +67,7 @@ export default function DashboardContainer() {
             <Box className="home_page_news_subBox3">
               <Text text={'Trending News'} sx={{ fontWeight: 700 }} />
               <Box className="SideNewCards">
-                {dashboardNewsDataApi?.reviews?.slice(0,6).map((data) => (
+                {dashboardNewsDataApi?.reviews?.slice(0, 6).map((data) => (
                   <Box key={data.id} sx={{ marginTop: '1rem' }}>
                     <SideNewCards data={data} />
                   </Box>
@@ -182,7 +181,7 @@ export default function DashboardContainer() {
               sx={{ display: 'flex', gap: '0.5rem' }}
             >
               <Box className="bottomSubHeadingCardBox">
-                {dashboardNewsDataApi?.reviews?.slice(0,3).map((data) => (
+                {dashboardNewsDataApi?.reviews?.slice(0, 3).map((data) => (
                   <Box
                     key={data.id}
                     sx={{ flex: '1 1 calc(33.33% - 1rem)', margin: '0.5rem' }}

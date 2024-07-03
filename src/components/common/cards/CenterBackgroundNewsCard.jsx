@@ -20,7 +20,7 @@ export default function CenterBackgroudNewsCard({ data }) {
   });
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: '0.5rem',maxWidth:'250px' }}>
       <Box className="centercard_box" sx={{width:'100%'}}>
         <img
           src={imageUrl + newsItem?.news_description[0]?.image}

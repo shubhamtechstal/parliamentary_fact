@@ -9,7 +9,6 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import '../../components/common/cards/NewsCard.css';
 
 export default function Header({ data }) {
-
   const navigate = useNavigate();
 
   const fadeInSlideIn = keyframes`
@@ -260,7 +259,11 @@ export default function Header({ data }) {
             {header?.map((val, index) => (
               <Box
                 sx={{ display: 'flex' }}
-                onClick={() => navigate(`/categories/${val?.url}`,{state:{"category":val?.category}})}
+                onClick={() =>
+                  navigate(`/categories/${val?.url}`, {
+                    state: { category: val?.category },
+                  })
+                }
               >
                 <Text
                   text={val?.category}

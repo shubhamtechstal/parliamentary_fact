@@ -10,6 +10,7 @@ const dashboardNews = createApi({
     'HEADER_CATEGORY',
     'FETCH_NEWS_BY_ID',
     'TOP_FIVE_NEWS',
+    'LATEST_TOP_NEWS',
   ],
   endpoints: (qb) => ({
     getDashboardNews: qb.query({
@@ -65,6 +66,16 @@ const dashboardNews = createApi({
       providesTags: ['TOP_FIVE_NEWS'],
     }),
 
+    getLatestTopNews: qb.query({
+
+      query: ({} = {}) => {
+        const params = {};
+
+        return `/latest_top_news.php?${encodeURI(new URLSearchParams(params).toString())}`;
+      },
+      providesTags: ['LATEST_TOP_NEWS'],
+    }),
+
   }),
 });
 
@@ -79,7 +90,7 @@ export const dashboardNewsApiAction = {
   getHeaderCategories: dashboardNews.useGetHeaderCategoriesQuery,
   getNewsById: dashboardNews.useGetNewsByIdQuery,
   getTopFiveNews: dashboardNews.useGetTopFiveNewsQuery,
-
+  getLatestTopNews: dashboardNews.useGetLatestTopNewsQuery,
 };
 
 export default dashboardNews;

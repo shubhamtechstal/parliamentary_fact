@@ -3,6 +3,7 @@ import Text from '../Text';
 import { useNavigate } from 'react-router-dom';
 import './NewsCard.css';
 import parse from 'html-react-parser';
+import { appConstants } from 'helpers/constants/appConstants';
 
 export default function HeadingNewCards({ data }) {
   const navigate = useNavigate();
@@ -17,6 +18,8 @@ export default function HeadingNewCards({ data }) {
     minute: '2-digit',
     hour12: true,
   });
+
+  const imageUrl = appConstants.BACKEND_IMAGE_URL;
 
   return (
     <>
@@ -40,16 +43,24 @@ export default function HeadingNewCards({ data }) {
               maxHeight: '250px',
             }}
           >
-            <iframe
-              width="100%"
-              height="100%"
-              title="YouTube video player"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerpolicy="strict-origin-when-cross-origin"
-              allowfullscreen
-              src={newsItem?.video}
-            ></iframe>
+            {newsItem?.video ? (
+              <iframe
+                width="100%"
+                height="100%"
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+                src={newsItem?.video}
+              ></iframe>
+            ) : newsItem?.news_description[0]?.image ? (
+              <img
+                src={imageUrl + newsItem?.news_description[0].image}
+                alt="News"
+                style={{ height: '200px', width: '100%' }}
+              />
+            ) : null}
           </Box>
           <Box
             sx={{
@@ -58,13 +69,12 @@ export default function HeadingNewCards({ data }) {
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',
-              gap:'10px',
+              gap: '10px',
             }}
           >
             <Box>
               <Text
-                onClick={() => navigate(`/details/${newsItem?.url}`,{state : {id:newsItem?.id}})}
-
+                onClick={() => navigate(`/details/${newsItem?.url}`, { state: { id: newsItem?.id } })}
                 sx={{
                   lineHeight: '33px',
                   fontSize: '1.5rem',
@@ -93,7 +103,7 @@ export default function HeadingNewCards({ data }) {
                     transition: 'width 0.4s ease-out',
                   },
                 }}
-                text={newsItem ? (newsItem?.news_description[0]?.title ?? ' ') : ''  }
+                text={newsItem ? (newsItem?.news_description[0]?.title ?? ' ') : ''}
               />
 
               <Box
@@ -129,17 +139,15 @@ export default function HeadingNewCards({ data }) {
               </Box>
             </Box>
             <Text
-            className="news_desc"
+              className="news_desc"
               font={'Roboto'}
               sx={{
                 color: '#767676',
-                // fontSize: '14px',
                 display: '-webkit-box',
                 WebkitBoxOrient: 'vertical',
                 WebkitLineClamp: 3,
                 overflow: 'hidden',
                 textOverflow: 'ellipsis',
-                // fontWeight: '600',
               }}
               text={newsItem ? parse(newsItem?.news_description[0]?.description ?? ' ') : ''}
             />
