@@ -3,13 +3,14 @@ import Text from 'components/common/Text';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import images from 'helpers/images';
 import { useNavigate } from 'react-router-dom';
 import '../../components/common/cards/NewsCard.css';
 
 export default function Header({ data }) {
   const navigate = useNavigate();
+  const searchRef = useRef(null);
 
   const fadeInSlideIn = keyframes`
     from {
@@ -21,6 +22,7 @@ export default function Header({ data }) {
       transform: translateX(0);
     }
   `;
+
   const animatedTextStyle = {
     fontSize: '0.68rem',
     fontWeight: 400,
@@ -43,6 +45,25 @@ export default function Header({ data }) {
     }, 500);
     return () => clearTimeout(timeout);
   }, [trendingNews]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (searchRef.current && !searchRef.current.contains(event.target)) {
+        setSearchShow(false);
+        setKeyword('');
+      }
+    };
+
+    if (searchShow) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside); 
+    };
+  }, [searchShow]);
 
   const arrNews = [
     'COVID-19: Australia to ban all arrivals of non-residents, says PM',
@@ -228,6 +249,7 @@ export default function Header({ data }) {
             </Box>
             {searchShow && (
               <Box
+                ref={searchRef} 
                 sx={{
                   position: 'absolute',
                   display: 'flex',
@@ -239,7 +261,7 @@ export default function Header({ data }) {
                   width: '450px',
                   right: '50px',
                   height: '100px',
-                  zIndex:'2'
+                  zIndex: '2',
                 }}
               >
                 <TextField

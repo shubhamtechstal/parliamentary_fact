@@ -41,12 +41,11 @@ export default function CategoriesContainer() {
         ></Box>
         <Box sx={{ width: '100%' }}>
           <Box>
-            {topLatestNewsApi?.latest_top_news?.slice(0, 1).map((data) => (
+            {headerNewsDataApi?.reviews?.slice(0, 1).map((data) => (
               <Box key={data.id}>
                 <HeadingNewCards data={data} />
               </Box>
             ))}
-            {/* <HeadingNewCards data={dashboardNewsDataApi?.reviews} /> */}
           </Box>
           <Box
             className="BigNewsCardContainer"
@@ -104,7 +103,7 @@ export default function CategoriesContainer() {
                   className="BigNewsCardContainer"
                   sx={{ display: 'flex', gap: '0.5rem' }}
                 >
-                  {headerNewsDataApi?.reviews?.slice(0, 3).map((data) => (
+                  {headerNewsDataApi?.reviews?.slice(1, 4).map((data) => (
                     <Box key={data.id} sx={{ marginTop: '1rem' }}>
                       <CenterBackgroudNewsCard data={data} />
                     </Box>

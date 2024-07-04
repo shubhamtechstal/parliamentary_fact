@@ -92,7 +92,7 @@ export default function DetailsContainer() {
             </Box>
           </Box>
         </Box>
-        <Text
+        <Text className='news_desc'
           // font={'Roboto'}
           sx={{
             // color: '#767676',
