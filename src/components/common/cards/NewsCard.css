@@ -84,12 +84,12 @@
 }
 
 .news_desc h2 {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500 !important;
   margin-top: 0px;
 }
 .news_desc p {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500 !important;
   margin-top: 0px;
 }
@@ -109,7 +109,7 @@
   }
   .pf_logo {
     height: 32px;
-    margin-top: 20px;
+    margin-top: 7px;
   }
   .categories_subheading_card {
     max-width: 100%;

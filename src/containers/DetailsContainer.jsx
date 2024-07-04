@@ -58,7 +58,7 @@ export default function DetailsContainer() {
             marginTop: '1rem',
             fontSize: '1.5rem',
           }}
-          text={headerNewsDataApi?.news[0]?.title}
+          text={headerNewsDataApi?.news[0]?.news_description[0]?.title}
         />
         <img
           // src={`${imageUrl}${headerNewsDataApi?.news[0]?.image}`}
@@ -105,7 +105,7 @@ export default function DetailsContainer() {
             // fontWeight:'lighter !important'
           }}
           // text={headerNewsDataApi?.news[0]?.description}
-          text={parse(headerNewsDataApi?.news[0]?.description ?? ' ')}
+          text={parse(headerNewsDataApi?.news[0]?.news_description[0]?.description ?? ' ')}
         />
         {!isExpanded && (
           <span className="read-more-button" onClick={toggleReadMore}>

@@ -25,7 +25,7 @@ export default function BigNewCards({ data }) {
   return (
     <Card sx={{ maxWidth: 450, boxShadow: 'none', borderRadius: '0' }}>
       <CardMedia
-        sx={{ height: 250 }}
+        sx={{ height: 300 }}
         // src={imageUrl + newsItem?.image}
         // image={imageUrl + newsItem?.image}
         src={imageUrl + newsItem?.news_description[0]?.image}

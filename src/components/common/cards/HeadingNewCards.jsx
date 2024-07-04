@@ -140,7 +140,7 @@ export default function HeadingNewCards({ data }) {
             </Box>
             <Text
               className="news_desc"
-              font={'Roboto'}
+              // font={'Roboto'}
               sx={{
                 color: '#767676',
                 display: '-webkit-box',

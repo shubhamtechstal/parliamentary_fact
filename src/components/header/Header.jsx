@@ -5,22 +5,22 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import React, { useEffect, useState } from 'react';
 import images from 'helpers/images';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import '../../components/common/cards/NewsCard.css';
 
 export default function Header({ data }) {
   const navigate = useNavigate();
 
   const fadeInSlideIn = keyframes`
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-`;
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  `;
   const animatedTextStyle = {
     fontSize: '0.68rem',
     fontWeight: 400,
@@ -30,9 +30,12 @@ export default function Header({ data }) {
       color: '#162eb7',
     },
   };
+
+  const [keyword, setKeyword] = useState('');
   const [searchShow, setSearchShow] = useState(false);
   const [trendingNews, setTrendingNews] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+
   useEffect(() => {
     setIsAnimating(true);
     const timeout = setTimeout(() => {
@@ -40,39 +43,49 @@ export default function Header({ data }) {
     }, 500);
     return () => clearTimeout(timeout);
   }, [trendingNews]);
+
   const arrNews = [
     'COVID-19: Australia to ban all arrivals of non-residents, says PM',
-    'Trump sought to buy  vaccine developer excusively',
+    'Trump sought to buy vaccine developer exclusively',
     'Doors slam shut across borderless Europe as coronavirus spreads',
     'Fearing coronavirus recession, France announces €45 billion in business aid',
   ];
-  // const header = [
-  //   { head: 'Home', link: '/' },
-  //   { head: 'News', subhead: 'check' },
-  //   { head: 'Coronavirus', subhead: 'check' },
-  //   { head: 'Videos', link: '/categories' },
-  //   { head: 'Health' },
-  //   { head: 'Stories' },
-  //   { head: 'Local news' },
-  //   { head: 'More', subhead: 'check' },
-  // ];
+
   const header = data;
 
   const handleRightClick = () => {
-    if (trendingNews === arrNews.length - 1) setTrendingNews(0);
-    else setTrendingNews(trendingNews + 1);
+    setTrendingNews((prev) => (prev === arrNews.length - 1 ? 0 : prev + 1));
   };
+
   const handleLeftClick = () => {
-    if (trendingNews === 0) setTrendingNews(arrNews.length - 1);
-    else setTrendingNews(trendingNews - 1);
+    setTrendingNews((prev) => (prev === 0 ? arrNews.length - 1 : prev - 1));
   };
+
   useEffect(() => {
     const intervalId = setInterval(() => {
-      if (trendingNews === arrNews.length - 1) setTrendingNews(0);
-      else setTrendingNews(trendingNews + 1);
+      setTrendingNews((prev) => (prev === arrNews.length - 1 ? 0 : prev + 1));
     }, 3000);
     return () => clearInterval(intervalId);
-  });
+  }, []);
+
+  function createSlug(text) {
+    return encodeURIComponent(text.trim().toLowerCase()).replace(/%20/g, '-');
+  }
+
+  const searchKeyword = (event) => {
+    setKeyword(createSlug(event.target.value));
+  };
+
+  const handleSearch = () => {
+    if (keyword.trim()) {
+      navigate(`/search/${keyword}`, {
+        state: { keyword: keyword },
+      });
+      setSearchShow(false);
+      setKeyword('');
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -140,7 +153,6 @@ export default function Header({ data }) {
                 width: '25px',
                 color: '#dcdcdc',
                 padding: '6px',
-
                 cursor: 'pointer',
                 '&:hover': {
                   background: '#162eb7',
@@ -224,17 +236,22 @@ export default function Header({ data }) {
                   background: '#FFF',
                   top: 250,
                   boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.2)',
-                  width: '500px',
-                  right: '10px',
-                  height: '50px',
+                  width: '450px',
+                  right: '50px',
+                  height: '100px',
+                  zIndex:'2'
                 }}
               >
                 <TextField
                   label="Search"
                   variant="standard"
                   sx={{ width: '350px' }}
+                  onChange={searchKeyword}
+                  value={keyword}
                 />
-                <Button>search</Button>
+                <Button onClick={handleSearch} disabled={!keyword.trim()}>
+                  search
+                </Button>
               </Box>
             )}
           </Box>
@@ -264,10 +281,10 @@ export default function Header({ data }) {
                     state: { category: val?.category },
                   })
                 }
+                key={index}
               >
                 <Text
                   text={val?.category}
-                  key={index}
                   sx={{
                     fontSize: '0.9rem',
                     fontWeight: 700,

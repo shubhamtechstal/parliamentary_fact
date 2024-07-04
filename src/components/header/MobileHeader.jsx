@@ -10,6 +10,9 @@ import { useNavigate } from 'react-router-dom';
 import '../../components/common/cards/NewsCard.css';
 
 export default function MobileHeader({ menuOpen, data }) {
+  const [keyword, setKeyword] = useState('');
+  const [searchShow, setSearchShow] = useState(false);
+
   const navigate = useNavigate();
   const slideInFromLeft = keyframes`
   from {
@@ -41,6 +44,26 @@ export default function MobileHeader({ menuOpen, data }) {
     menuOpen(false);
   };
   const ITEM_HEIGHT = 100;
+
+  function createSlug(text) {
+    return encodeURIComponent(text.trim().toLowerCase()).replace(/%20/g, '-');
+  }
+
+  const searchKeyword = (event) => {
+    setKeyword(createSlug(event.target.value));
+  };
+
+  const handleSearch = () => {
+    if (keyword.trim()) {
+      navigate(`/search/${keyword}`, {
+        state: { keyword: keyword },
+      });
+      setSearchShow(false);
+      setKeyword('');
+      handleClose();
+    }
+  };
+
   return (
     <>
       <Box
@@ -57,7 +80,7 @@ export default function MobileHeader({ menuOpen, data }) {
             sx={{ color: '#0d0b52', cursor: 'pointer' }}
           />
         </Box>
-        <Box sx={{ textAlign: 'center' }}>
+        <Box onClick={() => navigate('/')}>
           <img src="/pf_logo.png" alt="logo" className="pf_logo" />
           {/* <Text
             text={'Local Coronavirus informations'}
@@ -124,16 +147,20 @@ export default function MobileHeader({ menuOpen, data }) {
                     alignItems: 'center',
                     background: '#FFF',
                     boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.2)',
-                    width: '300px',
-                    height: '50px',
+                    width: '350px',
+                    height: '60px',
                   }}
                 >
                   <TextField
                     label="Search"
                     variant="standard"
                     sx={{ width: '200px' }}
+                    onChange={searchKeyword}
+                    value={keyword}
                   />
-                  <Button onClick={handleClose}>search</Button>
+                  <Button onClick={handleSearch} disabled={!keyword.trim()}>
+                    search
+                  </Button>
                 </Box>
               </Box>
             ) : (

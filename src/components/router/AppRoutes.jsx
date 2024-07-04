@@ -10,9 +10,9 @@ const LoginPage = lazy(() => import('pages/LoginPage'));
 
 // Private route pages
 const DashboardPage = lazy(() => import('pages/DashboardPage'));
-const ReportsPage = lazy(() => import('pages/reports/ReportsPage'));
 const CategoriesPage = lazy(() => import('pages/Categories'));
 const DetailsPage = lazy(() => import('pages/DetailsPage'));
+const SearchPage = lazy(() => import('pages/SearchPage'));
 
 // Define routes config here
 const routes = [
@@ -26,16 +26,16 @@ const routes = [
         element: <PrivateRoute component={<DashboardPage />} />,
       },
       {
-        path: 'reports',
-        element: <PrivateRoute component={<ReportsPage />} />,
-      },
-      {
         path: 'categories/:id',
         element: <PrivateRoute component={<CategoriesPage />} />,
       },
       {
         path: 'details/:id',
         element: <PrivateRoute component={<DetailsPage />} />,
+      },
+      {
+        path: 'search/*',
+        element: <PrivateRoute component={<SearchPage />} />,
       },
     ],
   },
