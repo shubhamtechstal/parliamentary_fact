@@ -67,7 +67,6 @@ export default function BottomSubHeadingCards({ type, data }) {
               overflow: 'hidden',
               textOverflow: 'ellipsis',
               position: 'relative',
-              paddingBottom: '3px',
               '&:hover': {
                 color: '#da251d',
                 '&::before': {

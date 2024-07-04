@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Box, Container, Divider } from '@mui/material';
 import Text from 'components/common/Text';
 import SubHeadingNewCard from 'components/common/cards/SubHeadingNewCard';
-import images from 'helpers/images';
 import '../App.css';
 import SideNewCards from 'components/common/cards/SideNewCards';
 import { dashboardNewsApiAction } from 'stores/redux/apiSlices/DashboardNewsSlice/dashboardNewsApiSlice';
@@ -13,22 +12,24 @@ import DetailNewsIconBox from 'components/DetailNews/DetailNewsIconBox';
 import parse from 'html-react-parser';
 
 export default function DetailsContainer() {
-  const relatedNews = [1, 2, 3, 4];
-  // const { id } = useParams();
+  const imageUrl = appConstants.BACKEND_IMAGE_URL;
+
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const location = useLocation();
-  const {id} = location.state || {};
+
+  const { id } = location.state || {};
 
   const { data: headerNewsDataApi } = dashboardNewsApiAction.getNewsById({
     id: id,
   });
 
   const { data: dashboardNewsDataApi } =
-    dashboardNewsApiAction.getDashboardNews();
+    dashboardNewsApiAction.getDashboardNews({
+      category: headerNewsDataApi?.news[0]?.category,
+    });
 
-  const imageUrl = appConstants.BACKEND_IMAGE_URL;
-
-  const [isExpanded, setIsExpanded] = useState(false);
+    const { data: trendingNews } = dashboardNewsApiAction.getDashboardNews();
 
   const toggleReadMore = () => {
     setIsExpanded(true);
@@ -61,12 +62,11 @@ export default function DetailsContainer() {
           text={headerNewsDataApi?.news[0]?.news_description[0]?.title}
         />
         <img
-          // src={`${imageUrl}${headerNewsDataApi?.news[0]?.image}`}
           src={`${imageUrl}${headerNewsDataApi?.news[0]?.news_description[0]?.image}`}
           style={{ height: 'auto', width: '100%' }}
         />
 
-        <DetailNewsIconBox/>
+        <DetailNewsIconBox />
         <Box
           sx={{
             width: '100%',
@@ -92,20 +92,19 @@ export default function DetailsContainer() {
             </Box>
           </Box>
         </Box>
-        <Text className='news_desc'
-          // font={'Roboto'}
+        <Text
+          className="news_desc"
           sx={{
-            // color: '#767676',
+            color: '#767676',
             display: '-webkit-box',
             WebkitLineClamp: isExpanded ? 'none' : 2,
             WebkitBoxOrient: 'vertical',
             overflow: isExpanded ? 'visible' : 'hidden',
             textOverflow: isExpanded ? 'unset' : 'ellipsis',
-            // fontSize:'12px !important',
-            // fontWeight:'lighter !important'
           }}
-          // text={headerNewsDataApi?.news[0]?.description}
-          text={parse(headerNewsDataApi?.news[0]?.news_description[0]?.description ?? ' ')}
+          text={parse(
+            headerNewsDataApi?.news[0]?.news_description[0]?.description ?? ' '
+          )}
         />
         {!isExpanded && (
           <span className="read-more-button" onClick={toggleReadMore}>
@@ -141,11 +140,11 @@ export default function DetailsContainer() {
         <Box>
           <Text text={'Related News'} sx={{ fontWeight: '700' }} />
           <Box sx={{ marginTop: '1rem' }}>
-            {relatedNews.map((val) => (
-              <>
-                <SubHeadingNewCard data={dashboardNewsDataApi?.reviews[0]} />
+            {dashboardNewsDataApi?.reviews?.slice(0, 6).map((val) => (
+              <Box sx={{ marginTop: '1rem' }}>
+                <SubHeadingNewCard data={val} />
                 <Divider sx={{ margin: '1rem' }} />
-              </>
+              </Box>
             ))}
           </Box>
         </Box>
@@ -156,12 +155,13 @@ export default function DetailsContainer() {
           sx={{ position: 'sticky', top: '1rem' }}
         >
           <Text
-            text={'Virus confronts'}
+            text={'Trending News'}
             sx={{ fontWeight: 700, margin: '1rem 0rem' }}
           />
-          {relatedNews.map((val) => (
+
+          {trendingNews?.reviews?.slice(0, 5).map((val) => (
             <Box sx={{ marginTop: '1rem' }}>
-              <SideNewCards key={val} data={dashboardNewsDataApi?.reviews[0]} />
+              <SideNewCards data={val} />
             </Box>
           ))}
           <Box
@@ -176,12 +176,13 @@ export default function DetailsContainer() {
             }}
           ></Box>
           <Text
-            text={'Virus confronts'}
+            text={'Trending News'}
             sx={{ fontWeight: 700, margin: '1rem 0rem' }}
           />
-          {relatedNews.map((val) => (
+
+          {trendingNews?.reviews?.slice(5, 11).map((val) => (
             <Box sx={{ marginTop: '1rem' }}>
-              <SideNewCards key={val} data={dashboardNewsDataApi?.reviews[0]} />
+              <SideNewCards data={val} />
             </Box>
           ))}
         </Box>

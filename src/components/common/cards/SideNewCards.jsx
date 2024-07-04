@@ -44,7 +44,6 @@ export default function SideNewCards({ data }) {
             sx={{
               fontSize: '0.8rem',
               fontWeight: 500,
-              lineHeight: '17px',
               cursor: 'pointer',
               display: '-webkit-box',
               WebkitLineClamp: 3,

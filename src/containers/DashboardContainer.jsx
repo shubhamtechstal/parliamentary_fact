@@ -19,7 +19,9 @@ export default function DashboardContainer() {
 
   const { data: topLatestNewsApi } = dashboardNewsApiAction.getLatestTopNews();
 
-  // console.log(topLatestNewsApi,'topLatestNewsApiskskdsk');
+  const { data: categorynews } = dashboardNewsApiAction.getDashboardNews({
+    category: 'MPs News',
+  });
 
   return (
     <>
@@ -114,9 +116,9 @@ export default function DashboardContainer() {
         }}
       >
         <Box sx={{ width: '80%' }}>
-          <Text text={'Political News'} sx={{ fontWeight: 700 }} />
+          <Text text={`MP's News`} sx={{ fontWeight: 700 }} />
           <Box className="CenterVirusConfrontSection">
-            {dashboardNewsDataApi?.reviews?.slice(0, 5).map((data) => (
+            {categorynews?.reviews?.slice(0, 5).map((data) => (
               <Box key={data.id} sx={{ marginTop: '1rem' }}>
                 <CenterBackgroudNewsCard data={data} />
               </Box>
@@ -138,11 +140,11 @@ export default function DashboardContainer() {
             className="BigNewsCardSection"
             sx={{ display: 'flex', gap: '1.5rem' }}
           >
-            <BigNewCards data={dashboardNewsDataApi?.reviews[2]} />
+            <BigNewCards data={dashboardNewsDataApi?.reviews[6]} />
             <Box
               sx={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}
             >
-              {dashboardNewsDataApi?.reviews?.slice(0, 2).map((data) => (
+              {dashboardNewsDataApi?.reviews?.slice(7, 9).map((data) => (
                 <Box>
                   <BottomSubHeadingCards data={data} />
                 </Box>
@@ -173,7 +175,7 @@ export default function DashboardContainer() {
           </Box>
           <Box sx={{ background: '#f7f7f7', padding: '0.5rem 1rem' }}>
             <Text
-              text={'Virus confronts'}
+              text={'Trending News'}
               sx={{ fontWeight: 700, margin: '1rem 0.5rem' }}
             />
             <Box
@@ -181,7 +183,7 @@ export default function DashboardContainer() {
               sx={{ display: 'flex', gap: '0.5rem' }}
             >
               <Box className="bottomSubHeadingCardBox">
-                {dashboardNewsDataApi?.reviews?.slice(0, 3).map((data) => (
+                {dashboardNewsDataApi?.reviews?.slice(9, 12).map((data) => (
                   <Box
                     key={data.id}
                     sx={{ flex: '1 1 calc(33.33% - 1rem)', margin: '0.5rem' }}
@@ -208,7 +210,7 @@ export default function DashboardContainer() {
                 text={'Virus confronts'}
                 sx={{ fontWeight: 700, margin: '0.5rem 0' }}
               />
-              {dashboardNewsDataApi?.reviews?.slice(0, 3).map((data) => (
+              {dashboardNewsDataApi?.reviews?.slice(12, 15).map((data) => (
                 <Box key={data.id} sx={{ margin: '0.5rem' }}>
                   <SubHeadingNewCard data={data} />
                 </Box>
@@ -226,7 +228,7 @@ export default function DashboardContainer() {
                   sx={{ fontWeight: 700, margin: '10px 0' }}
                 />
                 <Box className="bottomSubHeadingCardWidth">
-                  {dashboardNewsDataApi?.reviews?.slice(0, 1).map((data) => (
+                  {dashboardNewsDataApi?.reviews?.slice(15, 16).map((data) => (
                     <Box>
                       <BottomSubHeadingCards type={'withbg'} data={data} />
                     </Box>
@@ -237,11 +239,11 @@ export default function DashboardContainer() {
           </Box>
           <Divider sx={{ margin: '2.5rem 0' }} />
           <Text
-            text={'Virus confronts'}
+            text={'Trending News'}
             sx={{ fontWeight: 700, margin: '1rem 0' }}
           />
 
-          {dashboardNewsDataApi?.reviews?.slice(0, 3).map((data) => (
+          {dashboardNewsDataApi?.reviews?.slice(16, 19).map((data) => (
             <Box key={data.id} sx={{ margin: '0.5rem' }}>
               <SubHeadingNewCard data={data} />
               <Divider sx={{ margin: '1rem' }} />
@@ -266,7 +268,7 @@ export default function DashboardContainer() {
               text={'Virus confronts'}
               sx={{ fontWeight: 700, margin: '1rem 0rem' }}
             />
-            {dashboardNewsDataApi?.reviews?.slice(0, 5).map((data) => (
+            {dashboardNewsDataApi?.reviews?.slice(19, 24).map((data) => (
               <Box key={data.id} sx={{ marginTop: '1rem' }}>
                 <SideNewCards data={data} />
               </Box>
@@ -286,7 +288,7 @@ export default function DashboardContainer() {
               text={'Virus confronts'}
               sx={{ fontWeight: 700, margin: '1rem 0rem' }}
             />
-            {dashboardNewsDataApi?.reviews?.slice(0, 6).map((data) => (
+            {dashboardNewsDataApi?.reviews?.slice(24, 30).map((data) => (
               <Box key={data.id} sx={{ marginTop: '1rem' }}>
                 <SideNewCards data={data} />
               </Box>

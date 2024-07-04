@@ -11,19 +11,17 @@ import '../components/common/cards/NewsCard.css';
 // import DownloadAppSection from 'components/homePage/DownloadAppSection';
 
 export default function CategoriesContainer() {
-  // const cardsData = [1, 2, 3, 4, 5, 6];
   const { id } = useParams();
   const location = useLocation();
   const { category } = location.state || {};
-  const { data: dashboardNewsDataApi } =
-    dashboardNewsApiAction.getDashboardNews();
+
+  const { data: dashboardNewsDataApi } = dashboardNewsApiAction.getDashboardNews();
 
   const { data: headerNewsDataApi } = dashboardNewsApiAction.getDashboardNews({
     category: category,
   });
 
-  const { data: topLatestNewsApi } = dashboardNewsApiAction.getLatestTopNews();
-  // console.log(headerNewsDataApi,'idhhh');
+  const { data: topFiveNewsDataApi } = dashboardNewsApiAction.getTopFiveNews();
 
   return (
     <>
@@ -56,9 +54,8 @@ export default function CategoriesContainer() {
                 text={id}
                 sx={{ fontWeight: 700, margin: '0 0 1rem 0rem' }}
               />
-              {headerNewsDataApi?.reviews.map((val, index) => (
-                <>
-                  {/* {console.log(val,'checkconsole')} */}
+              {headerNewsDataApi?.reviews?.map((val, index) => (
+                index>0 && <>
                   <SubHeadingNewCard data={val} />
                   <Divider sx={{ margin: '1rem' }} />
                   {index === 3 && (
@@ -96,14 +93,14 @@ export default function CategoriesContainer() {
               ))}
               <Box sx={{ background: '#f7f7f7', padding: '1rem' }}>
                 <Text
-                  text={id}
+                  text={'Top News'}
                   sx={{ fontWeight: 700, margin: '0.5rem 0rem 0rem 0rem' }}
                 />
                 <Box
                   className="BigNewsCardContainer"
                   sx={{ display: 'flex', gap: '0.5rem' }}
                 >
-                  {headerNewsDataApi?.reviews?.slice(1, 4).map((data) => (
+                  {topFiveNewsDataApi?.top_news?.slice(0, 3).map((data) => (
                     <Box key={data.id} sx={{ marginTop: '1rem' }}>
                       <CenterBackgroudNewsCard data={data} />
                     </Box>
@@ -111,7 +108,10 @@ export default function CategoriesContainer() {
                 </Box>
               </Box>
             </Box>
-            <Box className="categories_subheading_side_card">
+
+            
+           <Box className="categories_subheading_side_card" >
+           <Box sx={{ position: 'sticky', top: '1rem',}}>
               <Text
                 text={'Trending News'}
                 sx={{ fontWeight: 700, margin: '1rem 0rem' }}
@@ -139,6 +139,7 @@ export default function CategoriesContainer() {
                 </Box>
               ))}
             </Box>
+           </Box>
           </Box>
         </Box>
         <Box
