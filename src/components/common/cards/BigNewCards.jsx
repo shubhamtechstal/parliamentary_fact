@@ -50,35 +50,6 @@ export default function BigNewCards({ data }) {
               state: { id: newsItem?.id },
             })
           }
-          // sx={{
-          //   lineHeight: '33px',
-          //   fontWeight: '700',
-          //   marginTop: '1rem',
-          //   fontSize: '1.5rem',
-          //   cursor: 'pointer',
-          //   display: '-webkit-box',
-          //   WebkitLineClamp: 3,
-          //   WebkitBoxOrient: 'vertical',
-          //   textOverflow: 'ellipsis',
-          //   overflow: 'hidden',
-          //   position: 'relative',
-          //   '&:hover': {
-          //     color: '#da251d',
-          //     '&::before': {
-          //       width: '100%',
-          //     },
-          //   },
-          //   '&::before': {
-          //     content: '""',
-          //     position: 'absolute',
-          //     bottom: 0,
-          //     left: 0,
-          //     width: '0%',
-          //     height: '1px',
-          //     backgroundColor: '#da251d',
-          //     transition: 'width 0.4s ease-out',
-          //   },
-          // }}
           text={newsItem ? newsItem?.news_description[0]?.title ?? ' ' : ''}
         />
         <Text
