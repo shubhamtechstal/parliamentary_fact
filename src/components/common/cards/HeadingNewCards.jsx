@@ -36,13 +36,7 @@ export default function HeadingNewCards({ data }) {
           className="headCard"
           sx={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}
         >
-          <Box
-            sx={{
-              width: '100%',
-              maxWidth: '300px',
-              maxHeight: '250px',
-            }}
-          >
+          <Box className="vedio_news_box">
             {newsItem?.video ? (
               <iframe
                 width="100%"
@@ -74,36 +68,15 @@ export default function HeadingNewCards({ data }) {
           >
             <Box>
               <Text
-                onClick={() => navigate(`/details/${newsItem?.url}`, { state: { id: newsItem?.id } })}
-                sx={{
-                  lineHeight: '33px',
-                  fontSize: '1.5rem',
-                  fontWeight: 700,
-                  cursor: 'pointer',
-                  display: '-webkit-box',
-                  WebkitLineClamp: 3,
-                  WebkitBoxOrient: 'vertical',
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis',
-                  position: 'relative',
-                  '&:hover': {
-                    color: '#da251d',
-                    '&::before': {
-                      width: '90%',
-                    },
-                  },
-                  '&::before': {
-                    content: '""',
-                    position: 'absolute',
-                    bottom: 0,
-                    left: 0,
-                    width: '0%',
-                    height: '1px',
-                    backgroundColor: '#da251d',
-                    transition: 'width 0.4s ease-out',
-                  },
-                }}
-                text={newsItem ? (newsItem?.news_description[0]?.title ?? ' ') : ''}
+                className="heading_title"
+                onClick={() =>
+                  navigate(`/details/${newsItem?.url}`, {
+                    state: { id: newsItem?.id },
+                  })
+                }
+                text={
+                  newsItem ? newsItem?.news_description[0]?.title ?? ' ' : ''
+                }
               />
 
               <Box
@@ -149,7 +122,11 @@ export default function HeadingNewCards({ data }) {
                 overflow: 'hidden',
                 textOverflow: 'ellipsis',
               }}
-              text={newsItem ? parse(newsItem?.news_description[0]?.description ?? ' ') : ''}
+              text={
+                newsItem
+                  ? parse(newsItem?.news_description[0]?.description ?? ' ')
+                  : ''
+              }
             />
           </Box>
         </Box>

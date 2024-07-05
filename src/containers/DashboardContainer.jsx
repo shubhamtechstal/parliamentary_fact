@@ -45,7 +45,7 @@ export default function DashboardContainer() {
             <Box className="home_page_news_subBox1">
               <Box>
                 <Text
-                  text={'Virus confronts'}
+                  text={'Top News'}
                   sx={{ fontWeight: 700, margin: '0 0 1rem 0' }}
                 ></Text>
               </Box>
@@ -113,9 +113,10 @@ export default function DashboardContainer() {
           flexWrap: 'wrap',
           justifyContent: 'center',
           padding: '1rem 0',
+          margin:{xs:'15px',md:'0px'}
         }}
       >
-        <Box sx={{ width: '80%' }}>
+        <Box  width={{ sm: "80%", xs: "100%", md: "80%" }}>
           <Text text={`MP's News`} sx={{ fontWeight: 700 }} />
           <Box className="CenterVirusConfrontSection">
             {categorynews?.reviews?.slice(0, 5).map((data) => (
@@ -133,7 +134,7 @@ export default function DashboardContainer() {
       >
         <Box sx={{ padding: '1rem', maxWidth: '750px' }}>
           <Text
-            text={'Virus confronts'}
+            text={'Top News'}
             sx={{ fontWeight: 700, margin: '0 0 1rem 0rem' }}
           />
           <Box
@@ -207,7 +208,7 @@ export default function DashboardContainer() {
               }}
             >
               <Text
-                text={'Virus confronts'}
+                text={'Trending News'}
                 sx={{ fontWeight: 700, margin: '0.5rem 0' }}
               />
               {dashboardNewsDataApi?.reviews?.slice(12, 15).map((data) => (
@@ -224,7 +225,7 @@ export default function DashboardContainer() {
                 }}
               >
                 <Text
-                  text={'Virus confronts'}
+                  text={'Trending News'}
                   sx={{ fontWeight: 700, margin: '10px 0' }}
                 />
                 <Box className="bottomSubHeadingCardWidth">
@@ -265,7 +266,7 @@ export default function DashboardContainer() {
           ></Box>
           <Box className="sideNewCardsWidth">
             <Text
-              text={'Virus confronts'}
+              text={'Trending News'}
               sx={{ fontWeight: 700, margin: '1rem 0rem' }}
             />
             {dashboardNewsDataApi?.reviews?.slice(19, 24).map((data) => (
@@ -285,7 +286,7 @@ export default function DashboardContainer() {
               }}
             ></Box>
             <Text
-              text={'Virus confronts'}
+              text={'Trending News'}
               sx={{ fontWeight: 700, margin: '1rem 0rem' }}
             />
             {dashboardNewsDataApi?.reviews?.slice(24, 30).map((data) => (

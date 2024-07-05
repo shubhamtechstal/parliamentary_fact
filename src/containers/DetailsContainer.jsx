@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Container, Divider } from '@mui/material';
 import Text from 'components/common/Text';
 import SubHeadingNewCard from 'components/common/cards/SubHeadingNewCard';
@@ -29,12 +29,17 @@ export default function DetailsContainer() {
       category: headerNewsDataApi?.news[0]?.category,
     });
 
-    const { data: trendingNews } = dashboardNewsApiAction.getDashboardNews();
+  const { data: trendingNews } = dashboardNewsApiAction.getDashboardNews();
 
   const toggleReadMore = () => {
     setIsExpanded(true);
   };
 
+  useEffect(()=>{
+    setIsExpanded(false)
+    window.scroll(0, 0);
+  },[id]);
+  // console.log(headerNewsDataApi.news[0].news_description,'headerNewsDataApi');
   return (
     <Container
       sx={{
@@ -92,26 +97,67 @@ export default function DetailsContainer() {
             </Box>
           </Box>
         </Box>
-        <Text
-          className="news_desc"
+        <Box
           sx={{
-            color: '#767676',
-            display: '-webkit-box',
-            WebkitLineClamp: isExpanded ? 'none' : 2,
-            WebkitBoxOrient: 'vertical',
-            overflow: isExpanded ? 'visible' : 'hidden',
-            textOverflow: isExpanded ? 'unset' : 'ellipsis',
+            overflowY: 'hidden',
+            height: isExpanded ? 'fit-content' : '100px',
           }}
-          text={parse(
-            headerNewsDataApi?.news[0]?.news_description[0]?.description ?? ' '
+        >
+          <Text
+            className="news_desc"
+            sx={{
+              color: '#767676',
+              display: '-webkit-box',
+              WebkitLineClamp: isExpanded ? 'none' : 3,
+              WebkitBoxOrient: 'vertical',
+              overflow: isExpanded ? 'visible' : 'hidden',
+              textOverflow: isExpanded ? 'unset' : 'ellipsis',
+            }}
+            text={parse(
+              headerNewsDataApi?.news[0]?.news_description[0]?.description ??
+                ' '
+            )}
+          />
+          {!isExpanded && (
+            <span className="read-more-button" onClick={toggleReadMore} style={{marginBottom:'2rem'}}>
+              Read more
+              <span className="arrow-icon">→</span>
+            </span>
           )}
-        />
-        {!isExpanded && (
-          <span className="read-more-button" onClick={toggleReadMore}>
-            Read more
-            <span className="arrow-icon">→</span>
-          </span>
-        )}
+          {headerNewsDataApi?.news[0]?.news_description?.map(
+            (val, index) =>
+              index > 0 && (
+                <>
+                  <Text
+                    sx={{
+                      fontWeight: '600',
+                      marginTop: '1rem',
+                      fontSize: '16px',
+                      marginBottom:'20px'
+                    }}
+                    text={val?.title}
+                  />
+
+                  <img
+                    src={`${imageUrl}${val?.image}`}
+                    style={{ height: 'auto', width: '100%',marginBottom:'20px' }}
+                  />
+                  <Text
+                    className="news_desc"
+                    sx={{
+                      color: '#767676',
+                      display: '-webkit-box',
+                      WebkitLineClamp: isExpanded ? 'none' : 2,
+                      WebkitBoxOrient: 'vertical',
+                      overflow: isExpanded ? 'visible' : 'hidden',
+                      textOverflow: isExpanded ? 'unset' : 'ellipsis',
+                    }}
+                    text={parse(val?.description ?? ' ')}
+                  />
+                </>
+              )
+          )}
+        </Box>
         <Box
           sx={{
             width: '100%',

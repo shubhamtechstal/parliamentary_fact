@@ -20,7 +20,7 @@ export default function CenterBackgroudNewsCard({ data }) {
   });
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: '0.5rem',maxWidth:'250px' }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', maxWidth:{md:'250px',xs:'100%'} }}>
       <Box className="centercard_box" sx={{width:'100%'}}>
         <img
           src={imageUrl + newsItem?.news_description[0]?.image}
@@ -55,7 +55,7 @@ export default function CenterBackgroudNewsCard({ data }) {
                 state: { id: newsItem?.id },
               })
             }
-            font={'Roboto'}
+            // font={'Roboto'}
             sx={{
               fontSize: '0.8rem',
               fontWeight: 500,

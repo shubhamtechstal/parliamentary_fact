@@ -26,8 +26,6 @@ export default function BigNewCards({ data }) {
     <Card sx={{ maxWidth: 450, boxShadow: 'none', borderRadius: '0' }}>
       <CardMedia
         sx={{ height: 300 }}
-        // src={imageUrl + newsItem?.image}
-        // image={imageUrl + newsItem?.image}
         src={imageUrl + newsItem?.news_description[0]?.image}
         image={imageUrl + newsItem?.news_description[0]?.image}
         title="green iguana"
@@ -46,43 +44,46 @@ export default function BigNewCards({ data }) {
           ></Text>
         </Box>
         <Text
-        // onClick={() => navigate(`/details/${newsItem?.id}`)}
-          onClick={() => navigate(`/details/${newsItem?.url}`,{state : {id:newsItem?.id}})}
-        sx={{
-          lineHeight:'33px',
-        fontWeight: '700',
-        marginTop: '1rem',
-        fontSize: '1.5rem',
-        cursor: 'pointer',
-        display: '-webkit-box',
-        WebkitLineClamp: 3,
-        WebkitBoxOrient: 'vertical',
-        textOverflow: 'ellipsis',
-        overflow: 'hidden',
-        position: 'relative',
-        '&:hover': {
-          color: '#da251d',
-          '&::before': {
-            width: '100%',
-          },
-        },
-        '&::before': {
-          content: '""',
-          position: 'absolute',
-          bottom: 0,
-          left: 0,
-          width: '0%',
-          height: '1px',
-          backgroundColor: '#da251d',
-          transition: 'width 0.4s ease-out',
-        },
-      }}
-          // text={newsItem?.title}
-          text={newsItem ? (newsItem?.news_description[0]?.title ?? ' ') : ''  }
+          className='heading_title'
+          onClick={() =>
+            navigate(`/details/${newsItem?.url}`, {
+              state: { id: newsItem?.id },
+            })
+          }
+          // sx={{
+          //   lineHeight: '33px',
+          //   fontWeight: '700',
+          //   marginTop: '1rem',
+          //   fontSize: '1.5rem',
+          //   cursor: 'pointer',
+          //   display: '-webkit-box',
+          //   WebkitLineClamp: 3,
+          //   WebkitBoxOrient: 'vertical',
+          //   textOverflow: 'ellipsis',
+          //   overflow: 'hidden',
+          //   position: 'relative',
+          //   '&:hover': {
+          //     color: '#da251d',
+          //     '&::before': {
+          //       width: '100%',
+          //     },
+          //   },
+          //   '&::before': {
+          //     content: '""',
+          //     position: 'absolute',
+          //     bottom: 0,
+          //     left: 0,
+          //     width: '0%',
+          //     height: '1px',
+          //     backgroundColor: '#da251d',
+          //     transition: 'width 0.4s ease-out',
+          //   },
+          // }}
+          text={newsItem ? newsItem?.news_description[0]?.title ?? ' ' : ''}
         />
         <Text
           text={formattedDate}
-          sx={{ color: '#9e9e9e', margin: '0.6rem 0',fontSize:'0.75rem' }}
+          sx={{ color: '#9e9e9e', margin: '0.6rem 0', fontSize: '0.75rem' }}
         />
         <Text
           font={'Poppins'}
@@ -95,13 +96,20 @@ export default function BigNewCards({ data }) {
             textOverflow: 'ellipsis',
           }}
           className="news_desc"
-          // text={newsItem ? parse(newsItem?.description ?? '') : ''}
-          text={newsItem ? parse(newsItem?.news_description[0]?.description ?? ' ') : ''}
+          text={
+            newsItem
+              ? parse(newsItem?.news_description[0]?.description ?? ' ')
+              : ''
+          }
         />
         <Box>
           <span
             className="read-more-button"
-            onClick={() => navigate(`/details/${newsItem?.url}`,{state : {id:newsItem?.id}})}
+            onClick={() =>
+              navigate(`/details/${newsItem?.url}`, {
+                state: { id: newsItem?.id },
+              })
+            }
           >
             Read more
             <span className="arrow-icon">→</span>
