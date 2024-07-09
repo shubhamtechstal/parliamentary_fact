@@ -19,10 +19,6 @@
     .bottomSubHeadingCardWidth{
         max-width: 200px;
     }
-    /* .SubheadingImage{
-        width:320px; 
-        height: 120px
-    } */
 @media (max-width: 775px) {
     .MainContainer{
         overflow-y: hidden;
@@ -33,10 +29,7 @@
     .sideNewCardsWidth{
         max-width: 320px;
     }
-    .SubheadingImage{
-        width:150px; 
-        height: auto
-    }
+    
     .DownlaodAppSection{
         margin-left:10rem;
     }

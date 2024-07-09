@@ -123,8 +123,15 @@
 .heading_title:hover::before {
   width: 90%;
 }
+.shortnews_card_img {
+  width: 100%;
+  height: 100%;
+}
 
 @media (min-device-width: 300px) and (max-device-width: 768px) {
+  .shortnews_card_img {
+    height: 200px;
+  }
   .home_page_news_subBox2 {
     margin: 20px 0px;
   }

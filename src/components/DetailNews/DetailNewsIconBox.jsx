@@ -19,10 +19,6 @@ const DetailNewsIconBox = () => {
             flexWrap: 'wrap',
           }}
         >
-          <Text
-            sx={{ fontWeight: 700, fontSize: '0.7rem' }}
-            text={'Stephen Romero'}
-          />
           <Box
             sx={{
               display: 'flex',

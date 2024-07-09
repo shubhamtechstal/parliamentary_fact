@@ -37,6 +37,7 @@ export default function SubHeadingNewCard({ textWidth, data }) {
           display: 'flex',
           flexDirection: 'column',
           gap: '0.5rem',
+          // margin:'auto 0px'
         }}
       >
         <Box sx={{ display: 'flex' }}>
@@ -86,17 +87,16 @@ export default function SubHeadingNewCard({ textWidth, data }) {
           />
           <Box
             sx={{
-              display: 'flex',
+              display:{xs:'block',md:'flex'},
               alignItems: 'center',
-              marginTop: '0.5rem',
             }}
           >
             <Text
-              sx={{ fontWeight: 700, fontSize: '0.7rem' }}
+              sx={{ fontWeight: 700, fontSize: '0.7rem',marginRight:'5px' }}
               text={newsItem?.author}
             ></Text>
             <Text
-              sx={{ textAlign: 'center', color: '#767676', fontSize: '0.7rem' }}
+              sx={{ textAlign:{xs:'left',md:'center'}, color: '#767676', fontSize: '0.7rem' }}
               text={formattedDate}
             ></Text>
           </Box>

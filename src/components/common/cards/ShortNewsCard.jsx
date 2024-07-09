@@ -2,6 +2,7 @@ import { Box } from '@mui/material';
 import Text from '../Text';
 import { useNavigate } from 'react-router-dom';
 import { appConstants } from 'helpers/constants/appConstants';
+import './NewsCard.css';
 
 export default function ShortNewsCard({ data }) {  
     
@@ -24,10 +25,9 @@ export default function ShortNewsCard({ data }) {
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
       <Box className='centercard_box'>
-        <img
+        <img className='shortnews_card_img'
           src={imageUrl + newsItem?.news_description[0]?.image}
           image={imageUrl + newsItem?.news_description[0]?.image}
-          style={{ height: '100%', width: '100%' }}
         />
       </Box>
       <Box

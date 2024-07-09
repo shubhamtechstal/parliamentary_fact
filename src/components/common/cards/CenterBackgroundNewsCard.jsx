@@ -2,6 +2,8 @@ import { Box } from '@mui/material';
 import Text from '../Text';
 import { useNavigate } from 'react-router-dom';
 import { appConstants } from 'helpers/constants/appConstants';
+import './NewsCard.css';
+
 
 export default function CenterBackgroudNewsCard({ data }) {
   const navigate = useNavigate();
@@ -25,7 +27,7 @@ export default function CenterBackgroudNewsCard({ data }) {
         <img
           src={imageUrl + newsItem?.news_description[0]?.image}
           image={imageUrl + newsItem?.news_description[0]?.image}
-          style={{ height: '100%', width: '100%' }}
+          className='shortnews_card_img'
         />
       </Box>
       <Box

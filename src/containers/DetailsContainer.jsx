@@ -112,17 +112,20 @@ export default function DetailsContainer() {
               WebkitBoxOrient: 'vertical',
               overflow: isExpanded ? 'visible' : 'hidden',
               textOverflow: isExpanded ? 'unset' : 'ellipsis',
-              maskImage: !isExpanded?'linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3))':'none',
-              WebkitMaskImage: !isExpanded?'linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3))':'none'
+              maskImage: !isExpanded
+                ? 'linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3))'
+                : 'none',
+              WebkitMaskImage: !isExpanded
+                ? 'linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3))'
+                : 'none',
             }}
-            
             text={parse(
               headerNewsDataApi?.news[0]?.news_description[0]?.description ??
                 ' '
             )}
           />
           {!isExpanded && (
-            <div className="read-more-container" style={{height:'100%'}}>
+            <div className="read-more-container" style={{ height: '100%' }}>
               <span className="read-more-button" onClick={toggleReadMore}>
                 और देखें
                 {/* <span className="arrow-icon">→</span> */}
@@ -134,13 +137,16 @@ export default function DetailsContainer() {
             src={`${imageUrl}${headerNewsDataApi?.news[0]?.news_description[0]?.image}`}
             style={{ height: '400px', width: '100%' }}
           />
+          <Text
+            sx={{ fontWeight: 700, fontSize: '0.7rem' }}
+            text={parse(headerNewsDataApi?.news[0]?.author ?? ' ')}
+          />
 
           <DetailNewsIconBox />
-
           {headerNewsDataApi?.news[0]?.news_description?.map(
             (val, index) =>
               index > 0 && (
-                <>
+                <React.Fragment key={index}>
                   <Text
                     sx={{
                       fontWeight: '600',
@@ -163,15 +169,18 @@ export default function DetailsContainer() {
                     }}
                     text={parse(val?.description ?? ' ')}
                   />
-                  <img
-                    src={`${imageUrl}${val?.image}`}
-                    style={{
-                      height: '400px',
-                      width: '100%',
-                      marginBottom: '20px',
-                    }}
-                  />
-                </>
+
+                  {val?.image && (
+                    <img
+                      src={`${imageUrl}${val?.image}`}
+                      style={{
+                        height: '400px',
+                        width: '100%',
+                        marginBottom: '20px',
+                      }}
+                    />
+                  )}
+                </React.Fragment>
               )
           )}
         </Box>
