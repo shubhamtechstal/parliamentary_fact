@@ -35,10 +35,10 @@ export default function DetailsContainer() {
     setIsExpanded(true);
   };
 
-  useEffect(()=>{
-    setIsExpanded(false)
+  useEffect(() => {
+    setIsExpanded(false);
     window.scroll(0, 0);
-  },[id]);
+  }, [id]);
   // console.log(headerNewsDataApi.news[0].news_description,'headerNewsDataApi');
   return (
     <Container
@@ -66,13 +66,13 @@ export default function DetailsContainer() {
           }}
           text={headerNewsDataApi?.news[0]?.news_description[0]?.title}
         />
-        <img
+        {/* <img
           src={`${imageUrl}${headerNewsDataApi?.news[0]?.news_description[0]?.image}`}
           style={{ height: 'auto', width: '100%' }}
-        />
+        /> */}
 
-        <DetailNewsIconBox />
-        <Box
+        {/* <DetailNewsIconBox /> */}
+        {/* <Box
           sx={{
             width: '100%',
             height: '130px',
@@ -96,11 +96,11 @@ export default function DetailsContainer() {
               />
             </Box>
           </Box>
-        </Box>
+        </Box> */}
         <Box
           sx={{
             overflowY: 'hidden',
-            height: isExpanded ? 'fit-content' : '100px',
+            height: isExpanded ? 'fit-content' : '125px',
           }}
         >
           <Text
@@ -112,18 +112,31 @@ export default function DetailsContainer() {
               WebkitBoxOrient: 'vertical',
               overflow: isExpanded ? 'visible' : 'hidden',
               textOverflow: isExpanded ? 'unset' : 'ellipsis',
+              maskImage: !isExpanded?'linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3))':'none',
+              WebkitMaskImage: !isExpanded?'linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3))':'none'
             }}
+            
             text={parse(
               headerNewsDataApi?.news[0]?.news_description[0]?.description ??
                 ' '
             )}
           />
           {!isExpanded && (
-            <span className="read-more-button" onClick={toggleReadMore} style={{marginBottom:'2rem'}}>
-              Read more
-              <span className="arrow-icon">→</span>
-            </span>
+            <div className="read-more-container" style={{height:'100%'}}>
+              <span className="read-more-button" onClick={toggleReadMore}>
+                और देखें
+                {/* <span className="arrow-icon">→</span> */}
+              </span>
+            </div>
           )}
+
+          <img
+            src={`${imageUrl}${headerNewsDataApi?.news[0]?.news_description[0]?.image}`}
+            style={{ height: '400px', width: '100%' }}
+          />
+
+          <DetailNewsIconBox />
+
           {headerNewsDataApi?.news[0]?.news_description?.map(
             (val, index) =>
               index > 0 && (
@@ -132,16 +145,12 @@ export default function DetailsContainer() {
                     sx={{
                       fontWeight: '600',
                       marginTop: '1rem',
-                      fontSize: '16px',
-                      marginBottom:'20px'
+                      fontSize: '18px',
+                      marginBottom: '20px',
                     }}
                     text={val?.title}
                   />
 
-                  <img
-                    src={`${imageUrl}${val?.image}`}
-                    style={{ height: 'auto', width: '100%',marginBottom:'20px' }}
-                  />
                   <Text
                     className="news_desc"
                     sx={{
@@ -154,11 +163,19 @@ export default function DetailsContainer() {
                     }}
                     text={parse(val?.description ?? ' ')}
                   />
+                  <img
+                    src={`${imageUrl}${val?.image}`}
+                    style={{
+                      height: '400px',
+                      width: '100%',
+                      marginBottom: '20px',
+                    }}
+                  />
                 </>
               )
           )}
         </Box>
-        <Box
+        {/* <Box
           sx={{
             width: '100%',
             height: '130px',
@@ -182,8 +199,8 @@ export default function DetailsContainer() {
               />
             </Box>
           </Box>
-        </Box>
-        <Box>
+        </Box> */}
+        <Box sx={{ marginTop: '1rem' }}>
           <Text text={'Related News'} sx={{ fontWeight: '700' }} />
           <Box sx={{ marginTop: '1rem' }}>
             {dashboardNewsDataApi?.reviews?.slice(0, 6).map((val) => (

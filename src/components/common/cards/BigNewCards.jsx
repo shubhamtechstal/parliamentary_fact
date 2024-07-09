@@ -74,7 +74,7 @@ export default function BigNewCards({ data }) {
           }
         />
         <Box>
-          <span
+          <span style={{marginTop:'5px',fontSize:'14px'}}
             className="read-more-button"
             onClick={() =>
               navigate(`/details/${newsItem?.url}`, {
@@ -83,7 +83,8 @@ export default function BigNewCards({ data }) {
             }
           >
             Read more
-            <span className="arrow-icon">→</span>
+            {/* और देखें */}
+            {/* <span className="arrow-icon">→</span> */}
           </span>
         </Box>
       </CardContent>

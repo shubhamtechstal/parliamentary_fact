@@ -52,7 +52,7 @@ export default function HeadingNewCards({ data }) {
               <img
                 src={imageUrl + newsItem?.news_description[0].image}
                 alt="News"
-                style={{ height: '200px', width: '100%' }}
+                style={{ height: '250px', width: '100%' }}
               />
             ) : null}
           </Box>

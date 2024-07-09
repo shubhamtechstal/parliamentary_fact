@@ -1,6 +1,6 @@
 .Subheading_card_img {
   width: 200px;
-  height: 100%;
+  height: 130px;
 }
 .centercard_box {
   width: 200px;
@@ -52,35 +52,33 @@
   height: 30px;
 }
 
+.read-more-container {
+  position: relative;
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-top: 8px;
+}
+
 .read-more-button {
-  color: #0d0b52;
-  cursor: pointer;
-  font-weight: bold;
-  display: inline-flex;
-  align-items: center;
-  width: 120px;
+  display: inline-block;
+  background-color: #eb3032;
+  color: #ffffff;
+  padding: 6px 20px;
   font-size: 16px;
-  line-height: 20px;
+  border-radius: 50px;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  border: none;
   position: relative;
 }
+
 .read-more-button .arrow-icon {
-  margin-left: 5px;
-  font-size: 1.5em;
+  margin-left: 8px; /* Space between text and arrow */
 }
 
-.read-more-button:hover::before {
-  width: 100%;
-}
-
-.read-more-button::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0%;
-  height: 1px;
-  background-color: #0d0b52;
-  transition: width 0.3s ease-out;
+.read-more-button:hover {
+  background-color: #cc0000; /* Darker red on hover */
 }
 
 .news_desc * {
@@ -88,12 +86,11 @@
   font-weight: 500 !important;
   margin-top: 0px;
 }
-.vedio_news_box{
-  width:100%;
+.vedio_news_box {
+  width: 100%;
   max-width: 300px;
   max-height: 250px;
 }
-
 
 .heading_title {
   font-size: 1.5rem !important;
@@ -120,20 +117,19 @@
   width: 0%;
   height: 1px;
   background-color: #da251d;
-  transition: width 0.4s ease-out; 
+  transition: width 0.4s ease-out;
 }
 
 .heading_title:hover::before {
-  width: 90%; 
+  width: 90%;
 }
 
-
 @media (min-device-width: 300px) and (max-device-width: 768px) {
-  .home_page_news_subBox2{
+  .home_page_news_subBox2 {
     margin: 20px 0px;
   }
 
-  .home_page_news_container{
+  .home_page_news_container {
     padding: 12px 0px;
   }
   .heading_title {
@@ -141,8 +137,8 @@
     line-height: 33px !important;
     letter-spacing: 0.1px !important;
   }
-  .vedio_news_box{
-    width:100%;
+  .vedio_news_box {
+    width: 100%;
     max-width: 100%;
     max-height: 100%;
   }
