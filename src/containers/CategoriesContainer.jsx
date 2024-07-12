@@ -49,7 +49,7 @@ export default function CategoriesContainer() {
             className="BigNewsCardContainer"
             sx={{ display: 'flex', justifyContent: 'space-between' }}
           >
-            <Box className="categories_subheading_card">
+            <Box className="categorieSubheadingCard">
               <Text
                 text={id}
                 sx={{ fontWeight: 700, margin: '0 0 1rem 0rem' }}
@@ -110,7 +110,7 @@ export default function CategoriesContainer() {
             </Box>
 
             
-           <Box className="categories_subheading_side_card" >
+           <Box className="categoriesSideCard" >
            <Box sx={{ position: 'sticky', top: '1rem',}}>
               <Text
                 text={'Trending News'}

@@ -1,8 +1,8 @@
-.Subheading_card_img {
+.subheadingCardImage {
   width: 200px;
   height: 130px;
 }
-.centercard_box {
+.centerCardBox {
   width: 200px;
   height: 120px;
 }
@@ -20,34 +20,34 @@
   height: 100%;
 }
 
-.categories_subheading_card {
+.categorieSubheadingCard {
   padding: 1rem;
   max-width: 65%;
 }
-.categories_subheading_side_card {
+.categoriesSideCard {
   max-width: 31%;
 }
-.pf_logo {
+.pfLogo {
   width: 100%;
   height: 60px;
 }
-.home_page_news_container {
+.homeNewsContainer {
   display: flex;
   width: 100%;
   justify-content: space-between;
   padding: 12px;
 }
-.home_page_news_subBox1 {
+.homePageNewsBox1 {
   max-width: 38%;
 }
-.home_page_news_subBox2 {
+.homePageNewsBox2 {
   max-width: 31%;
   margin: 40px 20px;
 }
-.home_page_news_subBox3 {
+.homePageNewsBox3 {
   max-width: 31%;
 }
-.pf_logo_footer {
+.pfLogoFooter {
   width: 230px;
   height: 30px;
 }
@@ -128,15 +128,16 @@
   height: 100%;
 }
 
+
 @media (min-device-width: 300px) and (max-device-width: 768px) {
   .shortnews_card_img {
     height: 200px;
   }
-  .home_page_news_subBox2 {
+  .homePageNewsBox2 {
     margin: 20px 0px;
   }
 
-  .home_page_news_container {
+  .homeNewsContainer {
     padding: 12px 0px;
   }
   .heading_title {
@@ -149,26 +150,26 @@
     max-width: 100%;
     max-height: 100%;
   }
-  .home_page_news_subBox1 {
+  .homePageNewsBox1 {
     max-width: 100%;
   }
-  .home_page_news_subBox2 {
+  .homePageNewsBox2 {
     max-width: 100%;
   }
-  .home_page_news_subBox3 {
+  .homePageNewsBox3 {
     max-width: 100%;
   }
-  .home_page_news_container {
+  .homeNewsContainer {
     display: block;
   }
-  .pf_logo {
+  .pfLogo {
     height: 32px;
     margin-top: 7px;
   }
-  .categories_subheading_card {
+  .categorieSubheadingCard {
     max-width: 100%;
   }
-  .categories_subheading_side_card {
+  .categoriesSideCard {
     max-width: 100%;
   }
   .advertise_img {
@@ -180,11 +181,11 @@
   .CenterVirusConfrontSection {
     display: block;
   }
-  .Subheading_card_img {
+  .subheadingCardImage {
     width: 130px;
     height: 130px;
   }
-  .centercard_box {
+  .centerCardBox {
     width: 100%;
     height: 100%;
   }

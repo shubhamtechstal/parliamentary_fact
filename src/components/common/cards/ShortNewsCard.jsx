@@ -24,7 +24,7 @@ export default function ShortNewsCard({ data }) {
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-      <Box className='centercard_box'>
+      <Box className='centerCardBox'>
         <img className='shortnews_card_img'
           src={imageUrl + newsItem?.news_description[0]?.image}
           image={imageUrl + newsItem?.news_description[0]?.image}

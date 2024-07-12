@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { appConstants } from 'helpers/constants/appConstants';
 import './NewsCard.css';
 
-
 export default function CenterBackgroudNewsCard({ data }) {
   const navigate = useNavigate();
 
@@ -22,13 +21,39 @@ export default function CenterBackgroudNewsCard({ data }) {
   });
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', maxWidth:{md:'250px',xs:'100%'} }}>
-      <Box className="centercard_box" sx={{width:'100%'}}>
-        <img
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '0.5rem',
+        maxWidth: { md: '250px', xs: '100%' },
+      }}
+    >
+      <Box className="centerCardBox" sx={{ width: '100%' }}>
+        {/* <img
           src={imageUrl + newsItem?.news_description[0]?.image}
           image={imageUrl + newsItem?.news_description[0]?.image}
           className='shortnews_card_img'
-        />
+        /> */}
+        {newsItem?.video ? (
+          <iframe
+            width="100%"
+            height="100%"
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+            src={newsItem?.video}
+            className='shortnews_card_img'
+          ></iframe>
+        ) : newsItem?.news_description[0]?.image ? (
+          <img
+            src={imageUrl + newsItem?.news_description[0].image}
+            alt="News"
+            className='shortnews_card_img'
+          />
+        ) : null}
       </Box>
       <Box
         sx={{

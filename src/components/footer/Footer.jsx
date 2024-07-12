@@ -45,9 +45,9 @@ export default function Footer() {
         <Box>
           <Box sx={{ display: 'flex', gap: '0.5rem', cursor: 'pointer' }}>
             <img
-              src="/pf_logo.png"
+              src="/pfLogo.png"
               alt="logo"
-              className="pf_logo_footer"
+              className="pfLogoFooter"
             />
           </Box>
           <Box>

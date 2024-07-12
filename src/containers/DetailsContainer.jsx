@@ -5,7 +5,7 @@ import SubHeadingNewCard from 'components/common/cards/SubHeadingNewCard';
 import '../App.css';
 import SideNewCards from 'components/common/cards/SideNewCards';
 import { dashboardNewsApiAction } from 'stores/redux/apiSlices/DashboardNewsSlice/dashboardNewsApiSlice';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { appConstants } from 'helpers/constants/appConstants';
 import '../components/common/cards/NewsCard.css';
 import DetailNewsIconBox from 'components/DetailNews/DetailNewsIconBox';
@@ -39,7 +39,18 @@ export default function DetailsContainer() {
     setIsExpanded(false);
     window.scroll(0, 0);
   }, [id]);
-  // console.log(headerNewsDataApi.news[0].news_description,'headerNewsDataApi');
+
+  const formattedDate = headerNewsDataApi?.news[0]?.date
+    ? new Date(headerNewsDataApi?.news[0]?.date).toLocaleDateString('en-GB', {
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true,
+      })
+    : '';
+
   return (
     <Container
       sx={{
@@ -66,6 +77,12 @@ export default function DetailsContainer() {
           }}
           text={headerNewsDataApi?.news[0]?.news_description[0]?.title}
         />
+
+        <Text
+          sx={{ fontWeight: 700, fontSize: '0.7rem' }}
+          text={formattedDate}
+        />
+        <DetailNewsIconBox />
         {/* <img
           src={`${imageUrl}${headerNewsDataApi?.news[0]?.news_description[0]?.image}`}
           style={{ height: 'auto', width: '100%' }}
@@ -133,16 +150,43 @@ export default function DetailsContainer() {
             </div>
           )}
 
-          <img
+          {/* <img
             src={`${imageUrl}${headerNewsDataApi?.news[0]?.news_description[0]?.image}`}
             style={{ height: '400px', width: '100%' }}
-          />
-          <Text
-            sx={{ fontWeight: 700, fontSize: '0.7rem' }}
-            text={parse(headerNewsDataApi?.news[0]?.author ?? ' ')}
-          />
+          /> */}
 
-          <DetailNewsIconBox />
+          {headerNewsDataApi?.news[0]?.video ? (
+            <iframe
+              width="100%"
+              height="400px"
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+              src={headerNewsDataApi?.news[0]?.video}
+            ></iframe>
+          ) : (
+            headerNewsDataApi?.news[0]?.news_description[0]?.image && (
+              <img
+                src={`${imageUrl}${headerNewsDataApi?.news[0]?.news_description[0]?.image}`}
+                alt="News"
+                style={{ height: '400px', width: '100%' }}
+              />
+            )
+          )}
+          <Box sx={{ display: 'flex', gap: '10px' }}>
+            <Text
+              sx={{ fontWeight: 700, fontSize: '0.7rem' }}
+              text={`By : ${headerNewsDataApi?.news[0]?.author ?? ' '}`}
+            />
+            <Text
+              sx={{ fontWeight: 700, fontSize: '0.7rem' }}
+              text={formattedDate}
+            />
+          </Box>
+
+          {/* <DetailNewsIconBox /> */}
           {headerNewsDataApi?.news[0]?.news_description?.map(
             (val, index) =>
               index > 0 && (
@@ -213,7 +257,7 @@ export default function DetailsContainer() {
           <Text text={'Related News'} sx={{ fontWeight: '700' }} />
           <Box sx={{ marginTop: '1rem' }}>
             {dashboardNewsDataApi?.reviews?.slice(0, 6).map((val) => (
-              <Box sx={{ marginTop: '1rem' }}>
+              <Box sx={{ marginTop: '1rem' }} key={val.id}>
                 <SubHeadingNewCard data={val} />
                 <Divider sx={{ margin: '1rem' }} />
               </Box>
@@ -232,7 +276,7 @@ export default function DetailsContainer() {
           />
 
           {trendingNews?.reviews?.slice(0, 5).map((val) => (
-            <Box sx={{ marginTop: '1rem' }}>
+            <Box sx={{ marginTop: '1rem' }} key={val.id}>
               <SideNewCards data={val} />
             </Box>
           ))}
@@ -253,7 +297,7 @@ export default function DetailsContainer() {
           />
 
           {trendingNews?.reviews?.slice(5, 11).map((val) => (
-            <Box sx={{ marginTop: '1rem' }}>
+            <Box sx={{ marginTop: '1rem' }} key={val.id}>
               <SideNewCards data={val} />
             </Box>
           ))}

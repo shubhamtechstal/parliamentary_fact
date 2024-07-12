@@ -23,11 +23,28 @@ export default function SideNewCards({ data }) {
   return (
     <Box sx={{ display: 'flex', gap: '1rem', marginRight: '6px' }}>
       <Box>
-        <img 
+        {/* <img 
           src={imageUrl + newsItem?.news_description[0]?.image}
           image={imageUrl + newsItem?.news_description[0]?.image}
           style={{ height: '80px', width: '100px' }}
-        />
+        /> */}
+               {newsItem?.video ? (
+              <iframe
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+                src={newsItem?.video}
+                style={{ height: '80px', width: '100px' }}
+              ></iframe>
+            ) : newsItem?.news_description[0]?.image ? (
+              <img
+                src={imageUrl + newsItem?.news_description[0]?.image}
+                alt="News"
+                style={{ height: '80px', width: '100px' }}
+              />
+            ) : null}
       </Box>
       <Box
         sx={{

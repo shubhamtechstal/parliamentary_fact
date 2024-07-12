@@ -1,6 +1,5 @@
 import { Box } from '@mui/material';
 import Text from '../Text';
-import images from 'helpers/images';
 import '../../../App.css';
 import { useNavigate } from 'react-router-dom';
 import './NewsCard.css';
@@ -13,6 +12,7 @@ export default function SubHeadingNewCard({ textWidth, data }) {
   if (data) newsItem = data;
 
   const imageUrl = appConstants.BACKEND_IMAGE_URL;
+
   const formattedDate = new Date(newsItem?.date).toLocaleString('en-GB', {
     day: '2-digit',
     month: 'short',
@@ -25,11 +25,31 @@ export default function SubHeadingNewCard({ textWidth, data }) {
   return (
     <Box sx={{ display: 'flex', gap: '1rem' }}>
       <Box className="SubheadingImage">
-        <img
+        {/* <img
           src={imageUrl + newsItem?.news_description[0]?.image}
           image={imageUrl + newsItem?.news_description[0]?.image}
-          className="Subheading_card_img"
-        />
+          className="subheadingCardImage"
+        /> */}
+
+        {newsItem?.video ? (
+          <iframe
+            width="100%"
+            height="100%"
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+            src={newsItem?.video}
+            className="subheadingCardImage"
+          ></iframe>
+        ) : newsItem?.news_description[0]?.image ? (
+          <img
+            src={imageUrl + newsItem?.news_description[0].image}
+            alt="News"
+            className="subheadingCardImage"
+          />
+        ) : null}
       </Box>
       <Box
         sx={{
@@ -54,8 +74,11 @@ export default function SubHeadingNewCard({ textWidth, data }) {
         </Box>
         <Box>
           <Text
-            onClick={() => navigate(`/details/${newsItem?.url}`,{state : {id:newsItem?.id}})}
-
+            onClick={() =>
+              navigate(`/details/${newsItem?.url}`, {
+                state: { id: newsItem?.id },
+              })
+            }
             sx={{
               fontSize: '0.9rem',
               fontWeight: 600,
@@ -83,20 +106,24 @@ export default function SubHeadingNewCard({ textWidth, data }) {
                 transition: 'width 0.4s ease-out',
               },
             }}
-            text={newsItem ? (newsItem?.news_description[0]?.title ?? ' ') : ''  }
+            text={newsItem ? newsItem?.news_description[0]?.title ?? ' ' : ''}
           />
           <Box
             sx={{
-              display:{xs:'block',md:'flex'},
+              display: { xs: 'block', md: 'flex' },
               alignItems: 'center',
             }}
           >
             <Text
-              sx={{ fontWeight: 700, fontSize: '0.7rem',marginRight:'5px' }}
+              sx={{ fontWeight: 700, fontSize: '0.7rem', marginRight: '5px' }}
               text={newsItem?.author}
             ></Text>
             <Text
-              sx={{ textAlign:{xs:'left',md:'center'}, color: '#767676', fontSize: '0.7rem' }}
+              sx={{
+                textAlign: { xs: 'left', md: 'center' },
+                color: '#767676',
+                fontSize: '0.7rem',
+              }}
               text={formattedDate}
             ></Text>
           </Box>

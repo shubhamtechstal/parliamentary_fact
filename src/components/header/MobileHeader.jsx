@@ -81,7 +81,7 @@ export default function MobileHeader({ menuOpen, data }) {
           />
         </Box>
         <Box onClick={() => navigate('/')}>
-          <img src="/pf_logo.png" alt="logo" className="pf_logo" />
+          <img src="/pfLogo.png" alt="logo" className="pfLogo" />
           {/* <Text
             text={'Local Coronavirus informations'}
             sx={{ color: '#767676', fontSize: '0.75rem' }}

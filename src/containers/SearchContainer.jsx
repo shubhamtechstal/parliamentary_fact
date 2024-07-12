@@ -55,7 +55,7 @@ export default function SearchContainer() {
             className="BigNewsCardContainer"
             sx={{ display: 'flex', justifyContent: 'space-between',height:"100%" }}
           >
-            <Box className="categories_subheading_card" sx={{width:"100%",alignItems:'center'}}>
+            <Box className="categorieSubheadingCard" sx={{width:"100%",alignItems:'center'}}>
               <Text
                 text={id}
                 sx={{ fontWeight: 700, margin: '0 0 1rem 0rem' }}
@@ -112,7 +112,7 @@ export default function SearchContainer() {
                 </Box>
               )}
             </Box>
-            <Box className="categories_subheading_side_card">
+            <Box className="categoriesSideCard">
 
             <Box  sx={{ position: 'sticky', top: '1rem',marginBottom:'4rem' }}>
               <Text

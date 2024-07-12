@@ -41,8 +41,8 @@ export default function DashboardContainer() {
           <Box>
             <HeadingNewCards data={topLatestNewsApi?.latest_top_news[0]} />
           </Box>
-          <Box className="home_page_news_container">
-            <Box className="home_page_news_subBox1">
+          <Box className="homeNewsContainer">
+            <Box className="homePageNewsBox1">
               <Box>
                 <Text
                   text={'Top News'}
@@ -54,7 +54,7 @@ export default function DashboardContainer() {
               </Box>
             </Box>
 
-            <Box className="home_page_news_subBox2">
+            <Box className="homePageNewsBox2">
               <Box
                 sx={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}
               >
@@ -66,7 +66,7 @@ export default function DashboardContainer() {
               </Box>
             </Box>
 
-            <Box className="home_page_news_subBox3">
+            <Box className="homePageNewsBox3">
               <Text text={'Trending News'} sx={{ fontWeight: 700 }} />
               <Box className="SideNewCards">
                 {dashboardNewsDataApi?.reviews?.slice(0, 6).map((data) => (

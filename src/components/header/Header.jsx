@@ -200,7 +200,7 @@ export default function Header({ data }) {
               onClick={() => navigate('/')}
               sx={{ display: 'flex', cursor: 'pointer' }}
             >
-              <img src="/pf_logo.png" alt="logo" className="pf_logo" />
+              <img src="/pfLogo.png" alt="logo" className="pfLogo" />
             </Box>
             {/* <Text
               text={'Local Coronavirus informations'}
