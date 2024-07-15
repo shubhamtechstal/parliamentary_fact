@@ -7,8 +7,11 @@ import React, { useEffect, useRef, useState } from 'react';
 import images from 'helpers/images';
 import { useNavigate } from 'react-router-dom';
 import '../../components/common/cards/NewsCard.css';
+import { dashboardNewsApiAction } from 'stores/redux/apiSlices/DashboardNewsSlice/dashboardNewsApiSlice';
 
 export default function Header({ data }) {
+  const { data: trendingDataApi } = dashboardNewsApiAction.getDashboardNews({ limit: 10 });
+
   const navigate = useNavigate();
   const searchRef = useRef(null);
 
@@ -24,12 +27,13 @@ export default function Header({ data }) {
   `;
 
   const animatedTextStyle = {
-    fontSize: '0.68rem',
-    fontWeight: 400,
+    fontSize: '0.80rem',
+    fontWeight: 500,
     animation: `${fadeInSlideIn} 0.3s ease-in`,
     cursor: 'pointer',
+    color: '#eb3032',
     '&:hover': {
-      color: '#162eb7',
+      color: '#eb3032',
     },
   };
 
@@ -61,16 +65,25 @@ export default function Header({ data }) {
     }
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside); 
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [searchShow]);
 
-  const arrNews = [
-    'COVID-19: Australia to ban all arrivals of non-residents, says PM',
-    'Trump sought to buy vaccine developer exclusively',
-    'Doors slam shut across borderless Europe as coronavirus spreads',
-    'Fearing coronavirus recession, France announces €45 billion in business aid',
-  ];
+  const arrNews = trendingDataApi?.reviews?.map((val) => ({
+    id: val.id,
+    title: val?.news_description?.[0]?.title || '', // Added fallback to empty string
+    url: val?.url || '', // Added fallback to empty string
+  })) || [];
+
+  const limitWords = (text, wordLimit) => {
+    const words = text.split(' ');
+    if (words.length > wordLimit) {
+      return words.slice(0, wordLimit).join(' ') + '...';
+    }
+    return text;
+  };
+
+  const truncatedText = arrNews.length > 0 ? limitWords(arrNews[trendingNews]?.title, 15) : '';
 
   const header = data;
 
@@ -87,7 +100,7 @@ export default function Header({ data }) {
       setTrendingNews((prev) => (prev === arrNews.length - 1 ? 0 : prev + 1));
     }, 3000);
     return () => clearInterval(intervalId);
-  }, []);
+  }, [arrNews.length]); // Added arrNews.length as dependency
 
   function createSlug(text) {
     return encodeURIComponent(text.trim().toLowerCase()).replace(/%20/g, '-');
@@ -135,16 +148,22 @@ export default function Header({ data }) {
               }}
             />
             <Text
-              text={arrNews[trendingNews]}
+              onClick={() =>
+                navigate(`/details/${arrNews[trendingNews]?.url}`, {
+                  state: { id: arrNews[trendingNews]?.id },
+                })
+              }
+              text={truncatedText}
               sx={
                 isAnimating
                   ? animatedTextStyle
                   : {
-                      fontSize: '0.68rem',
-                      fontWeight: 400,
+                      fontSize: '0.80rem',
+                      fontWeight: 500,
                       cursor: 'pointer',
+                      color: '#eb3032',
                       '&:hover': {
-                        color: '#162eb7',
+                        color: '#eb3032',
                       },
                     }
               }
@@ -241,15 +260,11 @@ export default function Header({ data }) {
                 cursor: 'pointer',
               }}
             >
-              <img
-                src={images.search}
-                style={{ height: '16px' }}
-                alt="search"
-              />
+              <img src={images.search} style={{ height: '16px' }} alt="search" />
             </Box>
             {searchShow && (
               <Box
-                ref={searchRef} 
+                ref={searchRef}
                 sx={{
                   position: 'absolute',
                   display: 'flex',
