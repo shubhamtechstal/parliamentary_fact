@@ -1,10 +1,20 @@
-import { Box, Container, Divider, colors } from '@mui/material';
+import { Box, Divider, Menu, MenuItem } from '@mui/material';
 import Text from 'components/common/Text';
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 export default function Footer({ data }) {
   const navigate = useNavigate();
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleMoreClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   const footer = data;
 
@@ -30,48 +40,25 @@ export default function Footer({ data }) {
         }}
       >
         <Box>
-          <Box sx={{ display: 'flex', gap: '0.5rem', cursor: 'pointer' }}>
+          <Box
+            sx={{ display: 'flex', justifyContent: 'left', cursor: 'pointer' }}
+          >
             <img src="/pfLogo.png" alt="logo" className="pfLogoFooter" />
           </Box>
           <Box>
             <Box
               sx={{
                 display: 'flex',
-                flexWrap: 'wrap',
-                gap: '0.5rem',
+                justifyContent: 'left',
                 marginTop: '1rem',
               }}
             >
-              <Box sx={{ display: 'flex' }} onClick={() => navigate('/')}>
-                <Text
-                  text={'Home'}
-                  sx={{
-                    padding: '0 0.4rem',
-                    fontSize: '0.8rem',
-                    fontWeight: 700,
-                    cursor: 'pointer',
-                    '&:hover': {
-                      color: '#162eb7',
-                    },
-                  }}
-                />
-              </Box>
-
-              {footer?.map((val, index) => (
-                <Box
-                  sx={{ display: 'flex' }}
-                  onClick={() =>
-                    navigate(`/categories/${val?.url}`, {
-                      state: { category: val?.category },
-                    })
-                  }
-                  key={index}
-                >
+              <Box sx={{ display: 'flex', gap: '1.5rem' }}>
+                <Box sx={{ display: 'flex' }} onClick={() => navigate('/')}>
                   <Text
-                    text={val?.category}
+                    text={'Home'}
                     sx={{
-                      padding: '0 0.4rem',
-                      fontSize: '0.8rem',
+                      fontSize: '0.9rem',
                       fontWeight: 700,
                       cursor: 'pointer',
                       '&:hover': {
@@ -80,14 +67,76 @@ export default function Footer({ data }) {
                     }}
                   />
                 </Box>
-              ))}
+                {footer?.slice(0, 6).map((val, index) => (
+                  <Box
+                    sx={{ display: 'flex' }}
+                    onClick={() =>
+                      navigate(`/categories/${val?.url}`, {
+                        state: { category: val?.category },
+                      })
+                    }
+                    key={index}
+                  >
+                    <Text
+                      text={val?.category}
+                      sx={{
+                        fontSize: '0.9rem',
+                        fontWeight: 700,
+                        cursor: 'pointer',
+                        '&:hover': {
+                          color: '#162eb7',
+                        },
+                      }}
+                    />
+                    {val?.subhead && <ExpandMoreIcon />}
+                  </Box>
+                ))}
+                {footer?.length > 6 && (
+                  <Box
+                    sx={{ display: 'flex', cursor: 'pointer' }}
+                    onClick={handleMoreClick}
+                  >
+                    <Text
+                      text={'More :'}
+                      sx={{
+                        fontSize: '0.9rem',
+                        fontWeight: 700,
+                        cursor: 'pointer',
+                        '&:hover': {
+                          color: '#162eb7',
+                        },
+                      }}
+                    />
+                  </Box>
+                )}
+              </Box>
+              <Menu
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                {footer?.slice(6).map((val, index) => (
+                  <MenuItem
+                    sx={{ fontSize: '12px' }}
+                    onClick={() => {
+                      navigate(`/categories/${val?.url}`, {
+                        state: { category: val?.category },
+                      });
+                      handleClose();
+                    }}
+                    key={index}
+                  >
+                    {val?.category}
+                  </MenuItem>
+                ))}
+              </Menu>
             </Box>
           </Box>
-          <Divider sx={{ marginTop: '4rem' }} />
+          <Divider sx={{ marginTop: '3rem' }} />
           <Box
             sx={{
               display: 'flex',
-              flexWrap: 'wrap',
+              justifyContent: 'left',
               gap: '1rem',
               marginTop: '1rem',
             }}

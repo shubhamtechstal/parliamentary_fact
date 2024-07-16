@@ -1,4 +1,12 @@
-import { Box, Button, Container, TextField, keyframes } from '@mui/material';
+import {
+  Box,
+  Button,
+  Container,
+  TextField,
+  keyframes,
+  Menu,
+  MenuItem,
+} from '@mui/material';
 import Text from 'components/common/Text';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -15,6 +23,16 @@ export default function Header({ data }) {
   });
 
   const navigate = useNavigate();
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleMoreClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   const searchRef = useRef(null);
 
   const fadeInSlideIn = keyframes`
@@ -318,7 +336,7 @@ export default function Header({ data }) {
                 }}
               />
             </Box>
-            {header?.map((val, index) => (
+            {header?.slice(0, 5).map((val, index) => (
               <Box
                 sx={{ display: 'flex' }}
                 onClick={() =>
@@ -342,7 +360,45 @@ export default function Header({ data }) {
                 {val?.subhead && <ExpandMoreIcon />}
               </Box>
             ))}
+            {header?.length > 5 && (
+              <Box
+                sx={{ display: 'flex', cursor: 'pointer' }}
+                onClick={handleMoreClick}
+              >
+                <Text
+                  text={'More :'}
+                  sx={{
+                    fontSize: '0.9rem',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                    '&:hover': {
+                      color: '#162eb7',
+                    },
+                  }}
+                />
+              </Box>
+            )}
           </Box>
+          <Menu
+            anchorEl={anchorEl}
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+          >
+            {header?.slice(5).map((val, index) => (
+              <MenuItem
+                sx={{ fontSize: '12px' }}
+                onClick={() => {
+                  navigate(`/categories/${val?.url}`, {
+                    state: { category: val?.category },
+                  });
+                  handleClose();
+                }}
+                key={index}
+              >
+                {val?.category}
+              </MenuItem>
+            ))}
+          </Menu>
         </Box>
       </Container>
     </Box>
