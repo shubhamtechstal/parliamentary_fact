@@ -1,31 +1,18 @@
 import { Box, Container, Divider, colors } from '@mui/material';
 import Text from 'components/common/Text';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-export default function Footer() {
-  const footer = [
-    'Home',
-    'News',
-    'Sports',
-    'Business',
-    'Innovation',
-    'Culture',
-    'Travel',
-    'Earth',
-    'Video',
-    'Live',
-    'Audio',
-    'Weather',
-    'BBC Shop',
-  ];
+export default function Footer({ data }) {
+  const navigate = useNavigate();
+
+  const footer = data;
+
   const footerDescrip = [
     'Terms of Use',
-    'About the BBC',
+    'About the Parliamentary Fact ',
     'Privacy Policy',
-    'Cookies',
-    'Accesibility Help',
-    'Contact the BBC',
+    'Contact',
     'Advertise with us',
     'Do not share or sell my info',
     'Contact technical support',
@@ -44,25 +31,20 @@ export default function Footer() {
       >
         <Box>
           <Box sx={{ display: 'flex', gap: '0.5rem', cursor: 'pointer' }}>
-            <img
-              src="/pfLogo.png"
-              alt="logo"
-              className="pfLogoFooter"
-            />
+            <img src="/pfLogo.png" alt="logo" className="pfLogoFooter" />
           </Box>
           <Box>
             <Box
               sx={{
                 display: 'flex',
                 flexWrap: 'wrap',
-                gap: '1rem',
+                gap: '0.5rem',
                 marginTop: '1rem',
               }}
             >
-              {footer.map((val) => (
+              <Box sx={{ display: 'flex' }} onClick={() => navigate('/')}>
                 <Text
-                  key={val}
-                  text={val}
+                  text={'Home'}
                   sx={{
                     padding: '0 0.4rem',
                     fontSize: '0.8rem',
@@ -73,6 +55,31 @@ export default function Footer() {
                     },
                   }}
                 />
+              </Box>
+
+              {footer?.map((val, index) => (
+                <Box
+                  sx={{ display: 'flex' }}
+                  onClick={() =>
+                    navigate(`/categories/${val?.url}`, {
+                      state: { category: val?.category },
+                    })
+                  }
+                  key={index}
+                >
+                  <Text
+                    text={val?.category}
+                    sx={{
+                      padding: '0 0.4rem',
+                      fontSize: '0.8rem',
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                      '&:hover': {
+                        color: '#162eb7',
+                      },
+                    }}
+                  />
+                </Box>
               ))}
             </Box>
           </Box>

@@ -8,6 +8,8 @@ import '../App.css';
 import { dashboardNewsApiAction } from 'stores/redux/apiSlices/DashboardNewsSlice/dashboardNewsApiSlice';
 import { useLocation, useParams } from 'react-router-dom';
 import '../components/common/cards/NewsCard.css';
+import { useEffect, useState } from 'react';
+import CircularProgress from '@mui/material/CircularProgress'; 
 // import DownloadAppSection from 'components/homePage/DownloadAppSection';
 
 export default function CategoriesContainer() {
@@ -22,11 +24,30 @@ export default function CategoriesContainer() {
   });
 
   const { data: topFiveNewsDataApi } = dashboardNewsApiAction.getTopFiveNews();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, [id]);
+
+  useEffect(() => {
+      setLoading(true);
+      setTimeout(() => {
+        setLoading(false);
+      }, 500);
+  }, [category]);
 
   return (
     <>
-      {/* <DownloadAppSection /> */}
-      <Box
+    {/* <DownloadAppSection /> */}
+
+      {loading ? (
+        <Box sx={{height:'40vh',width:'100%',display:'flex',justifyContent:'center',alignItems:'center'}}>
+        <CircularProgress/>
+        </Box>
+        ) : (
+          <>
+        <Box
         sx={{
           display: 'flex',
           justifyContent: 'space-between',
@@ -172,6 +193,10 @@ export default function CategoriesContainer() {
           </Box>
         </Box>
       </Box>
+      </>
+      )}
+
+     
     </>
   );
 }

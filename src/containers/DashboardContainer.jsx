@@ -10,6 +10,7 @@ import CenterBackgroudNewsCard from 'components/common/cards/CenterBackgroundNew
 import { dashboardNewsApiAction } from 'stores/redux/apiSlices/DashboardNewsSlice/dashboardNewsApiSlice';
 import ShortNewsCard from 'components/common/cards/ShortNewsCard';
 import '../components/common/cards/NewsCard.css';
+import { useEffect } from 'react';
 
 export default function DashboardContainer() {
   const { data: dashboardNewsDataApi } =
@@ -22,6 +23,10 @@ export default function DashboardContainer() {
   const { data: categorynews } = dashboardNewsApiAction.getDashboardNews({
     category: 'MPs News',
   });
+
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
 
   return (
     <>
@@ -113,10 +118,10 @@ export default function DashboardContainer() {
           flexWrap: 'wrap',
           justifyContent: 'center',
           padding: '1rem 0',
-          margin:{xs:'15px',md:'0px'}
+          margin: { xs: '15px', md: '0px' },
         }}
       >
-        <Box  width={{ sm: "80%", xs: "100%", md: "80%" }}>
+        <Box width={{ sm: '80%', xs: '100%', md: '80%' }}>
           <Text text={`MP's News`} sx={{ fontWeight: 700 }} />
           <Box className="CenterVirusConfrontSection">
             {categorynews?.reviews?.slice(0, 5).map((data) => (

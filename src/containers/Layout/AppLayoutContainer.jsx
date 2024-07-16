@@ -13,7 +13,6 @@ const AppLayoutContainer = () => {
 
   const { data: headerCategoryApi } =
     dashboardNewsApiAction.getHeaderCategories();
-  // console.log(headerCategoryApi,'headerCategoryApi');
 
   return (
     <Stack
@@ -60,7 +59,7 @@ const AppLayoutContainer = () => {
       <Stack sx={{ overflow: 'visible' }}>
         <Outlet />
       </Stack>
-      <Footer />
+      <Footer data={headerCategoryApi?.categories}/>
     </Stack>
   );
 };

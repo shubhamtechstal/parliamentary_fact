@@ -48,8 +48,9 @@
   max-width: 31%;
 }
 .pfLogoFooter {
-  width: 230px;
+  width: 250px;
   height: 30px;
+  margin-left: 5px;
 }
 
 .read-more-container {
