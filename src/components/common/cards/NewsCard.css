@@ -74,11 +74,11 @@
 }
 
 .read-more-button .arrow-icon {
-  margin-left: 8px; /* Space between text and arrow */
+  margin-left: 8px;
 }
 
 .read-more-button:hover {
-  background-color: #cc0000; /* Darker red on hover */
+  background-color: #cc0000;
 }
 
 .news_desc * {
@@ -128,8 +128,21 @@
   height: 100%;
 }
 
+.shareIconBox {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  background: #ffffff;
+  padding: 20px;
+}
 
 @media (min-device-width: 300px) and (max-device-width: 768px) {
+  .shareIconBox {
+    width: 90%;
+    padding: 15px;
+  }
   .shortnews_card_img {
     height: 200px;
   }
