@@ -137,8 +137,16 @@
   background: #ffffff;
   padding: 20px;
 }
+.footerCategory{
+  display: flex;gap: 1.5rem;
+}
 
 @media (min-device-width: 300px) and (max-device-width: 768px) {
+  .footerCategory{
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
   .shareIconBox {
     width: 90%;
     padding: 15px;

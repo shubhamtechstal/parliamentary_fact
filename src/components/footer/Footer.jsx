@@ -53,7 +53,7 @@ export default function Footer({ data }) {
                 marginTop: '1rem',
               }}
             >
-              <Box sx={{ display: 'flex', gap: '1.5rem' }}>
+              <Box className="footerCategory">
                 <Box sx={{ display: 'flex' }} onClick={() => navigate('/')}>
                   <Text
                     text={'Home'}
@@ -132,21 +132,13 @@ export default function Footer({ data }) {
               </Menu>
             </Box>
           </Box>
-          <Divider sx={{ marginTop: '3rem' }} />
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'left',
-              gap: '1rem',
-              marginTop: '1rem',
-            }}
-          >
+          <Divider sx={{ marginTop: '2rem', marginBottom: '2rem' }} />
+          <Box className="footerCategory">
             {footerDescrip.map((val) => (
               <Text
                 key={val}
                 text={val}
                 sx={{
-                  padding: '0 0.4rem',
                   fontSize: '0.7rem',
                   fontWeight: 500,
                   cursor: 'pointer',
@@ -171,7 +163,6 @@ export default function Footer({ data }) {
                 'Copyright 2024 Parliamentary Fact. All rights reserved. The Parliamentary Fact is not responsible for the content of external sites.'
               }
               sx={{
-                padding: '0 0.4rem',
                 fontSize: '0.7rem',
                 fontWeight: 500,
               }}
