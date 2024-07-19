@@ -53,7 +53,7 @@ export default function BottomSubHeadingCards({ type, data }) {
         <Box>
           <Text
             onClick={() =>
-              navigate(`/details/${newsItem?.url}`, {
+              navigate(`/details/${newsItem?.url}?id=${newsItem?.id}`, {
                 state: { id: newsItem?.id },
               })
             }

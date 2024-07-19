@@ -23,16 +23,23 @@ export default function DetailsContainer() {
 
   const { id } = location.state || {};
 
+  const { data: trendingNews } = dashboardNewsApiAction.getDashboardNews();
+
+  let newsUrlId = getQueryParam('id');
+
   const { data: headerNewsDataApi } = dashboardNewsApiAction.getNewsById({
-    id: id,
+    id: id ?? newsUrlId,
   });
+
+  function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+  }
 
   const { data: dashboardNewsDataApi } =
     dashboardNewsApiAction.getDashboardNews({
       category: headerNewsDataApi?.news[0]?.category,
     });
-
-  const { data: trendingNews } = dashboardNewsApiAction.getDashboardNews();
 
   const toggleReadMore = () => {
     setIsExpanded(true);
@@ -106,7 +113,10 @@ export default function DetailsContainer() {
                 sx={{ fontWeight: 700, fontSize: '0.7rem' }}
                 text={formattedDate}
               />
-              <DetailNewsIconBox />
+              <DetailNewsIconBox
+                image={`${imageUrl}${headerNewsDataApi?.news[0]?.news_description[0]?.image}`}
+                title={headerNewsDataApi?.news[0]?.news_description[0]?.title}
+              />
               {/* <img
             src={`${imageUrl}${headerNewsDataApi?.news[0]?.news_description[0]?.image}`}
             style={{ height: 'auto', width: '100%' }}

@@ -52,7 +52,7 @@ export default function ShortNewsCard({ data }) {
         </Box>
         <Box>
           <Text 
-           onClick={() => navigate(`/details/${newsItem?.url}`,{state : {id:newsItem?.id}})}
+           onClick={() => navigate(`/details/${newsItem?.url}?id=${newsItem?.id}`,{state : {id:newsItem?.id}})}
 
             font={'Roboto'}
             sx={{

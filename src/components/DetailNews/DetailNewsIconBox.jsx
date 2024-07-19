@@ -5,10 +5,10 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import PinterestIcon from '@mui/icons-material/Pinterest';
 import images from 'helpers/images';
 import Divider from 'components/common/Divider';
-import { Box,IconButton } from '@mui/material';
+import { Box, IconButton } from '@mui/material';
 
-const DetailNewsIconBox = () => {
-  const newsLink = 'https://example.com/news/123';
+const DetailNewsIconBox = ({ title, image }) => {
+  const newsLink = window.location.href;
 
   return (
     <>
@@ -159,13 +159,17 @@ const DetailNewsIconBox = () => {
             }}
           >
             <IconButton
-              href={`https://api.whatsapp.com/send?text=${encodeURIComponent(newsLink)}`}
+              href={`https://api.whatsapp.com/send?text=${encodeURIComponent(title)}%20${encodeURIComponent(newsLink)}`}
               target="_blank"
             >
               <WhatsAppIcon sx={{ fontSize: '1rem', color: '#FFF' }} />
               <Divider
                 orientation="vertical"
-                sx={{ height: '20px', backgroundColor: '#FFF',margin:'0px 8px 0px 8px' }}
+                sx={{
+                  height: '20px',
+                  backgroundColor: '#FFF',
+                  margin: '0px 8px 0px 8px',
+                }}
               />
               <Text
                 sx={{ fontWeight: 500, fontSize: '0.8rem', color: '#FFF' }}

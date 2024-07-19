@@ -75,7 +75,7 @@ export default function SubHeadingNewCard({ textWidth, data }) {
         <Box>
           <Text
             onClick={() =>
-              navigate(`/details/${newsItem?.url}`, {
+              navigate(`/details/${newsItem?.url}?id=${newsItem?.id}`, {
                 state: { id: newsItem?.id },
               })
             }

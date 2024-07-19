@@ -70,7 +70,7 @@ export default function HeadingNewCards({ data }) {
               <Text
                 className="heading_title"
                 onClick={() =>
-                  navigate(`/details/${newsItem?.url}`, {
+                  navigate(`/details/${newsItem?.url}?id=${newsItem?.id}`, {
                     state: { id: newsItem?.id },
                   })
                 }

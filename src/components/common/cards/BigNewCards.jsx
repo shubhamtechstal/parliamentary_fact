@@ -46,7 +46,7 @@ export default function BigNewCards({ data }) {
         <Text
           className='heading_title'
           onClick={() =>
-            navigate(`/details/${newsItem?.url}`, {
+            navigate(`/details/${newsItem?.url}?id=${newsItem?.id}`, {
               state: { id: newsItem?.id },
             })
           }
@@ -77,7 +77,7 @@ export default function BigNewCards({ data }) {
           <span style={{marginTop:'5px',fontSize:'14px'}}
             className="read-more-button"
             onClick={() =>
-              navigate(`/details/${newsItem?.url}`, {
+              navigate(`/details/${newsItem?.url}?id=${newsItem?.id}`, {
                 state: { id: newsItem?.id },
               })
             }
