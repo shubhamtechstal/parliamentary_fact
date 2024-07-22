@@ -13,6 +13,15 @@ import parse from 'html-react-parser';
 import CircularProgress from '@mui/material/CircularProgress';
 
 export default function DetailsContainer() {
+  const url = window.location.href;
+
+  const path = url.replace(/^https?:\/\/[^\/]+\/details\//, '');
+
+  const parts = path.split('/');
+
+  const subcategory = decodeURIComponent(parts[0]);
+  const remainingUrl = decodeURIComponent(parts.slice(1).join('/'));
+
   const imageUrl = appConstants.BACKEND_IMAGE_URL;
 
   const [isExpanded, setIsExpanded] = useState(false);
@@ -25,10 +34,9 @@ export default function DetailsContainer() {
 
   const { data: trendingNews } = dashboardNewsApiAction.getDashboardNews();
 
-  let newsUrlId = getQueryParam('id');
-
   const { data: headerNewsDataApi } = dashboardNewsApiAction.getNewsById({
-    id: id ?? newsUrlId,
+    sub_category: subcategory.replace(/-/g, ' '),
+    url: remainingUrl,
   });
 
   function getQueryParam(param) {

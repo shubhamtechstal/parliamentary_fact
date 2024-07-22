@@ -56,7 +56,7 @@ export default function SideNewCards({ data }) {
       >
         <Box>
           <Text
-           onClick={() => navigate(`/details/${newsItem?.url}?id=${newsItem?.id}`,{state : {id:newsItem?.id}})}
+           onClick={() => navigate(`/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url} `,{state : {id:newsItem?.id}})}
 
             sx={{
               fontSize: '0.8rem',

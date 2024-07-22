@@ -70,7 +70,7 @@ export default function HeadingNewCards({ data }) {
               <Text
                 className="heading_title"
                 onClick={() =>
-                  navigate(`/details/${newsItem?.url}?id=${newsItem?.id}`, {
+                  navigate(`/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url} `, {
                     state: { id: newsItem?.id },
                   })
                 }

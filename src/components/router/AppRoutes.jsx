@@ -30,7 +30,7 @@ const routes = [
         element: <PrivateRoute component={<CategoriesPage />} />,
       },
       {
-        path: 'details/:id',
+        path: 'details/*',
         element: <PrivateRoute component={<DetailsPage />} />,
       },
       {

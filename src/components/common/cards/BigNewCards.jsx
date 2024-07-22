@@ -21,7 +21,6 @@ export default function BigNewCards({ data }) {
     minute: '2-digit',
     hour12: true,
   });
-
   return (
     <Card sx={{ maxWidth: 450, boxShadow: 'none', borderRadius: '0' }}>
       <CardMedia
@@ -44,11 +43,14 @@ export default function BigNewCards({ data }) {
           ></Text>
         </Box>
         <Text
-          className='heading_title'
+          className="heading_title"
           onClick={() =>
-            navigate(`/details/${newsItem?.url}?id=${newsItem?.id}`, {
-              state: { id: newsItem?.id },
-            })
+            navigate(
+              `/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url}`,
+              {
+                state: { id: newsItem?.id },
+              }
+            )
           }
           text={newsItem ? newsItem?.news_description[0]?.title ?? ' ' : ''}
         />
@@ -74,12 +76,16 @@ export default function BigNewCards({ data }) {
           }
         />
         <Box>
-          <span style={{marginTop:'5px',fontSize:'14px'}}
+          <span
+            style={{ marginTop: '5px', fontSize: '14px' }}
             className="read-more-button"
             onClick={() =>
-              navigate(`/details/${newsItem?.url}?id=${newsItem?.id}`, {
-                state: { id: newsItem?.id },
-              })
+              navigate(
+                `/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url}`,
+                {
+                  state: { id: newsItem?.id },
+                }
+              )
             }
           >
             Read more

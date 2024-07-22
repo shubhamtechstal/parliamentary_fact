@@ -48,9 +48,12 @@ const dashboardNews = createApi({
 
     getNewsById: qb.query({
 
-      query: ({id} ) => {
+      query: ({id,url,sub_category} ) => {
         const params = {};
         if(id)params['id'] = id;
+        if(url)params['url'] = url;
+        if(sub_category)params['sub_category'] = sub_category;
+
        
         return `/get_news_by_id.php?${encodeURI(new URLSearchParams(params).toString())}`;
       },
