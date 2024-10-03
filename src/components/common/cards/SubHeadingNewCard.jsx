@@ -23,7 +23,11 @@ export default function SubHeadingNewCard({ textWidth, data }) {
   });
 
   return (
-    <Box sx={{ display: 'flex', gap: '1rem' }}>
+    <Box sx={{ display: 'flex', gap: '1rem',cursor:'pointer' }}  onClick={() =>
+      navigate(`/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url} `, {
+        state: { id: newsItem?.id },
+      })
+    }>
       <Box className="SubheadingImage">
         {/* <img
           src={imageUrl + newsItem?.news_description[0]?.image}
@@ -67,9 +71,9 @@ export default function SubHeadingNewCard({ textWidth, data }) {
               color: '#FFF',
               padding: '0.2rem 0.5rem',
               fontSize: '0.625rem',
-              fontWeight: 700,
+              fontWeight: 500,
             }}
-            text={newsItem?.category}
+            text={newsItem?.sub_category}
           ></Text>
         </Box>
         <Box>
@@ -112,6 +116,7 @@ export default function SubHeadingNewCard({ textWidth, data }) {
             sx={{
               display: { xs: 'block', md: 'flex' },
               alignItems: 'center',
+              marginTop:'0.2rem'
             }}
           >
             <Text

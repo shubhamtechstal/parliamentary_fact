@@ -22,12 +22,19 @@ export default function BottomSubHeadingCards({ type, data }) {
   });
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+    <Box  onClick={() =>
+      navigate(
+        `/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url} `,
+        {
+          state: { id: newsItem?.id },
+        }
+      )
+    } sx={{ display: 'flex', flexDirection: 'column', gap: '0.5rem',cursor:"pointer" }}>
       <Box className="Bottom_card_box">
         <img
           src={imageUrl + newsItem?.news_description[0]?.image}
           image={imageUrl + newsItem?.news_description[0]?.image}
-          style={{ width: '100%', height: '170px' }}
+          style={{ width: '100%', height: '150px',objectFit:'cover' }}
         />
       </Box>
       <Box
@@ -45,7 +52,7 @@ export default function BottomSubHeadingCards({ type, data }) {
               color: '#FFF',
               padding: '0.2rem 0.5rem',
               fontSize: '0.625rem',
-              fontWeight: 700,
+              fontWeight: 500,
             }}
             text={newsItem?.sub_category}
           ></Text>

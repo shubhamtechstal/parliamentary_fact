@@ -13,6 +13,11 @@ const DashboardPage = lazy(() => import('pages/DashboardPage'));
 const CategoriesPage = lazy(() => import('pages/Categories'));
 const DetailsPage = lazy(() => import('pages/DetailsPage'));
 const SearchPage = lazy(() => import('pages/SearchPage'));
+const AboutPage = lazy(() => import('pages/AboutPage'));
+const PrivacyPolicy = lazy(() => import('pages/PrivacyPolicy'));
+const TermsAndConditions = lazy(() => import('pages/TermsAndConditions'));
+const ContactPage = lazy(() => import('pages/ContactPage'));
+const AdvertiseWithUs = lazy(() => import('pages/AdvertiseWithUs'));
 
 // Define routes config here
 const routes = [
@@ -36,6 +41,26 @@ const routes = [
       {
         path: 'search/*',
         element: <PrivateRoute component={<SearchPage />} />,
+      },
+      {
+        path: 'about-us/*',
+        element: <PrivateRoute component={<AboutPage />} />,
+      },
+      {
+        path: 'privacy-policy',
+        element: <PrivateRoute component={<PrivacyPolicy />} />,
+      },
+      {
+        path: 'terms-and-conditions',
+        element: <PrivateRoute component={<TermsAndConditions />} />,
+      },
+      {
+        path: 'contact-us',
+        element: <PrivateRoute component={<ContactPage />} />,
+      },
+      {
+        path: 'advertise-with-us',
+        element: <PrivateRoute component={<AdvertiseWithUs />} />,
       },
     ],
   },

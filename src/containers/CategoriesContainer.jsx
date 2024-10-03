@@ -56,8 +56,12 @@ export default function CategoriesContainer() {
       >
         <Box
           className="MobileViewRemove"
-          sx={{ width: '8rem', height: '43.5rem', background: '#0d0b52' }}
-        ></Box>
+          sx={{ width: '180px', height: '37.5rem', background: '#0d0b52',position:'sticky',top:0 }}
+        >
+           <img 
+           onClick={()=>window.open("https://www.theshilp.com/product-details/fortunate-maha-ganesha", "_blank")}
+           className="advertise_img" src="/Assets/ads/leftSideImage.jpg" />
+        </Box>
         <Box sx={{ width: '100%' }}>
           <Box>
             {headerNewsDataApi?.reviews?.slice(0, 1).map((data) => (
@@ -71,10 +75,16 @@ export default function CategoriesContainer() {
             sx={{ display: 'flex', justifyContent: 'space-between' }}
           >
             <Box className="categorieSubheadingCard">
+            <Box sx={{display:'flex',gap:'5px'}}>
+                <Text
+                  text={'||'}
+                  sx={{ fontWeight: 500, margin: '0 0 1rem 0',color:'red' }}
+                ></Text>
               <Text
                 text={id}
                 sx={{ fontWeight: 700, margin: '0 0 1rem 0rem' }}
               />
+              </Box>
               {headerNewsDataApi?.reviews?.map((val, index) => (
                 index>0 && <>
                   <SubHeadingNewCard data={val} />
@@ -101,11 +111,15 @@ export default function CategoriesContainer() {
                           }}
                           text={'-Advertisement-'}
                         />
-                        <Box sx={{ maxWidth: '650px', height: '80px' }}>
-                          <img
-                            style={{ width: '100%', height: '100%' }}
-                            src="/advertise.jpg"
-                          />
+                        <Box className="desktop-advertise" sx={{ maxWidth: '650px', height: '70px' }}>
+                        <img 
+                        onClick={()=>window.open("https://www.theshilp.com/product-details/fortunate-maha-ganesha", "_blank")}
+                        style={{height:'100%',width:'100%'}} className="advertise_img" src="/Assets/ads/728x90ad.jpg" />
+                        </Box>
+                        <Box className="mobile-advertise" sx={{ maxWidth: '650px', height: '50px' }}>
+                        <img 
+                        onClick={()=>window.open("https://www.theshilp.com/product-details/indian-army-strike-antique-bronze-gold", "_blank")}
+                        style={{height:'100%',width:'100%'}} className="advertise_img" src="/Assets/ads/shilp-mobile-ad-300x50.jpg" />
                         </Box>
                       </Box>
                     </Box>
@@ -113,10 +127,16 @@ export default function CategoriesContainer() {
                 </>
               ))}
               <Box sx={{ background: '#f7f7f7', padding: '1rem' }}>
+              <Box sx={{display:'flex',gap:'5px'}}>
+                <Text
+                  text={'||'}
+                  sx={{ fontWeight: 500, margin: '0.5rem 0rem 0rem 0rem',color:'red' }}
+                ></Text>
                 <Text
                   text={'Top News'}
                   sx={{ fontWeight: 700, margin: '0.5rem 0rem 0rem 0rem' }}
                 />
+                </Box>
                 <Box
                   className="BigNewsCardContainer"
                   sx={{ display: 'flex', gap: '0.5rem' }}
@@ -133,27 +153,42 @@ export default function CategoriesContainer() {
             
            <Box className="categoriesSideCard" >
            <Box sx={{ position: 'sticky', top: '1rem',}}>
+           <Box sx={{display:'flex',gap:'5px'}}>
+                <Text
+                  text={'||'}
+                  sx={{ fontWeight: 500, margin: '1rem 0',color:'red' }}
+                ></Text>
               <Text
                 text={'Trending News'}
                 sx={{ fontWeight: 700, margin: '1rem 0rem' }}
               />
+              </Box>
               {dashboardNewsDataApi?.reviews?.slice(0, 6).map((val) => (
                 <Box sx={{ marginTop: '1rem' }}>
                   <SideNewCards data={val} />
                 </Box>
               ))}
               <Box
-                sx={{
-                  margin: '2rem 0',
-                  height: '200px',
-                  width: '260px',
-                  borderTop: '25px solid #f7f7f7',
-                  borderBottom: '7px solid #f7f7f7',
-                  borderLeft: '7px solid #f7f7f7',
-                  borderRight: '7px solid #f7f7f7',
-                }}
-              ></Box>
-              <Text text={id} sx={{ fontWeight: 700, margin: '1rem 0rem' }} />
+            sx={{
+              margin: '2rem 0',
+                height: '268px',
+                width: '300px',
+                background:'#f7f7f7',
+                outline:'7px solid #f7f7f7',
+                paddingTop:'18px'
+            }}
+          >
+              <img 
+               onClick={()=>window.open("https://www.theshilp.com/product-details/indian-army-strike-antique-bronze-gold", "_blank")}
+              className="advertise_img" src="/Assets/ads/secondAd.jpg" />
+          </Box>
+          <Box sx={{display:'flex',gap:'5px'}}>
+                <Text
+                  text={'||'}
+                  sx={{ fontWeight: 500, margin: '1rem 0',color:'red' }}
+                ></Text>
+              <Text text={"Latest News"} sx={{ fontWeight: 700, margin: '1rem 0rem' }} />
+              </Box>
               {dashboardNewsDataApi?.reviews?.slice(6, 12).map((val) => (
                 <Box sx={{ marginTop: '1rem' }}>
                   <SideNewCards data={val} />
@@ -165,8 +200,12 @@ export default function CategoriesContainer() {
         </Box>
         <Box
           className="MobileViewRemove"
-          sx={{ width: '8rem', height: '43.5rem', background: '#0d0b52' }}
-        ></Box>
+          sx={{ width: '180px', height: '37.5rem', background: '#0d0b52',position:'sticky',top:0 }}
+        >
+           <img 
+            onClick={()=>window.open("https://www.theshilp.com/product-details/indian-army-strike-antique-bronze-gold", "_blank")}
+           className="advertise_img" src="/Assets/ads/rightSideImage.jpg" />
+        </Box>
       </Box>
       <Box
         sx={{
@@ -185,11 +224,17 @@ export default function CategoriesContainer() {
             sx={{ color: '#767676', marginBottom: '5px', fontSize: '10px' }}
             text={'-Advertisement-'}
           />
-          <Box sx={{ maxWidth: '728px', height: '90px' }}>
-            <img
-              style={{ width: '100%', height: '100%' }}
-              src="/advertise.jpg"
-            />
+          <Box className="desktop-advertise" sx={{ maxWidth: '728px', height: '90px' }}>
+                <img
+                onClick={()=>window.open("https://www.theshilp.com/product-details/fortunate-maha-ganesha", "_blank")}
+                style={{height:'100%',width:'100%'}} className="advertise_img" src="/Assets/ads/728x90ad.jpg" />
+
+          </Box>
+          <Box className="mobile-advertise" sx={{ maxWidth: '728px', height: '50px' }}>
+                <img
+                onClick={()=>window.open("https://www.theshilp.com/product-details/fortunate-maha-ganesha", "_blank")}
+                style={{height:'100%',width:'100%'}} className="advertise_img" src="/Assets/ads/shilp-mobile-ad-300x50-2.jpg" />
+
           </Box>
         </Box>
       </Box>

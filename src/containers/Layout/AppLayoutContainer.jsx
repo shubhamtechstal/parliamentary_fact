@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import {  useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import '../../App.css';
-import { Box, Stack } from '@mui/material';
+import { Box, Stack, CircularProgress } from '@mui/material';
 import Header from 'components/header/Header';
 import Footer from 'components/footer/Footer';
 import MobileHeader from 'components/header/MobileHeader';
@@ -10,10 +10,26 @@ import { dashboardNewsApiAction } from 'stores/redux/apiSlices/DashboardNewsSlic
 
 const AppLayoutContainer = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [headerSelectedIndex, setHeaderSelectedIndex] = useState(-1);
 
-  const { data: headerCategoryApi } =
+  const { data: headerCategoryApi, isLoading } =
     dashboardNewsApiAction.getHeaderCategories();
 
+  if (isLoading) {
+    return (
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100vh',
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
+  }
+ 
   return (
     <Stack
       className="MainContainer"
@@ -23,10 +39,10 @@ const AppLayoutContainer = () => {
         <Box
           className="MobileViewRemove"
           sx={{
-            width: '92%',
+            width: '100%',
             background: '#f7f7f7',
             padding: '0.3rem 0 1.2rem 0',
-            marginBottom: '1rem',
+            marginBottom: '0.5rem',
             textAlign: 'center',
             alignItems: 'center',
             justifyContent: 'center',
@@ -43,23 +59,39 @@ const AppLayoutContainer = () => {
             />
             <Box sx={{ maxWidth: '728px', height: '90px' }}>
               <img
+                onClick={() =>
+                  window.open(
+                    'https://www.theshilp.com/product-details/fortunate-maha-ganesha',
+                    '_blank'
+                  )
+                }
                 style={{ width: '100%', height: '100%' }}
-                src="/advertise.jpg"
+                src="/Assets/ads/728x90ad.jpg"
               />
             </Box>
           </Box>
         </Box>
       </Box>
       <Box className="MobileViewRemove">
-        <Header data={headerCategoryApi?.categories} />
+        <Header
+          data={headerCategoryApi?.categories}
+          setIndex={setHeaderSelectedIndex}
+          selected={headerSelectedIndex}
+        />
       </Box>
       <Box className="mobileHeader">
-        <MobileHeader menuOpen={setMenuOpen} data={headerCategoryApi?.categories} />
+        <MobileHeader
+          menuOpen={setMenuOpen}
+          data={headerCategoryApi?.categories}
+        />
       </Box>
       <Stack sx={{ overflow: 'visible' }}>
         <Outlet />
       </Stack>
-      <Footer data={headerCategoryApi?.categories}/>
+      <Footer
+        data={headerCategoryApi?.categories}
+        setIndex={setHeaderSelectedIndex}
+      />
     </Stack>
   );
 };

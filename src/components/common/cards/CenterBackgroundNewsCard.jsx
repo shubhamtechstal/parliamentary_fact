@@ -21,12 +21,17 @@ export default function CenterBackgroudNewsCard({ data }) {
   });
 
   return (
-    <Box
+    <Box  onClick={() =>
+      navigate(`/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url} `, {
+        state: { id: newsItem?.id },
+      })
+    }
       sx={{
         display: 'flex',
         flexDirection: 'column',
         gap: '0.5rem',
         maxWidth: { md: '250px', xs: '100%' },
+        cursor:'pointer'
       }}
     >
       <Box className="centerCardBox" sx={{ width: '100%' }}>
@@ -52,6 +57,7 @@ export default function CenterBackgroudNewsCard({ data }) {
             src={imageUrl + newsItem?.news_description[0].image}
             alt="News"
             className='shortnews_card_img'
+            style={{objectFit:'cover' }}
           />
         ) : null}
       </Box>
@@ -70,9 +76,9 @@ export default function CenterBackgroudNewsCard({ data }) {
               color: '#FFF',
               padding: '0.2rem 0.5rem',
               fontSize: '0.625rem',
-              fontWeight: 700,
+              fontWeight: 500,
             }}
-            text={newsItem?.category}
+            text={newsItem?.sub_category}
           ></Text>
         </Box>
         <Box>

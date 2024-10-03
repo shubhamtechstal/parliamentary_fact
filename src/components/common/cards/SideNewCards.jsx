@@ -21,7 +21,8 @@ export default function SideNewCards({ data }) {
   });
 
   return (
-    <Box sx={{ display: 'flex', gap: '1rem', marginRight: '6px' }}>
+    <Box sx={{ display: 'flex', gap: '1rem', marginRight: '6px',cursor:'pointer' }}  onClick={() => navigate(`/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url} `,{state : {id:newsItem?.id}})}
+>
       <Box>
         {/* <img 
           src={imageUrl + newsItem?.news_description[0]?.image}
@@ -42,7 +43,7 @@ export default function SideNewCards({ data }) {
               <img
                 src={imageUrl + newsItem?.news_description[0]?.image}
                 alt="News"
-                style={{ height: '80px', width: '100px' }}
+                style={{ height: '80px', width: '100px',objectFit:'cover' }}
               />
             ) : null}
       </Box>

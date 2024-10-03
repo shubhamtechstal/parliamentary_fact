@@ -23,7 +23,7 @@ export default function ShortNewsCard({ data }) {
   });
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: '0.5rem',cursor:'pointer' }}   onClick={() => navigate(`/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url} `,{state : {id:newsItem?.id}})}>
       <Box className='centerCardBox'>
         <img className='shortnews_card_img'
           src={imageUrl + newsItem?.news_description[0]?.image}
@@ -45,7 +45,7 @@ export default function ShortNewsCard({ data }) {
               color: '#FFF',
               padding: '0.2rem 0.5rem',
               fontSize: '0.625rem',
-              fontWeight: 700,
+              fontWeight: 500,
             }}
             text={newsItem?.sub_category}
           ></Text>
@@ -54,7 +54,7 @@ export default function ShortNewsCard({ data }) {
           <Text 
            onClick={() => navigate(`/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url} `,{state : {id:newsItem?.id}})}
 
-            font={'Roboto'}
+           font={'Poppins'}
             sx={{
               fontSize: '0.8rem',
               fontWeight: 500,

@@ -24,7 +24,7 @@ export default function DetailsContainer() {
 
   const imageUrl = appConstants.BACKEND_IMAGE_URL;
 
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(true);
 
   const location = useLocation();
 
@@ -54,7 +54,7 @@ export default function DetailsContainer() {
   };
 
   useEffect(() => {
-    setIsExpanded(false);
+    setIsExpanded(true);
     window.scroll(0, 0);
 
     setLoading(true);
@@ -75,6 +75,7 @@ export default function DetailsContainer() {
       })
     : '';
 
+    const keywords = headerNewsDataApi?.news[0]?.keywords.split(",");
   return (
     <>
       {loading ? (
@@ -91,9 +92,25 @@ export default function DetailsContainer() {
         </Box>
       ) : (
         <>
-          <Container
+          <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          padding: '0rem 1rem',
+        }}
+      >
+        <Box
+          className="MobileViewRemove"
+          sx={{ width: '180px', height: '37.5rem', background: '#0d0b52',position:'sticky',top:0 }}
+        >
+           <img 
+           onClick={()=>window.open("https://www.theshilp.com/product-details/fortunate-maha-ganesha", "_blank")}
+           className="advertise_img" src="/Assets/ads/leftSideImage.jpg" />
+        </Box>
+          <Box
             sx={{
-              padding: '1rem',
+              // padding: '1rem',
+              width:'100%',
               display: 'flex',
               justifyContent: 'center',
               flexWrap: 'wrap',
@@ -117,10 +134,16 @@ export default function DetailsContainer() {
                 text={headerNewsDataApi?.news[0]?.news_description[0]?.title}
               />
 
-              <Text
-                sx={{ fontWeight: 700, fontSize: '0.7rem' }}
-                text={formattedDate}
-              />
+<Box sx={{ display: 'flex', gap: '10px' }}>
+                  <Text
+                    sx={{ fontWeight: 700, fontSize: '0.7rem' }}
+                    text={`By : ${headerNewsDataApi?.news[0]?.author ?? 'N/A'}`}
+                  />
+                  <Text
+                    sx={{ fontWeight: 700, fontSize: '0.7rem' }}
+                    text={formattedDate}
+                  />
+                </Box>
               <DetailNewsIconBox
                 image={`${imageUrl}${headerNewsDataApi?.news[0]?.news_description[0]?.image}`}
                 title={headerNewsDataApi?.news[0]?.news_description[0]?.title}
@@ -220,17 +243,33 @@ export default function DetailsContainer() {
                     />
                   )
                 )}
-                <Box sx={{ display: 'flex', gap: '10px' }}>
-                  <Text
-                    sx={{ fontWeight: 700, fontSize: '0.7rem' }}
-                    text={`By : ${headerNewsDataApi?.news[0]?.author ?? ' '}`}
-                  />
-                  <Text
-                    sx={{ fontWeight: 700, fontSize: '0.7rem' }}
-                    text={formattedDate}
-                  />
-                </Box>
+                <Box sx={{display:'flex',gap:'0.5rem'}}>
 
+  <Text
+                          className="news_desc"
+                          sx={{
+                            color: '#000',
+                            fontSize:'0.7rem'
+                          }}
+                          text={'Image title :'}
+                          />
+  <Text
+                          className="news_desc"
+                          sx={{
+                            color: '#767676',
+                             fontSize:'0.7rem'
+                          }}
+                          text={parse(headerNewsDataApi?.news[0]?.caption ?? ' ')}
+                          />
+                          </Box>
+  <Text
+                          className="news_desc"
+                          sx={{
+                            color: '#767676',
+                            marginTop:'1rem'
+                          }}
+                          text={parse(headerNewsDataApi?.news[0]?.image_description ?? ' ')}
+                        />
                 {/* <DetailNewsIconBox /> */}
                 {headerNewsDataApi?.news[0]?.news_description?.map(
                   (val, index) =>
@@ -272,6 +311,34 @@ export default function DetailsContainer() {
                       </React.Fragment>
                     )
                 )}
+                <Box sx={{display:'flex',gap:'6px'}}>
+                 <Text
+                          className="news_desc"
+                          sx={{
+                            color: '#000',
+                            minWidth:'90px',
+                            marginTop:'0.3rem'
+                          }}
+                          text={"Keywords : "}
+                          />
+                          <Box sx={{display:'flex',gap:'0.3rem',flexWrap:'wrap'}}>
+       {keywords?.map((val,index)=>(
+            <Text
+                          className="news_desc"
+                          sx={{
+                            color: '#767676',
+                            border:'1px solid #767676',
+                            padding:'0.4rem 0.8rem',
+                            borderRadius:'24px',
+                            fontSize:'10px',
+                           cursor:"pointer"
+                          }}
+                          text={val}
+                          />
+  ))     }
+  </Box>
+                          </Box>
+                          <Divider sx={{ margin: '1rem 0', }} />
               </Box>
               {/* <Box
             sx={{
@@ -302,7 +369,7 @@ export default function DetailsContainer() {
                 <Text text={'Related News'} sx={{ fontWeight: '700' }} />
                 <Box sx={{ marginTop: '1rem' }}>
                   {dashboardNewsDataApi?.reviews?.slice(0, 6).map((val) => (
-                    <Box sx={{ marginTop: '1rem' }} key={val.id}>
+                headerNewsDataApi?.news[0].id!==val.id &&  <Box sx={{ marginTop: '1rem' }} key={val.id}>
                       <SubHeadingNewCard data={val} />
                       <Divider sx={{ margin: '1rem' }} />
                     </Box>
@@ -311,6 +378,20 @@ export default function DetailsContainer() {
               </Box>
             </Box>
             <Box>
+            <Box
+                  sx={{
+                    margin: '2rem 0',
+                    height: '268px',
+                    width: '300px',
+                    background:'#f7f7f7',
+                    outline:'7px solid #f7f7f7',
+                    paddingTop:'18px'
+                  }}
+                >
+                  <img 
+                  onClick={()=>window.open("https://www.theshilp.com/product-details/fortunate-maha-ganesha", "_blank")}
+                  className="advertise_img" src="/Assets/ads/shilp-ad-300x250.jpg" />
+                </Box>
               <Box
                 className="sideNewCardsWidth"
                 sx={{ position: 'sticky', top: '1rem' }}
@@ -321,34 +402,46 @@ export default function DetailsContainer() {
                 />
 
                 {trendingNews?.reviews?.slice(0, 5).map((val) => (
-                  <Box sx={{ marginTop: '1rem' }} key={val.id}>
+               headerNewsDataApi?.news[0].id!==val.id &&  <Box sx={{ marginTop: '1rem' }} key={val.id}>
                     <SideNewCards data={val} />
                   </Box>
                 ))}
                 <Box
                   sx={{
                     margin: '2rem 0',
-                    height: '200px',
-                    width: '260px',
-                    borderTop: '25px solid #f7f7f7',
-                    borderBottom: '7px solid #f7f7f7',
-                    borderLeft: '7px solid #f7f7f7',
-                    borderRight: '7px solid #f7f7f7',
+                    height: '268px',
+                    width: '300px',
+                    background:'#f7f7f7',
+                    outline:'7px solid #f7f7f7',
+                    paddingTop:'18px'
                   }}
-                ></Box>
+                >
+                  <img 
+                  onClick={()=>window.open("https://www.theshilp.com/product-details/indian-army-strike-antique-bronze-gold", "_blank")}
+                  className="advertise_img" src="/Assets/ads/secondAd.jpg" />
+                </Box>
                 <Text
-                  text={'Trending News'}
+                  text={'Latest News'}
                   sx={{ fontWeight: 700, margin: '1rem 0rem' }}
                 />
 
                 {trendingNews?.reviews?.slice(5, 11).map((val) => (
-                  <Box sx={{ marginTop: '1rem' }} key={val.id}>
+                 headerNewsDataApi?.news[0].id!==val.id &&   <Box sx={{ marginTop: '1rem' }} key={val.id}>
                     <SideNewCards data={val} />
                   </Box>
                 ))}
               </Box>
             </Box>
-          </Container>
+          </Box>
+          <Box
+          className="MobileViewRemove"
+          sx={{ width: '180px', height: '37.5rem', background: '#0d0b52',position:'sticky',top:0 }}
+        >
+           <img 
+            onClick={()=>window.open("https://www.theshilp.com/product-details/indian-army-strike-antique-bronze-gold", "_blank")}
+           className="advertise_img" src="/Assets/ads/rightSideImage.jpg" />
+        </Box>
+      </Box>
         </>
       )}
     </>

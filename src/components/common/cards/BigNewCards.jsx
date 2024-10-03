@@ -22,9 +22,16 @@ export default function BigNewCards({ data }) {
     hour12: true,
   });
   return (
-    <Card sx={{ maxWidth: 450, boxShadow: 'none', borderRadius: '0' }}>
+    <Card  onClick={() =>
+      navigate(
+        `/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url}`,
+        {
+          state: { id: newsItem?.id },
+        }
+      )
+    } sx={{ maxWidth: 450, boxShadow: 'none', borderRadius: '0',cursor:'pointer' }}>
       <CardMedia
-        sx={{ height: 300 }}
+        sx={{ height: "270px", }}
         src={imageUrl + newsItem?.news_description[0]?.image}
         image={imageUrl + newsItem?.news_description[0]?.image}
         title="green iguana"
@@ -37,7 +44,8 @@ export default function BigNewCards({ data }) {
               color: '#FFF',
               padding: '0.2rem 0.5rem',
               fontSize: '0.625rem',
-              fontWeight: 700,
+              marginBottom:'0.5rem',
+              fontWeight: 500,
             }}
             text={newsItem?.sub_category}
           ></Text>
@@ -75,7 +83,7 @@ export default function BigNewCards({ data }) {
               : ''
           }
         />
-        <Box>
+        {/* <Box>
           <span
             style={{ marginTop: '5px', fontSize: '14px' }}
             className="read-more-button"
@@ -89,10 +97,9 @@ export default function BigNewCards({ data }) {
             }
           >
             Read more
-            {/* और देखें */}
-            {/* <span className="arrow-icon">→</span> */}
-          </span>
-        </Box>
+           
+          </span> 
+        </Box> */}
       </CardContent>
     </Card>
   );

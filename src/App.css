@@ -2,7 +2,7 @@
     display: none;
 }
 .DetailsContainer{
-    width: 60%;
+    width: 65%;
 }
 .sticky {
     position: -webkit-sticky; 
@@ -19,7 +19,34 @@
     .bottomSubHeadingCardWidth{
         max-width: 200px;
     }
+    .aboutContainer{
+        flex-direction: row;
+    }
+    .aboutTabVal{
+        flex-direction: column;
+        width: 100px;
+    }
+    .aboutContent{
+        width: 80%;
+        max-width: 950px;
+    }
+    .aboutTabVal{
+        display: flex;
+    }
 @media (max-width: 775px) {
+    .privacytabVal{
+        display: none;
+    }
+    .aboutContainer{
+        flex-direction: column;
+    }
+    .aboutContent{
+        width: 100%;
+    }
+    .aboutTabVal{
+        flex-direction: row;
+        width: 100%;
+    }
     .MainContainer{
         overflow-y: hidden;
     }

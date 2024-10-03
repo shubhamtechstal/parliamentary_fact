@@ -5,6 +5,10 @@ import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import XIcon from '@mui/icons-material/X';
+import YouTubeIcon from '@mui/icons-material/YouTube';
+import InstagramIcon from '@mui/icons-material/Instagram';
 import images from 'helpers/images';
 import { useNavigate } from 'react-router-dom';
 import '../../components/common/cards/NewsCard.css';
@@ -172,30 +176,84 @@ export default function MobileHeader({ menuOpen, data }) {
                   padding: '2rem',
                 }}
               >
-                <Box
-                  sx={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}
-                >
-                  <img
-                    style={{ cursor: 'pointer' }}
-                    src={images.facebookWhite}
-                    alt="facebook"
+                <Box sx={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+          <Box display="flex" gap="8px">
+                  <FacebookIcon
+                  onClick={()=>window.location.href="https://www.facebook.com/profile.php?id=100088959852699"}
+                    sx={{
+                      fontSize: '24px',
+                      color: '#4267B2',
+                      cursor: 'pointer',
+                      background:'#fff'
+                    }}
                   />
-                  <img
-                    style={{ cursor: 'pointer' }}
-                    src={images.instagramWhite}
-                    alt="instagram"
+                  <XIcon
+                  onClick={()=>window.location.href="https://x.com/parliamentaryf7"}
+                    sx={{
+                      fontSize: '20px',
+                      color: '#fff',
+                      background: '#000',
+                      padding: '0.2rem',
+                      borderRadius: '5px',
+                      marginTop: '3px',
+                      cursor: 'pointer',
+                    }}
                   />
-                  <img
-                    style={{ cursor: 'pointer' }}
-                    src={images.twitterXWhite}
-                    alt="twitter"
+                  <InstagramIcon
+                  onClick={()=>window.location.href="https://www.instagram.com/parliamentaryfacts/?hl=en"}
+                    sx={{
+                      fontSize: '20px',
+                      color: '#fff',
+                      background: 'linear-gradient(45deg, #f58529, #dd2a7b, #8134af, #515bd4)', 
+                      padding: '0.1rem',
+                      borderRadius: '5px',
+                      marginTop: '3px',
+                      cursor: 'pointer',
+                    }}
                   />
-                  <img
-                    style={{ cursor: 'pointer' }}
-                    src={images.youtubeWhite}
-                    alt="youtube"
+                  <YouTubeIcon
+                  onClick={()=>window.location.href="https://www.youtube.com/channel/UCmiD-5GplSufIcKYQ-fHNUQ"}
+                    sx={{
+                      background: '#fff',
+                      color: '#FF0000',
+                      fontSize: '20px',
+                      borderRadius: '5px',
+                      marginTop: '3px',
+                      cursor: 'pointer',
+                    }}
                   />
                 </Box>
+           
+            {searchShow && (
+              <Box
+                // ref={searchRef}
+                sx={{
+                  position: 'absolute',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  background: '#FFF',
+                  top: 250,
+                  boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.2)',
+                  width: '450px',
+                  right: '50px',
+                  height: '100px',
+                  zIndex: '2',
+                }}
+              >
+                <TextField
+                  label="Search"
+                  variant="standard"
+                  sx={{ width: '350px' }}
+                  onChange={searchKeyword}
+                  value={keyword}
+                />
+                <Button onClick={handleSearch} disabled={!keyword.trim()}>
+                  search
+                </Button>
+              </Box>
+            )}
+          </Box>
                 <Box
                   sx={{ display: 'flex' }}
                   onClick={() => {

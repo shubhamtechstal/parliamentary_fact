@@ -33,10 +33,15 @@ export default function SearchContainer() {
           padding: '0rem 1rem',
         }}
       >
-        <Box
+         <Box
           className="MobileViewRemove"
-          sx={{ width: '8rem', height: '43.5rem', background: '#0d0b52' }}
-        ></Box>
+          sx={{ width: '10rem', height: '37.5rem', background: '#0d0b52',position:'sticky',top:0 }}
+        >
+           <img 
+           onClick={()=>window.open("https://www.theshilp.com/product-details/fortunate-maha-ganesha", "_blank")}
+           className="advertise_img" src="/Assets/ads/leftSideImage.jpg" />
+        </Box>
+      
         <Box sx={{ width: '100%' ,}}>
           <Box>
             <Text
@@ -131,8 +136,13 @@ export default function SearchContainer() {
         </Box>
         <Box
           className="MobileViewRemove"
-          sx={{ width: '8rem', height: '43.5rem', background: '#0d0b52' }}
-        ></Box>
+          sx={{ width: '10rem', height: '37.5rem', background: '#0d0b52',position:'sticky',top:0 }}
+        >
+           <img 
+           onClick={()=>window.open("https://www.theshilp.com/product-details/indian-army-strike-antique-bronze-gold", "_blank")}
+           className="advertise_img" src="/Assets/ads/rightSideImage.jpg" />
+        </Box>
+      
       </Box>
       <Box
         sx={{

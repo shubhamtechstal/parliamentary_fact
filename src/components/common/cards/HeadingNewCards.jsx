@@ -30,11 +30,17 @@ export default function HeadingNewCards({ data }) {
           padding: '1rem',
           display: 'flex',
           justifyContent: 'space-between',
+          cursor:'pointer'
         }}
       >
         <Box
           className="headCard"
           sx={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}
+          onClick={() =>
+            navigate(`/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url} `, {
+              state: { id: newsItem?.id },
+            })
+          }
         >
           <Box className="vedio_news_box">
             {newsItem?.video ? (
@@ -49,11 +55,13 @@ export default function HeadingNewCards({ data }) {
                 src={newsItem?.video}
               ></iframe>
             ) : newsItem?.news_description[0]?.image ? (
+              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '250px', width: '100%', overflow: 'hidden' }}>
               <img
                 src={imageUrl + newsItem?.news_description[0].image}
                 alt="News"
-                style={{ height: '250px', width: '100%' }}
+                style={{ height: '100%', width: '100%', objectFit: 'cover' }}
               />
+            </div>
             ) : null}
           </Box>
           <Box
@@ -62,8 +70,8 @@ export default function HeadingNewCards({ data }) {
               maxHeight: '250px',
               display: 'flex',
               flexDirection: 'column',
-              justifyContent: 'center',
-              gap: '10px',
+              justifyContent: 'flex-start',
+              gap: '16px',
             }}
           >
             <Box>
@@ -93,7 +101,7 @@ export default function HeadingNewCards({ data }) {
                     color: '#FFF',
                     padding: '0.1rem 0.5rem',
                     fontSize: '0.625rem',
-                    fontWeight: 700,
+                    fontWeight: 500,
                   }}
                   text={newsItem?.sub_category}
                 ></Text>
@@ -130,7 +138,7 @@ export default function HeadingNewCards({ data }) {
             />
           </Box>
         </Box>
-        <Box
+        <Box 
           className="MobileViewRemove"
           sx={{
             height: '250px',
@@ -138,7 +146,9 @@ export default function HeadingNewCards({ data }) {
             width: '100%',
             background: '#abb8c3',
           }}
-        ></Box>
+        >
+          <img onClick={()=>window.open("https://www.theshilp.com/product-details/fortunate-maha-ganesha", "_blank")} className="advertise_img" src="/Assets/ads/shilp-ad-300x250.jpg" />
+        </Box>
       </Box>
     </>
   );

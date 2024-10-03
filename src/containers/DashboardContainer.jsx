@@ -20,14 +20,32 @@ export default function DashboardContainer() {
 
   const { data: topLatestNewsApi } = dashboardNewsApiAction.getLatestTopNews();
 
-  const { data: categorynews } = dashboardNewsApiAction.getDashboardNews({
-    category: 'MPs News',
+  const { data: pioParliamentarainNews } =
+    dashboardNewsApiAction.getDashboardNews({
+      category: 'PIO Parliamentarian',
+    });
+  const { data: parliamentarianNews } = dashboardNewsApiAction.getDashboardNews(
+    {
+      category: 'Parliamentarian News',
+    }
+  );
+  const { data: parliamentSessionNews } =
+    dashboardNewsApiAction.getDashboardNews({
+      category: 'Parliament Session',
+    });
+  const { data: assemblyNews } = dashboardNewsApiAction.getDashboardNews({
+    category: 'Assembly News',
+  });
+  const { data: historicalNews } = dashboardNewsApiAction.getDashboardNews({
+    category: 'Historical',
+  });
+  const { data: mlaNews } = dashboardNewsApiAction.getDashboardNews({
+    category: 'MLA News',
   });
 
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
-
   return (
     <>
       <Box
@@ -39,8 +57,25 @@ export default function DashboardContainer() {
       >
         <Box
           className="MobileViewRemove"
-          sx={{ width: '8rem', height: '43.5rem', background: '#0d0b52' }}
-        ></Box>
+          sx={{
+            width: '180px',
+            height: '37.5rem',
+            background: '#0d0b52',
+            position: 'sticky',
+            top: 0,
+          }}
+        >
+          <img
+            onClick={() =>
+              window.open(
+                'https://www.theshilp.com/product-details/fortunate-maha-ganesha',
+                '_blank'
+              )
+            }
+            className="advertise_img"
+            src="/Assets/ads/leftSideImage.jpg"
+          />
+        </Box>
 
         <Box sx={{ width: '100%' }}>
           <Box>
@@ -48,9 +83,13 @@ export default function DashboardContainer() {
           </Box>
           <Box className="homeNewsContainer">
             <Box className="homePageNewsBox1">
-              <Box>
+              <Box sx={{ display: 'flex', gap: '5px' }}>
                 <Text
-                  text={'Top News'}
+                  text={'||'}
+                  sx={{ fontWeight: 500, margin: '0 0 1rem 0', color: 'red' }}
+                ></Text>
+                <Text
+                  text={'Latest news'}
                   sx={{ fontWeight: 700, margin: '0 0 1rem 0' }}
                 ></Text>
               </Box>
@@ -72,9 +111,15 @@ export default function DashboardContainer() {
             </Box>
 
             <Box className="homePageNewsBox3">
-              <Text text={'Trending News'} sx={{ fontWeight: 700 }} />
+              <Box sx={{ display: 'flex', gap: '5px' }}>
+                <Text
+                  text={'||'}
+                  sx={{ fontWeight: 500, margin: '0 0 1rem 0', color: 'red' }}
+                ></Text>
+                <Text text={'Parliamentarian News'} sx={{ fontWeight: 700 }} />
+              </Box>
               <Box className="SideNewCards">
-                {dashboardNewsDataApi?.reviews?.slice(0, 6).map((data) => (
+                {parliamentarianNews?.reviews?.slice(0, 6).map((data) => (
                   <Box key={data.id} sx={{ marginTop: '1rem' }}>
                     <SideNewCards data={data} />
                   </Box>
@@ -82,13 +127,7 @@ export default function DashboardContainer() {
               </Box>
             </Box>
           </Box>
-        </Box>
-        <Box
-          className="MobileViewRemove"
-          sx={{ width: '8rem', height: '43.5rem', background: '#0d0b52' }}
-        ></Box>
-      </Box>
-      <Box
+          <Box
         sx={{
           width: '100%',
           height: '130px',
@@ -106,51 +145,88 @@ export default function DashboardContainer() {
             sx={{ color: '#767676', marginBottom: '5px', fontSize: '10px' }}
             text={'-Advertisement-'}
           />
-          <Box sx={{ maxWidth: '728px', height: '90px' }}>
-            <img className="advertise_img" src="/advertise.jpg" />
+          <Box className="desktop-advertise" sx={{ maxWidth: '728px', height: '90px' }}>
+            <img
+              onClick={() =>
+                window.open(
+                  'https://www.theshilp.com/product-details/fortunate-maha-ganesha',
+                  '_blank'
+                )
+              }
+              className="advertise_img"
+              src="/Assets/ads/728x90ad.jpg"
+            />
+          </Box>
+          <Box className="mobile-advertise" sx={{ maxWidth: '728px', height: '50px' }}>
+            <img
+              onClick={() =>
+                window.open(
+                  'https://www.theshilp.com/product-details/indian-army-strike-antique-bronze-gold',
+                  '_blank'
+                )
+              }
+              className="advertise_img"
+              src="/Assets/ads/shilp-mobile-ad-300x50.jpg"
+            />
           </Box>
         </Box>
       </Box>
-      <Box
+          <Box
         sx={{
           background: '#f7f7f7',
           display: 'flex',
           flexWrap: 'wrap',
           justifyContent: 'center',
           padding: '1rem 0',
-          margin: { xs: '15px', md: '0px' },
+          paddingLeft:{xs:'1rem',md:0},
+          paddingRight:{xs:'1rem',md:0},
+          margin: {md: '0px' },
         }}
       >
-        <Box width={{ sm: '80%', xs: '100%', md: '80%' }}>
-          <Text text={`MP's News`} sx={{ fontWeight: 700 }} />
+        <Box width={{ sm: '100%', xs: '100%', md: '95%' }}>
+          <Box sx={{ display: 'flex', gap: '5px',marginTop:'0.5rem' }}>
+            <Text
+              text={'||'}
+              sx={{ fontWeight: 500, margin: '0 0 0 0', color: 'red' }}
+            ></Text>
+            <Text text={`Parliament Session`} sx={{ fontWeight: 700 }} />
+          </Box>
           <Box className="CenterVirusConfrontSection">
-            {categorynews?.reviews?.slice(0, 5).map((data) => (
-              <Box key={data.id} sx={{ marginTop: '1rem' }}>
+            {parliamentSessionNews?.reviews?.slice(0, 5).map((data) => (
+              <Box key={data.id} >
                 <CenterBackgroudNewsCard data={data} />
               </Box>
             ))}
           </Box>
         </Box>
       </Box>
-
+    
       <Box
         className="BigNewsCardContainer"
-        sx={{ display: 'flex', justifyContent: 'center', gap: '1rem' }}
+        sx={{ display: 'flex', justifyContent: 'center', gap: '1rem',margin:'0 1rem' }}
       >
-        <Box sx={{ padding: '1rem', maxWidth: '750px' }}>
-          <Text
-            text={'Top News'}
-            sx={{ fontWeight: 700, margin: '0 0 1rem 0rem' }}
-          />
+        <Box sx={{ padding: '1rem 0', maxWidth: '750px' }}>
+          <Box sx={{ display: 'flex', gap: '5px' }}>
+            <Text
+              text={'||'}
+              sx={{ fontWeight: 500, margin: '0 0 1rem 0', color: 'red' }}
+            ></Text>
+            <Text
+              text={'Assembly News'}
+              sx={{ fontWeight: 700, margin: '0 0 1rem 0rem' }}
+            />
+          </Box>
           <Box
             className="BigNewsCardSection"
             sx={{ display: 'flex', gap: '1.5rem' }}
           >
-            <BigNewCards data={dashboardNewsDataApi?.reviews[6]} />
+            <Box sx={{width:"100%"}}>
+            <BigNewCards data={assemblyNews?.reviews[0]} />
+            </Box>
             <Box
               sx={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}
             >
-              {dashboardNewsDataApi?.reviews?.slice(7, 9).map((data) => (
+              {assemblyNews?.reviews?.slice(1, 3).map((data) => (
                 <Box>
                   <BottomSubHeadingCards data={data} />
                 </Box>
@@ -162,7 +238,7 @@ export default function DashboardContainer() {
               width: '100%',
               height: '130px',
               background: '#f7f7f7',
-              marginBottom: '1rem',
+              margin: '1rem 0',
               textAlign: 'center',
               display: 'flex',
               alignItems: 'center',
@@ -174,22 +250,51 @@ export default function DashboardContainer() {
                 sx={{ color: '#767676', marginBottom: '5px', fontSize: '10px' }}
                 text={'-Advertisement-'}
               />
-              <Box sx={{ maxWidth: '650px', height: '80px' }}>
-                <img className="advertise_img" src="/advertise.jpg" />
+              <Box className="desktop-advertise" sx={{ maxWidth: '650px', height: '80px' }}>
+                <img
+                  onClick={() =>
+                    window.open(
+                      'https://www.theshilp.com/product-details/fortunate-maha-ganesha',
+                      '_blank'
+                    )
+                  }
+                  style={{ height: '100%', width: '100%' }}
+                  className="advertise_img"
+                  src="/Assets/ads/728x90ad.jpg"
+                />
+              </Box>
+              <Box className="mobile-advertise" sx={{ maxWidth: '650px', height: '50px' }}>
+                <img
+                  onClick={() =>
+                    window.open(
+                      'https://www.theshilp.com/product-details/fortunate-maha-ganesha',
+                      '_blank'
+                    )
+                  }
+                  style={{ height: '100%', width: '100%' }}
+                  className="advertise_img"
+                  src="/Assets/ads/shilp-mobile-ad-300x50-2.jpg"
+                />
               </Box>
             </Box>
           </Box>
           <Box sx={{ background: '#f7f7f7', padding: '0.5rem 1rem' }}>
-            <Text
-              text={'Trending News'}
-              sx={{ fontWeight: 700, margin: '1rem 0.5rem' }}
-            />
+            <Box sx={{ display: 'flex', gap: '5px' }}>
+              <Text
+                text={'||'}
+                sx={{ fontWeight: 500, marginTop: '1rem', color: 'red' }}
+              ></Text>
+              <Text
+                text={'Historical News'}
+                sx={{ fontWeight: 700, marginTop: '1rem' }}
+              />
+            </Box>
             <Box
               className="BigNewsCardContainer"
               sx={{ display: 'flex', gap: '0.5rem' }}
             >
               <Box className="bottomSubHeadingCardBox">
-                {dashboardNewsDataApi?.reviews?.slice(9, 12).map((data) => (
+                {historicalNews?.reviews?.slice(0, 3).map((data) => (
                   <Box
                     key={data.id}
                     sx={{ flex: '1 1 calc(33.33% - 1rem)', margin: '0.5rem' }}
@@ -212,12 +317,18 @@ export default function DashboardContainer() {
                 maxWidth: '500px',
               }}
             >
-              <Text
-                text={'Trending News'}
-                sx={{ fontWeight: 700, margin: '0.5rem 0' }}
-              />
-              {dashboardNewsDataApi?.reviews?.slice(12, 15).map((data) => (
-                <Box key={data.id} sx={{ margin: '0.5rem' }}>
+              <Box sx={{ display: 'flex', gap: '5px' }}>
+                <Text
+                  text={'||'}
+                  sx={{ fontWeight: 500, margin: '0.5rem 0', color: 'red' }}
+                ></Text>
+                <Text
+                  text={'PIO Parliamentarian'}
+                  sx={{ fontWeight: 700, margin: '0.5rem 0' }}
+                />
+              </Box>
+              {pioParliamentarainNews?.reviews?.slice(1, 4).map((data) => (
+                <Box key={data.id} sx={{ margin: '0.8rem' }}>
                   <SubHeadingNewCard data={data} />
                 </Box>
               ))}
@@ -229,12 +340,18 @@ export default function DashboardContainer() {
                   padding: '1px 10px 10px 10px',
                 }}
               >
-                <Text
-                  text={'Trending News'}
-                  sx={{ fontWeight: 700, margin: '10px 0' }}
-                />
+                <Box sx={{ display: 'flex', gap: '5px',minWidth:'200px' }}>
+                  <Text
+                    text={'||'}
+                    sx={{ fontWeight: 500, margin: '10px 0', color: 'red' }}
+                  ></Text>
+                  <Text
+                    text={'Top News'}
+                    sx={{ fontWeight: 700, margin: '10px 0' }}
+                  />
+                </Box>
                 <Box className="bottomSubHeadingCardWidth">
-                  {dashboardNewsDataApi?.reviews?.slice(15, 16).map((data) => (
+                  {pioParliamentarainNews?.reviews?.slice(0, 1).map((data) => (
                     <Box>
                       <BottomSubHeadingCards type={'withbg'} data={data} />
                     </Box>
@@ -243,13 +360,18 @@ export default function DashboardContainer() {
               </Box>
             </Box>
           </Box>
-          <Divider sx={{ margin: '2.5rem 0' }} />
-          <Text
-            text={'Trending News'}
-            sx={{ fontWeight: 700, margin: '1rem 0' }}
-          />
-
-          {dashboardNewsDataApi?.reviews?.slice(16, 19).map((data) => (
+          <Divider sx={{ margin: '1rem 0' }} />
+          <Box sx={{ display: 'flex', gap: '5px' }}>
+            <Text
+              text={'||'}
+              sx={{ fontWeight: 500, margin: '1rem 0', color: 'red' }}
+            ></Text>
+            <Text
+              text={'MLA News'}
+              sx={{ fontWeight: 700, margin: '1rem 0' }}
+            />
+          </Box>
+          {mlaNews?.reviews?.slice(0, 3).map((data) => (
             <Box key={data.id} sx={{ margin: '0.5rem' }}>
               <SubHeadingNewCard data={data} />
               <Divider sx={{ margin: '1rem' }} />
@@ -261,20 +383,36 @@ export default function DashboardContainer() {
           <Box
             sx={{
               margin: '2rem 0',
-              height: '250px',
+              height: '268px',
               width: '300px',
-              borderTop: '25px solid #f7f7f7',
-              borderBottom: '7px solid #f7f7f7',
-              borderLeft: '7px solid #f7f7f7',
-              borderRight: '7px solid #f7f7f7',
+              background: '#f7f7f7',
+              outline: '7px solid #f7f7f7',
+              paddingTop: '18px',
             }}
-          ></Box>
-          <Box className="sideNewCardsWidth">
-            <Text
-              text={'Trending News'}
-              sx={{ fontWeight: 700, margin: '1rem 0rem' }}
+          >
+            <img
+              onClick={() =>
+                window.open(
+                  'https://www.theshilp.com/product-details/indian-army-strike-antique-bronze-gold',
+                  '_blank'
+                )
+              }
+              className="advertise_img"
+              src="/Assets/ads/secondAd.jpg"
             />
-            {dashboardNewsDataApi?.reviews?.slice(19, 24).map((data) => (
+          </Box>
+          <Box className="sideNewCardsWidth">
+            <Box sx={{ display: 'flex', gap: '5px' }}>
+              <Text
+                text={'||'}
+                sx={{ fontWeight: 500, margin: '1rem 0', color: 'red' }}
+              ></Text>
+              <Text
+                text={'Most Read'}
+                sx={{ fontWeight: 700, margin: '1rem 0rem' }}
+              />
+            </Box>
+            {dashboardNewsDataApi?.reviews?.slice(2, 7).map((data) => (
               <Box key={data.id} sx={{ marginTop: '1rem' }}>
                 <SideNewCards data={data} />
               </Box>
@@ -282,24 +420,67 @@ export default function DashboardContainer() {
             <Box
               sx={{
                 margin: '2rem 0',
-                height: '250px',
+                height: '268px',
                 width: '300px',
-                borderTop: '25px solid #f7f7f7',
-                borderBottom: '7px solid #f7f7f7',
-                borderLeft: '7px solid #f7f7f7',
-                borderRight: '7px solid #f7f7f7',
+                background: '#f7f7f7',
+                outline: '7px solid #f7f7f7',
+                paddingTop: '18px',
+                // borderTop: '25px solid #f7f7f7',
+                // borderBottom: '7px solid #f7f7f7',
+                // borderLeft: '7px solid #f7f7f7',
+                // borderRight: '7px solid #f7f7f7',
               }}
-            ></Box>
-            <Text
-              text={'Trending News'}
-              sx={{ fontWeight: 700, margin: '1rem 0rem' }}
-            />
-            {dashboardNewsDataApi?.reviews?.slice(24, 30).map((data) => (
+            >
+              <img
+                onClick={() =>
+                  window.open(
+                    'https://www.theshilp.com/product-details/fortunate-maha-ganesha',
+                    '_blank'
+                  )
+                }
+                className="advertise_img"
+                src="/Assets/ads/shilp-ad-300x250.jpg"
+              />
+            </Box>
+            <Box sx={{ display: 'flex', gap: '5px' }}>
+              <Text
+                text={'||'}
+                sx={{ fontWeight: 500, margin: '1rem 0', color: 'red' }}
+              ></Text>
+              <Text
+                text={'Trending News'}
+                sx={{ fontWeight: 700, margin: '1rem 0rem' }}
+              />
+            </Box>
+            {dashboardNewsDataApi?.reviews?.slice(8, 14).map((data) => (
               <Box key={data.id} sx={{ marginTop: '1rem' }}>
                 <SideNewCards data={data} />
               </Box>
             ))}
           </Box>
+        </Box>
+      </Box>
+        </Box>
+        <Box
+          className="MobileViewRemove"
+          sx={{
+            width: '180px',
+            height: '37.5rem',
+            background: '#0d0b52',
+            position: 'sticky',
+            top: 0,
+          }}
+        >
+          <img
+            onClick={() =>
+              window.open(
+                'https://www.theshilp.com/product-details/indian-army-strike-antique-bronze-gold',
+                '_blank'
+              )
+            }
+            className="advertise_img"
+            src="/Assets/ads/rightSideImage.jpg"
+          />
         </Box>
       </Box>
       <Box
@@ -320,9 +501,31 @@ export default function DashboardContainer() {
             sx={{ color: '#767676', marginBottom: '5px', fontSize: '10px' }}
             text={'-Advertisement-'}
           />
-          <Box sx={{ maxWidth: '728px', height: '90px' }}>
-            <img className="advertise_img" src="/advertise.jpg" />
+          <Box className="desktop-advertise" sx={{ maxWidth: '728px', height: '90px' }}>
+            <img
+              onClick={() =>
+                window.open(
+                  'https://www.theshilp.com/product-details/fortunate-maha-ganesha',
+                  '_blank'
+                )
+              }
+              className="advertise_img"
+              src="/Assets/ads/728x90ad.jpg"
+            />
           </Box>
+          <Box className="mobile-advertise" sx={{ maxWidth: '650px', height: '50px' }}>
+                <img
+                  onClick={() =>
+                    window.open(
+                      'https://www.theshilp.com/product-details/fortunate-maha-ganesha',
+                      '_blank'
+                    )
+                  }
+                  style={{ height: '100%', width: '100%' }}
+                  className="advertise_img"
+                  src="/Assets/ads/shilp-mobile-ad-300x50-2.jpg"
+                />
+              </Box>
         </Box>
       </Box>
     </>
