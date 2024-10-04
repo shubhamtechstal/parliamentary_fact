@@ -1,19 +1,25 @@
-import { Box, Divider, TextField, Button, Grid, Container } from '@mui/material';
+import { Box, Divider, TextField, Button, Grid, Container, Snackbar, Alert, CircularProgress } from '@mui/material';
 import Text from 'components/common/Text';
 import '../App.css';
 import parse from 'html-react-parser';
 import { useState, useEffect } from 'react';
+import { dashboardNewsApiAction } from 'stores/redux/apiSlices/DashboardNewsSlice/dashboardNewsApiSlice';
 
 export default function AdvertiseContainer() {
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
 
+  const [advertiseWithUs] = dashboardNewsApiAction.advertiseWithUs();
   const data = [
     "Parliamentary Fact expertly combines factual reporting, news, and insightful opinions to captivate a diverse audience across India’s extensive market of products and services. ",
     "Our site delivers real-time updates on politics, Parliament, Parliamentarian and their constituencies, technology, lifestyle, and events through text, images, and videos. We offer advertisers a powerful platform to connect with a high-profile and engaged audience both in India and internationally.",
     `Choose <a href="www.parliamentaryfact.com">www.parliamentaryfact.com</a> to reach an informed and engaged audience. For more information, please contact us at-`,
   ];
+  const [loading, setLoading] = useState(false);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [responseMessage, setResponseMessage] = useState('');
+  const [alertType, setAlertType] = useState('success');
 
   // Form State
   const [formData, setFormData] = useState({
@@ -21,7 +27,6 @@ export default function AdvertiseContainer() {
     organization: '',
     email: '',
     mobile: '',
-    message: '',
   });
 
   const handleChange = (e) => {
@@ -31,10 +36,30 @@ export default function AdvertiseContainer() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log('Form Data:', formData);
+    setLoading(true); // Show loading spinner
+
+    try {
+      // Call API to submit the form
+      await advertiseWithUs({
+        name: formData.name,
+        email: formData.email,
+        phone_number: formData.mobile,
+        organization: formData.organization,
+      }).unwrap(); // Extract the fulfilled value
+      setAlertType('success');
+      setResponseMessage('Your message has been successfully submitted!');
+    } catch (error) {
+      setAlertType('error');
+      setResponseMessage('There was an error submitting the form. Please try again.');
+    } finally {
+      setLoading(false); // Hide loading spinner
+      setOpenSnackbar(true); // Show alert
+    }
+  };
+  const handleCloseSnackbar = () => {
+    setOpenSnackbar(false);
   };
 
   return (
@@ -151,35 +176,35 @@ export default function AdvertiseContainer() {
         />
       </Grid>
       <Grid item xs={12}>
-        <TextField
-          fullWidth
-          label="Message"
-          name="message"
-          value={formData.message}
-          onChange={handleChange}
-          multiline
-          rows={3}  
-          size="small"  
-          margin="dense" 
-          required
-        />
-      </Grid>
-      <Grid item xs={12}>
-        <Button
-          fullWidth
-          type="submit"
-          variant="contained"
-          color="primary"
-          size="small"  
-        >
-          Submit
-        </Button>
-      </Grid>
+                  <Button
+                    fullWidth
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    size="small"
+                    disabled={loading}
+                  >
+                    {loading ? <CircularProgress size={24} /> : 'Submit'}
+                  </Button>
+                </Grid>
     </Grid>
   </form>
 </Box>
 </Box>
 </Box>
+<Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+      >
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity={alertType}
+          sx={{ width: '100%' }}
+        >
+          {responseMessage}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 }

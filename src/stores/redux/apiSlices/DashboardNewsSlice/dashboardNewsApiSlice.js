@@ -12,6 +12,8 @@ const dashboardNews = createApi({
     'TOP_FIVE_NEWS',
     'LATEST_TOP_NEWS',
     'SEARCH_KEYWORD',
+    'CONTACT_US',
+    'ADVERTISE_WITH_US'
   ],
   endpoints: (qb) => ({
     getDashboardNews: qb.query({
@@ -70,7 +72,7 @@ const dashboardNews = createApi({
       providesTags: ['TOP_FIVE_NEWS'],
     }),
 
-    getLatestTopNews: qb.query({
+      getLatestTopNews: qb.query({
 
       query: ({} = {}) => {
         const params = {};
@@ -92,6 +94,34 @@ const dashboardNews = createApi({
       providesTags: ['SEARCH_KEYWORD'],
     }),
 
+    contactUs: qb.mutation({
+      query: ({ name, email,phone_number,organization, message }) => ({
+        url: '/contact_api.php',
+        method: 'POST',
+        body: {
+          name,
+          email,
+          phone_number,
+          organization,
+          message,
+        },
+      }),
+      invalidatesTags: ['CONTACT_US'], // Invalidate cache for CONTACT_US
+    }),
+    advertiseWithUs: qb.mutation({
+      query: ({ name, email,phone_number,organization }) => ({
+        url: '/advertise_contact_api.php',
+        method: 'POST',
+        body: {
+          name,
+          email,
+          phone_number,
+          organization,
+          
+        },
+      }),
+      invalidatesTags: ['ADVERTISE_WITH_US'], // Invalidate cache for CONTACT_US
+    }),
   }),
 });
 
@@ -100,7 +130,6 @@ export const dashboardNewsApiReducer = dashboardNews.reducer;
 
 export const dashboardNewsApiAction = {
   middleware: dashboardNews.middleware,
-  
   reducerPath: dashboardNews.reducerPath,
   getDashboardNews: dashboardNews.useGetDashboardNewsQuery,
   getHeaderCategories: dashboardNews.useGetHeaderCategoriesQuery,
@@ -108,6 +137,8 @@ export const dashboardNewsApiAction = {
   getTopFiveNews: dashboardNews.useGetTopFiveNewsQuery,
   getLatestTopNews: dashboardNews.useGetLatestTopNewsQuery,
   getSearchKeyword: dashboardNews.useGetSearchKeywordQuery,
+  contactUs : dashboardNews.useContactUsMutation,
+  advertiseWithUs : dashboardNews.useAdvertiseWithUsMutation
 };
 
 export default dashboardNews;
