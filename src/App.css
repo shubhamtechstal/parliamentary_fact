@@ -1,0 +1,90 @@
+.mobileHeader{
+    display: none;
+}
+.DetailsContainer{
+    width: 65%;
+}
+.sticky {
+    position: -webkit-sticky; 
+    position: sticky;
+    top: 1rem; 
+  }
+  
+.sideNewCardsWidth{
+    max-width: 280px;
+}
+.MobileViewRemove{
+    display: flex;
+    }
+    .bottomSubHeadingCardWidth{
+        max-width: 200px;
+    }
+    .aboutContainer{
+        flex-direction: row;
+    }
+    .aboutTabVal{
+        flex-direction: column;
+        width: 100px;
+    }
+    .aboutContent{
+        width: 80%;
+        max-width: 950px;
+    }
+    .aboutTabVal{
+        display: flex;
+    }
+@media (max-width: 775px) {
+    .privacytabVal{
+        display: none;
+    }
+    .aboutContainer{
+        flex-direction: column;
+    }
+    .aboutContent{
+        width: 100%;
+    }
+    .aboutTabVal{
+        flex-direction: row;
+        width: 100%;
+    }
+    .MainContainer{
+        overflow-y: hidden;
+    }
+    .DetailsContainer{
+        width: 100%;
+    }
+    .sideNewCardsWidth{
+        max-width: 320px;
+    }
+    
+    .DownlaodAppSection{
+        margin-left:10rem;
+    }
+    .MobileViewRemove{
+    display: none;
+    }
+    .mobileHeader{
+        display: block;
+    }
+    .BigNewsCardContainer{
+        flex-wrap: wrap;
+    }
+    .SideNewCards{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .bottomSubHeadingCardWidth{
+        max-width: 500px;
+    }
+  }
+@media (max-width: 1200px) {
+   .headCard{
+    flex-wrap:wrap;
+   }
+  }
+@media (max-width: 1000px) {
+   .BigNewsCardSection{
+    flex-wrap: wrap;
+   }
+  
+  }

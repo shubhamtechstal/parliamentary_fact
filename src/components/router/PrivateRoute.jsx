@@ -8,12 +8,12 @@ const PrivateRoute = (props) => {
     const navigate = useNavigate();
     console.log("isAuthenticated", isAuthenticated)
 
-    React.useEffect(() => {
-        if (!isAuthenticated) {
-            return navigate('/login', { replace: true });
-        }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isAuthenticated]);
+    // React.useEffect(() => {
+    //     if (!isAuthenticated) {
+    //         return navigate('/login', { replace: true });
+    //     }
+    // // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [isAuthenticated]);
 
     return <>{props.component}</>;
 };

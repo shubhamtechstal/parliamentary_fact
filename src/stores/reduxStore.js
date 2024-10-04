@@ -4,6 +4,7 @@ import { persistStore } from 'redux-persist';
 import rootReducers from './redux/rootReducer';
 
 import { todoApiAction } from './redux/apiSlices/todoApiSlice';
+import { dashboardNewsApiAction } from './redux/apiSlices/DashboardNewsSlice/dashboardNewsApiSlice';
 
 export const reduxStore = configureStore({
   reducer: rootReducers,
@@ -12,6 +13,8 @@ export const reduxStore = configureStore({
       serializableCheck: false,
     }).concat([
       todoApiAction.middleware,
+      dashboardNewsApiAction.middleware,
+
     ]),
 });
 
