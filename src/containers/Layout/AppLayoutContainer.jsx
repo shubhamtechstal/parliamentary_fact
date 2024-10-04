@@ -1,90 +1,97 @@
-import { useState } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
-
-import {
-  AccountCircleOutlined,
-  NotificationsOutlined,
-} from '@mui/icons-material';
-import {
-  AppBar,
-  Box,
-  Button,
-  IconButton,
-  Menu,
-  MenuItem,
-  Stack,
-  Toolbar,
-} from '@mui/material';
+import {  useState } from 'react';
+import { Outlet } from 'react-router-dom';
+import '../../App.css';
+import { Box, Stack, CircularProgress } from '@mui/material';
+import Header from 'components/header/Header';
+import Footer from 'components/footer/Footer';
+import MobileHeader from 'components/header/MobileHeader';
+import Text from 'components/common/Text';
+import { dashboardNewsApiAction } from 'stores/redux/apiSlices/DashboardNewsSlice/dashboardNewsApiSlice';
 
 const AppLayoutContainer = () => {
-  const navigate = useNavigate();
-  const [accountAnchorEl, setAccountAnchorEl] = useState(null);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [headerSelectedIndex, setHeaderSelectedIndex] = useState(-1);
 
-  const menuOptions = [
-    {
-      key: 'DASHBOARD',
-      label: 'Dashboard',
-      onClick: () => {
-        navigate('/');
-      },
-    },
-   
-    {
-      key: 'REPORTS',
-      label: 'Reports',
-      onClick: () => {
-        navigate('/reports');
-      },
-    },
-  ];
+  const { data: headerCategoryApi, isLoading } =
+    dashboardNewsApiAction.getHeaderCategories();
 
-  const handleAccountMenuClick = () => {
-    setAccountAnchorEl(event.currentTarget);
-  };
-
-  const handleAccountMenuClose = () => {
-    setAccountAnchorEl(null);
-  };
-
-  const handleLogoutClick = () => {};
-
-  return (
-    <Stack>
-      <AppBar
-        position="sticky"
-        color="transparent"
-        sx={{ backgroundColor: 'white' }}
+  if (isLoading) {
+    return (
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100vh',
+        }}
       >
-        <Toolbar>
-          {menuOptions.map((menu) => (
-            <Button onClick={() => menu.onClick()} size="large" variant="text" key={`menu_${menu.key}`}>
-              {menu.label}
-            </Button>
-          ))}
-          <Box sx={{ flexGrow: 1 }} />
-          <IconButton color="primary">
-            <NotificationsOutlined />
-          </IconButton>
-          <div>
-            <IconButton onClick={handleAccountMenuClick}>
-              <AccountCircleOutlined />
-            </IconButton>
-            <Menu
-              keepMounted
-              onClose={handleAccountMenuClose}
-              anchorEl={accountAnchorEl}
-              anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-              transformOrigin={{ horizontal: 'right', vertical: 'center' }}
-              open={Boolean(accountAnchorEl)}
-            >
-              <MenuItem onClick={handleLogoutClick}>Logout</MenuItem>
-            </Menu>
-          </div>
-        </Toolbar>
-      </AppBar>
-      <Stack>
+        <CircularProgress />
+      </Box>
+    );
+  }
+ 
+  return (
+    <Stack
+      className="MainContainer"
+      sx={{ maxHeight: menuOpen ? '100vh' : '100%' }}
+    >
+      <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+        <Box
+          className="MobileViewRemove"
+          sx={{
+            width: '100%',
+            background: '#f7f7f7',
+            padding: '0.3rem 0 1.2rem 0',
+            marginBottom: '0.5rem',
+            textAlign: 'center',
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundImage: 'url(Assets/circleblues.webp)',
+            backgroundSize: 'fill',
+            backgroundRepeat: 'repeat',
+            backgroundPosition: 'centerTop',
+          }}
+        >
+          <Box>
+            <Text
+              sx={{ color: '#767676', marginBottom: '5px', fontSize: '10px' }}
+              text={'-Advertisement-'}
+            />
+            <Box sx={{ maxWidth: '728px', height: '90px' }}>
+              <img
+                onClick={() =>
+                  window.open(
+                    'https://www.theshilp.com/product-details/fortunate-maha-ganesha',
+                    '_blank'
+                  )
+                }
+                style={{ width: '100%', height: '100%' }}
+                src="/Assets/ads/728x90ad.jpg"
+              />
+            </Box>
+          </Box>
+        </Box>
+      </Box>
+      <Box className="MobileViewRemove">
+        <Header
+          data={headerCategoryApi?.categories}
+          setIndex={setHeaderSelectedIndex}
+          selected={headerSelectedIndex}
+        />
+      </Box>
+      <Box className="mobileHeader">
+        <MobileHeader
+          menuOpen={setMenuOpen}
+          data={headerCategoryApi?.categories}
+        />
+      </Box>
+      <Stack sx={{ overflow: 'visible' }}>
         <Outlet />
       </Stack>
+      <Footer
+        data={headerCategoryApi?.categories}
+        setIndex={setHeaderSelectedIndex}
+      />
     </Stack>
   );
 };
