@@ -5,6 +5,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import XIcon from '@mui/icons-material/X';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import InstagramIcon from '@mui/icons-material/Instagram';
 
@@ -98,21 +100,22 @@ export default function Footer({ data,setIndex }) {
                 ))}
                 {footer?.length > 6 && (
                   <Box
-                    sx={{ display: 'flex', cursor: 'pointer' }}
-                    onClick={handleMoreClick}
-                  >
-                    <Text
-                      text={'More :'}
-                      sx={{
-                        fontSize: '0.9rem',
-                        fontWeight: 700,
-                        cursor: 'pointer',
-                        '&:hover': {
-                          color: '#162eb7',
-                        },
-                      }}
-                    />
-                  </Box>
+                  sx={{ display: 'flex', cursor: 'pointer' }}
+                  onClick={handleMoreClick}
+                >
+                  {/* <Text
+                    text={'More'}
+                    sx={{
+                      fontSize: '0.9rem',
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                      '&:hover': {
+                        color: '#162eb7',
+                      },
+                    }}
+                  /> */}
+                  <MoreVertIcon sx={{fontSize:'1.2rem'}}/>
+                </Box>
                 )}
               </Box>
               <Menu
