@@ -76,6 +76,7 @@ export default function MobileHeader({ menuOpen, data }) {
           justifyContent: 'space-between',
           alignItems: 'center',
           padding: '0.5rem 1rem',
+          gap:'2rem'
         }}
       >
         <Box>

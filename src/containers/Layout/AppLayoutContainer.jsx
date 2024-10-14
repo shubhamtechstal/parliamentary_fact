@@ -1,5 +1,5 @@
 import {  useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import '../../App.css';
 import { Box, Stack, CircularProgress } from '@mui/material';
 import Header from 'components/header/Header';
@@ -11,7 +11,7 @@ import { dashboardNewsApiAction } from 'stores/redux/apiSlices/DashboardNewsSlic
 const AppLayoutContainer = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [headerSelectedIndex, setHeaderSelectedIndex] = useState(-1);
-
+const navigate = useNavigate();
   const { data: headerCategoryApi, isLoading } =
     dashboardNewsApiAction.getHeaderCategories();
 
@@ -84,6 +84,65 @@ const AppLayoutContainer = () => {
           menuOpen={setMenuOpen}
           data={headerCategoryApi?.categories}
         />
+      </Box>
+      <Box className="mobileHeader">
+      <Box  sx={{
+    display: 'flex',
+    gap: '1.5rem',
+    overflowX: 'auto', // or 'scroll' if you want to always show the scrollbar
+    width: '100%',
+    boxShadow: '0 2px 0px rgba(0, 0, 0, 0.1)',
+    marginBottom:'1rem',
+    padding: '0 1rem 1rem',
+    '&::-webkit-scrollbar': {
+      display: 'none', // Hides the scrollbar for webkit browsers (Chrome, Safari)
+    },
+    msOverflowStyle: 'none', // Hides scrollbar for IE and Edge
+    scrollbarWidth: 'none', // Hides scrollbar for Firefox
+  }}>
+            <Box sx={{ display: 'flex' }} onClick={() => {navigate('/'),setHeaderSelectedIndex(-1)}}>
+              <Text
+                text={'Home'}
+                sx={{
+                  fontSize: '0.9rem',
+                  fontWeight: 700,
+                  cursor: 'pointer',
+                  color:headerSelectedIndex===-1?"#162eb7":"",
+                  '&:hover': {
+                    color: '#162eb7',
+                  },
+                }}
+              />
+            </Box>
+            {headerCategoryApi?.categories?.map((val, index) => (
+              <Box
+                sx={{ display: 'flex' }}
+                onClick={() =>
+                 { navigate(`/categories/${val?.url}`, {
+                    state: { category: val?.category },
+                  })
+                  setHeaderSelectedIndex(index)
+                }
+                }
+                key={index}
+              >
+                <Text
+                  text={val?.category}
+                  sx={{
+                    fontSize: '0.9rem',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                    textWrap:'nowrap',
+                    color:headerSelectedIndex===index?"#162eb7":"",
+                    '&:hover': {
+                      color: '#162eb7',
+                    },
+                  }}
+                />
+                {val?.subhead && <ExpandMoreIcon />}
+              </Box>
+            ))}
+          </Box>
       </Box>
       <Stack sx={{ overflow: 'visible' }}>
         <Outlet />

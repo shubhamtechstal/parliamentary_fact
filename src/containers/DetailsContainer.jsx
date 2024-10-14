@@ -96,7 +96,7 @@ export default function DetailsContainer() {
         sx={{
           display: 'flex',
           justifyContent: 'space-between',
-          padding: '0rem 1rem',
+          padding: '0rem 0.7rem',
         }}
       >
         <Box
@@ -239,24 +239,25 @@ export default function DetailsContainer() {
                     <img
                       src={`${imageUrl}${headerNewsDataApi?.news[0]?.news_description[0]?.image}`}
                       alt="News"
-                      style={{ height: '400px', width: '100%' }}
+                      style={{ height: 'auto', width: '100%' }}
                     />
                   )
                 )}
                 <Box sx={{display:'flex',gap:'0.5rem'}}>
 
-  <Text
+  {/* <Text
                           className="news_desc"
                           sx={{
                             color: '#000',
                             fontSize:'0.7rem'
                           }}
                           text={'Image title :'}
-                          />
+                          /> */}
   <Text
                           className="news_desc"
                           sx={{
                             color: '#767676',
+                            display:'block',
                              fontSize:'0.7rem'
                           }}
                           text={parse(headerNewsDataApi?.news[0]?.caption ?? ' ')}
@@ -266,6 +267,7 @@ export default function DetailsContainer() {
                           className="news_desc"
                           sx={{
                             color: '#767676',
+                            display:'block',
                             marginTop:'1rem'
                           }}
                           text={parse(headerNewsDataApi?.news[0]?.image_description ?? ' ')}
@@ -311,10 +313,11 @@ export default function DetailsContainer() {
                       </React.Fragment>
                     )
                 )}
-                <Box sx={{display:'flex',gap:'6px'}}>
+                <Box className="keywords" sx={{display:'flex',gap:'6px'}}>
                  <Text
-                          className="news_desc"
+                          className="news_desc "
                           sx={{
+                            display:'block',
                             color: '#000',
                             minWidth:'90px',
                             marginTop:'0.3rem'
@@ -327,6 +330,7 @@ export default function DetailsContainer() {
                           className="news_desc"
                           sx={{
                             color: '#767676',
+                            display:'block',
                             border:'1px solid #767676',
                             padding:'0.4rem 0.8rem',
                             borderRadius:'24px',
@@ -367,11 +371,12 @@ export default function DetailsContainer() {
           </Box> */}
               <Box sx={{ marginTop: '1rem' }}>
                 <Text text={'Related News'} sx={{ fontWeight: '700' }} />
-                <Box sx={{ marginTop: '1rem' }}>
+                <Box className="categoriesContainer relatedNews" sx={{ marginTop: '1rem' }}>
                   {dashboardNewsDataApi?.reviews?.slice(0, 6).map((val) => (
-                headerNewsDataApi?.news[0].id!==val.id &&  <Box sx={{ marginTop: '1rem' }} key={val.id}>
+                headerNewsDataApi?.news[0].id!==val.id &&  
+                <Box className="categoriesSection" sx={{ marginTop: '1rem'}} key={val.id}>
                       <SubHeadingNewCard data={val} />
-                      <Divider sx={{ margin: '1rem' }} />
+                      <Divider className="MobileViewRemove" sx={{ margin: '1rem' }} />
                     </Box>
                   ))}
                 </Box>

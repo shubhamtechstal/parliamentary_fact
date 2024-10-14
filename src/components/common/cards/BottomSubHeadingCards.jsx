@@ -31,10 +31,10 @@ export default function BottomSubHeadingCards({ type, data }) {
       )
     } sx={{ display: 'flex', flexDirection: 'column', gap: '0.5rem',cursor:"pointer" }}>
       <Box className="Bottom_card_box">
-        <img
+        <img className='mobile-bottom-subheading-card'
           src={imageUrl + newsItem?.news_description[0]?.image}
           image={imageUrl + newsItem?.news_description[0]?.image}
-          style={{ width: '100%', height: '150px',objectFit:'cover' }}
+          style={{ width: '100%',objectFit:'cover' }}
         />
       </Box>
       <Box

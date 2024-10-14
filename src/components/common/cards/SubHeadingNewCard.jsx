@@ -23,7 +23,7 @@ export default function SubHeadingNewCard({ textWidth, data }) {
   });
 
   return (
-    <Box sx={{ display: 'flex', gap: '1rem',cursor:'pointer' }}  onClick={() =>
+    <Box className="subheadingcardmobile" sx={{ display: 'flex', gap: '1rem',cursor:'pointer' }}  onClick={() =>
       navigate(`/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url} `, {
         state: { id: newsItem?.id },
       })

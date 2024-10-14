@@ -51,7 +51,7 @@ export default function CategoriesContainer() {
         sx={{
           display: 'flex',
           justifyContent: 'space-between',
-          padding: '0rem 1rem',
+          // padding: '0rem 1rem',
         }}
       >
         <Box
@@ -75,7 +75,7 @@ export default function CategoriesContainer() {
             sx={{ display: 'flex', justifyContent: 'space-between' }}
           >
             <Box className="categorieSubheadingCard">
-            <Box sx={{display:'flex',gap:'5px'}}>
+            <Box sx={{display:'flex',gap:'5px',padding:'0 1rem'}}>
                 <Text
                   text={'||'}
                   sx={{ fontWeight: 500, margin: '0 0 1rem 0',color:'red' }}
@@ -85,11 +85,14 @@ export default function CategoriesContainer() {
                 sx={{ fontWeight: 700, margin: '0 0 1rem 0rem' }}
               />
               </Box>
+              <Box className="categoriesContainer">
               {headerNewsDataApi?.reviews?.map((val, index) => (
                 index>0 && <>
+                <Box className="categoriesSection" >
                   <SubHeadingNewCard data={val} />
-                  <Divider sx={{ margin: '1rem' }} />
-                  {index === 3 && (
+                </Box>
+                  <Divider className='MobileViewRemove' sx={{ margin: '1rem' }} />
+                  {index === 4 && (
                     <Box
                       sx={{
                         width: '100%',
@@ -126,6 +129,7 @@ export default function CategoriesContainer() {
                   )}
                 </>
               ))}
+              </Box>
               <Box sx={{ background: '#f7f7f7', padding: '1rem' }}>
               <Box sx={{display:'flex',gap:'5px'}}>
                 <Text
@@ -152,7 +156,7 @@ export default function CategoriesContainer() {
 
             
            <Box className="categoriesSideCard" >
-           <Box sx={{ position: 'sticky', top: '1rem',}}>
+           <Box sx={{ position: 'sticky', top: '1rem', padding:'0 1rem' ,display:'flex',flexDirection:'column'}}>
            <Box sx={{display:'flex',gap:'5px'}}>
                 <Text
                   text={'||'}
@@ -173,6 +177,7 @@ export default function CategoriesContainer() {
               margin: '2rem 0',
                 height: '268px',
                 width: '300px',
+                alignSelf:'center',
                 background:'#f7f7f7',
                 outline:'7px solid #f7f7f7',
                 paddingTop:'18px'

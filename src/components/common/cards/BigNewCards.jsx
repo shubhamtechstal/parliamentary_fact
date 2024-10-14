@@ -36,7 +36,9 @@ export default function BigNewCards({ data }) {
         image={imageUrl + newsItem?.news_description[0]?.image}
         title="green iguana"
       />
-      <CardContent sx={{ margin: 0, padding: '1rem 0rem' }}>
+      <CardContent  sx={{ margin: 0, padding: '1rem 0 0 0rem', '&:last-child': {
+      paddingBottom: 0, // Remove padding-bottom for the last child
+    }, }}>
         <Box sx={{ display: 'flex' }}>
           <Text
             sx={{
@@ -70,7 +72,7 @@ export default function BigNewCards({ data }) {
           font={'Poppins'}
           sx={{
             color: '#767676',
-            display: '-webkit-box',
+            // display: '-webkit-box',
             WebkitBoxOrient: 'vertical',
             WebkitLineClamp: 3,
             overflow: 'hidden',

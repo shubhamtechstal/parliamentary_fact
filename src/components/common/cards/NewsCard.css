@@ -5,14 +5,23 @@
   max-width: 170px;
   object-fit: cover;
 }
+.headingNewsCardImage{
+  height: 250px;
+}
 .centerCardBox {
   width: 200px;
   height: 120px;
+}
+.mobile-three-card-section{
+  flex-direction: column;
 }
 .CenterVirusConfrontSection {
   display: flex;
   gap: 1rem;
   margin-top: 1rem;
+}
+.sideCardMobileView{
+  padding-right: 1rem;
 }
 .bottomSubHeadingCardBox {
   display: flex;
@@ -95,7 +104,9 @@
   max-width: 300px;
   max-height: 250px;
 }
-
+.news_desc{
+  display: -webkit-box;
+}
 .heading_title {
   font-size: 1.5rem !important;
   font-weight: 700 !important;
@@ -150,8 +161,107 @@
 .mobile-advertise{
   display: none;
 }
-
+.mobileAd{
+  width: 98%;
+  margin: 1rem;
+}
+.historicalMobile{
+  margin-left: 1rem;
+}
+.mobile-bottom-subheading-card{
+  height: 150px;
+}
+.sideSection{
+  margin-right:1rem;
+  margin-top: 1rem;
+}
+.parliamentariancardsection{
+  margin: 0.8rem;
+}
+.bigNewsSection{
+  padding:1rem;
+}
+.categoriesSection{
+  padding:0 1rem;
+}
 @media (min-device-width: 300px) and (max-device-width: 768px) {
+  .categoriesSection{
+    width: 48%;
+    padding:0;
+  }
+ 
+  .categoriesContainer{
+    display: flex;
+    flex-wrap: wrap;
+    gap:0.5rem;
+    padding: 0 0.5rem;
+  }
+  .bigNewsSection{
+    padding:1rem 0 0 0;
+  }
+  .mlanewssection{
+    padding:0 0.5rem
+  }
+  .parliamentariancardsection{
+    margin: 0.8rem 0;
+  }
+  .relatedNews{
+    padding:0rem;
+    gap: 0.5rem;
+  }
+  .subheadingcardmobile{
+    flex-direction: column;
+  }
+  .parliamentarian-section {
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+    overflow: scroll;
+
+    /* Hides scrollbar for WebKit browsers (Chrome, Safari) */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+.parliamentarian-section::-webkit-scrollbar {
+    display: none; /* WebKit browsers (Chrome, Safari) */
+}
+
+  .sideSection{
+    margin-right: 0rem;
+    margin-top:0rem;
+  }
+ .mobileCenterBackgroundCard{
+  width: 47%;
+ }
+  .mobile-bottom-subheading-card{
+    height: auto;
+  }
+  .mobile-three-card-section{
+    flex-direction: row;
+  }
+  .headingNewsCardImage{
+    height: 200px;
+  }
+  .mobileAd{
+    width: 100%;
+    margin: 1rem 0;
+  }
+  .historicalMobile{
+    margin-left: 0rem;
+  }
+  .sideCardMobileView{
+    padding-right: 0rem;
+  }
+  .categorieSubheadingCard{
+    padding: 1rem 0;
+  }
+  .news_desc{
+    display: none;
+  }
+  .keywords{
+    flex-wrap: wrap;
+  }
   .footerCategory{
     display: flex;
     gap: 10px;
@@ -162,7 +272,7 @@
     padding: 15px;
   }
   .shortnews_card_img {
-    height: 200px;
+    height: auto;
   }
   .homePageNewsBox2 {
     margin: 20px 0px;
@@ -216,11 +326,12 @@
     display: block;
   }
   .CenterVirusConfrontSection {
-    display: block;
+    /* display: block; */
+    flex-wrap: wrap;
   }
   .subheadingCardImage {
-    width: 130px;
-    height: 130px;
+    width: auto;
+    height: 100px;
   }
   .centerCardBox {
     width: 100%;
@@ -228,6 +339,6 @@
   }
   .Bottom_card_box {
     width: 100%;
-    height: 170px;
+    height: auto;
   }
 }

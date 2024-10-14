@@ -55,7 +55,7 @@ export default function HeadingNewCards({ data }) {
                 src={newsItem?.video}
               ></iframe>
             ) : newsItem?.news_description[0]?.image ? (
-              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '250px', width: '100%', overflow: 'hidden' }}>
+              <div className="headingNewsCardImage" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', overflow: 'hidden' }}>
               <img
                 src={imageUrl + newsItem?.news_description[0].image}
                 alt="News"
@@ -124,7 +124,7 @@ export default function HeadingNewCards({ data }) {
               // font={'Roboto'}
               sx={{
                 color: '#767676',
-                display: '-webkit-box',
+                // display: '-webkit-box',
                 WebkitBoxOrient: 'vertical',
                 WebkitLineClamp: 3,
                 overflow: 'hidden',
