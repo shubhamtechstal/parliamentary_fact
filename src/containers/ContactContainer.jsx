@@ -126,7 +126,7 @@ export default function ContactContainer() {
             text={'Contact us'}
           />
         </Box>
-        <Box sx={{ display: 'flex' }}>
+        <Box className="contactContainer" sx={{ display: 'flex',gap:'0.5rem' }}>
           <Box>
             <Box
               className="aboutContent"

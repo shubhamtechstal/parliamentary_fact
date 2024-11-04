@@ -95,7 +95,7 @@ export default function AdvertiseContainer() {
       <Box sx={{ alignSelf: 'center', borderBottom: '2px solid rgba(0, 0, 0, 0.12)', padding: '0 1rem' }}>
             <Text sx={{ fontWeight: 'bold', fontSize: '1.8rem' }} text={"Advertise with us"} />
           </Box>
-<Box sx={{display:'flex'}}>
+<Box className="contactContainer" sx={{display:'flex',gap:'0.5rem'}}>
       <Box>
         <Box
           className="aboutContent"

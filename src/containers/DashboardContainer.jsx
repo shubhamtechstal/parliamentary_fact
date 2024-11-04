@@ -95,7 +95,7 @@ export default function DashboardContainer() {
                 ></Text>
               </Box>
               <Box>
-                <BigNewCards data={topFiveNewsDataApi?.top_news[0]} />
+                <BigNewCards data={dashboardNewsDataApi?.reviews[0]} />
               </Box>
             </Box>
 
@@ -103,7 +103,7 @@ export default function DashboardContainer() {
               <Box className="mobile-three-card-section"
                 sx={{ display: 'flex', gap: '1.5rem' }}
               >
-                {topFiveNewsDataApi?.top_news?.slice(1, 3).map((data) => (
+                {dashboardNewsDataApi?.reviews?.slice(1, 3).map((data) => (
                   <Box>
                     <BottomSubHeadingCards data={data} />
                   </Box>
@@ -206,7 +206,7 @@ export default function DashboardContainer() {
     
       <Box
         className="BigNewsCardContainer"
-        sx={{ display: 'flex', justifyContent: 'center', }}
+        sx={{ display: 'flex', justifyContent: 'center',gap:'1rem' }}
       >
         <Box className="bigNewsSection" sx={{  maxWidth: '750px',width:'100%' }}>
           <Box sx={{ display: 'flex', gap: '5px',margin:'0 1rem'  }}>
@@ -300,7 +300,7 @@ export default function DashboardContainer() {
                 {historicalNews?.reviews?.slice(0, 3).map((data) => (
                   <Box
                     key={data.id}
-                    sx={{ flex: '1 1 calc(33.33% - 1rem)', margin: '0.5rem' }}
+                    sx={{ flex: '1 1 calc(33.33% - 1rem)', margin: {xs:"1rem 0",md:'0.5rem'} }}
                   >
                     <ShortNewsCard data={data} />
                   </Box>
@@ -343,7 +343,7 @@ export default function DashboardContainer() {
               <Box
                 sx={{
                   background: '#f7f7f7',
-                  padding: '1px 10px 10px 10px',
+                  padding: {xs:'1rem',md:'1px 10px 10px 10px'},
                 }}
               >
                 <Box sx={{ display: 'flex', gap: '5px',minWidth:'200px' }}>
@@ -370,11 +370,11 @@ export default function DashboardContainer() {
           <Box sx={{ display: 'flex', gap: '5px',margin:'0 1rem'  }}>
             <Text
               text={'||'}
-              sx={{ fontWeight: 500, margin: '1rem 0', color: 'red' }}
+              sx={{ fontWeight: 500, margin: '0 0 1rem 0', color: 'red' }}
             ></Text>
             <Text
               text={'MLA News'}
-              sx={{ fontWeight: 700, margin: '1rem 0' }}
+              sx={{ fontWeight: 700, margin: '0 0 1rem 0' }}
             />
           </Box>
           <Box className="parliamentarian-section mlanewssection" sx={{gap:'0'}}>
@@ -391,8 +391,9 @@ export default function DashboardContainer() {
           <Box
             sx={{
               margin: '2rem 0',
-              height: '268px',
-              width: '300px',
+              display:'flex',
+              justifyContent:'center',
+              width: {xs:'100%',md:'300px'},
               background: '#f7f7f7',
               outline: '7px solid #f7f7f7',
               paddingTop: '18px',
@@ -405,7 +406,7 @@ export default function DashboardContainer() {
                   '_blank'
                 )
               }
-              className="advertise_img"
+              className="advertise_img mobileSmallAdImage"
               src="/Assets/ads/secondAd.jpg"
             />
           </Box>
@@ -420,12 +421,12 @@ export default function DashboardContainer() {
                 sx={{ fontWeight: 700, margin: '1rem 0rem' }}
               />
             </Box>
-            {dashboardNewsDataApi?.reviews?.slice(2, 7).map((data) => (
+            {dashboardNewsDataApi?.reviews?.slice(4, 9).map((data) => (
               <Box key={data.id} className="mostReadNews">
                 <SideNewCards data={data} />
               </Box>
             ))}
-            <Box
+            <Box className="MobileViewRemove" 
               sx={{
                 marginTop: '2rem',
                 height: '268px',
@@ -460,7 +461,7 @@ export default function DashboardContainer() {
                 sx={{ fontWeight: 700, margin: '1rem 0rem' }}
               />
             </Box>
-            {dashboardNewsDataApi?.reviews?.slice(8, 14).map((data) => (
+            {dashboardNewsDataApi?.reviews?.slice(10, 16).map((data) => (
               <Box key={data.id} >
                 <SideNewCards data={data} />
               </Box>

@@ -11,7 +11,7 @@ import YouTubeIcon from '@mui/icons-material/YouTube';
 import InstagramIcon from '@mui/icons-material/Instagram';
 
 
-export default function Footer({ data,setIndex }) {
+export default function mobileFooter({ data,setIndex }) {
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -36,28 +36,21 @@ export default function Footer({ data,setIndex }) {
   ];
 
   return (
-    <Box sx={{ width: '100%', background: '#cfcfcf', padding: '0 1rem',display:'flex',justifyContent:'center' }}>
+    <Box sx={{ width: '100%', background: '#cfcfcf', padding: '0 1rem' }}>
       <Box
         sx={{
           margin: '2rem 0',
           display: 'flex',
           flexDirection: 'column',
-          width:{xs:'100%',md:'85%'},
           justifyContent: 'center',
           alignItems: 'center',
         }}
       >
         <Box>
           <Box
-            sx={{ display: 'flex', justifyContent: 'flex-start', cursor: 'pointer',alignItems:'center',gap:'1.5rem',marginBottom:'2rem',flexWrap:'wrap' }}
+            sx={{ display: 'flex', justifyContent: 'left', cursor: 'pointer' }}
           >
-            <img src="/footer_logo.png" alt="logo"/>
-            <Text 
-                 sx={{fontSize:'0.8rem',width:{xs:'100%',md:'80%'},}}
-                  text={
-                    'Parliamentary fact is an specialized research and media platform which is working as a think tank on parliamentary system, promoting parliamentary values. platform is working as a watchdog and create performance of Parliament, state assemblies and its members Parliamentarian (MPs) and legislature (MLAs).'
-                  }
-                ></Text>
+            <img src="/pfLogo.png" alt="logo" className="pfLogoFooter" />
           </Box>
           <Box>
             <Box
@@ -85,7 +78,7 @@ export default function Footer({ data,setIndex }) {
                   <Box
                     sx={{ display: 'flex' }}
                     onClick={() =>
-                    {  navigate(`/news-and-videos/categories/${val?.url}`, {
+                    {  navigate(`/categories/${val?.url}`, {
                         state: { category: val?.category },
                       }),setIndex(index)}
                     }
@@ -134,7 +127,7 @@ export default function Footer({ data,setIndex }) {
                   <MenuItem
                     sx={{ fontSize: '12px' }}
                     onClick={() => {
-                      navigate(`/news-and-videos/categories/${val?.url}`, {
+                      navigate(`/categories/${val?.url}`, {
                         state: { category: val?.category },
                       });
                       handleClose();
@@ -153,7 +146,7 @@ export default function Footer({ data,setIndex }) {
               <Box
                 display="flex"
                 justifyContent="space-between"
-                maxWidth={"89%"}
+                maxWidth={855}
                 flexWrap="wrap-reverse"
                 gap="5px"
               >
@@ -175,37 +168,49 @@ export default function Footer({ data,setIndex }) {
                   ))}
                 </Box>
                 <Box display="flex" gap="8px">
-                <img
-                      style={{ height: '25px', cursor: 'pointer' }}
-                      onClick={() =>
-                        (window.location.href =
-                          'https://www.facebook.com/profile.php?id=100088959852699')
-                      }
-                      src="/Assets/icons/facebook.png"
-                    />
-                    <img
-                      style={{ height: '25px', cursor: 'pointer' }}
-                      onClick={() =>
-                        (window.location.href = 'https://x.com/parliamentaryf7')
-                      }
-                      src="/Assets/icons/twitterX.png"
-                    />
-                    <img
-                      style={{ height: '25px', cursor: 'pointer' }}
-                      onClick={() =>
-                        (window.location.href =
-                          'https://www.instagram.com/parliamentaryfacts/?hl=en')
-                      }
-                      src="/Assets/icons/instagram.png"
-                    />
-                    <img
-                      style={{ height: '25px', cursor: 'pointer' }}
-                      onClick={() =>
-                        (window.location.href =
-                          'https://www.youtube.com/channel/UCmiD-5GplSufIcKYQ-fHNUQ')
-                      }
-                      src="/Assets/icons/youtube.png"
-                    />
+                  <FacebookIcon
+                  onClick={()=>window.location.href="https://www.facebook.com/profile.php?id=100088959852699"}
+                    sx={{
+                      fontSize: '24px',
+                      color: '#4267B2',
+                      cursor: 'pointer',
+                    }}
+                  />
+                  <XIcon
+                  onClick={()=>window.location.href="https://x.com/parliamentaryf7"}
+                    sx={{
+                      fontSize: '20px',
+                      color: '#fff',
+                      background: '#000',
+                      padding: '0.3rem',
+                      borderRadius: '5px',
+                      marginTop: '3px',
+                      cursor: 'pointer',
+                    }}
+                  />
+                  <InstagramIcon
+                  onClick={()=>window.location.href="https://www.instagram.com/parliamentaryfacts/?hl=en"}
+                    sx={{
+                      fontSize: '20px',
+                      color: '#fff',
+                      background: 'linear-gradient(45deg, #f58529, #dd2a7b, #8134af, #515bd4)', 
+                      padding: '0.1rem',
+                      borderRadius: '5px',
+                      marginTop: '3px',
+                      cursor: 'pointer',
+                    }}
+                  />
+                  <YouTubeIcon
+                  onClick={()=>window.location.href="https://www.youtube.com/channel/UCmiD-5GplSufIcKYQ-fHNUQ"}
+                    sx={{
+                      background: '#fff',
+                      color: '#FF0000',
+                      fontSize: '20px',
+                      borderRadius: '5px',
+                      marginTop: '3px',
+                      cursor: 'pointer',
+                    }}
+                  />
                 </Box>
               </Box>
               <Box display="flex" gap="15px" flexWrap="wrap-reverse">

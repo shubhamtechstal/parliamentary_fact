@@ -22,19 +22,20 @@ export default function CenterBackgroudNewsCard({ data }) {
 
   return (
     <Box  onClick={() =>
-      navigate(`/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url} `, {
+      navigate(`/news-and-videos/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url} `, {
         state: { id: newsItem?.id },
       })
     }
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        gap: '0.5rem',
+        gap: {xs:'1rem',md:'0.5rem'},
         maxWidth: { md: '250px', xs: '100%' },
+        minWidth:"160px",
         cursor:'pointer'
       }}
     >
-      <Box className="centerCardBox" sx={{ width: '100%' }}>
+      <Box className="centerCardBox" sx={{ width: '100%',overflow:'hidden' }}>
         {/* <img
           src={imageUrl + newsItem?.news_description[0]?.image}
           image={imageUrl + newsItem?.news_description[0]?.image}
@@ -84,17 +85,17 @@ export default function CenterBackgroudNewsCard({ data }) {
         <Box>
           <Text
             onClick={() =>
-              navigate(`/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url} `, {
+              navigate(`/news-and-videos/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url} `, {
                 state: { id: newsItem?.id },
               })
             }
             // font={'Roboto'}
             sx={{
-              fontSize: '0.8rem',
-              fontWeight: 500,
+              fontSize: {xs:'0.9rem',md:'0.8rem'},
+              fontWeight: {xs:600,md:500},
               cursor: 'pointer',
               display: '-webkit-box',
-              WebkitLineClamp: 3,
+              WebkitLineClamp: {xs:4,md:3},
               WebkitBoxOrient: 'vertical',
               overflow: 'hidden',
               textOverflow: 'ellipsis',

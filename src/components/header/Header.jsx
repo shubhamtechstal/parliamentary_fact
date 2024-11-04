@@ -140,7 +140,7 @@ export default function Header({ data,setIndex,selected }) {
   const handleSearch = () => {
     setIndex(-2)
     if (keyword.trim()) {
-      navigate(`/search/${createSlug(keyword)}`, {
+      navigate(`/news-and-videos/search/${createSlug(keyword)}`, {
         state: { keyword: createSlug(keyword) },
       });
       setSearchShow(false);
@@ -182,7 +182,7 @@ export default function Header({ data,setIndex,selected }) {
             <Text
               onClick={() =>
                 navigate(
-                  `/details/${arrNews[trendingNews]?.subCategory?.toLowerCase().replace(/\s+/g, '-')}/${arrNews[trendingNews]?.url}`, {
+                  `/news-and-videos/details/${arrNews[trendingNews]?.subCategory?.toLowerCase().replace(/\s+/g, '-')}/${arrNews[trendingNews]?.url}`, {
                   state: { id: arrNews[trendingNews]?.id },
                 })
               }
@@ -261,50 +261,38 @@ export default function Header({ data,setIndex,selected }) {
             /> */}
           </Box>
           <Box sx={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-          <Box display="flex" gap="8px">
-                  <FacebookIcon
-                  onClick={()=>window.location.href="https://www.facebook.com/profile.php?id=100088959852699"}
-                    sx={{
-                      fontSize: '24px',
-                      color: '#4267B2',
-                      cursor: 'pointer',
-                    }}
-                  />
-                  <XIcon
-                  onClick={()=>window.location.href="https://x.com/parliamentaryf7"}
-                    sx={{
-                      fontSize: '20px',
-                      color: '#fff',
-                      background: '#000',
-                      padding: '0.2rem',
-                      borderRadius: '5px',
-                      marginTop: '3px',
-                      cursor: 'pointer',
-                    }}
-                  />
-                  <InstagramIcon
-                  onClick={()=>window.location.href="https://www.instagram.com/parliamentaryfacts/?hl=en"}
-                    sx={{
-                      fontSize: '20px',
-                      color: '#fff',
-                      background: 'linear-gradient(45deg, #f58529, #dd2a7b, #8134af, #515bd4)', 
-                      padding: '0.1rem',
-                      borderRadius: '5px',
-                      marginTop: '3px',
-                      cursor: 'pointer',
-                    }}
-                  />
-                  <YouTubeIcon
-                  onClick={()=>window.location.href="https://www.youtube.com/channel/UCmiD-5GplSufIcKYQ-fHNUQ"}
-                    sx={{
-                      background: '#fff',
-                      color: '#FF0000',
-                      fontSize: '20px',
-                      borderRadius: '5px',
-                      marginTop: '3px',
-                      cursor: 'pointer',
-                    }}
-                  />
+          <Box display="flex" gap="2px">
+          <img
+                      style={{ height: '25px', cursor: 'pointer' }}
+                      onClick={() =>
+                        (window.location.href =
+                          'https://www.facebook.com/profile.php?id=100088959852699')
+                      }
+                      src="/Assets/icons/facebook.png"
+                    />
+                    <img
+                      style={{ height: '25px', cursor: 'pointer' }}
+                      onClick={() =>
+                        (window.location.href = 'https://x.com/parliamentaryf7')
+                      }
+                      src="/Assets/icons/twitterX.png"
+                    />
+                    <img
+                      style={{ height: '25px', cursor: 'pointer' }}
+                      onClick={() =>
+                        (window.location.href =
+                          'https://www.instagram.com/parliamentaryfacts/?hl=en')
+                      }
+                      src="/Assets/icons/instagram.png"
+                    />
+                    <img
+                      style={{ height: '25px', cursor: 'pointer' }}
+                      onClick={() =>
+                        (window.location.href =
+                          'https://www.youtube.com/channel/UCmiD-5GplSufIcKYQ-fHNUQ')
+                      }
+                      src="/Assets/icons/youtube.png"
+                    />
                 </Box>
             <Box
               onClick={() => setSearchShow(!searchShow)}
@@ -376,7 +364,7 @@ export default function Header({ data,setIndex,selected }) {
               <Box
                 sx={{ display: 'flex' }}
                 onClick={() =>
-                 { navigate(`/categories/${val?.url}`, {
+                 { navigate(`/news-and-videos/categories/${val?.url}`, {
                     state: { category: val?.category },
                   }),setIndex(index)}
                 }
@@ -426,7 +414,7 @@ export default function Header({ data,setIndex,selected }) {
               <MenuItem
                 sx={{ fontSize: '12px' }}
                 onClick={() => {
-                 { navigate(`/categories/${val?.url}`, {
+                 { navigate(`/news-and-videos/categories/${val?.url}`, {
                     state: { category: val?.category },
                   }),setIndex(index+6)};
                   handleClose();

@@ -52,6 +52,7 @@
 .homePageNewsBox1 {
   /* max-width: 38%; */
   width: 90%;
+  max-width: 400px;
 }
 .homePageNewsBox2 {
   max-width: 31%;
@@ -179,23 +180,36 @@
   margin: 0.8rem;
 }
 .bigNewsSection{
-  padding:1rem;
+  padding:1rem 0;
 }
 .categoriesSection{
-  padding:0 1rem;
+  padding:0 ;
+}
+.mobileViewDetails{
+  padding: 0rem 0.7rem
+}
+.mlanewssection{
+  padding:0 0.5rem
 }
 @media (min-device-width: 300px) and (max-device-width: 768px) {
+ 
   .categoriesSection{
     width: 48%;
     padding:0;
   }
  
   .categoriesContainer{
+    overflow-x: scroll;
     display: flex;
-    flex-wrap: wrap;
-    gap:0.5rem;
-    padding: 0 0.5rem;
-  }
+    /* flex-wrap: wrap; */
+    gap:1rem;
+    padding: 0 1rem;   /* Hides scrollbar for WebKit browsers (Chrome, Safari) */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+.categoriesContainer::-webkit-scrollbar {
+    display: none; /* WebKit browsers (Chrome, Safari) */
+}
   .bigNewsSection{
     padding:1rem 0 0 0;
   }
@@ -207,14 +221,14 @@
   }
   .relatedNews{
     padding:0rem;
-    gap: 0.5rem;
+    gap: 1rem;
   }
   .subheadingcardmobile{
     flex-direction: column;
   }
   .parliamentarian-section {
     display: flex;
-    gap: 0.5rem;
+    gap: 1rem;
     width: 100%;
     overflow: scroll;
 
@@ -230,6 +244,10 @@
   .sideSection{
     margin-right: 0rem;
     margin-top:0rem;
+    /* padding: 1rem;
+    display: flex;
+    flex-direction: column;*/
+    width: 96%;
   }
  .mobileCenterBackgroundCard{
   width: 47%;
@@ -293,6 +311,7 @@
   }
   .homePageNewsBox1 {
     width: 100%;
+    max-width: none;
   }
   .homePageNewsBox2 {
     max-width: 100%;
@@ -323,22 +342,40 @@
     width: 100%;
   }
   .bottomSubHeadingCardBox {
-    display: block;
+    flex-direction: column;
+    margin:0
   }
   .CenterVirusConfrontSection {
-    /* display: block; */
-    flex-wrap: wrap;
-  }
+    overflow-x: scroll;
+       scrollbar-width: none; /* Firefox */
+       -ms-overflow-style: none; /* Internet Explorer 10+ */
+   }
+   
+   .CenterVirusConfrontSection::-webkit-scrollbar {
+       display: none; /* WebKit browsers (Chrome, Safari) */
+   }
   .subheadingCardImage {
-    width: auto;
+    max-width: 165px;
+    min-width: 0;
     height: 100px;
   }
   .centerCardBox {
     width: 100%;
     height: 100%;
+    max-height: 200px;
   }
   .Bottom_card_box {
     width: 100%;
     height: auto;
+  }
+  .mobileSmallAdImage{
+    width: 300px !important;
+    height: auto;
+  }
+  .trendingNewsWidthmobile{
+    padding: 0 !important;
+  }
+  .mobileViewDetails{
+    padding: 0rem 1rem
   }
 }

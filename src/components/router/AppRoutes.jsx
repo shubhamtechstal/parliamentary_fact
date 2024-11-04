@@ -1,5 +1,5 @@
 import { lazy } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
@@ -18,28 +18,33 @@ const PrivacyPolicy = lazy(() => import('pages/PrivacyPolicy'));
 const TermsAndConditions = lazy(() => import('pages/TermsAndConditions'));
 const ContactPage = lazy(() => import('pages/ContactPage'));
 const AdvertiseWithUs = lazy(() => import('pages/AdvertiseWithUs'));
+const SecondPhase = lazy(() => import('pages/SecondPhase'));
 
 // Define routes config here
 const routes = [
   {
     path: '/',
+    element: <Navigate to="/news-and-videos" replace />,
+  },
+  {
+    path: '/news-and-videos',
     isLayoutRoute: true,
     element: <AppLayoutContainer />,
     children: [
       {
-        path: '',
+        path: '/news-and-videos',
         element: <PrivateRoute component={<DashboardPage />} />,
       },
       {
-        path: 'categories/:id',
+        path: '/news-and-videos/categories/:id',
         element: <PrivateRoute component={<CategoriesPage />} />,
       },
       {
-        path: 'details/*',
+        path: '/news-and-videos/details/*',
         element: <PrivateRoute component={<DetailsPage />} />,
       },
       {
-        path: 'search/*',
+        path: '/news-and-videos/search/*',
         element: <PrivateRoute component={<SearchPage />} />,
       },
       {
@@ -61,6 +66,10 @@ const routes = [
       {
         path: 'advertise-with-us',
         element: <PrivateRoute component={<AdvertiseWithUs />} />,
+      },
+      {
+        path: 'second-phase',
+        element: <PrivateRoute component={<SecondPhase />} />,
       },
     ],
   },

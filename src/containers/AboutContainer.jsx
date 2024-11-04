@@ -80,7 +80,7 @@ const ourVision = [
   return (
     <Box
       className="aboutContainer"
-      sx={{ display: 'flex', margin: '2rem', gap: '2rem' }}
+      sx={{ display: 'flex', margin: '2rem', gap: {xs:'0.5rem',md:'2rem'} }}
     >
       <Box
         className="aboutTabVal"
@@ -88,8 +88,10 @@ const ourVision = [
           alignSelf: 'flex-start',
           position: 'sticky',
           top: '2rem',
-          marginLeft: '1rem',
+          marginLeft: {xs:0,md:'1rem'},
           display: 'flex',
+          overflow:{xs:'scroll',md:'hidden'},
+          width:{xs:'100%',md:'min-content'},
           gap: '1rem',
         }}
       >
@@ -97,61 +99,70 @@ const ourVision = [
           onClick={() => {
             navigate('/about-us');
           }}
+          sx={{borderRight: {xs:'1px solid #000000DE',md:'none'},paddingRight:'0.5rem'} }
         >
           <Text
             sx={{
               color: selected === 'about-us' ? '#000' : '#767676',
               fontWeight: selected === 'about-us' ? 'bold' : '',
               cursor: 'pointer',
+               textWrap:'noWrap'
+               
             }}
             text={'About Us'}
           />
-          <Divider sx={{ marginTop: '8px' }} />
+          <Divider className="MobileViewRemove" sx={{ marginTop: '8px' }} />
         </Box>
         <Box
           onClick={() => {
             navigate('our-vision');
           }}
+          sx={{borderRight: {xs:'1px solid #000000DE',md:'none'},paddingRight:'0.5rem'} }
         >
           <Text
             sx={{
               color: selected === 'our-vision' ? '#000' : '#767676',
               fontWeight: selected === 'our-vision' ? 'bold' : '',
-              cursor: 'pointer',
+              cursor: 'pointer', 
+              textWrap:'noWrap'
             }}
             text={'Our vision'}
           />
-          <Divider sx={{ marginTop: '8px' }} />
+          <Divider className="MobileViewRemove" sx={{ marginTop: '8px' }} />
         </Box>
         <Box
           onClick={() => {
             navigate('leadership');
           }}
+          sx={{borderRight: {xs:'1px solid #000000DE',md:'none'},paddingRight:'0.5rem'} }
         >
           <Text
             sx={{
               color: selected === 'leadership' ? '#000' : '#767676',
               fontWeight: selected === 'leadership' ? 'bold' : '',
               cursor: 'pointer',
+              textWrap:'noWrap'
             }}
             text={'Leadership'}
           />
-          <Divider sx={{ marginTop: '8px' }} />
+          <Divider className="MobileViewRemove" sx={{ marginTop: '8px' }} />
         </Box>
         <Box
           onClick={() => {
             navigate('research-endorsement');
           }}
+          sx={{paddingRight:'0.5rem'} }
         >
           <Text
             sx={{
               color: selected === 'research-endorsement' ? '#000' : '#767676',
               fontWeight: selected === 'research-endorsement' ? 'bold' : '',
               cursor: 'pointer',
+              textWrap:{xs:'noWrap',md:'wrap'}
             }}
             text={'Research Endorsement'}
           />
-          <Divider sx={{ marginTop: '8px' }} />
+          <Divider className="MobileViewRemove" sx={{ marginTop: '8px' }} />
         </Box>
       </Box>
       <div style={{ background: 'rgba(0, 0, 0, 0.12)', width: '2px' }}></div>
@@ -179,6 +190,7 @@ const ourVision = [
             <Text
               sx={{
                 color: '#767676',
+                 textWrap:{xs:'wrap',md:'wrap'}
               }}
               text={val}
             />
@@ -193,15 +205,18 @@ const ourVision = [
             flexDirection: 'column',
             gap: '1rem',
             paddingBottom: '3rem',
+            
           }}
         >
           {researchEndorement.map((val, index) => (
-            <Box>
-              <img
+            <Box sx={{width:'100%',overflow:'hidden'}}>
+              <img 
+
+              className="researchEndorsementImage"
                 style={{
-                  width: 'auto',
+                 
                   maxWidth:'700px',
-                  height: '400px',
+                 
                   marginTop: index === 'about-us' ? '' : '1rem',
                 }}
                 src={val.image}

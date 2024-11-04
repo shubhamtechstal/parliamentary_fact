@@ -24,7 +24,7 @@ export default function BottomSubHeadingCards({ type, data }) {
   return (
     <Box  onClick={() =>
       navigate(
-        `/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url} `,
+        `/news-and-videos/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url} `,
         {
           state: { id: newsItem?.id },
         }
@@ -61,7 +61,7 @@ export default function BottomSubHeadingCards({ type, data }) {
           <Text
             onClick={() =>
               navigate(
-                `/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url} `,
+                `/news-and-videos/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url} `,
                 {
                   state: { id: newsItem?.id },
                 }
@@ -69,10 +69,10 @@ export default function BottomSubHeadingCards({ type, data }) {
             }
             sx={{
               fontSize: '0.9rem',
-              fontWeight: 500,
+              fontWeight: {xs:600,md:500},
               cursor: 'pointer',
               display: '-webkit-box',
-              WebkitLineClamp: 3,
+              WebkitLineClamp: {xs:4,md:3},
               WebkitBoxOrient: 'vertical',
               overflow: 'hidden',
               textOverflow: 'ellipsis',

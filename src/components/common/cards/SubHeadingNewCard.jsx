@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import './NewsCard.css';
 import { appConstants } from 'helpers/constants/appConstants';
 
-export default function SubHeadingNewCard({ textWidth, data }) {
+export default function SubHeadingNewCard({ textWidth, data,style }) {
   const navigate = useNavigate();
 
   let newsItem;
@@ -23,8 +23,8 @@ export default function SubHeadingNewCard({ textWidth, data }) {
   });
 
   return (
-    <Box className="subheadingcardmobile" sx={{ display: 'flex', gap: '1rem',cursor:'pointer' }}  onClick={() =>
-      navigate(`/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url} `, {
+    <Box className="subheadingcardmobile" sx={{...style, display: 'flex', gap: {xs:'0.5rem',md:'1rem'},cursor:'pointer' }}  onClick={() =>
+      navigate(`/news-and-videos/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url} `, {
         state: { id: newsItem?.id },
       })
     }>
@@ -79,7 +79,7 @@ export default function SubHeadingNewCard({ textWidth, data }) {
         <Box>
           <Text
             onClick={() =>
-              navigate(`/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url} `, {
+              navigate(`/news-and-videos/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url} `, {
                 state: { id: newsItem?.id },
               })
             }
@@ -88,7 +88,7 @@ export default function SubHeadingNewCard({ textWidth, data }) {
               fontWeight: 600,
               cursor: 'pointer',
               display: '-webkit-box',
-              WebkitLineClamp: 3,
+              WebkitLineClamp: {xs:4,md:3},
               WebkitBoxOrient: 'vertical',
               overflow: 'hidden',
               textOverflow: 'ellipsis',

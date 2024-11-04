@@ -14,7 +14,6 @@ const AppLayoutContainer = () => {
 const navigate = useNavigate();
   const { data: headerCategoryApi, isLoading } =
     dashboardNewsApiAction.getHeaderCategories();
-
   if (isLoading) {
     return (
       <Box
@@ -92,8 +91,10 @@ const navigate = useNavigate();
     overflowX: 'auto', // or 'scroll' if you want to always show the scrollbar
     width: '100%',
     boxShadow: '0 2px 0px rgba(0, 0, 0, 0.1)',
-    marginBottom:'1rem',
-    padding: '0 1rem 1rem',
+    // marginBottom:'1rem',
+    zIndex:1,
+    position:'relative',
+    padding: '0 1rem 0.3rem 1rem',
     '&::-webkit-scrollbar': {
       display: 'none', // Hides the scrollbar for webkit browsers (Chrome, Safari)
     },
@@ -118,7 +119,7 @@ const navigate = useNavigate();
               <Box
                 sx={{ display: 'flex' }}
                 onClick={() =>
-                 { navigate(`/categories/${val?.url}`, {
+                 { navigate(`/news-and-videos/categories/${val?.url}`, {
                     state: { category: val?.category },
                   })
                   setHeaderSelectedIndex(index)

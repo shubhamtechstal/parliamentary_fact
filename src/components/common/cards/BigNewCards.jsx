@@ -24,14 +24,14 @@ export default function BigNewCards({ data }) {
   return (
     <Card  onClick={() =>
       navigate(
-        `/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url}`,
+        `/news-and-videos/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url}`,
         {
           state: { id: newsItem?.id },
         }
       )
     } sx={{ maxWidth: 450, boxShadow: 'none', borderRadius: '0',cursor:'pointer' }}>
       <CardMedia
-        sx={{ height: "270px", }}
+        sx={{ height: {xs:'200px',md:"270px"} }}
         src={imageUrl + newsItem?.news_description[0]?.image}
         image={imageUrl + newsItem?.news_description[0]?.image}
         title="green iguana"
@@ -56,7 +56,7 @@ export default function BigNewCards({ data }) {
           className="heading_title"
           onClick={() =>
             navigate(
-              `/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url}`,
+              `/news-and-videos/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url}`,
               {
                 state: { id: newsItem?.id },
               }
@@ -91,7 +91,7 @@ export default function BigNewCards({ data }) {
             className="read-more-button"
             onClick={() =>
               navigate(
-                `/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url}`,
+                `/news-and-videos/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url}`,
                 {
                   state: { id: newsItem?.id },
                 }

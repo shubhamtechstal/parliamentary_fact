@@ -68,38 +68,54 @@ export default function SearchContainer() {
               {searchKeywordApi?.reviews?.length ? (
                 searchKeywordApi.reviews.map((val, index) => (
                   <React.Fragment key={index}>
-                    <SubHeadingNewCard data={val} />
+                    <SubHeadingNewCard data={val} style={{flexDirection:'row'}}/>
                     <Divider sx={{ margin: '1rem' }} />
                     {index === 3 && (
-                      <Box
-                        sx={{
-                          width: '100%',
-                          height: '130px',
-                          background: '#f7f7f7',
-                          marginBottom: '1rem',
-                          textAlign: 'center',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                        }}
-                      >
-                        <Box>
-                          <Text
-                            sx={{
-                              color: '#767676',
-                              marginBottom: '5px',
-                              fontSize: '10px',
-                            }}
-                            text={'-Advertisement-'}
-                          />
-                          <Box sx={{ maxWidth: '650px', height: '80px' }}>
-                            <img
-                              style={{ width: '100%', height: '100%' }}
-                              src="/advertise.jpg"
-                            />
-                          </Box>
-                        </Box>
-                      </Box>
+                   <Box className="mobileAd"
+                   sx={{
+                    
+                     height: '130px',
+                     background: '#f7f7f7',
+                     
+                     textAlign: 'center',
+                     display: 'flex',
+                     alignItems: 'center',
+                     justifyContent: 'center',
+                   }}
+                 >
+                   <Box>
+                     <Text
+                       sx={{ color: '#767676', marginBottom: '5px', fontSize: '10px' }}
+                       text={'-Advertisement-'}
+                     />
+                     <Box className="desktop-advertise" sx={{ maxWidth: '650px', height: '80px' }}>
+                       <img
+                         onClick={() =>
+                           window.open(
+                             'https://www.theshilp.com/product-details/fortunate-maha-ganesha',
+                             '_blank'
+                           )
+                         }
+                         style={{ height: '100%', width: '100%' }}
+                         className="advertise_img"
+                         src="/Assets/ads/728x90ad.jpg"
+                       />
+                     </Box>
+                     <Box className="mobile-advertise" sx={{ maxWidth: '650px', height: '50px' }}>
+                       <img
+                         onClick={() =>
+                           window.open(
+                             'https://www.theshilp.com/product-details/fortunate-maha-ganesha',
+                             '_blank'
+                           )
+                         }
+                         style={{ height: '100%', width: '100%' }}
+                         className="advertise_img"
+                         src="/Assets/ads/shilp-mobile-ad-300x50-2.jpg"
+                       />
+                     </Box>
+                   </Box>
+                 </Box>
                     )}
                   </React.Fragment>
                 ))

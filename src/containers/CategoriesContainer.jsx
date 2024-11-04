@@ -14,8 +14,10 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 export default function CategoriesContainer() {
   const { id } = useParams();
-  const location = useLocation();
-  const { category } = location.state || {};
+  const url = window.location.href;
+  const parts = url.split('/');
+  let lastComponent = parts[parts.length - 1];
+  let category = lastComponent.replace(/-/g, ' ');
 
   const { data: dashboardNewsDataApi } = dashboardNewsApiAction.getDashboardNews();
 
@@ -75,13 +77,14 @@ export default function CategoriesContainer() {
             sx={{ display: 'flex', justifyContent: 'space-between' }}
           >
             <Box className="categorieSubheadingCard">
-            <Box sx={{display:'flex',gap:'5px',padding:'0 1rem'}}>
+            <Box sx={{display:'flex',gap:'5px',padding:{xs:'0 1rem',md:0}}}>
                 <Text
                   text={'||'}
                   sx={{ fontWeight: 500, margin: '0 0 1rem 0',color:'red' }}
                 ></Text>
               <Text
-                text={id}
+                text={'Top Stories'}
+                // text={id}
                 sx={{ fontWeight: 700, margin: '0 0 1rem 0rem' }}
               />
               </Box>
@@ -93,14 +96,14 @@ export default function CategoriesContainer() {
                 </Box>
                   <Divider className='MobileViewRemove' sx={{ margin: '1rem' }} />
                   {index === 4 && (
-                    <Box
+                    <Box 
                       sx={{
                         width: '100%',
                         height: '130px',
                         background: '#f7f7f7',
                         marginBottom: '1rem',
                         textAlign: 'center',
-                        display: 'flex',
+                        display: {xs:'none',md:'flex'},
                         alignItems: 'center',
                         justifyContent: 'center',
                       }}
@@ -175,17 +178,19 @@ export default function CategoriesContainer() {
               <Box
             sx={{
               margin: '2rem 0',
-                height: '268px',
-                width: '300px',
+                height:{xs:'auto',md:'268px'},
+                width: {xs:'105%',md:'300px'},
                 alignSelf:'center',
                 background:'#f7f7f7',
                 outline:'7px solid #f7f7f7',
-                paddingTop:'18px'
+                paddingTop:'18px',
+                display:'flex',
+                justifyContent:'center'
             }}
           >
               <img 
                onClick={()=>window.open("https://www.theshilp.com/product-details/indian-army-strike-antique-bronze-gold", "_blank")}
-              className="advertise_img" src="/Assets/ads/secondAd.jpg" />
+            style={{width:'300px',height:'auto'}}  className="advertise_img" src="/Assets/ads/secondAd.jpg" />
           </Box>
           <Box sx={{display:'flex',gap:'5px'}}>
                 <Text

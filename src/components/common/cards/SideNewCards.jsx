@@ -21,7 +21,7 @@ export default function SideNewCards({ data }) {
   });
 
   return (
-    <Box sx={{ display: 'flex', gap: '1rem', marginRight: '6px',cursor:'pointer' }}  onClick={() => navigate(`/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url} `,{state : {id:newsItem?.id}})}
+    <Box sx={{ display: 'flex', gap: '1rem', marginRight: '6px',cursor:'pointer' }}  onClick={() => navigate(`/news-and-videos/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url} `,{state : {id:newsItem?.id}})}
 >
       <Box>
         {/* <img 
@@ -57,11 +57,11 @@ export default function SideNewCards({ data }) {
       >
         <Box>
           <Text
-           onClick={() => navigate(`/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url} `,{state : {id:newsItem?.id}})}
+           onClick={() => navigate(`/news-and-videos/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url} `,{state : {id:newsItem?.id}})}
 
             sx={{
-              fontSize: '0.8rem',
-              fontWeight: 500,
+              fontSize: {xs:'0.9rem',md:'0.8rem'},
+              fontWeight: {xs:600,md:500},
               cursor: 'pointer',
               display: '-webkit-box',
               WebkitLineClamp: 3,
