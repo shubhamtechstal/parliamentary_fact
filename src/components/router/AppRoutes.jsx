@@ -18,7 +18,10 @@ const PrivacyPolicy = lazy(() => import('pages/PrivacyPolicy'));
 const TermsAndConditions = lazy(() => import('pages/TermsAndConditions'));
 const ContactPage = lazy(() => import('pages/ContactPage'));
 const AdvertiseWithUs = lazy(() => import('pages/AdvertiseWithUs'));
-const SecondPhase = lazy(() => import('pages/SecondPhase'));
+const MpsPublicRating = lazy(() => import('pages/MpsPublicRating'));
+const MpsRatingAllList = lazy(() => import('pages/MpsRatingAllList'));
+const RateYourMp = lazy(() => import('pages/RateYourMp'));
+const NewsLetter = lazy(() => import('pages/NewsLetter'));
 
 // Define routes config here
 const routes = [
@@ -68,8 +71,20 @@ const routes = [
         element: <PrivateRoute component={<AdvertiseWithUs />} />,
       },
       {
-        path: 'second-phase',
-        element: <PrivateRoute component={<SecondPhase />} />,
+        path: 'mps-public-rating',
+        element: <PrivateRoute component={<MpsPublicRating/>} />,
+      },
+      {
+        path: 'mps-public-rating-list',
+        element: <PrivateRoute component={<MpsRatingAllList/>} />,
+      },
+      {
+        path: 'rate-your-mp',
+        element: <PrivateRoute component={<RateYourMp/>} />,
+      },
+      {
+        path: 'news-letter',
+        element: <PrivateRoute component={<NewsLetter/>} />,
       },
     ],
   },

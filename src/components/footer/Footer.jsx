@@ -42,7 +42,7 @@ export default function Footer({ data,setIndex }) {
           margin: '2rem 0',
           display: 'flex',
           flexDirection: 'column',
-          width:{xs:'100%',md:'85%'},
+          width:{xs:'100%',md:'min-content'},
           justifyContent: 'center',
           alignItems: 'center',
         }}
@@ -97,6 +97,7 @@ export default function Footer({ data,setIndex }) {
                         fontSize: '0.9rem',
                         fontWeight: 700,
                         cursor: 'pointer',
+                        textWrap:'nowrap',
                         '&:hover': {
                           color: '#162eb7',
                         },
@@ -208,7 +209,7 @@ export default function Footer({ data,setIndex }) {
                     />
                 </Box>
               </Box>
-              <Box display="flex" gap="15px" flexWrap="wrap-reverse">
+              <Box display="flex" gap="15px" flexWrap="wrap-reverse" sx={{ width:{xs:'auto',md:'max-content'}}}>
                 <Box
                   sx={{
                     display: 'flex',
