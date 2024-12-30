@@ -24,7 +24,7 @@ export default function BottomSubHeadingCards({ type, data }) {
   return (
     <Box  onClick={() =>
       navigate(
-        `/news-and-videos/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url} `,
+        `/news/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url} `,
         {
           state: { id: newsItem?.id },
         }
@@ -61,7 +61,7 @@ export default function BottomSubHeadingCards({ type, data }) {
           <Text
             onClick={() =>
               navigate(
-                `/news-and-videos/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url} `,
+                `/news/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url} `,
                 {
                   state: { id: newsItem?.id },
                 }

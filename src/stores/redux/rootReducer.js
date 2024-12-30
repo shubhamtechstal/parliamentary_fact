@@ -6,12 +6,14 @@ import { toastReducers } from './slices/toastSlice';
 // RTK Query API slice
 import { todoApiAction, todoApiReducer } from './apiSlices/todoApiSlice';
 import { dashboardNewsApiAction, dashboardNewsApiReducer } from './apiSlices/DashboardNewsSlice/dashboardNewsApiSlice';
+import { newsLetterApiAction, newsLetterApiReducer } from './apiSlices/newsLetterApiSlice';
 
 const rootReducers = combineReducers({
   toast: toastReducers,
   
   [todoApiAction.reducerPath]: todoApiReducer,
   [dashboardNewsApiAction.reducerPath]: dashboardNewsApiReducer,
+  [newsLetterApiAction.reducerPath]:newsLetterApiReducer
 });
 
 export default rootReducers;

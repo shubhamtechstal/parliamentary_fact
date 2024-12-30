@@ -16,7 +16,7 @@ export default function DetailsContainer() {
   const url = window.location.href;
 
   // Replace the exact base path pattern in the URL
-  const path = url.replace(/^https?:\/\/[^\/]+\/news-and-videos\/details\//, '');
+  const path = url.replace(/^https?:\/\/[^\/]+\/news\/details\//, '');
   
   // Split the remaining path to extract parts
   const parts = path.split('/');

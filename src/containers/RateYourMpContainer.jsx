@@ -16,6 +16,7 @@ import Text from 'components/common/Text';
 import MpsRatingCard from 'components/common/MpsRatingCard';
 import RatingCardSection from 'components/mpRating/RatingsCardSection';
 import ThankYouModal from 'components/mpRating/ThankYouModal';
+import "../App.css"
 
 export default function RateYourMpContainer() {
   const [mp, setMp] = React.useState('');
@@ -53,13 +54,13 @@ export default function RateYourMpContainer() {
           paddingBottom:'1rem'
         }}
       >
-        <Box sx={{ padding: '1rem', width: { md: '80%', xs: '90%' } }}>
+        <Box sx={{ padding: '1rem 0', width: { md: '80%', xs: '90%' } }}>
         <Text  sx={{ fontWeight: '600', marginTop: '0.1rem',fontSize:'1.25rem',background:'#dce5e850',width:'fit-content',padding:' 0.2rem 0.5rem' }} text={"Selected MP"} />
           <Box
-            sx={{ display: 'flex', justifyContent: 'space-between' }}
+            sx={{ display: 'flex', justifyContent: 'space-between',flexWrap:'wrap',gap:'1rem' }}
             className="search_mp"
           >
-            <Stack direction="row" gap="2rem" mt={3}>
+            <Stack direction="row" gap={{xs:"0.5rem",md:"2rem"}} mt={3}>
               <Box sx={{ pt: 2 }}>
                 <Avatar
                   alt="Krishna Chaurasiya"
@@ -69,12 +70,12 @@ export default function RateYourMpContainer() {
               </Box>
               <Box
                 sx={{ maxWidth: '70%', padding: '1rem', background: '#dce5e850' }}
-                className="search_mp_av_text"
+               
               >
                 <Typography sx={{ fontWeight: 600, color: 'grey' }}>
                   Neeraj Ram Mandola Choudheer Mandola
                 </Typography>
-                <Typography variant="body2" sx={{ mt: 2, color: 'grey' }}>
+                <Typography variant="body2" sx={{ mt: {xs:1,md:2}, color: 'grey' }}>
                   Samajwadi Party
                 </Typography>
                 <Typography variant="body2" sx={{ color: 'grey' }}>
@@ -90,7 +91,7 @@ export default function RateYourMpContainer() {
               <Typography variant="h6" sx={{ fontWeight: 600 }}>
                 Current Rating
               </Typography>
-              <hr className="search_mp_hr" />
+              <hr className="MobileViewRemove" />
               <Box sx={{ display: 'flex', gap: '1rem' }}>
                 <Rating
                   sx={{ fontSize: '2rem' }}

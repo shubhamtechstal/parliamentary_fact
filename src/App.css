@@ -1,4 +1,8 @@
-
+.parliamentDotImage{
+    right: auto;
+    left: -11%;
+    top:-84px
+}
 
 .mobileHeader{
     display: none;
@@ -41,6 +45,12 @@
     .contactContainer{
         flex-direction: row;
     }
+@media (max-width: 1300px) {
+    .parliamentDotImage{
+        left: -18%;
+    }
+    
+}
 @media (max-width: 775px) {
     .form_text{
         margin-left: 40px !important;
@@ -120,4 +130,12 @@
     flex-wrap: wrap;
    }
   
+  }
+@media (max-width: 900px) {
+    .parliamentDotImage{
+        left:auto;
+        right: -50px;
+        top:-100px
+
+    }
   }

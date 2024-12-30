@@ -1,7 +1,7 @@
-import {  useState } from 'react';
+import {   useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import '../../App.css';
-import { Box, Stack, CircularProgress } from '@mui/material';
+import { Box, Stack,  } from '@mui/material';
 import Header from 'components/header/Header';
 import Footer from 'components/footer/Footer';
 import MobileHeader from 'components/header/MobileHeader';
@@ -14,25 +14,10 @@ const AppLayoutContainer = () => {
 const navigate = useNavigate();
   const { data: headerCategoryApi, isLoading } =
     dashboardNewsApiAction.getHeaderCategories();
-  if (isLoading) {
-    return (
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '100vh',
-        }}
-      >
-        <CircularProgress />
-      </Box>
-    );
-  }
- 
   return (
     <Stack
       className="MainContainer"
-      sx={{ maxHeight: menuOpen ? '100vh' : '100%' }}
+      sx={{ maxHeight: menuOpen ? '100vh' : '100vh',width:'100%',overflowY:'auto',overflowX:'hidden',scrollBehavior:'smooth'}}
     >
       <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
         <Box
@@ -71,6 +56,7 @@ const navigate = useNavigate();
           </Box>
         </Box>
       </Box>
+    
       <Box className="MobileViewRemove">
         <Header
           data={headerCategoryApi?.categories}
@@ -119,7 +105,7 @@ const navigate = useNavigate();
               <Box
                 sx={{ display: 'flex' }}
                 onClick={() =>
-                 { navigate(`/news-and-videos/categories/${val?.url}`, {
+                 { navigate(`/news/categories/${val?.url}`, {
                     state: { category: val?.category },
                   })
                   setHeaderSelectedIndex(index)

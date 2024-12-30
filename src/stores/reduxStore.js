@@ -5,6 +5,7 @@ import rootReducers from './redux/rootReducer';
 
 import { todoApiAction } from './redux/apiSlices/todoApiSlice';
 import { dashboardNewsApiAction } from './redux/apiSlices/DashboardNewsSlice/dashboardNewsApiSlice';
+import { newsLetterApiAction } from './redux/apiSlices/newsLetterApiSlice';
 
 export const reduxStore = configureStore({
   reducer: rootReducers,
@@ -14,7 +15,7 @@ export const reduxStore = configureStore({
     }).concat([
       todoApiAction.middleware,
       dashboardNewsApiAction.middleware,
-
+      newsLetterApiAction.middleware
     ]),
 });
 

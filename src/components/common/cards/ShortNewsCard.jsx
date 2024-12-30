@@ -23,7 +23,7 @@ export default function ShortNewsCard({ data }) {
   });
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: '0.5rem',cursor:'pointer' }}   onClick={() => navigate(`/news-and-videos/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url} `,{state : {id:newsItem?.id}})}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: '0.5rem',cursor:'pointer' }}   onClick={() => navigate(`/news/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url} `,{state : {id:newsItem?.id}})}>
       <Box className='centerCardBox' sx={{overflow:'hidden'}}>
         <img className='shortnews_card_img'
           src={imageUrl + newsItem?.news_description[0]?.image}
@@ -52,7 +52,7 @@ export default function ShortNewsCard({ data }) {
         </Box>
         <Box>
           <Text 
-           onClick={() => navigate(`/news-and-videos/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url} `,{state : {id:newsItem?.id}})}
+           onClick={() => navigate(`/news/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url} `,{state : {id:newsItem?.id}})}
 
            font={'Poppins'}
             sx={{

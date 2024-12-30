@@ -24,7 +24,7 @@ export default function SubHeadingNewCard({ textWidth, data,style }) {
 
   return (
     <Box className="subheadingcardmobile" sx={{...style, display: 'flex', gap: {xs:'0.5rem',md:'1rem'},cursor:'pointer' }}  onClick={() =>
-      navigate(`/news-and-videos/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url} `, {
+      navigate(`/news/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url} `, {
         state: { id: newsItem?.id },
       })
     }>
@@ -79,7 +79,7 @@ export default function SubHeadingNewCard({ textWidth, data,style }) {
         <Box>
           <Text
             onClick={() =>
-              navigate(`/news-and-videos/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url} `, {
+              navigate(`/news/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url} `, {
                 state: { id: newsItem?.id },
               })
             }

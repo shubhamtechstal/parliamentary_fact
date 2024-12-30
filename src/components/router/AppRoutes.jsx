@@ -27,27 +27,27 @@ const NewsLetter = lazy(() => import('pages/NewsLetter'));
 const routes = [
   {
     path: '/',
-    element: <Navigate to="/news-and-videos" replace />,
+    element: <Navigate to="/news" replace />,
   },
   {
-    path: '/news-and-videos',
+    path: '/news',
     isLayoutRoute: true,
     element: <AppLayoutContainer />,
     children: [
       {
-        path: '/news-and-videos',
+        path: '/news',
         element: <PrivateRoute component={<DashboardPage />} />,
       },
       {
-        path: '/news-and-videos/categories/:id',
+        path: '/news/categories/:id',
         element: <PrivateRoute component={<CategoriesPage />} />,
       },
       {
-        path: '/news-and-videos/details/*',
+        path: '/news/details/*',
         element: <PrivateRoute component={<DetailsPage />} />,
       },
       {
-        path: '/news-and-videos/search/*',
+        path: '/news/search/*',
         element: <PrivateRoute component={<SearchPage />} />,
       },
       {
@@ -83,7 +83,7 @@ const routes = [
         element: <PrivateRoute component={<RateYourMp/>} />,
       },
       {
-        path: 'news-letter',
+        path: 'newsletter/loksabha/*',
         element: <PrivateRoute component={<NewsLetter/>} />,
       },
     ],

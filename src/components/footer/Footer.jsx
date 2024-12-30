@@ -85,7 +85,7 @@ export default function Footer({ data,setIndex }) {
                   <Box
                     sx={{ display: 'flex' }}
                     onClick={() =>
-                    {  navigate(`/news-and-videos/categories/${val?.url}`, {
+                    {  navigate(`/news/categories/${val?.url}`, {
                         state: { category: val?.category },
                       }),setIndex(index)}
                     }
@@ -135,7 +135,7 @@ export default function Footer({ data,setIndex }) {
                   <MenuItem
                     sx={{ fontSize: '12px' }}
                     onClick={() => {
-                      navigate(`/news-and-videos/categories/${val?.url}`, {
+                      navigate(`/news/categories/${val?.url}`, {
                         state: { category: val?.category },
                       });
                       handleClose();

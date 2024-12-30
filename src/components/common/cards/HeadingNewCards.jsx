@@ -37,7 +37,7 @@ export default function HeadingNewCards({ data }) {
           className="headCard"
           sx={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}
           onClick={() =>
-            navigate(`/news-and-videos/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url} `, {
+            navigate(`/news/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url} `, {
               state: { id: newsItem?.id },
             })
           }
@@ -78,7 +78,7 @@ export default function HeadingNewCards({ data }) {
               <Text
                 className="heading_title"
                 onClick={() =>
-                  navigate(`/news-and-videos/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url} `, {
+                  navigate(`/news/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url} `, {
                     state: { id: newsItem?.id },
                   })
                 }
@@ -147,7 +147,7 @@ export default function HeadingNewCards({ data }) {
             background: '#abb8c3',
           }}
         >
-          <img onClick={()=>window.open("https://www.theshilp.com/product-details/fortunate-maha-ganesha", "_blank")} className="advertise_img" src="/Assets/ads/shilp-ad-300x250.jpg" />
+          <img onClick={()=>window.open("https://www.theshilp.com/product-details/fortunate-maha-ganesha", "_blank")} className="advertise_img" src="/Assets/ads/shilp-ad-300x250.jpg" alt="advertise" />
         </Box>
       </Box>
     </>

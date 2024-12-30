@@ -22,7 +22,7 @@ export default function CenterBackgroudNewsCard({ data }) {
 
   return (
     <Box  onClick={() =>
-      navigate(`/news-and-videos/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url} `, {
+      navigate(`/news/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url} `, {
         state: { id: newsItem?.id },
       })
     }
@@ -85,7 +85,7 @@ export default function CenterBackgroudNewsCard({ data }) {
         <Box>
           <Text
             onClick={() =>
-              navigate(`/news-and-videos/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url} `, {
+              navigate(`/news/details/${newsItem?.sub_category.toLowerCase().replace(/\s+/g, '-')}/${newsItem?.url} `, {
                 state: { id: newsItem?.id },
               })
             }

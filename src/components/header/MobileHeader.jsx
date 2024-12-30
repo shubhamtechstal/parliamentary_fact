@@ -60,7 +60,7 @@ export default function MobileHeader({ menuOpen, data }) {
 
   const handleSearch = () => {
     if (keyword.trim()) {
-      navigate(`/news-and-videos/search/${keyword}`, {
+      navigate(`/news/search/${keyword}`, {
         state: { keyword: keyword },
       });
       setSearchShow(false);
@@ -314,7 +314,7 @@ export default function MobileHeader({ menuOpen, data }) {
                 {options.map((val) => (
                   <Box
                     onClick={() => {
-                      navigate(`/news-and-videos/categories/${val?.url}`, {
+                      navigate(`/news/categories/${val?.url}`, {
                         state: { category: val?.category },
                       }),
                         handleClose();
