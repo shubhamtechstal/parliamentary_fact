@@ -17,10 +17,10 @@ export default function DetailsContainer() {
 
   // Replace the exact base path pattern in the URL
   const path = url.replace(/^https?:\/\/[^\/]+\/news\/details\//, '');
-  
+
   // Split the remaining path to extract parts
   const parts = path.split('/');
-  
+
   // Extract the category and remaining URL
   const subcategory = decodeURIComponent(parts[0]);
   const remainingUrl = decodeURIComponent(parts.slice(1).join('/'));
@@ -41,6 +41,7 @@ export default function DetailsContainer() {
     sub_category: subcategory.replace(/-/g, ' '),
     url: remainingUrl,
   });
+
 
   function getQueryParam(param) {
     const urlParams = new URLSearchParams(window.location.search);
@@ -67,6 +68,27 @@ export default function DetailsContainer() {
     }, 500);
   }, [id]);
 
+
+   useEffect(() => {
+    const loadScript = (src) => {
+      
+        const script = document.createElement("script");
+        script.src = src;
+        script.async = true;
+      
+        document.body.appendChild(script);
+     
+    };
+
+    // Load Instagram, Facebook, and Twitter scripts
+    loadScript("https://www.instagram.com/embed.js", "instagram-embed-script");
+    loadScript(
+      "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v16.0",
+      "facebook-embed-script"
+    );
+    loadScript("https://platform.twitter.com/widgets.js", "twitter-embed-script");
+  }, []);
+
   const formattedDate = headerNewsDataApi?.news[0]?.date
     ? new Date(headerNewsDataApi?.news[0]?.date).toLocaleDateString('en-GB', {
         day: '2-digit',
@@ -85,12 +107,14 @@ export default function DetailsContainer() {
         // Delay to ensure the embed is in the DOM before processing
         setTimeout(() => {
           window.instgrm.Embeds.process();
-        }, 1000 );
+        }, 1000);
       }
     };
 
     // Check if the Instagram script is already present in the DOM
-    const scriptExists = document.querySelector('script[src="https://www.instagram.com/embed.js"]');
+    const scriptExists = document.querySelector(
+      'script[src="https://www.instagram.com/embed.js"]'
+    );
 
     if (!scriptExists) {
       // Create the Instagram embed script if it doesn't exist
@@ -103,7 +127,7 @@ export default function DetailsContainer() {
       // Re-process embeds if the script is already loaded
       loadInstagramEmbed();
     }
-  }, [])
+  }, []);
   return (
     <>
       {loading ? (
@@ -349,7 +373,7 @@ export default function DetailsContainer() {
                             }}
                             text={parse(val?.description ?? ' ')}
                           />
-                        
+
                           {val?.image && (
                             <img
                               src={`${imageUrl}${val?.image}`}
@@ -360,11 +384,18 @@ export default function DetailsContainer() {
                               }}
                             />
                           )}
-                           <Box sx={{display:'flex',justifyContent:'center',}}>
-      <Box className="categoriesContainer">
-                 {parse(`${val?.embed ?? ''}`)}
-                 </Box>
-                 </Box>
+                          <Box
+                            sx={{ display: 'flex', justifyContent: 'center' }}
+                          >
+                            <Box className="categoriesContainer">
+                              {/* {parse(`${val?.embed ?? ''}`)} */}
+                              <div
+                                dangerouslySetInnerHTML={{
+                                  __html: val?.embed ?? '',
+                                }}
+                              ></div>
+                            </Box>
+                          </Box>
                         </React.Fragment>
                       )
                   )}
