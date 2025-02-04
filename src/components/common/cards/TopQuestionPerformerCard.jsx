@@ -6,7 +6,7 @@ export default function TopQuestionPerformerCard({val}) {
   return (
     <Box sx={{display:'flex',flexDirection:{xs:'column',md:'row'},alignItems:'flex-start',gap:'0.5rem',width:'35%'}}>
     <Box sx={{background:'grey',minHeight:{xs:'90px',md:'110px'},height:{xs:'90px',md:'110px'},minWidth:{xs:'90px',md:'110px'},width:{xs:'90px',md:'110px'},borderRadius:'50%',overflow:'hidden'}}>
-      <img src={val?.photo} alt={val.name} style={{height:'100%',width:'100%',}}/>
+      <img src={val?.image} alt={val.member} style={{height:'100%',width:'100%',}}/>
     </Box>
    <Box sx={{marginTop:'10px'}}>
     <Text
@@ -15,7 +15,7 @@ export default function TopQuestionPerformerCard({val}) {
           />
     <Text
             sx={{ color: '#656565', fontSize: '0.9rem', fontWeight: 600, }}
-            text={val?.name?.toUpperCase()}
+            text={val?.member?.toUpperCase()}
           />
     {/* <Text
             sx={{ color: '#6e6d6d', fontSize: '0.8rem', fontWeight: 600 }}
@@ -23,11 +23,11 @@ export default function TopQuestionPerformerCard({val}) {
           /> */}
     <Text
             sx={{ color: 'grey', fontSize: '0.75rem', fontWeight: 500 }}
-            text={val?.party}
+            text={val?.party_full_name}
           />
     <Text
             sx={{ color: 'grey', fontSize: '0.75rem', fontWeight: 500 }}
-            text={val?.state}
+            text={val?.state_name}
           />
           </Box>
     </Box>

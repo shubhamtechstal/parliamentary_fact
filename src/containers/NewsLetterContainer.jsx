@@ -752,7 +752,7 @@ export default function NewsLetterContainer() {
                       fontFamily: '"Sora", sans-serif',
                     }}
                   >
-                    {`${newsLetterData?.loksabha_productivity?.length > 0 ? newsLetterData?.loksabha_productivity[0]?.productivity_percentage?.split('.')[0] : 0}`}
+                    {`${newsLetterData?.loksabha_productivity?.length > 0 ? newsLetterData?.loksabha_productivity[0]?.productivity_percentage?.toString().split('.')[0] : 0}`}
                   </text>
                   <text
                     x="52%"
@@ -766,7 +766,7 @@ export default function NewsLetterContainer() {
                       fontFamily: '"Sora", sans-serif',
                     }}
                   >
-                    {`.${newsLetterData?.loksabha_productivity?.length > 0 ? newsLetterData?.loksabha_productivity[0]?.productivity_percentage?.split('.')[1] : 0}%`}
+                    {`.${newsLetterData?.loksabha_productivity?.length > 0 ? newsLetterData?.loksabha_productivity[0]?.productivity_percentage?.toString().split('.')[1] : 0}%`}
                   </text>
                   <text
                     x="50%"
@@ -847,7 +847,7 @@ export default function NewsLetterContainer() {
                       top: -22,
                       padding: '0.2rem 0',
                     }}
-                    text={`${newsLetterData?.loksabha_productivity?.length > 0 ? '11:59' : 0} Hrs`}
+                    text={`${newsLetterData?.loksabha_productivity?.length > 0 ? `${Math.floor(newsLetterData?.loksabha_productivity?.[0]?.actual_time / 60).toString().padStart(2, '0')}:${(newsLetterData?.loksabha_productivity?.[0]?.actual_time% 60)?.toString().padStart(2, '0')}` : 0} Hrs`}
                   />
                   <Text
                     font={'Sora'}
@@ -1587,7 +1587,7 @@ export default function NewsLetterContainer() {
                   // marginBottom:{xs:'none',md:'2rem'}
                 }}
               >
-                {newsLetterData?.performer_mps
+                {newsLetterData?.top_members
                   ?.slice(0, 3)
                   ?.map((val, index) => (
                     <TopQuestionPerformerCard key={index + val} val={val} />

@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "NODE_ENV=local vite",
-    "dev": " NODE_ENV=development vite",
+    "dev": " NODE_ENV=development vite --host",
     "prod": "NODE_ENV=production vite",
     "build:dev": "NODE_ENV=development vite build",
     "build:prod": "NODE_ENV=production vite build",
@@ -25,6 +25,7 @@
     "@hookform/resolvers": "^3.3.2",
     "@mui/icons-material": "^5.14.19",
     "@mui/material": "^5.15.20",
+    "@mui/x-charts": "^7.22.1",
     "@mui/x-data-grid": "^6.18.4",
     "@reduxjs/toolkit": "^2.0.1",
     "axios": "^1.6.2",

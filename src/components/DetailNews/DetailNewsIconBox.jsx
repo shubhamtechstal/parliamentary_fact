@@ -72,7 +72,8 @@ const DetailNewsIconBox = ({ title, description, imageUrl }) => {
           href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(newsLink)}`}
           aria-label="Share on Facebook"
         >
-          <FacebookIcon sx={{ fontSize: '2rem', color: '#4267B2' }} />
+          {/* <FacebookIcon sx={{ fontSize: '2rem', color: '#4267B2' }} /> */}
+          <img src='/Assets/icons/facebook_new.svg'/>
         </IconButton>
 
         {/* Twitter Share Button */}
@@ -80,12 +81,17 @@ const DetailNewsIconBox = ({ title, description, imageUrl }) => {
           href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(newsLink)}&text=${encodeURIComponent(metaData.title)}`}
           aria-label="Share on Twitter"
         >
-          <XIcon sx={{ fontSize: '1.7rem', color: '#fff', background: '#000', padding: '0.3rem', borderRadius: '5px' }} />
+          <img src='/Assets/icons/twitterX_new.svg' style={{height:20}}/>
+          
+          {/* <XIcon sx={{ fontSize: '1.7rem', color: '#fff', background: '#000', padding: '0.3rem', borderRadius: '5px' }} /> */}
+
         </IconButton>
 
         {/* WhatsApp Share Button */}
         <IconButton href={`https://api.whatsapp.com/send?text=${encodeURIComponent(metaData.title)}%0A${encodeURIComponent(newsLink)}&url=${encodeURIComponent(metaData.imageUrl)}`} aria-label="Share on WhatsApp">
-          <WhatsAppIcon sx={{ fontSize: '1.7rem', color: '#fff', background: '#25D366', padding: '0.1rem', borderRadius: '5px' }} />
+        <img src='/Assets/icons/whatsapp_new.svg' style={{height:30}}/>
+        
+          {/* <WhatsAppIcon sx={{ fontSize: '1.7rem', color: '#fff', background: '#25D366', padding: '0.1rem', borderRadius: '5px' }} /> */}
         </IconButton>
 
         {/* Instagram Share Button */}
@@ -93,7 +99,7 @@ const DetailNewsIconBox = ({ title, description, imageUrl }) => {
           href={`https://www.instagram.com/sharer/sharer.php?u=${encodeURIComponent(newsLink)}`}
           aria-label="Share on Instagram"
         >
-          <Box 
+          {/* <Box 
             sx={{ 
               width: '1.8rem', 
               height: '1.8rem', 
@@ -105,7 +111,9 @@ const DetailNewsIconBox = ({ title, description, imageUrl }) => {
             }}
           >
             <InstagramIcon sx={{ fontSize: '1.7rem', color: 'white' }} />
-          </Box>
+          </Box> */}
+          <img src='/Assets/icons/instagram_new.svg' />
+
         </IconButton>
       </Box>
     </>

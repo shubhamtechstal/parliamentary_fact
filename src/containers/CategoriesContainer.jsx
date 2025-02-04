@@ -61,6 +61,7 @@ export default function CategoriesContainer() {
           sx={{ width: '180px', height: '37.5rem', background: '#0d0b52',position:'sticky',top:0 }}
         >
            <img 
+           style={{cursor:'pointer'}}
            onClick={()=>window.open("https://www.theshilp.com/product-details/fortunate-maha-ganesha", "_blank")}
            className="advertise_img" src="/Assets/ads/leftSideImage.jpg" />
         </Box>
@@ -120,12 +121,12 @@ export default function CategoriesContainer() {
                         <Box className="desktop-advertise" sx={{ maxWidth: '650px', height: '70px' }}>
                         <img 
                         onClick={()=>window.open("https://www.theshilp.com/product-details/fortunate-maha-ganesha", "_blank")}
-                        style={{height:'100%',width:'100%'}} className="advertise_img" src="/Assets/ads/728x90ad.jpg" />
+                        style={{height:'100%',width:'100%',cursor:'pointer'}} className="advertise_img" src="/Assets/ads/728x90ad.jpg" />
                         </Box>
                         <Box className="mobile-advertise" sx={{ maxWidth: '650px', height: '50px' }}>
                         <img 
                         onClick={()=>window.open("https://www.theshilp.com/product-details/indian-army-strike-antique-bronze-gold", "_blank")}
-                        style={{height:'100%',width:'100%'}} className="advertise_img" src="/Assets/ads/shilp-mobile-ad-300x50.jpg" />
+                        style={{height:'100%',width:'100%',cursor:'pointer'}} className="advertise_img" src="/Assets/ads/shilp-mobile-ad-300x50.jpg" />
                         </Box>
                       </Box>
                     </Box>
@@ -190,7 +191,7 @@ export default function CategoriesContainer() {
           >
               <img 
                onClick={()=>window.open("https://www.theshilp.com/product-details/indian-army-strike-antique-bronze-gold", "_blank")}
-            style={{width:'300px',height:'auto'}}  className="advertise_img" src="/Assets/ads/secondAd.jpg" />
+            style={{width:'300px',height:'auto',cursor:'pointer'}}  className="advertise_img" src="/Assets/ads/secondAd.jpg" />
           </Box>
           <Box sx={{display:'flex',gap:'5px'}}>
                 <Text
@@ -213,6 +214,8 @@ export default function CategoriesContainer() {
           sx={{ width: '180px', height: '37.5rem', background: '#0d0b52',position:'sticky',top:0 }}
         >
            <img 
+           style={{cursor:'pointer'}}
+
             onClick={()=>window.open("https://www.theshilp.com/product-details/indian-army-strike-antique-bronze-gold", "_blank")}
            className="advertise_img" src="/Assets/ads/rightSideImage.jpg" />
         </Box>
@@ -237,13 +240,13 @@ export default function CategoriesContainer() {
           <Box className="desktop-advertise" sx={{ maxWidth: '728px', height: '90px' }}>
                 <img
                 onClick={()=>window.open("https://www.theshilp.com/product-details/fortunate-maha-ganesha", "_blank")}
-                style={{height:'100%',width:'100%'}} className="advertise_img" src="/Assets/ads/728x90ad.jpg" />
+                style={{height:'100%',width:'100%',cursor:'pointer'}} className="advertise_img" src="/Assets/ads/728x90ad.jpg" />
 
           </Box>
           <Box className="mobile-advertise" sx={{ maxWidth: '728px', height: '50px' }}>
                 <img
                 onClick={()=>window.open("https://www.theshilp.com/product-details/fortunate-maha-ganesha", "_blank")}
-                style={{height:'100%',width:'100%'}} className="advertise_img" src="/Assets/ads/shilp-mobile-ad-300x50-2.jpg" />
+                style={{height:'100%',width:'100%',cursor:'pointer'}} className="advertise_img" src="/Assets/ads/shilp-mobile-ad-300x50-2.jpg" />
 
           </Box>
         </Box>

@@ -37,6 +37,9 @@ export default function ContactContainer() {
 
   // Handle form input change
   const handleChange = (e) => {
+    if(e.target.name==='mobile'){
+        e.target.value.replace(/\D/g, "")
+      if(e.target.value.length>10)return}
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -66,6 +69,13 @@ export default function ContactContainer() {
     } finally {
       setLoading(false); // Hide loading spinner
       setOpenSnackbar(true); // Show alert
+      setFormData({
+        name: '',
+        organization: '',
+        email: '',
+        mobile: '',
+        message: '',
+      })
     }
   };
 
@@ -203,7 +213,7 @@ export default function ContactContainer() {
                     label="Mobile"
                     name="mobile"
                     type="tel"
-                    value={formData.mobile}
+                    value={formData.mobile.replace(/\D/g, "")}
                     onChange={handleChange}
                     size="small"
                     margin="dense"
@@ -244,6 +254,8 @@ export default function ContactContainer() {
 
       {/* Snackbar for alerts */}
       <Snackbar
+  sx={{height:'100px',width:'max-content',top:0,left:'63% !important'}}
+
         open={openSnackbar}
         autoHideDuration={6000}
         onClose={handleCloseSnackbar}

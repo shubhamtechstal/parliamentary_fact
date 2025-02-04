@@ -49,7 +49,7 @@ const navigate = useNavigate();
                     '_blank'
                   )
                 }
-                style={{ width: '100%', height: '100%' }}
+                style={{ width: '100%', height: '100%',cursor:'pointer' }}
                 src="/Assets/ads/728x90ad.jpg"
               />
             </Box>

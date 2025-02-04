@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Box, Container, Divider } from '@mui/material';
 import Text from 'components/common/Text';
 import SubHeadingNewCard from 'components/common/cards/SubHeadingNewCard';
@@ -13,6 +13,7 @@ import parse from 'html-react-parser';
 import CircularProgress from '@mui/material/CircularProgress';
 
 export default function DetailsContainer() {
+  const wrapperRef = useRef(null);
   const url = window.location.href;
 
   // Replace the exact base path pattern in the URL
@@ -69,25 +70,41 @@ export default function DetailsContainer() {
   }, [id]);
 
 
-   useEffect(() => {
-    const loadScript = (src) => {
-      
-        const script = document.createElement("script");
-        script.src = src;
-        script.async = true;
-      
-        document.body.appendChild(script);
-     
-    };
+  useEffect(() => {
+    const wrapper = wrapperRef.current;
+   if(headerNewsDataApi){
 
-    // Load Instagram, Facebook, and Twitter scripts
-    loadScript("https://www.instagram.com/embed.js", "instagram-embed-script");
-    loadScript(
-      "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v16.0",
-      "facebook-embed-script"
-    );
-    loadScript("https://platform.twitter.com/widgets.js", "twitter-embed-script");
-  }, []);
+    const blockquote = wrapper?.querySelector("blockquote");
+
+    if (blockquote) {
+      const width = blockquote.getAttribute("width");
+      const height = blockquote.getAttribute("height");
+
+      if (width && height) {
+        const aspectRatio = (height / width) * 100;
+        wrapper.style.paddingTop = `${aspectRatio}%`;
+      }
+    }}
+  }, [headerNewsDataApi]);
+  //  useEffect(() => {
+  //   const loadScript = (src) => {
+      
+  //       const script = document.createElement("script");
+  //       script.src = src;
+  //       script.async = true;
+      
+  //       document.body.appendChild(script);
+     
+  //   };
+
+  //   // Load Instagram, Facebook, and Twitter scripts
+  //   loadScript("https://www.instagram.com/embed.js", "instagram-embed-script");
+  //   loadScript(
+  //     "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v16.0",
+  //     "facebook-embed-script"
+  //   );
+  //   loadScript("https://platform.twitter.com/widgets.js", "twitter-embed-script");
+  // }, []);
 
   const formattedDate = headerNewsDataApi?.news[0]?.date
     ? new Date(headerNewsDataApi?.news[0]?.date).toLocaleDateString('en-GB', {
@@ -102,32 +119,57 @@ export default function DetailsContainer() {
 
   const keywords = headerNewsDataApi?.news[0]?.keywords.split(',');
   useEffect(() => {
-    const loadInstagramEmbed = () => {
-      if (window.instgrm) {
-        // Delay to ensure the embed is in the DOM before processing
-        setTimeout(() => {
-          window.instgrm.Embeds.process();
-        }, 1000);
+    const loadScript = (src, id, callback) => {
+      if (document.getElementById(id)) {
+        if (callback) callback();
+        return;
       }
-    };
-
-    // Check if the Instagram script is already present in the DOM
-    const scriptExists = document.querySelector(
-      'script[src="https://www.instagram.com/embed.js"]'
-    );
-
-    if (!scriptExists) {
-      // Create the Instagram embed script if it doesn't exist
-      const script = document.createElement('script');
-      script.src = 'https://www.instagram.com/embed.js'; // Explicit https
+      const script = document.createElement("script");
+      script.src = src;
+      script.id = id;
       script.async = true;
-      script.onload = loadInstagramEmbed;
+      script.onload = callback;
       document.body.appendChild(script);
-    } else {
-      // Re-process embeds if the script is already loaded
-      loadInstagramEmbed();
-    }
+    };
+  
+    // Load scripts
+    loadScript(
+      "https://www.instagram.com/embed.js",
+      "instagram-embed-script",
+      () => {
+        if (window.instgrm) {
+          setTimeout(() => {
+            window.instgrm.Embeds.process();
+          }, 1000);
+        }
+      }
+    );
+  
+    loadScript(
+      "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v16.0",
+      "facebook-embed-script",
+      () => {
+        if (window.FB && window.FB.XFBML) {
+          setTimeout(() => {
+            window.FB.XFBML.parse();
+          }, 1000);
+        }
+      }
+    );
+  
+    loadScript(
+      "https://platform.twitter.com/widgets.js",
+      "twitter-embed-script",
+      () => {
+        if (window.twttr && window.twttr.widgets) {
+          setTimeout(() => {
+            window.twttr.widgets.load();
+          }, 1000);
+        }
+      }
+    );
   }, []);
+  
   return (
     <>
       {loading ? (
@@ -167,6 +209,7 @@ export default function DetailsContainer() {
                     '_blank'
                   )
                 }
+                style={{cursor:'pointer'}}
                 className="advertise_img"
                 src="/Assets/ads/leftSideImage.jpg"
               />
@@ -347,6 +390,17 @@ export default function DetailsContainer() {
                   {/* <DetailNewsIconBox /> */}
                   {/* <div dangerouslySetInnerHTML={{ __html: parse(headerNewsDataApi?.news[0]?.news_description[1]
     ?.description?.replace(/<\/?p>/g, '') ?? '') ?? "" }} /> */}
+      <Box
+                            sx={{ display: 'flex', justifyContent: 'center' }}
+                          >
+    <Box className="embed-wrapper" ref={wrapperRef}>
+      <div  className="embed-content"
+                                dangerouslySetInnerHTML={{
+                                  __html: headerNewsDataApi?.news[0]?.news_description?.[0].embed ?? '',
+                                }}
+                                ></div>
+                                </Box>
+                                </Box>
                   {headerNewsDataApi?.news[0]?.news_description?.map(
                     (val, index) =>
                       index > 0 && (
@@ -389,11 +443,13 @@ export default function DetailsContainer() {
                           >
                             <Box className="categoriesContainer">
                               {/* {parse(`${val?.embed ?? ''}`)} */}
-                              <div
+                            <Box className="embed-wrapper" ref={wrapperRef}>
+                              <div className="embed-content"
                                 dangerouslySetInnerHTML={{
                                   __html: val?.embed ?? '',
                                 }}
                               ></div>
+                            </Box>
                             </Box>
                           </Box>
                         </React.Fragment>
@@ -501,8 +557,7 @@ export default function DetailsContainer() {
                   }}
                 >
                   <img
-                    style={{ height: 'auto', width: '300px' }}
-                    x
+                    style={{ height: 'auto', width: '300px',cursor:'pointer' }}
                     onClick={() =>
                       window.open(
                         'https://www.theshilp.com/product-details/fortunate-maha-ganesha',
@@ -545,7 +600,7 @@ export default function DetailsContainer() {
                     }}
                   >
                     <img
-                      style={{ height: 'auto', width: '300px' }}
+                      style={{ height: 'auto', width: '300px',cursor:'pointer' }}
                       onClick={() =>
                         window.open(
                           'https://www.theshilp.com/product-details/indian-army-strike-antique-bronze-gold',
@@ -590,6 +645,7 @@ export default function DetailsContainer() {
                   )
                 }
                 className="advertise_img"
+                style={{cursor:'pointer'}}
                 src="/Assets/ads/rightSideImage.jpg"
               />
             </Box>

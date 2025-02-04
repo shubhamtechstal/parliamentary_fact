@@ -30,6 +30,9 @@ export default function AdvertiseContainer() {
   });
 
   const handleChange = (e) => {
+    if(e.target.name==='mobile'){
+        e.target.value.replace(/\D/g, "")
+      if(e.target.value.length>10)return}
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -56,6 +59,12 @@ export default function AdvertiseContainer() {
     } finally {
       setLoading(false); // Hide loading spinner
       setOpenSnackbar(true); // Show alert
+      setFormData({
+        name: '',
+        organization: '',
+        email: '',
+        mobile: '',
+      })
     }
   };
   const handleCloseSnackbar = () => {
@@ -193,6 +202,7 @@ export default function AdvertiseContainer() {
 </Box>
 </Box>
 <Snackbar
+   sx={{height:'100px',width:'max-content',top:0,left:'63% !important'}}
         open={openSnackbar}
         autoHideDuration={6000}
         onClose={handleCloseSnackbar}

@@ -4,6 +4,8 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 import AppLayoutContainer from 'containers/Layout/AppLayoutContainer';
+import ParliamentAttendancePage from 'pages/ParliamentAttendancePage';
+import NotFoundPage from 'pages/NotFoundPage';
 
 // Public route pages
 const LoginPage = lazy(() => import('pages/LoginPage'));
@@ -70,22 +72,26 @@ const routes = [
         path: 'advertise-with-us',
         element: <PrivateRoute component={<AdvertiseWithUs />} />,
       },
-      {
-        path: 'mps-public-rating',
-        element: <PrivateRoute component={<MpsPublicRating/>} />,
-      },
-      {
-        path: 'mps-public-rating-list',
-        element: <PrivateRoute component={<MpsRatingAllList/>} />,
-      },
-      {
-        path: 'rate-your-mp',
-        element: <PrivateRoute component={<RateYourMp/>} />,
-      },
+      // {
+      //   path: 'mps-public-rating',
+      //   element: <PrivateRoute component={<MpsPublicRating/>} />,
+      // },
+      // {
+      //   path: 'mps-public-rating-list',
+      //   element: <PrivateRoute component={<MpsRatingAllList/>} />,
+      // },
+      // {
+      //   path: 'rate-your-mp',
+      //   element: <PrivateRoute component={<RateYourMp/>} />,
+      // },
       {
         path: 'newsletter/loksabha/*',
         element: <PrivateRoute component={<NewsLetter/>} />,
       },
+      // {
+      //   path: 'parliament-performance-attendance',
+      //   element: <PrivateRoute component={<ParliamentAttendancePage/>} />,
+      // },
     ],
   },
   {
@@ -138,6 +144,8 @@ const AppRoutes = () => {
           <Route key={`nav_${navI}`} path={nav.path} element={nav.element} />
         );
       })}
+       <Route path="*" element={<NotFoundPage />} />
+       
     </Routes>
   );
 };
