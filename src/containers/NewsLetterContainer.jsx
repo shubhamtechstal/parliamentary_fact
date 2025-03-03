@@ -23,6 +23,7 @@ export default function NewsLetterContainer() {
   const navigate = useNavigate();
   const [filter, setFilter] = useState(false);
   const [datefilter, setDateFilter] = useState(false);
+  const [loading,setLoading] = useState(false);
   const [selectedDropDown, setSelectedDropDown] = useState({
     LokSabha: '',
     year: '',
@@ -185,6 +186,7 @@ export default function NewsLetterContainer() {
   }, [selectedDropDown?.dates, window.location.href]);
   useEffect(() => {
     navigate(selectedDropDown?.dates[selectedDate]?.actualDate?.split('T')[0]);
+    setLoading(true);
   }, [selectedDropDown?.dates, selectedDate]);
   useEffect(() => {
     const months = [
@@ -208,14 +210,14 @@ export default function NewsLetterContainer() {
     setFormatedDate(
       `${newsLetterData?.date_session?.day_name ?? ''} ${isNaN(day) ? 'Invalid date' : day} ${month ?? ''} ${isNaN(year) ? '' : year}`
     );
+    setLoading(false);
   }, [newsLetterData?.date_session?.date]);
 
-  // const currentDate = new Date();
-  // console.log(currentDate.toISOString().split('T')[0], 'currentdate');
+  
 
   return (
     <>
-      {isLoading ? (
+      {(isLoading || loading) ? (
         <Box
           sx={{
             height: '100vh',
@@ -692,7 +694,7 @@ export default function NewsLetterContainer() {
                   }}
                   text={formattedDate ?? 'N/A'}
                 />
-                <Text
+                {/* <Text
                   font={'Sora'}
                   sx={{
                     color: 'grey',
@@ -701,7 +703,7 @@ export default function NewsLetterContainer() {
                     marginTop: '10px',
                   }}
                   text={`Day-${(newsLetterData?.date_session?.day_count ?? "00")?.toString()?.padStart(2, '0') }`}
-                />
+                /> */}
                 <Text
                   font={'Sora'}
                   sx={{
@@ -941,7 +943,7 @@ export default function NewsLetterContainer() {
                         justifyContent: 'center',
                         alignItems: 'center',
                       }}
-                      text={'06'}
+                      text={formatNumber(newsLetterData?.adjourned_count ?? 0)}
                     />
                   </Box>
                   <Box>
@@ -1331,10 +1333,7 @@ export default function NewsLetterContainer() {
                     }}
                     endAngle={130}
                     value={
-                      newsLetterData?.questions_summary?.length > 0
-                        ? newsLetterData?.questions_summary
-                            ?.mp_participant_percent
-                        : 0
+                      newsLetterData?.questions_summary?.participation_percentage?.toFixed(1) ?? 0
                     }
                   >
                     <GaugeReferenceArc /> {/* Set the color here */}

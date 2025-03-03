@@ -1,8 +1,9 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { apiSliceInterceptor } from '../apiSliceInterceptor';
 
 const newsLetterApi = createApi({
   reducerPath: 'newsLetterApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://parliamentryfact.revanshrenewable.com/API' }),
+  baseQuery: apiSliceInterceptor.baseQueryWithInterceptor,
   tagTypes: [
     'NEWS_LETTER_DROPDOWN',
    'NEWS_LETTER_DATA'

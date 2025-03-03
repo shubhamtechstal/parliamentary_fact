@@ -80,18 +80,18 @@ const routes = [
       //   path: 'mps-public-rating-list',
       //   element: <PrivateRoute component={<MpsRatingAllList/>} />,
       // },
-      // {
-      //   path: 'rate-your-mp',
-      //   element: <PrivateRoute component={<RateYourMp/>} />,
-      // },
+      {
+        path: 'rate-your-mp',
+        element: <PrivateRoute component={<RateYourMp/>} />,
+      },
       {
         path: 'newsletter/loksabha/*',
         element: <PrivateRoute component={<NewsLetter/>} />,
       },
-      // {
-      //   path: 'parliament-performance-attendance',
-      //   element: <PrivateRoute component={<ParliamentAttendancePage/>} />,
-      // },
+      {
+        path: 'parliament-performance-attendance',
+        element: <PrivateRoute component={<ParliamentAttendancePage/>} />,
+      },
     ],
   },
   {
