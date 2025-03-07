@@ -291,7 +291,7 @@ export default function NewsLetterContainer() {
               }}
               startIcon={<FilterAltOutlinedIcon />}
             >
-              {filter ? 'Clear Filter' : 'Filter'}
+              {filter ? 'Clear' : 'Filter'}
             </Button>
           </Box>
           {filter && (

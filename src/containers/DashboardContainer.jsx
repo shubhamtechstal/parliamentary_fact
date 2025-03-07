@@ -112,7 +112,7 @@ export default function DashboardContainer() {
             justifyContent: 'space-between',
           }}
         >
-          <Box sx={{ width: { xs: 'min-content', md: '28%' } }}>
+          <Box sx={{ width: { xs: 'min-content', md: '28%' }, padding: {md: '1rem'}}}>
             <Box
               sx={{
                 display: 'flex',

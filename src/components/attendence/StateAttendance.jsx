@@ -2,9 +2,9 @@ import { Box } from '@mui/material'
 import Text from 'components/common/Text'
 import React from 'react'
 
-export default function StateAttendance() {
+export default function StateAttendance({index}) {
   return (
-    <Box sx={{display:'flex',alignItems:'center'}}>
+    <Box key={index} sx={{display:'flex',alignItems:'center'}}>
         <img style={{height:'100px',width:'auto'}} src='/Assets/madhyaPradesh.png'/>
         <Box sx={{display:'flex',flexDirection:'column',alignItems:'center'}}>
             <Box sx={{height:'30px',width:'2px',background:'grey'}}></Box>
