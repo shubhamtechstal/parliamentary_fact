@@ -10,10 +10,10 @@ import {
 const pData = [10, 4, 6, 5, 14, 14, 15]; // Percentages as data points
 const xLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'];
 
-export default function LineCharts() {
+export default function LineCharts({width}) {
   return (
     <ChartContainer
-      width={500}
+      width={width||500}
       height={250}
       series={[{ type: 'line', data: pData, curve: 'linear' }]} // Disable curve
       xAxis={[{ scaleType: 'point', data: xLabels }]}
@@ -40,7 +40,7 @@ export default function LineCharts() {
       {pData.map((y, index) => (
         <text
           key={index}
-          x={(500 / xLabels.length) * (index + 0.5)} // Dynamic x position
+          x={((width || 500) / xLabels.length) * (index + 0.5)} // Dynamic x position
           y={index % 2 === 0 ? 190 - y * 10 :220 - y * 10 } // Dynamic y position (scaled for simplicity)
           textAnchor="middle"
           style={{

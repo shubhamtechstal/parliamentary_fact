@@ -1,6 +1,6 @@
 import React from "react";
 
-const ColorfulArc = ({ progressValues }) => {
+const ColorfulArc = ({ progressValues, height, width }) => {
     const arcData = [
         { radius: 95, strokeWidth: 10, color: "white", progress: 100 }, // White background arc
         { radius: 90, strokeWidth: 6, color: "#f5b797", progress: progressValues[0] || 0 },
@@ -10,7 +10,7 @@ const ColorfulArc = ({ progressValues }) => {
     ];
 
     return (
-        <svg width="450" height="225" viewBox="0 0 200 100">
+        <svg width={width || "450"} height={height || "225"} viewBox="0 0 200 100">
             {arcData.map((arc, index) => {
                 const circumference = Math.PI * arc.radius;
                 const dashLength = (arc.progress / 100) * circumference;

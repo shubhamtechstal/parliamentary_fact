@@ -6,7 +6,7 @@ import LS_productivity from 'components/pmt_performance/LS_productivity';
 import LS_QuestionsComponent from 'components/pmt_performance/LS_questions';
 import MpFundSection from 'components/pmt_performance/MpFundSection';
 import {
-    debateListData,
+  debateListData,
   MpFundsectionData,
   performace_chipList,
   productivity_bottomCardsdata,
@@ -14,9 +14,60 @@ import {
   questionsListData,
 } from 'helpers/performanceConstants';
 
-const Productivity_bottomCards = ({ cardData, BottomRightChip }) => {
+
+const BottomRightChip = () => {
   return (
-    <div style={{ position: 'relative', padding: '2rem 10rem' }}>
+    <Chip
+      label={'MPs Participation in Lok Sabha Attendance'}
+      Filled
+      sx={{
+        marginTop: '2rem',
+        color: 'white',
+        background: 'gray',
+        fontWeight: '500',
+      }}
+    />
+  );
+};
+const AdvertiseSection = () => {
+  return (
+    <>
+    <Box
+      sx={{
+        background: 'white',
+        display: {xs: 'none', md: 'flex'},
+        justifyContent: 'center',
+        padding: '1rem',
+        borderTop: '1px solid #00000080',
+        borderBottom: '1px solid #00000080',
+      }}
+    >
+      <img src="/advertise.jpg" />
+    </Box>
+    <Box
+      sx={{
+        background: 'white',
+        display:  {xs: 'flex', md: 'none'},
+        justifyContent: 'center',
+        padding: '1rem',
+        borderTop: '1px solid #00000080',
+        borderBottom: '1px solid #00000080',
+      }}
+    >
+      <img style={{width:'100%'}} src="/advertise.jpg" />
+    </Box>
+    </>
+  );
+};
+const Productivity_bottomCards = ({ cardData=productivity_bottomCardsdata, BottomRightChip }) => {
+  return (
+    <Box
+      sx={{
+        position: 'relative',
+        padding: '2rem 10rem',
+        display:{xs:'none',md:'block'}
+      }}
+    >
       <Box
         sx={{
           display: 'flex',
@@ -86,39 +137,10 @@ const Productivity_bottomCards = ({ cardData, BottomRightChip }) => {
       <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
         <BottomRightChip />
       </Box>
-    </div>
-  );
-};
-const BottomRightChip = () => {
-  return (
-    <Chip
-      label={'MPs Participation in Lok Sabha Attendance'}
-      Filled
-      sx={{
-        marginTop: '2rem',
-        color: 'white',
-        background: 'gray',
-        fontWeight: '500',
-      }}
-    />
-  );
-};
-const AdvertiseSection = () => {
-  return (
-    <Box
-      sx={{
-        background: 'white',
-        display: 'flex',
-        justifyContent: 'center',
-        padding: '1rem',
-        borderTop: '1px solid #00000080',
-        borderBottom: '1px solid #00000080',
-      }}
-    >
-      <img src="/advertise.jpg" />
     </Box>
   );
 };
+
 function ParliamentPerformanceContainer() {
   return (
     <Box
@@ -127,9 +149,18 @@ function ParliamentPerformanceContainer() {
         color: '#00000080',
         backgroundColor: '#f4f6f9',
         fontFamily: '"Sora", sans-serif',
+        scrollbarColor:"transparent transparent"
       }}
     >
-      <Box sx={{ display: 'flex', justifyContent:'space-between', padding: '2rem 10rem' }}>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'flex-start',
+          gap: '1rem',
+          padding: { md: '2rem 10rem', xs: '2rem  1rem 10px' },
+          overflowX: 'auto',
+        }}
+      >
         {performace_chipList?.map((title, i) => {
           return <Chip key={i} label={title} variant="outlined" />;
         })}
@@ -137,25 +168,46 @@ function ParliamentPerformanceContainer() {
       <Box
         sx={{
           display: 'flex',
+          gap: { xs: '0.8rem', md: '2rem' },
+          flexDirection: { xs: 'column', md: 'row' },
+          textAlign: { xs: 'center', md: 'left' },
           justifyContent: 'space-between',
           marginBottom: '20px',
-          padding: '2rem 10rem',
+          padding: { md: '0rem 10rem', xs: '1rem' },
         }}
       >
         <Text
           sx={{
-            fontSize: '1.3rem',
+            fontSize: { xs: '1rem', md: '1.5rem' },
             letterSpacing: '-0.3px',
             fontWeight: 600,
           }}
           font={'Sora'}
           text={'Parliament Performance 18th Lok Sabha'}
         />
+        <Text
+          sx={{
+            fontSize: { xs: '1rem', md: '1.5rem' },
+            letterSpacing: '-0.3px',
+            fontWeight: 400,
+            display: { xs: 'block', md: 'none' },
+          }}
+          font={'Sora'}
+          text={'Lok Sabha Productivity'}
+        />
+        <Text
+          sx={{
+            display: { xs: 'flex', md: 'none' },
+            justifyContent: 'center',
+          }}
+        >
+          <span style={{fontWeight:"600"}}>Till Now | </span> 23 September 2020
+        </Text>
         <Box
           sx={{
             color: '#00000080',
             borderBottom: '1px solid #D3D3D3',
-            display: 'flex',
+            display: { md: 'flex', xs: 'none' },
             gap: '5px',
             alignItems: 'center',
             padding: '0 30px 5px',
@@ -177,7 +229,7 @@ function ParliamentPerformanceContainer() {
           Read before check performance
         </Box>
       </Box>
-      <LS_productivity productivity_schedule={productivity_schedule} />
+      <LS_productivity productivity_schedule={productivity_schedule} mobCardsData={productivity_bottomCardsdata} />
       <Productivity_bottomCards
         cardData={productivity_bottomCardsdata}
         BottomRightChip={BottomRightChip}
