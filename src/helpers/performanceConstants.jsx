@@ -8,33 +8,33 @@ export const performace_chipList = [
 ];
 export const productivity_schedule = [
   {
-    title: 'SITTING SCHEDULED',
-    time: '02:22 Hrs.',
+    name: 'SITTING SCHEDULED',
+    value: '02:22 Hrs.',
   },
   {
-    title: 'TIME LOST',
-    time: '00:00 Hrs.',
+    name: 'TIME LOST',
+    value: '00:00 Hrs.',
   },
   {
-    title: 'LUNCH TIME',
-    time: '00:00 Hrs.',
+    name: 'LUNCH TIME',
+    value: '00:00 Hrs.',
   },
   {
-    title: 'Productivity',
-    value: '100',
+    name: 'Productivity',
+    valuee: '100',
     percentage: '.28%',
   },
   {
-    title: 'LATE SITTING',
-    time: '00:00 Hrs.',
+    name: 'LATE SITTING',
+    value: '00:00 Hrs.',
   },
   {
-    title: 'OVER TIME',
-    time: '00:00 Hrs.',
+    name: 'OVER TIME',
+    value: '00:00 Hrs.',
   },
   {
-    title: 'ACTUAL SITTING',
-    time: '02:22 Hrs.',
+    name: 'ACTUAL SITTING',
+    value: '02:22 Hrs.',
   },
 ];
 export const productivity_bottomCardsdata = [

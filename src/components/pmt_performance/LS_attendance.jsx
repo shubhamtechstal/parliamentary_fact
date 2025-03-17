@@ -1,11 +1,11 @@
-import { Box } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import GrayDot from 'components/common/GrayDot';
 import ProgressMeter from 'components/common/ProgressMeter';
 import SectionHeading from 'components/common/SectionHeading';
 import Text from 'components/common/Text';
 import LineCharts from 'components/LineCharts';
 
-function LS_attendance({ BottomRightChip }) {
+function LS_attendance({ attendance_details, BottomRightChip }) {
   return (
     <>
       {/* **********Mobile********** */}
@@ -48,33 +48,12 @@ function LS_attendance({ BottomRightChip }) {
           sx={{
             display: 'flex',
             alignItems: 'center',
-            overflow: 'auto',
-            gap: '2rem',
-            padding: '1rem',
+            flexWrap:'wrap',
+            // padding: '1rem',
+            justifyContent:"space-around"
           }}
         >
-          {[
-            {
-              title: 'Highest Attendance Day',
-              value: '24.56',
-              date: '15 AUG 2024',
-            },
-            {
-              title: 'Lowest Attendance Day  ',
-              value: '24.56',
-              date: '15 AUG 2024',
-            },
-            {
-              title: 'Highest Attendance Session',
-              value: 'WINTER',
-              date: '2024',
-            },
-            {
-              title: 'Lowest Attendance Session',
-              value: 'BUDGET',
-              date: '2024',
-            },
-          ].map((item, index) => (
+          {attendance_details?.map((item, index) => (
             <Box
               key={index}
               sx={{
@@ -82,8 +61,7 @@ function LS_attendance({ BottomRightChip }) {
                 alignItems: 'center',
                 gap: '0.8rem',
                 padding: '10px 10px',
-                borderRadius: '1rem',
-                backgroundColor: '#fff',
+                width:'12rem'
               }}
             >
               <GrayDot />
@@ -93,9 +71,8 @@ function LS_attendance({ BottomRightChip }) {
                     color: '#00000080',
                     fontSize: '0.8rem',
                     fontWeight: 600,
-                    textWrap: 'nowrap',
                   }}
-                  text={`${item.title}`}
+                  text={`${item?.title}`}
                 />
                 <Box
                   sx={{
@@ -112,7 +89,7 @@ function LS_attendance({ BottomRightChip }) {
                       fontWeight: 600,
                       lineHeight: 1,
                     }}
-                    text={`${item.value}`}
+                    text={`${item?.count}`}
                   />
                   <Text
                     sx={{
@@ -121,7 +98,7 @@ function LS_attendance({ BottomRightChip }) {
                       fontWeight: 500,
                       textWrap: 'nowrap',
                     }}
-                    text={`${item.date}`}
+                    text={`${item?.date}`}
                   />
                 </Box>
               </Box>
@@ -130,6 +107,9 @@ function LS_attendance({ BottomRightChip }) {
         </Box>
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           <LineCharts width={350} />
+        </Box>
+        <Box sx={{display:"flex", justifyContent:'center', marginTop:'-4rem', marginBottom:"1rem"}} >
+          <BottomRightChip/>
         </Box>
       </Box>
 
@@ -142,14 +122,14 @@ function LS_attendance({ BottomRightChip }) {
         }}
       >
         <SectionHeading title={'Lok Sabha Attendance'} />
-        <Box
+        <Grid container md={12}
           sx={{
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-evenly',
           }}
         >
-          <Box
+          <Grid md={3}
             sx={{
               width: { xs: '47%', md: 'auto' },
             }}
@@ -170,8 +150,51 @@ function LS_attendance({ BottomRightChip }) {
               dotPercent_x="72%"
               dotPercent_y="57%"
             />
-          </Box>
-          <Box
+          </Grid>
+          <Grid Grid md={5}  sx={{ display: 'flex', flexWrap:'wrap', alignItems: 'center', justifyContent:'space-between', gap:'2rem' }}>
+          {attendance_details?.map((item, index) => (
+            <Box key={index} sx={{ display: 'flex', alignItems: 'center', gap: '0.8rem', width:'45%' }}>
+              <GrayDot />
+              <Box>
+                <Text
+                  sx={{
+                    color: '#00000080',
+                    fontSize: '0.8rem',
+                    fontWeight: 600,
+                  }}
+                  text={item?.title}
+                />
+                <Box
+                  sx={{
+                    display: 'flex',
+                    gap: '5px',
+                    alignItems: 'end',
+                    marginTop: '0.3rem',
+                  }}
+                >
+                  <Text
+                    sx={{
+                      color: '#434343',
+                      fontSize: '1.5rem',
+                      fontWeight: 600,
+                      lineHeight: 1,
+                    }}
+                    text={item?.count}
+                  />
+                  <Text
+                    sx={{
+                      color: '#00000080',
+                      fontSize: '0.9rem',
+                      fontWeight: 500,
+                    }}
+                    text={item?.date}
+                  />
+                </Box>
+              </Box>
+            </Box>
+          ))}
+          </Grid>
+          {/* <Box
             sx={{
               display: 'flex',
               justifyContent: 'space-between',
@@ -347,9 +370,11 @@ function LS_attendance({ BottomRightChip }) {
                 </Box>
               </Box>
             </Box>
-          </Box>
-          <LineCharts />
-        </Box>
+          </Box> */}
+          <Grid md={4}>
+            <LineCharts />
+          </Grid>
+        </Grid>
         {BottomRightChip && (
           <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
             <BottomRightChip />

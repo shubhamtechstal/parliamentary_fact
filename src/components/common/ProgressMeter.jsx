@@ -6,7 +6,7 @@ export default function ProgressMeter(props) {
   return (
     <Box
       sx={{
-        width: { xs: '47%', md: 'auto' },
+        // width: { xs: '47%', md: 'auto' },
       }}
     >
       <GaugeContainer
@@ -47,7 +47,8 @@ export default function ProgressMeter(props) {
             fontFamily: '"Sora", sans-serif',
           }}
         >
-          {subPercentText || ".28%"}
+          {/* {subPercentText || ".28%"} */}
+          {subPercentText}
         </text>
         {centerDate&&( <text
           x="50%"

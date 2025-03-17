@@ -99,10 +99,13 @@ function LS_QuestionsComponent({ questionsListData, BottomRightChip }) {
           sx={{
             display: 'flex',
             alignItems: 'center',
-            overflowX: 'scroll',
-            gap: '2rem',
+            flexWrap:"wrap",
+            // overflowX: 'scroll',
+            justifyContent:'space-around',
+            gap: '2rem 1rem',
             padding: '1rem',
             width: '100%',
+            alignItems:'top'
           }}
         >
           {questionsListData.listData.map((item, index) => (
@@ -110,11 +113,12 @@ function LS_QuestionsComponent({ questionsListData, BottomRightChip }) {
               key={index}
               sx={{
                 display: 'flex',
-                alignItems: 'center',
+                alignItems: 'top',
                 gap: '0.8rem',
-                padding: '10px',
-                borderRadius: '1rem',
-                backgroundColor: '#fff',
+                maxWidth:"11rem"
+                // padding: '10px',
+                // borderRadius: '1rem',
+                // backgroundColor: '#fff',
               }}
             >
               <GrayDot />
@@ -124,7 +128,6 @@ function LS_QuestionsComponent({ questionsListData, BottomRightChip }) {
                     color: '#00000080',
                     fontSize: '0.8rem',
                     fontWeight: 600,
-                    textWrap: 'nowrap',
                   }}
                   text={`${item.title}`}
                 />
@@ -139,10 +142,10 @@ function LS_QuestionsComponent({ questionsListData, BottomRightChip }) {
                   <Text
                     sx={{
                       color: '#434343',
-                      fontSize: '1.5rem',
+                      fontSize: '1rem',
                       fontWeight: 600,
                       lineHeight: 1,
-                      textWrap: 'nowrap',
+                      // textWrap: 'nowrap',
                     }}
                     text={`${item.value}`}
                   />

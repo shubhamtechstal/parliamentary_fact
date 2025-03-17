@@ -10,9 +10,10 @@ import {
   MpFundsectionData,
   performace_chipList,
   productivity_bottomCardsdata,
-  productivity_schedule,
+  // productivity_schedule,
   questionsListData,
 } from 'helpers/performanceConstants';
+import { useEffect, useState } from 'react';
 
 
 const BottomRightChip = () => {
@@ -122,7 +123,7 @@ const Productivity_bottomCards = ({ cardData=productivity_bottomCardsdata, Botto
                 </Box>
               </Box>
               <Text
-                text={data.linkText}
+                text={'Know More >>'}
                 sx={{
                   // color: '#FF936F',
                   fontSize: '14px',
@@ -142,6 +143,34 @@ const Productivity_bottomCards = ({ cardData=productivity_bottomCardsdata, Botto
 };
 
 function ParliamentPerformanceContainer() {
+  const [data, setData] = useState(null);
+  const [loksabha_name, setLoksabha_name] = useState("");
+  const [attendance_details, setAttendance_details] = useState([]);
+  // const [data, setData] = useState(null);
+  // const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          "https://parliamentryfact.revanshrenewable.com/API/fetch_total_loksabha_percentage.php"
+        );
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const result = await response.json();
+        setAttendance_details(result?.attendance_details ?? []);
+        setLoksabha_name(result?.loksabha_name);
+        setData(result);
+      } catch (err) {
+        setError(err.message);
+      }
+    };
+
+    fetchData();
+  }, []);
+    console.log('attendance_details',data, loksabha_name, attendance_details)
   return (
     <Box
       sx={{
@@ -183,7 +212,7 @@ function ParliamentPerformanceContainer() {
             fontWeight: 600,
           }}
           font={'Sora'}
-          text={'Parliament Performance 18th Lok Sabha'}
+          text={`Parliament Performance ${loksabha_name}`}
         />
         <Text
           sx={{
@@ -229,14 +258,14 @@ function ParliamentPerformanceContainer() {
           Read before check performance
         </Box>
       </Box>
-      <LS_productivity productivity_schedule={productivity_schedule} mobCardsData={productivity_bottomCardsdata} />
+      <LS_productivity productivity_schedule={data?.schedule_data ?? []} productivity_details={data?.productivity_details} mobCardsData={data?.other_performing_data ?? []} BottomRightChip={BottomRightChip} />
       <Productivity_bottomCards
-        cardData={productivity_bottomCardsdata}
+        cardData={data?.other_performing_data }
         BottomRightChip={BottomRightChip}
       />
       {/* <BottomRightChip /> */}
       <AdvertiseSection />
-      <LS_attendance BottomRightChip={BottomRightChip} />
+      <LS_attendance attendance_details={attendance_details} BottomRightChip={BottomRightChip} />
       <AdvertiseSection />
       <LS_QuestionsComponent
         questionsListData={questionsListData}

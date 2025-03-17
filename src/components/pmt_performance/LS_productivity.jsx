@@ -21,7 +21,7 @@ const PercentageTextgroup = (props) => {
           fontFamily: '"Sora", sans-serif',
         }}
       >
-        <span style={{ fontWeight: '800' }}>{props.percentage}</span>%
+        <span style={{ fontWeight: '800' }}>{props.percentage}</span>
       </span>
     </div>
   );
@@ -101,17 +101,22 @@ const ScheduleTimeTextgroup = ({ schedule, i }) => {
     >
       <GrayDot />
       <div>
-        <span style={{ textWrap: 'nowrap' }}>{schedule.title}</span> <br />
+        <span style={{ textWrap: 'nowrap' }}>{schedule.name}</span> <br />
         <span
           style={{ textWrap: 'nowrap', fontWeight: '600', fontSize: '1rem' }}
         >
-          {schedule.time}
+          {schedule.value} Hrs.
         </span>
       </div>
     </Box>
   );
 };
-function LS_productivity({ productivity_schedule, mobCardsData }) {
+function LS_productivity({
+  productivity_schedule,
+  productivity_details = [],
+  mobCardsData=[],
+  BottomRightChip
+}) {
   const Arc_progressData = [85, 91, 90, 87];
   return (
     <Box sx={{ padding: { md: '0rem 10rem', xs: '0rem  1rem 10px' } }}>
@@ -187,12 +192,13 @@ function LS_productivity({ productivity_schedule, mobCardsData }) {
           if (i == 3) {
             return (
               <ProgressMeter
-                titleText={'Productivity'}
-                percentText={'100'}
-                subPercentText={'.20%'}
+                titleText={schedule.name || 'Productivity'}
+                percentText={schedule.value || '100'}
+                // subPercentText={schedule.value ||'.20%'}
                 width={180}
                 height={200}
                 innerRadius={74}
+                value={schedule.value.replaceAll('%', '')}
               />
             );
           }
@@ -225,13 +231,21 @@ function LS_productivity({ productivity_schedule, mobCardsData }) {
               gap: '2rem',
             }}
           >
-            <PercentageTextgroup title={'QUESTION HOUR'} percentage={'12.5'} />
-            <PercentageTextgroup title={'ZERO HOUR'} percentage={'8'} />
+            {productivity_details?.map((item, i) => {
+              return (
+                <PercentageTextgroup
+                  key={i}
+                  title={item.title}
+                  percentage={item.value}
+                />
+              );
+            })}
+            {/* <PercentageTextgroup title={'ZERO HOUR'} percentage={'8'} />
             <PercentageTextgroup
               title={'LEGISTATIVE BUSINESS'}
               percentage={'85.1'}
             />
-            <PercentageTextgroup title={'OTHER BUSINESS'} percentage={'10'} />
+            <PercentageTextgroup title={'OTHER BUSINESS'} percentage={'10'} /> */}
           </div>
           <Box
             sx={{
@@ -325,6 +339,7 @@ function LS_productivity({ productivity_schedule, mobCardsData }) {
           {mobCardsData?.map((data, i) => {
             return (
               <Box
+                key={i}
                 sx={{
                   padding: '5px 10px',
                   borderRadius: '1rem',
@@ -370,6 +385,9 @@ function LS_productivity({ productivity_schedule, mobCardsData }) {
               </Box>
             );
           })}
+        </Box>
+        <Box sx={{display:"flex", justifyContent:'center'}} >
+          <BottomRightChip/>
         </Box>
         {/* Govt bill */}
         <Box
@@ -555,8 +573,23 @@ function LS_productivity({ productivity_schedule, mobCardsData }) {
               justifyContent: 'start',
             }}
           >
-            <PercentageTextgroup title={'QUESTION HOUR'} percentage={'12.5'} />
-            <PercentageTextgroup title={'ZERO HOUR'} percentage={'8'} />
+            {productivity_details.map((item, i) => {
+              switch (i) {
+                case 2:
+                  return;
+                case 3:
+                  return;
+                default:
+                  break;
+              }
+              return (
+                <PercentageTextgroup
+                  key={i}
+                  title={item.title}
+                  percentage={item.value}
+                />
+              );
+            })}
           </div>
           <Box
             sx={{
@@ -678,12 +711,23 @@ function LS_productivity({ productivity_schedule, mobCardsData }) {
               flexDirection: 'row',
               justifyContent: 'space-between',
             }}
-          >
-            <PercentageTextgroup
-              title={'LEGISTATIVE BUSINESS'}
-              percentage={'85.1'}
-            />
-            <PercentageTextgroup title={'OTHER BUSINESS'} percentage={'10'} />
+          > {productivity_details.map((item, i) => {
+            switch (i) {
+              case 0:
+                return;
+              case 1:
+                return;
+              default:
+                break;
+            }
+            return (
+              <PercentageTextgroup
+                key={i}
+                title={item.title}
+                percentage={item.value}
+              />
+            );
+          })}
           </div>
           <Box
             sx={{

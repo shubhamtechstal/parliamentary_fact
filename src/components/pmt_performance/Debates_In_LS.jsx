@@ -146,8 +146,9 @@ function Debates_In_LS({ debateListData, BottomRightChip }) {
           sx={{
             display: 'flex',
             flexDirection: 'row',
-            overflow: 'auto',
+            // overflow: 'auto',
             gap: '2rem',
+            flexWrap:'wrap'
           }}
         >
           {debateListData.listData2.map((item, index) => (
