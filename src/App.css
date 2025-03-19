@@ -1,141 +1,165 @@
-.parliamentDotImage{
-    right: auto;
-    left: -11%;
-    top:-84px
+.parliamentDotImage {
+  right: auto;
+  left: -11%;
+  top: -84px;
 }
 
-.mobileHeader{
-    display: none;
+.mobileHeader {
+  display: none;
 }
-.DetailsContainer{
-    width: 67%;
+.DetailsContainer {
+  width: 67%;
 }
 .sticky {
-    position: -webkit-sticky; 
-    position: sticky;
-    top: 1rem; 
-  }
-  .researchEndorsementImage{
-    width:auto;
-    height:400px
-  }
-.sideNewCardsWidth{
-    max-width: min-content;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 1rem;
 }
-.MobileViewRemove{
-    display: flex;
-    }
-    .bottomSubHeadingCardWidth{
-        max-width: 200px;
-    }
-    .aboutContainer{
-        flex-direction: row;
-    }
-    .aboutTabVal{
-        flex-direction: column;
-        width: 100px;
-    }
-    .aboutContent{
-        width: 80%;
-        max-width: 950px;
-    }
-    .aboutTabVal{
-        display: flex;
-    }
-    .contactContainer{
-        flex-direction: row;
-    }
+.researchEndorsementImage {
+  width: auto;
+  height: 400px;
+}
+.sideNewCardsWidth {
+  max-width: min-content;
+}
+.MobileViewRemove {
+  display: flex;
+}
+.bottomSubHeadingCardWidth {
+  max-width: 200px;
+}
+.aboutContainer {
+  flex-direction: row;
+}
+.aboutTabVal {
+  flex-direction: column;
+  width: 100px;
+}
+.aboutContent {
+  width: 80%;
+  max-width: 950px;
+}
+.aboutTabVal {
+  display: flex;
+}
+.contactContainer {
+  flex-direction: row;
+}
+/* LS Parliament Performance */
+.performanceSection {
+  padding: 1rem 10rem;
+}
+.parliamentCenterImgDesktop {
+  position: relative;
+  bottom: 7%;
+  left: 0%;
+  width: 40vw;
+}
 @media (max-width: 1300px) {
-    .parliamentDotImage{
-        left: -18%;
-    }
-    
+  .parliamentDotImage {
+    left: -18%;
+  }
+  .performanceSection {
+    padding: 1rem 2rem;
+  }
+  .parliamentCenterImgDesktop {
+    left: 10%;
+  }
+}
+@media (min-width:1300px) and (max-width: 1400px) {
+  .performanceSection {
+    padding: 1rem 5rem;
+  }
+  .parliamentCenterImgDesktop {
+    left: 5%;
+  }
 }
 @media (max-width: 775px) {
-    .form_text{
-        margin-left: 40px !important;
-    }    
-    .form_checkbox{
-        margin-top: 10px !important;
-        margin-left: 0 !important;
+    .performanceSection{
+        padding: 1rem;
     }
-    .form_stack{
-        display: flex !important;
-        flex-direction: column !important;
-        width: 320px !important;
-        
-        .form_textfield{
-            margin-left: 0;
-        }
-    }
-    .contactContainer{
-        flex-direction: column-reverse !important;
-    }
-    .researchEndorsementImage{
-        width:100%;
-        height:auto
-      }
-    .privacytabVal{
-        display: none;
-    }
-    .aboutContainer{
-        flex-direction: column;
-    }
-    .aboutContent{
-        width: 100%;
-    }
-    .aboutTabVal{
-        flex-direction: row;
-        width: 100%;
-    }
-    .MainContainer{
-        overflow-y: hidden;
-    }
-    .DetailsContainer{
-        width: 100%;
-    }
-    .sideNewCardsWidth{
-        max-width: max-content;
-        padding: 0 0.5rem;
-    }
-    
-    .DownlaodAppSection{
-        margin-left:10rem;
-    }
-    .MobileViewRemove{
-    display: none;
-    }
-    .mobileHeader{
-        display: block;
-    }
-    .BigNewsCardContainer{
-        flex-wrap: wrap;
-    }
-    .SideNewCards{
-        display: flex;
-        flex-wrap: wrap;
-        gap:0.5rem
-    }
-    .bottomSubHeadingCardWidth{
-        max-width: 500px;
-    }
+  .form_text {
+    margin-left: 40px !important;
   }
-@media (max-width: 1200px) {
-   .headCard{
-    flex-wrap:wrap;
-   }
+  .form_checkbox {
+    margin-top: 10px !important;
+    margin-left: 0 !important;
   }
-@media (max-width: 1000px) {
-   .BigNewsCardSection{
-    flex-wrap: wrap;
-   }
-  
-  }
-@media (max-width: 900px) {
-    .parliamentDotImage{
-        left:auto;
-        right: -50px;
-        top:-100px
+  .form_stack {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 320px !important;
 
+    .form_textfield {
+      margin-left: 0;
     }
   }
+  .contactContainer {
+    flex-direction: column-reverse !important;
+  }
+  .researchEndorsementImage {
+    width: 100%;
+    height: auto;
+  }
+  .privacytabVal {
+    display: none;
+  }
+  .aboutContainer {
+    flex-direction: column;
+  }
+  .aboutContent {
+    width: 100%;
+  }
+  .aboutTabVal {
+    flex-direction: row;
+    width: 100%;
+  }
+  .MainContainer {
+    overflow-y: hidden;
+  }
+  .DetailsContainer {
+    width: 100%;
+  }
+  .sideNewCardsWidth {
+    max-width: max-content;
+    padding: 0 0.5rem;
+  }
+
+  .DownlaodAppSection {
+    margin-left: 10rem;
+  }
+  .MobileViewRemove {
+    display: none;
+  }
+  .mobileHeader {
+    display: block;
+  }
+  .BigNewsCardContainer {
+    flex-wrap: wrap;
+  }
+  .SideNewCards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .bottomSubHeadingCardWidth {
+    max-width: 500px;
+  }
+}
+@media (max-width: 1200px) {
+  .headCard {
+    flex-wrap: wrap;
+  }
+}
+@media (max-width: 1000px) {
+  .BigNewsCardSection {
+    flex-wrap: wrap;
+  }
+}
+@media (max-width: 900px) {
+  .parliamentDotImage {
+    left: auto;
+    right: -50px;
+    top: -100px;
+  }
+}

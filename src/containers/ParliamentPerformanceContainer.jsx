@@ -62,10 +62,10 @@ const AdvertiseSection = () => {
 };
 const Productivity_bottomCards = ({ cardData=productivity_bottomCardsdata, BottomRightChip }) => {
   return (
-    <Box
+    <Box className="performanceSection" 
       sx={{
         position: 'relative',
-        padding: '2rem 10rem',
+        // padding: '2rem 10rem',
         display:{xs:'none',md:'block'}
       }}
     >
@@ -74,6 +74,8 @@ const Productivity_bottomCards = ({ cardData=productivity_bottomCardsdata, Botto
           display: 'flex',
           justifyContent: 'space-between',
           marginTop: '3rem',
+          gap:"1rem",
+          overflow:'auto'
         }}
       >
         {cardData?.map((data, i) => {
@@ -170,7 +172,6 @@ function ParliamentPerformanceContainer() {
 
     fetchData();
   }, []);
-    console.log('attendance_details',data, loksabha_name, attendance_details)
   return (
     <Box
       sx={{
@@ -181,12 +182,12 @@ function ParliamentPerformanceContainer() {
         scrollbarColor:"transparent transparent"
       }}
     >
-      <Box
+      <Box className="performanceSection" 
         sx={{
           display: 'flex',
           justifyContent: 'flex-start',
           gap: '1rem',
-          padding: { md: '2rem 10rem', xs: '2rem  1rem 10px' },
+          // padding: { md: '2rem 10rem', xs: '2rem  1rem 10px' },
           overflowX: 'auto',
         }}
       >
@@ -194,15 +195,15 @@ function ParliamentPerformanceContainer() {
           return <Chip key={i} label={title} variant="outlined" />;
         })}
       </Box>
-      <Box
+      <Box className="performanceSection" 
         sx={{
           display: 'flex',
           gap: { xs: '0.8rem', md: '2rem' },
           flexDirection: { xs: 'column', md: 'row' },
           textAlign: { xs: 'center', md: 'left' },
           justifyContent: 'space-between',
-          marginBottom: '20px',
-          padding: { md: '0rem 10rem', xs: '1rem' },
+          // marginBottom: '20px',
+          // padding: { md: '0rem 10rem', xs: '1rem' },
         }}
       >
         <Text

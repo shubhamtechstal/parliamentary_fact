@@ -114,12 +114,13 @@ const ScheduleTimeTextgroup = ({ schedule, i }) => {
 function LS_productivity({
   productivity_schedule,
   productivity_details = [],
-  mobCardsData=[],
-  BottomRightChip
+  mobCardsData = [],
+  BottomRightChip,
 }) {
   const Arc_progressData = [85, 91, 90, 87];
   return (
-    <Box sx={{ padding: { md: '0rem 10rem', xs: '0rem  1rem 10px' } }}>
+    <Box className="performanceSection" >
+      {/* <Box className="performanceSection" sx={{ padding: { md: '0rem 2rem', xs: '0rem  1rem 10px' } }}> */}
       <Box sx={{ display: { md: 'block', xs: 'none' } }}>
         <SectionHeading title={'Lok Sabha Productivity'} />
         <pre
@@ -386,8 +387,8 @@ function LS_productivity({
             );
           })}
         </Box>
-        <Box sx={{display:"flex", justifyContent:'center'}} >
-          <BottomRightChip/>
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <BottomRightChip />
         </Box>
         {/* Govt bill */}
         <Box
@@ -700,8 +701,14 @@ function LS_productivity({
           </div>
           <img
             src="Assets/icons/Parliament-dot-image1.png"
+            className='parliamentCenterImgDesktop'
             alt="parliament"
-            style={{ position: 'absolute', bottom: '0%', right: '-9%' }}
+            // style={{
+            //   position: 'relative',
+            //   bottom: '7%',
+            //   left: '10%',
+            //   width: '40vw',
+            // }}
           />
         </Grid>
         <Grid item xs={12} md={3} sx={{ textAlign: 'right' }}>
@@ -711,23 +718,25 @@ function LS_productivity({
               flexDirection: 'row',
               justifyContent: 'space-between',
             }}
-          > {productivity_details.map((item, i) => {
-            switch (i) {
-              case 0:
-                return;
-              case 1:
-                return;
-              default:
-                break;
-            }
-            return (
-              <PercentageTextgroup
-                key={i}
-                title={item.title}
-                percentage={item.value}
-              />
-            );
-          })}
+          >
+            {' '}
+            {productivity_details.map((item, i) => {
+              switch (i) {
+                case 0:
+                  return;
+                case 1:
+                  return;
+                default:
+                  break;
+              }
+              return (
+                <PercentageTextgroup
+                  key={i}
+                  title={item.title}
+                  percentage={item.value}
+                />
+              );
+            })}
           </div>
           <Box
             sx={{
