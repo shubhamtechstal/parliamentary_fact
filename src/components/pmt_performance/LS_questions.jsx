@@ -169,9 +169,8 @@ function LS_QuestionsComponent({ questionsListData, BottomRightChip }) {
       </Box>
 
       {/* ******Desktop**** */}
-      <Box
+      <Box  className="performanceSection"
         sx={{
-          padding: '2rem 10rem',
           position: 'relative',
           display: { xs: 'none', md: 'block' },
         }}
@@ -196,8 +195,6 @@ function LS_QuestionsComponent({ questionsListData, BottomRightChip }) {
             sx={{
               position: 'relative',
               top: '-5.5rem',
-              // marginTop:'-10rem',
-              width: { xs: '47%', md: 'auto' },
             }}
           >
             <ProgressMeter
@@ -219,7 +216,7 @@ function LS_QuestionsComponent({ questionsListData, BottomRightChip }) {
           </Grid>
           <Grid
             xs={12}
-            md={8}
+            md={9}
             sx={{
               display: 'flex',
               flexDirection: 'row',

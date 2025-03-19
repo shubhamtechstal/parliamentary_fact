@@ -114,10 +114,9 @@ function LS_attendance({ attendance_details, BottomRightChip }) {
       </Box>
 
       {/* ******Desktop**** */}
-      <Box
+      <Box  className="performanceSection"
         sx={{
           position: 'relative',
-          padding: '2rem 10rem',
           display: { md: 'block', xs: 'none' },
         }}
       >
@@ -127,6 +126,7 @@ function LS_attendance({ attendance_details, BottomRightChip }) {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-evenly',
+            padding:'0 8rem 0 0'
           }}
         >
           <Grid md={3}

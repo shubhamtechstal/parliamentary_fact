@@ -152,9 +152,9 @@ function MpFundSection({ MpFundSection, BottomRightChip }) {
       </Box>
 
       {/* ****Desktop*** */}
-      <Box
+      <Box className="performanceSection"
         sx={{
-          padding: '2rem 10rem',
+          // padding: '2rem 10rem',
           position: 'relative',
           display: { xs: 'none', md: 'block' },
         }}
@@ -233,7 +233,7 @@ function MpFundSection({ MpFundSection, BottomRightChip }) {
               dotPercent_y="57%"
             />
           </Grid>
-          <Grid xs={12} md={8}>
+          <Grid xs={12} md={9}>
             <Box
               sx={{
                 display: 'flex',
