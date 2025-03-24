@@ -1,4 +1,4 @@
-import { Box, Chip } from '@mui/material';
+import { Box, Chip, CircularProgress } from '@mui/material';
 import Text from 'components/common/Text';
 import Debates_In_LS from 'components/pmt_performance/Debates_In_LS';
 import LS_attendance from 'components/pmt_performance/LS_attendance';
@@ -13,8 +13,9 @@ import {
   // productivity_schedule,
   questionsListData,
 } from 'helpers/performanceConstants';
-import { useEffect, useState } from 'react';
-
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchPerformanceData } from 'stores/redux/apiSlices/pmt_PerformanceSlice';
 
 const BottomRightChip = () => {
   return (
@@ -33,40 +34,44 @@ const BottomRightChip = () => {
 const AdvertiseSection = () => {
   return (
     <>
-    <Box
-      sx={{
-        background: 'white',
-        display: {xs: 'none', md: 'flex'},
-        justifyContent: 'center',
-        padding: '1rem',
-        borderTop: '1px solid #00000080',
-        borderBottom: '1px solid #00000080',
-      }}
-    >
-      <img src="/advertise.jpg" />
-    </Box>
-    <Box
-      sx={{
-        background: 'white',
-        display:  {xs: 'flex', md: 'none'},
-        justifyContent: 'center',
-        padding: '1rem',
-        borderTop: '1px solid #00000080',
-        borderBottom: '1px solid #00000080',
-      }}
-    >
-      <img style={{width:'100%'}} src="/advertise.jpg" />
-    </Box>
+      <Box
+        sx={{
+          background: 'white',
+          display: { xs: 'none', md: 'flex' },
+          justifyContent: 'center',
+          padding: '1rem',
+          borderTop: '1px solid #00000080',
+          borderBottom: '1px solid #00000080',
+        }}
+      >
+        <img src="/advertise.jpg" />
+      </Box>
+      <Box
+        sx={{
+          background: 'white',
+          display: { xs: 'flex', md: 'none' },
+          justifyContent: 'center',
+          padding: '1rem',
+          borderTop: '1px solid #00000080',
+          borderBottom: '1px solid #00000080',
+        }}
+      >
+        <img style={{ width: '100%' }} src="/advertise.jpg" />
+      </Box>
     </>
   );
 };
-const Productivity_bottomCards = ({ cardData=productivity_bottomCardsdata, BottomRightChip }) => {
+const Productivity_bottomCards = ({
+  cardData = productivity_bottomCardsdata,
+  BottomRightChip,
+}) => {
   return (
-    <Box className="performanceSection" 
+    <Box
+      className="performanceSection"
       sx={{
         position: 'relative',
         // padding: '2rem 10rem',
-        display:{xs:'none',md:'block'}
+        display: { xs: 'none', md: 'block' },
       }}
     >
       <Box
@@ -74,8 +79,8 @@ const Productivity_bottomCards = ({ cardData=productivity_bottomCardsdata, Botto
           display: 'flex',
           justifyContent: 'space-between',
           marginTop: '3rem',
-          gap:"1rem",
-          overflow:'auto'
+          gap: '1rem',
+          overflow: 'auto',
         }}
       >
         {cardData?.map((data, i) => {
@@ -145,44 +150,37 @@ const Productivity_bottomCards = ({ cardData=productivity_bottomCardsdata, Botto
 };
 
 function ParliamentPerformanceContainer() {
-  const [data, setData] = useState(null);
-  const [loksabha_name, setLoksabha_name] = useState("");
-  const [attendance_details, setAttendance_details] = useState([]);
-  // const [data, setData] = useState(null);
-  // const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
-
+  const dispatch = useDispatch();
+  const { attendanceDetails, questionsData,privateBillCount,govtBillCount, loksabhaName, pageData, loading, error } =
+    useSelector((state) => state?.pmtPerformance);
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          "https://parliamentryfact.revanshrenewable.com/API/fetch_total_loksabha_percentage.php"
-        );
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const result = await response.json();
-        setAttendance_details(result?.attendance_details ?? []);
-        setLoksabha_name(result?.loksabha_name);
-        setData(result);
-      } catch (err) {
-        setError(err.message);
-      }
-    };
-
-    fetchData();
-  }, []);
-  return (
+    dispatch(fetchPerformanceData());
+  }, [dispatch]);
+console.log('questions_data', questionsData, privateBillCount,govtBillCount)
+  return loading ? (
+    <Box
+      sx={{
+        height: '100vh',
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      <CircularProgress />
+    </Box>
+  ) : (
     <Box
       sx={{
         // padding: '2rem 10rem',
         color: '#00000080',
         backgroundColor: '#f4f6f9',
         fontFamily: '"Sora", sans-serif',
-        scrollbarColor:"transparent transparent"
+        scrollbarColor: 'transparent transparent',
       }}
     >
-      <Box className="performanceSection" 
+      <Box
+        className="performanceSection"
         sx={{
           display: 'flex',
           justifyContent: 'flex-start',
@@ -195,7 +193,8 @@ function ParliamentPerformanceContainer() {
           return <Chip key={i} label={title} variant="outlined" />;
         })}
       </Box>
-      <Box className="performanceSection" 
+      <Box
+        className="performanceSection"
         sx={{
           display: 'flex',
           gap: { xs: '0.8rem', md: '2rem' },
@@ -213,7 +212,7 @@ function ParliamentPerformanceContainer() {
             fontWeight: 600,
           }}
           font={'Sora'}
-          text={`Parliament Performance ${loksabha_name}`}
+          text={`Parliament Performance ${loksabhaName}`}
         />
         <Text
           sx={{
@@ -231,7 +230,8 @@ function ParliamentPerformanceContainer() {
             justifyContent: 'center',
           }}
         >
-          <span style={{fontWeight:"600"}}>Till Now | </span> 23 September 2020
+          <span style={{ fontWeight: '600' }}>Till Now | </span> 23 September
+          2020
         </Text>
         <Box
           sx={{
@@ -259,23 +259,38 @@ function ParliamentPerformanceContainer() {
           Read before check performance
         </Box>
       </Box>
-      <LS_productivity productivity_schedule={data?.schedule_data ?? []} productivity_details={data?.productivity_details} mobCardsData={data?.other_performing_data ?? []} BottomRightChip={BottomRightChip} />
+      <LS_productivity
+        productivity_schedule={pageData?.schedule_data ?? []}
+        productivity_details={pageData?.productivity_details}
+        mobCardsData={pageData?.other_performing_data ?? []}
+        govtBillCount={govtBillCount}
+        pageData={pageData}
+        privateBillCount={privateBillCount}
+        BottomRightChip={BottomRightChip}
+      />
       <Productivity_bottomCards
-        cardData={data?.other_performing_data }
+        cardData={pageData?.other_performing_data}
         BottomRightChip={BottomRightChip}
       />
       {/* <BottomRightChip /> */}
       <AdvertiseSection />
-      <LS_attendance attendance_details={attendance_details} BottomRightChip={BottomRightChip} />
+      <LS_attendance
+        attendance_details={attendanceDetails}
+        pageData={pageData}
+        BottomRightChip={BottomRightChip}
+      />
       <AdvertiseSection />
       <LS_QuestionsComponent
         questionsListData={questionsListData}
+        questionsData={questionsData}
+        pageData={pageData}
         BottomRightChip={BottomRightChip}
       />
       <AdvertiseSection />
       <Debates_In_LS
         debateListData={debateListData}
         BottomRightChip={BottomRightChip}
+        questionsData={questionsData}
       />
       <AdvertiseSection />
       <MpFundSection

@@ -4,8 +4,9 @@ import ProgressMeter from 'components/common/ProgressMeter';
 import SectionHeading from 'components/common/SectionHeading';
 import Text from 'components/common/Text';
 import LineCharts from 'components/LineCharts';
+import { extractPercentage, formattedDate } from 'helpers/performanceConstants';
 
-function LS_attendance({ attendance_details, BottomRightChip }) {
+function LS_attendance({ attendance_details, pageData, BottomRightChip }) {
   return (
     <>
       {/* **********Mobile********** */}
@@ -30,16 +31,16 @@ function LS_attendance({ attendance_details, BottomRightChip }) {
             titleText={'ATTENDANCE'}
             subTiteText={`LOK SABHA`}
             centerDate={'Till 20 March 2024'}
-            percentText={'100.'}
-            subPercentText={'20%'}
+            percentText={`${extractPercentage(pageData?.attendance_percentage?.attendance_percentage)?.a }`}
+            subPercentText={`${extractPercentage(pageData?.attendance_percentage?.attendance_percentage)?.b }`}            
             width={230}
             height={250}
             innerRadius={98}
             percentNumFontSize={'2.5rem'}
-            percent_x="40%"
+            percent_x="42%"
             percent_y="55%"
             dotPercentFontSize={'1.5rem'}
-            dotPercent_x="72%"
+            dotPercent_x="68%"
             dotPercent_y="57%"
           />
         </Box>
@@ -49,8 +50,8 @@ function LS_attendance({ attendance_details, BottomRightChip }) {
             display: 'flex',
             alignItems: 'center',
             flexWrap:'wrap',
-            // padding: '1rem',
-            justifyContent:"space-around"
+            justifyContent:"start",
+            padding:'1.5rem'
           }}
         >
           {attendance_details?.map((item, index) => (
@@ -61,7 +62,7 @@ function LS_attendance({ attendance_details, BottomRightChip }) {
                 alignItems: 'center',
                 gap: '0.8rem',
                 padding: '10px 10px',
-                width:'12rem'
+                // width:'12rem'
               }}
             >
               <GrayDot />
@@ -84,22 +85,24 @@ function LS_attendance({ attendance_details, BottomRightChip }) {
                 >
                   <Text
                     sx={{
-                      color: '#434343',
-                      fontSize: '1.5rem',
+                      // color: '#434343',
+                      fontSize: '1rem',
                       fontWeight: 600,
                       lineHeight: 1,
                     }}
                     text={`${item?.count}`}
                   />
-                  <Text
+                 {item?.date&&
+                 <Text
                     sx={{
                       color: '#00000080',
                       fontSize: '0.9rem',
                       fontWeight: 500,
                       textWrap: 'nowrap',
                     }}
-                    text={`${item?.date}`}
+                    text={formattedDate(item?.date)}
                   />
+                 } 
                 </Box>
               </Box>
             </Box>
@@ -138,22 +141,24 @@ function LS_attendance({ attendance_details, BottomRightChip }) {
               titleText={'ATTENDANCE'}
               subTiteText={`LOK SABHA`}
               centerDate={'Till 20 March 2024'}
-              percentText={'100.'}
-              subPercentText={'20%'}
+              percentText={`${extractPercentage(pageData?.attendance_percentage?.attendance_percentage)?.a }`}
+              subPercentText={`${extractPercentage(pageData?.attendance_percentage?.attendance_percentage)?.b }`}
+              // percentText={'100.'}
+              // subPercentText={'20%'}
               width={230}
               height={250}
               innerRadius={98}
               percentNumFontSize={'2.5rem'}
-              percent_x="40%"
+              percent_x="42%"
               percent_y="55%"
               dotPercentFontSize={'1.5rem'}
-              dotPercent_x="72%"
+              dotPercent_x="68%"
               dotPercent_y="57%"
             />
           </Grid>
-          <Grid Grid md={5}  sx={{ display: 'flex', flexWrap:'wrap', alignItems: 'center', justifyContent:'space-between', gap:'2rem' }}>
+          <Grid Grid md={5}  sx={{ display: 'flex', flexWrap:'wrap', alignItems: 'start', justifyContent:'space-between', gap:'1rem' }}>
           {attendance_details?.map((item, index) => (
-            <Box key={index} sx={{ display: 'flex', alignItems: 'center', gap: '0.8rem', width:'45%' }}>
+            <Box key={index} sx={{ display: 'flex', alignItems: 'center', gap: '0.8rem', width:'48%' }}>
               <GrayDot />
               <Box>
                 <Text
@@ -174,8 +179,8 @@ function LS_attendance({ attendance_details, BottomRightChip }) {
                 >
                   <Text
                     sx={{
-                      color: '#434343',
-                      fontSize: '1.5rem',
+                      // color: '#434343',
+                      fontSize: '1rem',
                       fontWeight: 600,
                       lineHeight: 1,
                     }}
@@ -187,190 +192,13 @@ function LS_attendance({ attendance_details, BottomRightChip }) {
                       fontSize: '0.9rem',
                       fontWeight: 500,
                     }}
-                    text={item?.date}
+                    text={formattedDate(item?.date)}
                   />
                 </Box>
               </Box>
             </Box>
           ))}
           </Grid>
-          {/* <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              width: '450px',
-              gap: '1rem',
-            }}
-          >
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-              <Box
-                sx={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}
-              >
-                <GrayDot />
-                <Box>
-                  <Text
-                    sx={{
-                      color: '#00000080',
-                      fontSize: '0.8rem',
-                      fontWeight: 600,
-                    }}
-                    text={'Highest Attendance Day'}
-                  />
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      gap: '5px',
-                      alignItems: 'end',
-                      marginTop: '0.3rem',
-                    }}
-                  >
-                    <Text
-                      sx={{
-                        color: '#434343',
-                        fontSize: '1.5rem',
-                        fontWeight: 600,
-                        lineHeight: 1,
-                      }}
-                      text={'24.56'}
-                    />
-                    <Text
-                      sx={{
-                        color: '#00000080',
-                        fontSize: '0.9rem',
-                        fontWeight: 500,
-                      }}
-                      text={'15 AUG 2024'}
-                    />
-                  </Box>
-                </Box>
-              </Box>
-              <Box
-                sx={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}
-              >
-                <GrayDot />
-                <Box>
-                  <Text
-                    sx={{
-                      color: '#00000080',
-                      fontSize: '0.8rem',
-                      fontWeight: 600,
-                    }}
-                    text={'Lowest Attendance Day  '}
-                  />
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      gap: '5px',
-                      alignItems: 'end',
-                      marginTop: '0.3rem',
-                    }}
-                  >
-                    <Text
-                      sx={{
-                        color: '#434343',
-                        fontSize: '1.5rem',
-                        fontWeight: 600,
-                        lineHeight: 1,
-                      }}
-                      text={'24.56'}
-                    />
-                    <Text
-                      sx={{
-                        color: '#00000080',
-                        fontSize: '0.9rem',
-                        fontWeight: 500,
-                      }}
-                      text={'15 AUG 2024'}
-                    />
-                  </Box>
-                </Box>
-              </Box>
-            </Box>
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-              <Box
-                sx={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}
-              >
-                <GrayDot />
-                <Box>
-                  <Text
-                    sx={{
-                      color: '#00000080',
-                      fontSize: '0.8rem',
-                      fontWeight: 600,
-                    }}
-                    text={'Highest Attendance Session'}
-                  />
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      gap: '5px',
-                      alignItems: 'end',
-                      marginTop: '0.3rem',
-                    }}
-                  >
-                    <Text
-                      sx={{
-                        color: '#434343',
-                        fontSize: '1.5rem',
-                        fontWeight: 600,
-                        lineHeight: 1,
-                      }}
-                      text={'WINTER'}
-                    />
-                    <Text
-                      sx={{
-                        color: '#00000080',
-                        fontSize: '0.9rem',
-                        fontWeight: 500,
-                      }}
-                      text={'2024'}
-                    />
-                  </Box>
-                </Box>
-              </Box>
-              <Box
-                sx={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}
-              >
-                <GrayDot />
-                <Box>
-                  <Text
-                    sx={{
-                      color: '#00000080',
-                      fontSize: '0.8rem',
-                      fontWeight: 600,
-                    }}
-                    text={'Lowest Attendance Session'}
-                  />
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      gap: '5px',
-                      alignItems: 'end',
-                      marginTop: '0.3rem',
-                    }}
-                  >
-                    <Text
-                      sx={{
-                        color: '#434343',
-                        fontSize: '1.5rem',
-                        fontWeight: 600,
-                        lineHeight: 1,
-                      }}
-                      text={'BUDGET'}
-                    />
-                    <Text
-                      sx={{
-                        color: '#00000080',
-                        fontSize: '0.9rem',
-                        fontWeight: 500,
-                      }}
-                      text={'2024'}
-                    />
-                  </Box>
-                </Box>
-              </Box>
-            </Box>
-          </Box> */}
           <Grid md={4}>
             <LineCharts />
           </Grid>

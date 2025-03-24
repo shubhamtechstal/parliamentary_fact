@@ -146,7 +146,7 @@ function MpFundSection({ MpFundSection, BottomRightChip }) {
             <FundSpentInTopAreaTextGroup index={index} {...item} />
           ))}
         </Box>
-        <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           <BottomRightChip />
         </Box>
       </Box>

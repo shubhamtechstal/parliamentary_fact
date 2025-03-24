@@ -62,7 +62,7 @@ const ChartProgressTextgroup = (props) => {
             fontFamily: '"Sora", sans-serif',
           }}
         >
-          <span style={{ fontWeight: '800' }}>{props.percentage}</span>%
+          <span style={{ fontWeight: '800' }}>{props.percentage.replace("%","")}</span>%
         </span>
       </div>
       <span style={{ fontSize: '12px', textWrap: 'nowrap' }}>
@@ -115,11 +115,14 @@ function LS_productivity({
   productivity_schedule,
   productivity_details = [],
   mobCardsData = [],
+  govtBillCount,
   BottomRightChip,
+  privateBillCount,
+  pageData
 }) {
   const Arc_progressData = [85, 91, 90, 87];
   return (
-    <Box className="performanceSection" >
+    <Box className="performanceSection">
       {/* <Box className="performanceSection" sx={{ padding: { md: '0rem 2rem', xs: '0rem  1rem 10px' } }}> */}
       <Box sx={{ display: { md: 'block', xs: 'none' } }}>
         <SectionHeading title={'Lok Sabha Productivity'} />
@@ -209,7 +212,7 @@ function LS_productivity({
           style={{
             position: 'absolute',
             width: '30%',
-            bottom: '30%',
+            bottom: '20%',
             left: '0px',
           }}
         />
@@ -217,7 +220,7 @@ function LS_productivity({
           style={{
             position: 'absolute',
             width: '30%',
-            bottom: '30%',
+            bottom: '20%',
             right: '0px',
           }}
         />
@@ -267,13 +270,14 @@ function LS_productivity({
             >
               <ChartProgressTextgroup
                 title={'ATTANDANCE'}
-                percentage={'85'}
+                percentage={`${pageData?.attendance_percentage?.attendance_percentage}`}
+                // percentage={'85'}
                 direction={'down'}
                 chartColor={'#f5b797'}
               />
               <ChartProgressTextgroup
                 title={'QUESTIONS'}
-                percentage={'91'}
+                percentage={`${pageData?.questions_percentage?.question_percentage}`}
                 chartColor={'#e795a2'}
               />
               {/* <span style={{ marginRight: '-1.5rem' }}>0</span> */}
@@ -294,7 +298,7 @@ function LS_productivity({
               />
               <ChartProgressTextgroup
                 title={'PRIVATE MEMBER BILL'}
-                percentage={'87'}
+                percentage={`${pageData?.private_bill_percentage?.private_bill_percentage}`}
                 isRight={true}
                 chartColor={'#686091'}
               />
@@ -435,14 +439,10 @@ function LS_productivity({
               justifyContent: 'center',
               padding: '1rem 0',
               marginBottom: '1rem',
+              flexWrap :'wrap'
             }}
           >
-            {[
-              { title: 'INTRODUCE', value: '12.5' },
-              { title: 'PENDING', value: '8' },
-              { title: 'PASSED', value: '12.5' },
-              { title: 'WITHDRAWN', value: '8' },
-            ]?.map((data, i) => {
+            {govtBillCount?.map((data, i) => {
               return (
                 <Box
                   key={i}
@@ -450,25 +450,26 @@ function LS_productivity({
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'left',
-                    padding: '10px 10px',
+                    padding: '10px 1rem',
                     borderRadius: '1rem',
                     backgroundColor: '#fff',
                     textAlign: 'left',
+                    width:'40%'
                   }}
                 >
+                <Text
+                  text={data.value}
+                  sx={{
+                    fontSize: '1.5rem',
+                    fontWeight: 600,
+                  }}
+                />
                   <Text
                     text={data.title}
                     sx={{
-                      fontSize: '0.7rem',
+                      fontSize: '0.8rem',
                       fontWeight: 600,
                       textWrap: 'nowrap',
-                    }}
-                  />
-                  <Text
-                    text={data.value}
-                    sx={{
-                      fontSize: '1.2rem',
-                      fontWeight: 600,
                     }}
                   />
                 </Box>
@@ -515,45 +516,50 @@ function LS_productivity({
               justifyContent: 'center',
               padding: '1rem 0',
               marginBottom: '1rem',
+              flexWrap :'wrap'
             }}
           >
-            {[
-              { title: 'INTRODUCE', value: '12.5' },
-              { title: 'PENDING', value: '8' },
-              { title: 'PASSED', value: '12.5' },
-              { title: 'WITHDRAWN', value: '8' },
-            ]?.map((data, i) => {
-              return (
-                <Box
-                  key={i}
-                  sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'left',
-                    padding: '10px 10px',
-                    borderRadius: '1rem',
-                    backgroundColor: '#fff',
-                    textAlign: 'left',
-                  }}
-                >
-                  <Text
-                    text={data.title}
+            {
+              // [
+              //   { title: 'INTRODUCE', value: '12.5' },
+              //   { title: 'PENDING', value: '8' },
+              //   { title: 'PASSED', value: '12.5' },
+              //   { title: 'WITHDRAWN', value: '8' },
+              // ]
+              privateBillCount?.map((data, i) => {
+                return (
+                  <Box
+                    key={i}
                     sx={{
-                      fontSize: '0.7rem',
-                      fontWeight: 600,
-                      textWrap: 'nowrap',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'left',
+                      padding: '10px 1rem',
+                      borderRadius: '1rem',
+                      backgroundColor: '#fff',
+                      textAlign: 'left',
+                      width:'40%'
                     }}
-                  />
-                  <Text
-                    text={data.value}
-                    sx={{
-                      fontSize: '1.2rem',
-                      fontWeight: 600,
-                    }}
-                  />
-                </Box>
-              );
-            })}
+                  >
+                    <Text
+                      text={data.value}
+                      sx={{
+                        fontSize: '1.5rem',
+                        fontWeight: 600,
+                      }}
+                    />
+                    <Text
+                      text={data.name}
+                      sx={{
+                        fontSize: '0.8rem',
+                        fontWeight: 600,
+                        textWrap: 'nowrap',
+                      }}
+                    />
+                  </Box>
+                );
+              })
+            }
           </Box>
         </Box>
       </Box>
@@ -624,12 +630,34 @@ function LS_productivity({
             </div>
             <Grid container spacing={2} columns={{ xs: 12, sm: 12, md: 12 }}>
               <Grid item xs={6} md={6} sx={{ textAlign: 'right' }}>
-                <BillTextgroup title={'INTRODUCE'} percentage={'12.5'} />
-                <BillTextgroup title={'PENDING'} percentage={'8'} />
+                {govtBillCount.map((item, i) => {
+                  switch (i) {
+                    case 1:
+                      return;
+                    case 3:
+                      return;
+                    default:
+                      break;
+                  }
+                  return (
+                    <BillTextgroup title={item.title} percentage={item.value} />
+                  );
+                })}
               </Grid>
               <Grid item xs={6} md={6} sx={{ textAlign: 'left' }}>
-                <BillTextgroup title={'PASSED'} percentage={'12.5'} />
-                <BillTextgroup title={'WITHDRAWN'} percentage={'8'} />
+                {govtBillCount.map((item, i) => {
+                  switch (i) {
+                    case 0:
+                      return;
+                    case 2:
+                      return;
+                    default:
+                      break;
+                  }
+                  return (
+                    <BillTextgroup title={item.title} percentage={item.value} />
+                  );
+                })}
               </Grid>
             </Grid>
           </Box>
@@ -642,15 +670,15 @@ function LS_productivity({
             position: 'relative',
           }}
         >
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              position: 'relative',
-              left: '-5%',
-              top: '2rem',
-            }}
+          <div className="colorfulArcBox"
+            // style={{
+            //   display: 'flex',
+            //   flexDirection: 'row',
+            //   justifyContent: 'space-between',
+            //   position: 'relative',
+            //   left: '-5%',
+            //   top: '2rem',
+            // }}
           >
             <Box
               sx={{
@@ -662,13 +690,13 @@ function LS_productivity({
             >
               <ChartProgressTextgroup
                 title={'ATTANDANCE'}
-                percentage={'85'}
+                percentage={`${pageData?.attendance_percentage?.attendance_percentage}`}
                 direction={'down'}
                 chartColor={'#f5b797'}
               />
               <ChartProgressTextgroup
                 title={'QUESTIONS'}
-                percentage={'91'}
+                percentage={`${pageData?.questions_percentage?.question_percentage}`}
                 chartColor={'#e795a2'}
               />
               <span style={{ marginRight: '-1.5rem' }}>0</span>
@@ -692,7 +720,7 @@ function LS_productivity({
               />
               <ChartProgressTextgroup
                 title={'PRIVATE MEMBER BILL'}
-                percentage={'87'}
+                percentage={`${pageData?.private_bill_percentage?.private_bill_percentage}`}
                 isRight={true}
                 chartColor={'#686091'}
               />
@@ -701,7 +729,7 @@ function LS_productivity({
           </div>
           <img
             src="Assets/icons/Parliament-dot-image1.png"
-            className='parliamentCenterImgDesktop'
+            className="parliamentCenterImgDesktop"
             alt="parliament"
             // style={{
             //   position: 'relative',
@@ -771,12 +799,34 @@ function LS_productivity({
             </div>
             <Grid container spacing={2} columns={{ xs: 12, sm: 12, md: 12 }}>
               <Grid item xs={6} md={6} sx={{ textAlign: 'right' }}>
-                <BillTextgroup title={'INTRODUCE'} percentage={'12.5'} />
-                <BillTextgroup title={'PENDING'} percentage={'8'} />
+                {privateBillCount.map((item, i) => {
+                  switch (i) {
+                    case 1:
+                      return;
+                    case 3:
+                      return;
+                    default:
+                      break;
+                  }
+                  return (
+                    <BillTextgroup title={item.name} percentage={item.value} />
+                  );
+                })}
               </Grid>
               <Grid item xs={6} md={6} sx={{ textAlign: 'left' }}>
-                <BillTextgroup title={'PASSED'} percentage={'12.5'} />
-                <BillTextgroup title={'WITHDRAWN'} percentage={'8'} />
+                {privateBillCount.map((item, i) => {
+                  switch (i) {
+                    case 0:
+                      return;
+                    case 2:
+                      return;
+                    default:
+                      break;
+                  }
+                  return (
+                    <BillTextgroup title={item.name} percentage={item.value} />
+                  );
+                })}
               </Grid>
             </Grid>
           </Box>

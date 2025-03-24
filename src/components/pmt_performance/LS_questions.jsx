@@ -4,6 +4,7 @@ import ProgressMeter from 'components/common/ProgressMeter';
 import SectionHeading from 'components/common/SectionHeading';
 import Text from 'components/common/Text';
 import LineCharts from 'components/LineCharts';
+import { extractPercentage, formattedDate } from 'helpers/performanceConstants';
 
 const QuestionTextGroup = ({ title, value, date, index }) => {
   return (
@@ -18,6 +19,7 @@ const QuestionTextGroup = ({ title, value, date, index }) => {
           : '2px solid #E0E0E0',
         padding: '1rem',
         minWidth: '30%',
+        maxWidth: '21rem',
       }}
     >
       <GrayDot />
@@ -43,14 +45,14 @@ const QuestionTextGroup = ({ title, value, date, index }) => {
               fontWeight: 600,
               lineHeight: 1,
             }}
-            text={value}
+            text={[6, 8].includes(index) ? `MINISTRY OF ${value}` : value}
           />
           <Text
             sx={{
               fontSize: '0.9rem',
               fontWeight: 500,
             }}
-            text={date}
+            text={formattedDate(date)}
           />
         </Box>
       </Box>
@@ -58,7 +60,12 @@ const QuestionTextGroup = ({ title, value, date, index }) => {
   );
 };
 
-function LS_QuestionsComponent({ questionsListData, BottomRightChip }) {
+function LS_QuestionsComponent({
+  questionsListData,
+  pageData,
+  questionsData,
+  BottomRightChip,
+}) {
   return (
     <>
       {/* **********Mobile********** */}
@@ -98,27 +105,121 @@ function LS_QuestionsComponent({ questionsListData, BottomRightChip }) {
         <Box
           sx={{
             display: 'flex',
-            alignItems: 'center',
-            flexWrap:"wrap",
-            // overflowX: 'scroll',
-            justifyContent:'space-around',
-            gap: '2rem 1rem',
-            padding: '1rem',
-            width: '100%',
-            alignItems:'top'
+            flexDirection: 'row',
+            flexWrap: 'wrap',
           }}
         >
-          {questionsListData.listData.map((item, index) => (
+          {questionsData.slice(0, 6).map((item, index) => (
             <Box
               key={index}
               sx={{
                 display: 'flex',
-                alignItems: 'top',
+                alignItems: 'center',
                 gap: '0.8rem',
-                maxWidth:"11rem"
-                // padding: '10px',
-                // borderRadius: '1rem',
-                // backgroundColor: '#fff',
+                padding: '1rem',
+                minWidth: 'auto',
+                //  textWrap:'nowrap',
+                width: '12rem',
+              }}
+            >
+              <GrayDot />
+              <Box>
+                <Text
+                  sx={{
+                    fontSize: '0.8rem',
+                    fontWeight: 600,
+                  }}
+                  text={item.title}
+                />
+                <Box
+                  sx={{
+                    //  display: 'flex',
+                    gap: '5px',
+                    alignItems: 'end',
+                    marginTop: '0.3rem',
+                  }}
+                >
+                  <Text
+                    sx={{
+                      fontSize: '1rem',
+                      fontWeight: 600,
+                      lineHeight: 1,
+                    }}
+                    text={item.value}
+                  />
+                  <Text
+                    sx={{
+                      fontSize: '0.9rem',
+                      fontWeight: 500,
+                    }}
+                    text={formattedDate(item?.date)}
+                  />
+                </Box>
+              </Box>
+            </Box>
+          ))}
+          {questionsData.slice(6).map((item, index) => (
+            <Box
+              key={index}
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.8rem',
+                padding: '1rem',
+                minWidth: 'auto',
+                //  textWrap:'nowrap',
+                width: 'auto',
+              }}
+            >
+              <GrayDot />
+              <Box>
+                <Text
+                  sx={{
+                    fontSize: '0.8rem',
+                    fontWeight: 600,
+                  }}
+                  text={item.title}
+                />
+                <Box
+                  sx={{
+                    display: 'flex',
+                    gap: '5px',
+                    alignItems: 'end',
+                    marginTop: '0.3rem',
+                  }}
+                >
+                  <Text
+                    sx={{
+                      fontSize: '1rem',
+                      fontWeight: 600,
+                      lineHeight: 1,
+                    }}
+                    text={
+                      [0, 2].includes(index)
+                        ? `MINISTRY OF ${item.value}`
+                        : item.value
+                    }
+                  />
+                  <Text
+                    sx={{
+                      fontSize: '0.9rem',
+                      fontWeight: 500,
+                    }}
+                    text={formattedDate(item?.date)}
+                  />
+                </Box>
+              </Box>
+            </Box>
+          ))}
+          {/* {questionsData.map((item, index) => (
+            <Box
+              key={index}
+              sx={{
+                display: 'flex',
+                alignItems: 'start',
+                gap: '0.8rem',
+                width: '47%',
+                padding: '2rem 0',
               }}
             >
               <GrayDot />
@@ -141,13 +242,17 @@ function LS_QuestionsComponent({ questionsListData, BottomRightChip }) {
                 >
                   <Text
                     sx={{
-                      color: '#434343',
+                      // color: '#434343',
                       fontSize: '1rem',
                       fontWeight: 600,
                       lineHeight: 1,
                       // textWrap: 'nowrap',
                     }}
-                    text={`${item.value}`}
+                    text={
+                      [6, 8].includes(index)
+                        ? `MINISTRY OF ${item.value}`
+                        : item.value
+                    }
                   />
                   <Text
                     sx={{
@@ -156,20 +261,22 @@ function LS_QuestionsComponent({ questionsListData, BottomRightChip }) {
                       fontWeight: 500,
                       textWrap: 'nowrap',
                     }}
-                    text={`${item.date}`}
+                    text={formattedDate(item?.date)}
                   />
                 </Box>
               </Box>
             </Box>
-          ))}
+          ))} */}
         </Box>
+
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           <LineCharts width={350} />
         </Box>
       </Box>
 
       {/* ******Desktop**** */}
-      <Box  className="performanceSection"
+      <Box
+        className="performanceSection"
         sx={{
           position: 'relative',
           display: { xs: 'none', md: 'block' },
@@ -201,16 +308,18 @@ function LS_QuestionsComponent({ questionsListData, BottomRightChip }) {
               titleText={questionsListData.progressTitle}
               subTiteText={questionsListData.progressSubTitle}
               centerDate={questionsListData.date}
-              percentText={'100.'}
-              subPercentText={'20%'}
+              percentText={`${extractPercentage(pageData?.questions_percentage?.question_percentage)?.a}`}
+              subPercentText={`${extractPercentage(pageData?.questions_percentage?.question_percentage)?.b}`}
+              // percentText={'100.'}
+              // subPercentText={'20%'}
               width={230}
               height={250}
               innerRadius={98}
               percentNumFontSize={'2.5rem'}
-              percent_x="40%"
+              percent_x="45%"
               percent_y="55%"
               dotPercentFontSize={'1.5rem'}
-              dotPercent_x="72%"
+              dotPercent_x="62%"
               dotPercent_y="57%"
             />
           </Grid>
@@ -224,7 +333,7 @@ function LS_QuestionsComponent({ questionsListData, BottomRightChip }) {
               flexWrap: 'wrap',
             }}
           >
-            {questionsListData.listData.map((item, index) => (
+            {questionsData.map((item, index) => (
               <QuestionTextGroup index={index} {...item} />
             ))}
           </Grid>
