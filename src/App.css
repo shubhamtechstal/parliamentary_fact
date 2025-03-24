@@ -51,9 +51,17 @@
 }
 .parliamentCenterImgDesktop {
   position: relative;
-  bottom: 7%;
+  bottom: 12%;
   left: 0%;
-  width: 40vw;
+  width: 42vw;
+}
+.colorfulArcBox{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: relative;
+  left: -9%;
+  top: 2rem;
 }
 @media (max-width: 1300px) {
   .parliamentDotImage {
@@ -63,7 +71,11 @@
     padding: 1rem 2rem;
   }
   .parliamentCenterImgDesktop {
-    left: 10%;
+    left: 8%;
+    bottom: 9%;
+  }
+  .colorfulArcBox{
+    left: -12%;
   }
 }
 @media (min-width:1300px) and (max-width: 1400px) {
@@ -71,7 +83,11 @@
     padding: 1rem 5rem;
   }
   .parliamentCenterImgDesktop {
-    left: 5%;
+    left: 6%;
+    bottom: 10%;
+  }
+  .colorfulArcBox{
+    left: -7%;
   }
 }
 @media (max-width: 775px) {

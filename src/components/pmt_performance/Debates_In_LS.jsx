@@ -3,8 +3,9 @@ import GrayDot from 'components/common/GrayDot';
 import ProgressMeter from 'components/common/ProgressMeter';
 import SectionHeading from 'components/common/SectionHeading';
 import Text from 'components/common/Text';
+import { formattedDate } from 'helpers/performanceConstants';
 
-const QuestionTextGroup = ({ title, value, date, index, mobTextWrap }) => {
+const QuestionTextGroup = ({ title, value, date, index }) => {
   return (
     <Box
       key={index}
@@ -13,13 +14,12 @@ const QuestionTextGroup = ({ title, value, date, index, mobTextWrap }) => {
         alignItems: 'center',
         gap: '0.8rem',
         borderRight: [2, 5, 7, 9].includes(index)
-          ? mobTextWrap
-            ? '2px solid #E0E0E0'
-            : 'none'
+          ? 'none'
           : '2px solid #E0E0E0',
         padding: '1rem',
-        minWidth: !mobTextWrap ? '30%' : 'auto',
-        textWrap: mobTextWrap || 'wrap',
+        minWidth: '30%',
+        maxWidth: '21rem',
+        textWrap: 'wrap',
       }}
     >
       <GrayDot />
@@ -66,9 +66,9 @@ const DebateTextGroup = ({ index, title, percentage, mobTextWrap }) => {
       style={{
         display: 'flex',
         gap: '1rem',
-        alignItems: 'center',
-        fontSize: '14px',
-        width: mobTextWrap ? 'auto' : '23%',
+        alignItems: mobTextWrap ? 'start' : 'center',
+        fontSize: '1rem',
+        width: mobTextWrap ? '10rem' : '23%',
       }}
     >
       <GrayDot />
@@ -88,13 +88,13 @@ const DebateTextGroup = ({ index, title, percentage, mobTextWrap }) => {
           %
         </span>{' '}
         <br />
-        <span style={{ textWrap: mobTextWrap || 'wrap' }}>{title}</span>
+        <span >{title}</span>
       </div>
     </div>
   );
 };
 
-function Debates_In_LS({ debateListData, BottomRightChip }) {
+function Debates_In_LS({ debateListData, questionsData, BottomRightChip }) {
   return (
     <>
       {/* ****Mobile*** */}
@@ -127,9 +127,11 @@ function Debates_In_LS({ debateListData, BottomRightChip }) {
           sx={{
             display: 'flex',
             flexDirection: 'row',
-            gap: '2rem',
-            overflow: 'auto',
+            gap: '2rem 0',
+            // overflow: 'auto',
             padding: '0 1rem',
+            flexWrap:'wrap',
+            justifyContent:'space-between'
           }}
         >
           {debateListData.listData.map((item, index) => (
@@ -146,14 +148,112 @@ function Debates_In_LS({ debateListData, BottomRightChip }) {
           sx={{
             display: 'flex',
             flexDirection: 'row',
-            // overflow: 'auto',
-            gap: '2rem',
             flexWrap:'wrap'
           }}
         >
-          {debateListData.listData2.map((item, index) => (
-            <QuestionTextGroup index={index} {...item} mobTextWrap={'nowrap'} />
+          {questionsData.slice(0,6).map((item, index) => (
+           <Box
+           key={index}
+           sx={{
+             display: 'flex',
+             alignItems: 'center',
+             gap: '0.8rem',
+             padding: '1rem',
+             minWidth:  'auto',
+            //  textWrap:'nowrap',
+             width:'12rem'
+           }}
+         >
+           <GrayDot />
+           <Box>
+             <Text
+               sx={{
+                 fontSize: '0.8rem',
+                 fontWeight: 600,
+               }}
+               text={item.title}
+             />
+             <Box
+               sx={{
+                //  display: 'flex',
+                 gap: '5px',
+                 alignItems: 'end',
+                 marginTop: '0.3rem',
+               }}
+             >
+               <Text
+                 sx={{
+                   fontSize: '1rem',
+                   fontWeight: 600,
+                   lineHeight: 1,
+                 }}
+                 text={item.value}
+               />
+               <Text
+                 sx={{
+                   fontSize: '0.9rem',
+                   fontWeight: 500,
+                 }}
+                 text={formattedDate(item?.date)}
+               />
+             </Box>
+           </Box>
+         </Box>
           ))}
+          {questionsData.slice(6).map((item, index) => (
+           <Box
+           key={index}
+           sx={{
+             display: 'flex',
+             alignItems: 'center',
+             gap: '0.8rem',
+             padding: '1rem',
+             minWidth:  'auto',
+            //  textWrap:'nowrap',
+             width:'auto'
+           }}
+         >
+           <GrayDot />
+           <Box>
+             <Text
+               sx={{
+                 fontSize: '0.8rem',
+                 fontWeight: 600,
+               }}
+               text={item.title}
+             />
+             <Box
+               sx={{
+                 display: 'flex',
+                 gap: '5px',
+                 alignItems: 'end',
+                 marginTop: '0.3rem',
+               }}
+             >
+               <Text
+                 sx={{
+                   fontSize: '1rem',
+                   fontWeight: 600,
+                   lineHeight: 1,
+                 }}
+                 text={ [0, 2].includes(index)
+                  ? `MINISTRY OF ${item.value}`
+                  : item.value}
+               />
+               <Text
+                 sx={{
+                   fontSize: '0.9rem',
+                   fontWeight: 500,
+                 }}
+                 text={formattedDate(item?.date)}
+               />
+             </Box>
+           </Box>
+         </Box>
+          ))}
+          {/* {debateListData.listData2.map((item, index) => (
+            <QuestionTextGroup index={index} {...item} mobTextWrap={'nowrap'} />
+          ))} */}
         </Box>
         <Grid
           container
@@ -169,7 +269,7 @@ function Debates_In_LS({ debateListData, BottomRightChip }) {
         >
           <Grid xs={12} md={8}></Grid>
         </Grid>
-        <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           <BottomRightChip />
         </Box>
       </Box>
@@ -249,7 +349,7 @@ function Debates_In_LS({ debateListData, BottomRightChip }) {
                 flexWrap: 'wrap',
               }}
             >
-              {debateListData.listData2.map((item, index) => (
+              {questionsData.map((item, index) => (
                 <QuestionTextGroup index={index} {...item} />
               ))}
             </Box>
