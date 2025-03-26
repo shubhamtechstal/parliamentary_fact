@@ -3,14 +3,24 @@ import StateAttendance from 'components/attendence/StateAttendance';
 // import ParliamentPerformanceCard from 'components/common/cards/ParliamentPerformanceCard';
 import Text from 'components/common/Text';
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import LS_attendance from 'components/pmt_performance/LS_attendance';
+// import { attendance_details } from 'helpers/performanceConstants';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchPerformanceData } from 'stores/redux/apiSlices/pmt_PerformanceSlice';
 
 export default function ParliamentAttendanceContainer() {
   const [filter, setFilter] = useState(false);
   const handleFilterClick = () => {
     setFilter(!filter);
   };
+  const dispatch = useDispatch();
+  const {
+    pageData,
+  } = useSelector((state) => state?.pmtPerformance);
+  useEffect(() => {
+    dispatch(fetchPerformanceData());
+  }, [dispatch]);
   return (
     <>
       {/* <Box sx={{display:'flex'}}>
@@ -77,7 +87,11 @@ export default function ParliamentAttendanceContainer() {
             {filter ? 'Clear' : 'Filter'}
           </Button>
         </Box>
-        <LS_attendance />
+        <LS_attendance
+          attendance_details={pageData.attendance_details}
+          pageData={pageData}
+          // BottomRightChip={BottomRightChip}
+        />
         <Divider sx={{ margin: '1rem' }} />
         <Box sx={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
           <Box
