@@ -12,7 +12,7 @@ const FundSpentInTopAreaTextGroup = ({ category, value, date, index }) => {
         display: 'flex',
         alignItems: 'center',
         gap: '0.8rem',
-        minWidth: { md: '20%', sm: '30%' },
+        width: { md: '20%', xs: '10rem' },
       }}
     >
       <GrayDot />
@@ -35,7 +35,7 @@ const FundSpentInTopAreaTextGroup = ({ category, value, date, index }) => {
     </Box>
   );
 };
-const FundDataTextGroup = ({ index, title, unit, percentage, monNowrap }) => {
+const FundDataTextGroup = ({ index, title, unit, percentage }) => {
   return (
     <Box
       key={index}
@@ -44,8 +44,8 @@ const FundDataTextGroup = ({ index, title, unit, percentage, monNowrap }) => {
         gap: '1rem',
         alignItems: 'center',
         fontSize: '14px',
-        width: { xs: 'auto', md: '25%' },
-        minWidth: monNowrap ? 'auto' : '150px',
+        width: { xs: '10rem', md: '25%' },
+        minWidth: '160px',
       }}
     >
       <GrayDot />
@@ -54,24 +54,21 @@ const FundDataTextGroup = ({ index, title, unit, percentage, monNowrap }) => {
           style={{
             color: '#FF936F',
             fontWeight: '600',
-
-            wordWrap: 'break-word',
           }}
         >
           <span style={{ fontWeight: '800', fontSize: '1.5rem' }}>
             {percentage}
-          </span>{' '}
-          %
+          </span>
         </span>{' '}
         <br />
         <h3 style={{ margin: '0px' }}>{unit}</h3>
-        <span style={{ textWrap: monNowrap || 'wrap' }}>{title}</span>
+        <span style={{ textWrap: 'wrap' }}>{title}</span>
       </div>
     </Box>
   );
 };
 
-function MpFundSection({ MpFundSection, BottomRightChip }) {
+function MpFundSection({ MpFundSection, mpsFundData, BottomRightChip }) {
   return (
     <>
       {/* **** Mobile *** */}
@@ -107,20 +104,22 @@ function MpFundSection({ MpFundSection, BottomRightChip }) {
         <Box
           sx={{
             display: 'flex',
-            overflow: 'auto',
+            // overflow: 'auto',
             width: '100%',
             margin: '2rem 0 0',
-            gap: '2rem',
+            gap: '2rem 0',
             alignItems: 'start',
+            flexWrap:'wrap',
+            justifyContent: "space-around"
           }}
         >
-          {MpFundSection.fundData.map((item, index) => (
+          {mpsFundData?.map((item, index) => (
             <FundDataTextGroup
               index={index}
               title={item.title}
-              unit={item.unit}
-              percentage={item.value}
-              monNowrap={'nowrap'}
+              unit={item.value}
+              percentage={item.percentage}
+              mobNowrap={'nowrap'}
             />
           ))}
         </Box>
@@ -138,7 +137,8 @@ function MpFundSection({ MpFundSection, BottomRightChip }) {
           sx={{
             display: 'flex',
             flexDirection: 'row',
-            overflow:'auto',
+            justifyContent:'space-around',
+            flexWrap:'wrap',
             gap: '1rem',
           }}
         >
@@ -243,12 +243,12 @@ function MpFundSection({ MpFundSection, BottomRightChip }) {
                 flexWrap: 'wrap',
               }}
             >
-              {MpFundSection.fundData.map((item, index) => (
+              {mpsFundData?.map((item, index) => (
                 <FundDataTextGroup
                   index={index}
                   title={item.title}
-                  unit={item.unit}
-                  percentage={item.value}
+                  unit={item.value}
+                  percentage={item.percentage}
                 />
               ))}
             </Box>

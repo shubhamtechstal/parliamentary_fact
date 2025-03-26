@@ -278,6 +278,7 @@ console.log('questions_data', questionsData, privateBillCount,govtBillCount)
         attendance_details={attendanceDetails}
         pageData={pageData}
         BottomRightChip={BottomRightChip}
+        className="performanceSection"
       />
       <AdvertiseSection />
       <LS_QuestionsComponent
@@ -295,6 +296,7 @@ console.log('questions_data', questionsData, privateBillCount,govtBillCount)
       <AdvertiseSection />
       <MpFundSection
         MpFundSection={MpFundsectionData}
+        mpsFundData={pageData?.mps_fund_data}
         BottomRightChip={BottomRightChip}
       />
     </Box>

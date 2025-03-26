@@ -6,7 +6,7 @@ import Text from 'components/common/Text';
 import LineCharts from 'components/LineCharts';
 import { extractPercentage, formattedDate } from 'helpers/performanceConstants';
 
-function LS_attendance({ attendance_details, pageData, BottomRightChip }) {
+function LS_attendance({ attendance_details, className, pageData, BottomRightChip }) {
   return (
     <>
       {/* **********Mobile********** */}
@@ -111,13 +111,15 @@ function LS_attendance({ attendance_details, pageData, BottomRightChip }) {
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           <LineCharts width={350} />
         </Box>
-        <Box sx={{display:"flex", justifyContent:'center', marginTop:'-4rem', marginBottom:"1rem"}} >
-          <BottomRightChip/>
-        </Box>
+        {BottomRightChip&&
+          <Box sx={{display:"flex", justifyContent:'center', marginTop:'-4rem', marginBottom:"1rem"}} >
+            <BottomRightChip/>
+          </Box>
+        }
       </Box>
 
       {/* ******Desktop**** */}
-      <Box  className="performanceSection"
+      <Box  className={className ?? ''}
         sx={{
           position: 'relative',
           display: { md: 'block', xs: 'none' },
