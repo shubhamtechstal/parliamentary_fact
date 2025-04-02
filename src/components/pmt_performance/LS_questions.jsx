@@ -4,7 +4,7 @@ import ProgressMeter from 'components/common/ProgressMeter';
 import SectionHeading from 'components/common/SectionHeading';
 import Text from 'components/common/Text';
 import LineCharts from 'components/LineCharts';
-import { extractPercentage, formattedDate } from 'helpers/performanceConstants';
+import { getDateInMonthNameFormate, extractPercentage } from 'helpers/utills/utilityFunctions';
 
 const QuestionTextGroup = ({ title, value, date, index }) => {
   return (
@@ -52,7 +52,7 @@ const QuestionTextGroup = ({ title, value, date, index }) => {
               fontSize: '0.9rem',
               fontWeight: 500,
             }}
-            text={formattedDate(date)}
+            text={getDateInMonthNameFormate(date)}
           />
         </Box>
       </Box>
@@ -152,7 +152,7 @@ function LS_QuestionsComponent({
                       fontSize: '0.9rem',
                       fontWeight: 500,
                     }}
-                    text={formattedDate(item?.date)}
+                    text={getDateInMonthNameFormate(item?.date)}
                   />
                 </Box>
               </Box>
@@ -205,7 +205,7 @@ function LS_QuestionsComponent({
                       fontSize: '0.9rem',
                       fontWeight: 500,
                     }}
-                    text={formattedDate(item?.date)}
+                    text={getDateInMonthNameFormate(item?.date)}
                   />
                 </Box>
               </Box>
@@ -261,7 +261,7 @@ function LS_QuestionsComponent({
                       fontWeight: 500,
                       textWrap: 'nowrap',
                     }}
-                    text={formattedDate(item?.date)}
+                    text={getDateInMonthNameFormate(item?.date)}
                   />
                 </Box>
               </Box>
@@ -344,7 +344,7 @@ function LS_QuestionsComponent({
           <LineCharts />
         </Box>
         <Box sx={{ position: 'absolute', right: '10rem', bottom: '15%' }}>
-          <BottomRightChip />
+          <BottomRightChip  chipLabal={"MPs Participation in Lok Sabha Questions"} />
         </Box>
       </Box>
     </>

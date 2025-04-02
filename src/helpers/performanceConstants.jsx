@@ -75,58 +75,6 @@ export const questionsListData = {
   date: 'Till 20 March 2024',
   progressTitle: 'QUESTIONS',
   progressSubTitle: 'OREL',
-  listData: [
-    {
-      title: 'Higest Questions Day',
-      value: '24.56',
-      date: '15AUG 2024',
-    },
-    {
-      title: 'Higest Questions Session',
-      value: 'WINTTER',
-      date: '2024',
-    },
-    {
-      title: 'Higest Written Questions Day by MPs',
-      value: '400',
-      date: '5AUG 2024',
-    },
-    {
-      title: 'Lowest Questions Day',
-      value: '24.56',
-      date: '15AUG 2024',
-    },
-    {
-      title: 'Lowest Questions Session',
-      value: 'BUDGET',
-      date: '2024',
-    },
-    {
-      title: 'Lowest Written Questions Day by MPs',
-      value: '230',
-      date: '5AUG 2024',
-    },
-    {
-      title: 'Higest Total Questions ask by Ministry',
-      value: 'MINISTRY OF DEFANCE',
-      date: '5AUG 2024',
-    },
-    {
-      title: 'Higest Questions Topics',
-      value: '400',
-      date: 'Price Hike of Temotos', // New field for additional info
-    },
-    {
-      title: 'Higest Total Questions ask by Ministry',
-      value: 'MINISTRY OF DEFANCE',
-      date: '5AUG 2024',
-    },
-    {
-      title: 'Higest Total Questions ask by Ministry',
-      value: '10',
-      date: 'Price Hike of Temotos', // New field for additional info
-    },
-  ],
 };
 export const debateListData = {
   title: 'Debate in Lok Sabha',
@@ -269,37 +217,6 @@ export const debateListData = {
   ],
 };
 
-export const formattedDate = (dateStr) => {
-  // Regular expression to match valid date formats (YYYY-MM-DD)
-  const datePattern = /^\d{4}-\d{2}-\d{2}$/;
-
-  // Check if input matches the correct date format
-  if (!datePattern.test(dateStr)) {
-    return dateStr; // Return original string if it's not a valid date format
-  }
-
-  const dateObj = new Date(dateStr);
-
-  // Validate if the date object is correctly created
-  if (isNaN(dateObj.getTime())) {
-    return dateStr; // Return original string if Date conversion fails
-  }
-
-  return dateObj.toLocaleDateString("en-GB", {
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
-  });
-};
-export const extractPercentage = (value='') => {
-  const [a, b] = value?.split(".");
-  return {
-    a: a+'.',         // Integer part
-    b: b ? b : "0%", // Decimal part with "%"
-  };
-};
-
-
 export const MpFundsectionData = {
   title: 'MP Fund-Local Development Fund (MPLADS)',
   readBeforeCheck: 'Read before check performance',
@@ -398,3 +315,109 @@ export const MpFundsectionData = {
   },
   footer: 'MPs Parlicipation in Lok Sabha Attendance',
 };
+export const questionsDetailsData ={
+  "title": "QUESTION IN LOK SABHA",
+  "filter": "Filter",
+  "select_year_label": "Select Year",
+  "year_options": [
+    {
+      "label": "1st year",
+      "checked": true
+    },
+    {
+      "label": "2nd year",
+      "checked": false
+    },
+    {
+      "label": "3rd year",
+      "checked": false
+    },
+    {
+      "label": "4th year",
+      "checked": false
+    },
+    {
+      "label": "5th year",
+      "checked": false
+    }
+  ],
+  "select_session_1_label": "Select Session",
+  "session_1_options": [
+    {
+      "label": "Special Session 2019",
+      "checked": true
+    },
+    {
+      "label": "Monsoon Session 2019",
+      "checked": false
+    },
+    {
+      "label": "Winter Session 2019",
+      "checked": false
+    },
+    {
+      "label": "Budget Session 2020",
+      "checked": false
+    }
+  ],
+  "select_session_2_label": "Select Session",
+  "session_2_options": [
+    {
+      "label": "Special Session 2019",
+      "checked": false
+    },
+    {
+      "label": "Monsoon Session 2019",
+      "checked": false
+    },
+    {
+      "label": "Winter Session 2019",
+      "checked": false
+    },
+    {
+      "label": "Budget Session 2020",
+      "checked": false
+    }
+  ],
+  "done_button": "Done",
+  "questions": [
+    {
+      "date": "25 NOV 2024",
+      "number": "QUESTION NUM.1",
+      "subject": "LOCAL INFRASTRUCTURE , SUCH AS ROADS AND WATER / WASTEWATER NETWORKS , FORM",
+      "from_ministry_label": "FROM MINISTERY",
+      "ministry": "MINISTRY OF RURAL DEVELOPMENT",
+      "answer_by_label": "ANSWER BY",
+      "answer_by": "SHIVRAJ SINGH CHOUHAN",
+      "by_mps_label": "BY MPS",
+      "mps": [
+        "SHREE RAHUL GANDHI",
+        "SHREE KAMLESH PASWAN",
+        "SMT . SUPRIYA SULE"
+      ],
+      "content": [
+        "Local infrastructure , such as roads and water / wastewater networks , form the backbone of the local economy . They enable the movement of people and goods , provide essential drinking water .",
+        "Local infrastructure , such as roads and water / wastewater networks , form the backbone of the local economy . They enable the movement of people and goods , provide",
+        "Local Infrastructure , such as roads and water / wastewater networks , form the backbone of the local economy . They enable the movement of people and goods , provide essential drinking water"
+      ]
+    },
+    {
+      "number": "QUESTION NUM.2",
+      "subject": "LOCAL INFRASTRUCTURE , SUCH AS ROADS AND WATER / WASTEWATER NETWORKS , FORM",
+      "from_ministry_label": "FROM MINISTERY",
+      "ministry": "MINISTRY OF RURAL DEVELOPMENT",
+      "answer_by_label": "ANSWER BY",
+      "answer_by": "SHIVRAJ SINGH CHOUHAN",
+      "by_mps_label": "BY MPS",
+      "mps": [
+        "SHREE RAHUL GANDHI",
+        "SHREE KAMLESH PASWAN",
+        "SMT SUPRIVA SULE"
+      ],
+      "content": [
+        "Local infrastructure , such as roads and water / wastewater networks , form the backbone of the local economy . They enable the movement of people and goods , provide essential drinking water .",
+        "Local infrastructure , such as roads and water / wastewater networks , form the backbone of the local economy . They enable the movement of people and goods , provide"
+      ]
+    }
+  ]
+}

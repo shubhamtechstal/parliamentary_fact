@@ -3,7 +3,8 @@ import GrayDot from 'components/common/GrayDot';
 import ProgressMeter from 'components/common/ProgressMeter';
 import SectionHeading from 'components/common/SectionHeading';
 import Text from 'components/common/Text';
-import { formattedDate } from 'helpers/performanceConstants';
+import { getDateInMonthNameFormate } from 'helpers/utills/utilityFunctions';
+// import { formattedDate } from 'helpers/performanceConstants';
 
 const QuestionTextGroup = ({ title, value, date, index }) => {
   return (
@@ -52,7 +53,7 @@ const QuestionTextGroup = ({ title, value, date, index }) => {
               fontSize: '0.9rem',
               fontWeight: 500,
             }}
-            text={date}
+            text={getDateInMonthNameFormate(date)}
           />
         </Box>
       </Box>
@@ -194,7 +195,7 @@ function Debates_In_LS({ debateListData, questionsData, BottomRightChip }) {
                    fontSize: '0.9rem',
                    fontWeight: 500,
                  }}
-                 text={formattedDate(item?.date)}
+                 text={getDateInMonthNameFormate(item?.date)}
                />
              </Box>
            </Box>
@@ -245,7 +246,7 @@ function Debates_In_LS({ debateListData, questionsData, BottomRightChip }) {
                    fontSize: '0.9rem',
                    fontWeight: 500,
                  }}
-                 text={formattedDate(item?.date)}
+                 text={getDateInMonthNameFormate(item?.date)}
                />
              </Box>
            </Box>

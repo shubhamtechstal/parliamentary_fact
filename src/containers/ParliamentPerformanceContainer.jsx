@@ -17,10 +17,10 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPerformanceData } from 'stores/redux/apiSlices/pmt_PerformanceSlice';
 
-const BottomRightChip = () => {
+const BottomRightChip = ({chipLabal}) => {
   return (
     <Chip
-      label={'MPs Participation in Lok Sabha Attendance'}
+      label={chipLabal ?? 'MPs Participation in Lok Sabha Attendance'}
       Filled
       sx={{
         marginTop: '2rem',
