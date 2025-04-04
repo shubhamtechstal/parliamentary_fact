@@ -4,7 +4,7 @@ import ProgressMeter from 'components/common/ProgressMeter';
 import SectionHeading from 'components/common/SectionHeading';
 import Text from 'components/common/Text';
 import LineCharts from 'components/LineCharts';
-import { extractPercentage, formattedDate } from 'helpers/performanceConstants';
+import { getDateInMonthNameFormate, extractPercentage } from 'helpers/utills/utilityFunctions';
 
 function LS_attendance({ attendance_details, className, pageData, BottomRightChip }) {
   return (
@@ -100,7 +100,7 @@ function LS_attendance({ attendance_details, className, pageData, BottomRightChi
                       fontWeight: 500,
                       textWrap: 'nowrap',
                     }}
-                    text={formattedDate(item?.date)}
+                    text={getDateInMonthNameFormate(item?.date)}
                   />
                  } 
                 </Box>
@@ -194,7 +194,7 @@ function LS_attendance({ attendance_details, className, pageData, BottomRightChi
                       fontSize: '0.9rem',
                       fontWeight: 500,
                     }}
-                    text={formattedDate(item?.date)}
+                    text={getDateInMonthNameFormate(item?.date)}
                   />
                 </Box>
               </Box>
