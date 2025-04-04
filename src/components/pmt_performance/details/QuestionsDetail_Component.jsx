@@ -7,9 +7,7 @@ import {
   Grid,
   Typography,
 } from '@mui/material';
-import Button from 'components/common/Button';
 import SectionHeading from 'components/common/SectionHeading';
-import Text from 'components/common/Text';
 import { questionsDetailsData } from 'helpers/performanceConstants';
 import { useState } from 'react';
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
@@ -41,7 +39,7 @@ function QuestionsDetail_Component() {
         className="performanceSection"
         sx={{
           position: 'relative',
-          display: { xs: 'none', md: 'block' }, marginBottom:'10rem'
+          marginBottom:'10rem'
         }}
       >
         <Box
@@ -153,7 +151,7 @@ function QuestionsDetail_Component() {
           return (
             <Box key={'questions' + i} sx={{ fontSize: '0.8rem' }}>
               <h3>{item?.date}</h3>
-              <h3>{item?.number}</h3>
+              <h3>QUESTION NUM : {i+1}</h3>
               <h5>
                 SUBJECT :{' '}
                 <span style={{ marginLeft: '10px' }}> {item?.subject} </span>
