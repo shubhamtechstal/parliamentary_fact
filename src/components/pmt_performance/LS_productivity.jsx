@@ -62,7 +62,10 @@ const ChartProgressTextgroup = (props) => {
             fontFamily: '"Sora", sans-serif',
           }}
         >
-          <span style={{ fontWeight: '800' }}>{props.percentage.replace("%","")}</span>%
+          <span style={{ fontWeight: '800' }}>
+            {props.percentage.replace('%', '')}
+          </span>
+          %
         </span>
       </div>
       <span style={{ fontSize: '12px', textWrap: 'nowrap' }}>
@@ -112,13 +115,13 @@ const ScheduleTimeTextgroup = ({ schedule, i }) => {
   );
 };
 function LS_productivity({
-  productivity_schedule,
+  productivity_schedule = [],
   productivity_details = [],
   mobCardsData = [],
-  govtBillCount,
+  govtBillCount = [],
   BottomRightChip,
   privateBillCount,
-  pageData
+  pageData,
 }) {
   const Arc_progressData = [85, 91, 90, 87];
   return (
@@ -391,9 +394,13 @@ function LS_productivity({
             );
           })}
         </Box>
-        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-          <BottomRightChip />
-        </Box>
+        {BottomRightChip && (
+          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+            <BottomRightChip
+              chipLabal={'MPs Participation in Lok Sabha Productivity'}
+            />
+          </Box>
+        )}
         {/* Govt bill */}
         <Box
           sx={{
@@ -439,7 +446,7 @@ function LS_productivity({
               justifyContent: 'center',
               padding: '1rem 0',
               marginBottom: '1rem',
-              flexWrap :'wrap'
+              flexWrap: 'wrap',
             }}
           >
             {govtBillCount?.map((data, i) => {
@@ -454,16 +461,16 @@ function LS_productivity({
                     borderRadius: '1rem',
                     backgroundColor: '#fff',
                     textAlign: 'left',
-                    width:'40%'
+                    width: '40%',
                   }}
                 >
-                <Text
-                  text={data.value}
-                  sx={{
-                    fontSize: '1.5rem',
-                    fontWeight: 600,
-                  }}
-                />
+                  <Text
+                    text={data.value}
+                    sx={{
+                      fontSize: '1.5rem',
+                      fontWeight: 600,
+                    }}
+                  />
                   <Text
                     text={data.title}
                     sx={{
@@ -516,7 +523,7 @@ function LS_productivity({
               justifyContent: 'center',
               padding: '1rem 0',
               marginBottom: '1rem',
-              flexWrap :'wrap'
+              flexWrap: 'wrap',
             }}
           >
             {
@@ -538,7 +545,7 @@ function LS_productivity({
                       borderRadius: '1rem',
                       backgroundColor: '#fff',
                       textAlign: 'left',
-                      width:'40%'
+                      width: '40%',
                     }}
                   >
                     <Text
