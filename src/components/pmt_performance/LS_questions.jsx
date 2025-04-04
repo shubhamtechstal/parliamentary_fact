@@ -4,7 +4,10 @@ import ProgressMeter from 'components/common/ProgressMeter';
 import SectionHeading from 'components/common/SectionHeading';
 import Text from 'components/common/Text';
 import LineCharts from 'components/LineCharts';
-import { getDateInMonthNameFormate, extractPercentage } from 'helpers/utills/utilityFunctions';
+import {
+  getDateInMonthNameFormate,
+  extractPercentage,
+} from 'helpers/utills/utilityFunctions';
 
 const QuestionTextGroup = ({ title, value, date, index }) => {
   return (
@@ -211,67 +214,20 @@ function LS_QuestionsComponent({
               </Box>
             </Box>
           ))}
-          {/* {questionsData.map((item, index) => (
-            <Box
-              key={index}
-              sx={{
-                display: 'flex',
-                alignItems: 'start',
-                gap: '0.8rem',
-                width: '47%',
-                padding: '2rem 0',
-              }}
-            >
-              <GrayDot />
-              <Box>
-                <Text
-                  sx={{
-                    color: '#00000080',
-                    fontSize: '0.8rem',
-                    fontWeight: 600,
-                  }}
-                  text={`${item.title}`}
-                />
-                <Box
-                  sx={{
-                    display: 'flex',
-                    gap: '5px',
-                    alignItems: 'end',
-                    marginTop: '0.3rem',
-                  }}
-                >
-                  <Text
-                    sx={{
-                      // color: '#434343',
-                      fontSize: '1rem',
-                      fontWeight: 600,
-                      lineHeight: 1,
-                      // textWrap: 'nowrap',
-                    }}
-                    text={
-                      [6, 8].includes(index)
-                        ? `MINISTRY OF ${item.value}`
-                        : item.value
-                    }
-                  />
-                  <Text
-                    sx={{
-                      color: '#00000080',
-                      fontSize: '0.9rem',
-                      fontWeight: 500,
-                      textWrap: 'nowrap',
-                    }}
-                    text={getDateInMonthNameFormate(item?.date)}
-                  />
-                </Box>
-              </Box>
-            </Box>
-          ))} */}
+
         </Box>
 
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           <LineCharts width={350} />
         </Box>
+        {BottomRightChip && (
+          <Box sx={{ position: 'relative', bottom: '1rem' }}>
+            <BottomRightChip
+              sectionDetailName={'questions-detail'}
+              chipLabal={'MPs Participation in Lok Sabha Questions'}
+            />
+          </Box>
+        )}
       </Box>
 
       {/* ******Desktop**** */}
@@ -343,9 +299,14 @@ function LS_QuestionsComponent({
         >
           <LineCharts />
         </Box>
-        <Box sx={{ position: 'absolute', right: '10rem', bottom: '15%' }}>
-          <BottomRightChip  chipLabal={"MPs Participation in Lok Sabha Questions"} />
-        </Box>
+        {BottomRightChip && (
+          <Box sx={{ position: 'absolute', right: '10rem', bottom: '15%' }}>
+            <BottomRightChip
+              sectionDetailName={'questions-detail'}
+              chipLabal={'MPs Participation in Lok Sabha Questions'}
+            />
+          </Box>
+        )}
       </Box>
     </>
   );

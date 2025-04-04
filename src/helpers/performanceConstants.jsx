@@ -418,6 +418,44 @@ export const questionsDetailsData ={
         "Local infrastructure , such as roads and water / wastewater networks , form the backbone of the local economy . They enable the movement of people and goods , provide essential drinking water .",
         "Local infrastructure , such as roads and water / wastewater networks , form the backbone of the local economy . They enable the movement of people and goods , provide"
       ]
-    }
+    },
+    {
+      // "date": "25 NOV 2024",
+      "number": "QUESTION NUM.3",
+      "subject": "LOCAL INFRASTRUCTURE , SUCH AS ROADS AND WATER / WASTEWATER NETWORKS , FORM",
+      "from_ministry_label": "FROM MINISTERY",
+      "ministry": "MINISTRY OF RURAL DEVELOPMENT",
+      "answer_by_label": "ANSWER BY",
+      "answer_by": "SHIVRAJ SINGH CHOUHAN",
+      "by_mps_label": "BY MPS",
+      "mps": [
+        "SHREE RAHUL GANDHI",
+        "SHREE KAMLESH PASWAN",
+        "SMT . SUPRIYA SULE"
+      ],
+      "content": [
+        "Local infrastructure , such as roads and water / wastewater networks , form the backbone of the local economy . They enable the movement of people and goods , provide essential drinking water .",
+        "Local infrastructure , such as roads and water / wastewater networks , form the backbone of the local economy . They enable the movement of people and goods , provide",
+        "Local Infrastructure , such as roads and water / wastewater networks , form the backbone of the local economy . They enable the movement of people and goods , provide essential drinking water"
+      ]
+    },
+    {
+      "number": "QUESTION NUM.4",
+      "subject": "LOCAL INFRASTRUCTURE , SUCH AS ROADS AND WATER / WASTEWATER NETWORKS , FORM",
+      "from_ministry_label": "FROM MINISTERY",
+      "ministry": "MINISTRY OF RURAL DEVELOPMENT",
+      "answer_by_label": "ANSWER BY",
+      "answer_by": "SHIVRAJ SINGH CHOUHAN",
+      "by_mps_label": "BY MPS",
+      "mps": [
+        "SHREE RAHUL GANDHI",
+        "SHREE KAMLESH PASWAN",
+        "SMT SUPRIVA SULE"
+      ],
+      "content": [
+        "Local infrastructure , such as roads and water / wastewater networks , form the backbone of the local economy . They enable the movement of people and goods , provide essential drinking water .",
+        "Local infrastructure , such as roads and water / wastewater networks , form the backbone of the local economy . They enable the movement of people and goods , provide"
+      ]
+    },
   ]
 }

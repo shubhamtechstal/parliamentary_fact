@@ -146,9 +146,11 @@ function MpFundSection({ MpFundSection, mpsFundData, BottomRightChip }) {
             <FundSpentInTopAreaTextGroup index={index} {...item} />
           ))}
         </Box>
+        {BottomRightChip&&
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           <BottomRightChip />
         </Box>
+        }
       </Box>
 
       {/* ****Desktop*** */}
@@ -276,9 +278,10 @@ function MpFundSection({ MpFundSection, mpsFundData, BottomRightChip }) {
             </Box>
           </Grid>
         </Grid>
+        {BottomRightChip&&
         <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
           <BottomRightChip />
-        </Box>
+        </Box>}
       </Box>
     </>
   );

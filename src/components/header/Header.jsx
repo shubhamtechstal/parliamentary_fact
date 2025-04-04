@@ -610,7 +610,7 @@ export default function Header({ data,setIndex,selected }) {
           </Box>
         </Box>
         <Box
-          sx={{ display: 'flex', justifyContent: 'center', marginTop: '1rem' }}
+          sx={{ display: 'flex', justifyContent: 'start', marginTop: '1rem' }}
         >
           <Box sx={{ display: 'flex', gap: '1.5rem' }}>
             <Box sx={{ display: 'flex' }} onClick={() => {navigate('/'),setIndex(-1)}}>

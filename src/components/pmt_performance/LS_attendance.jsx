@@ -50,7 +50,7 @@ function LS_attendance({ attendance_details, className, pageData, BottomRightChi
             display: 'flex',
             alignItems: 'center',
             flexWrap:'wrap',
-            justifyContent:"start",
+            justifyContent:"space-around",
             padding:'1.5rem'
           }}
         >
@@ -62,7 +62,7 @@ function LS_attendance({ attendance_details, className, pageData, BottomRightChi
                 alignItems: 'center',
                 gap: '0.8rem',
                 padding: '10px 10px',
-                // width:'12rem'
+                width:'15rem'
               }}
             >
               <GrayDot />
@@ -113,7 +113,7 @@ function LS_attendance({ attendance_details, className, pageData, BottomRightChi
         </Box>
         {BottomRightChip&&
           <Box sx={{display:"flex", justifyContent:'center', marginTop:'-4rem', marginBottom:"1rem"}} >
-            <BottomRightChip/>
+            <BottomRightChip sectionDetailName={'attendance-details'} chipLabal={'MPs Participation in Lok Sabha Attendance'}/>
           </Box>
         }
       </Box>
@@ -158,7 +158,7 @@ function LS_attendance({ attendance_details, className, pageData, BottomRightChi
               dotPercent_y="57%"
             />
           </Grid>
-          <Grid Grid md={5}  sx={{ display: 'flex', flexWrap:'wrap', alignItems: 'start', justifyContent:'space-between', gap:'1rem' }}>
+          <Grid Grid md={5}  sx={{ display: 'flex', flexWrap:'wrap', alignItems: 'start', justifyContent:'space-between'}}>
           {attendance_details?.map((item, index) => (
             <Box key={index} sx={{ display: 'flex', alignItems: 'center', gap: '0.8rem', width:'48%' }}>
               <GrayDot />
@@ -207,7 +207,7 @@ function LS_attendance({ attendance_details, className, pageData, BottomRightChi
         </Grid>
         {BottomRightChip && (
           <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <BottomRightChip />
+            <BottomRightChip sectionDetailName={'attendance-details'} chipLabal={'MPs Participation in Lok Sabha Attendance'}/>
           </Box>
         )}
       </Box>

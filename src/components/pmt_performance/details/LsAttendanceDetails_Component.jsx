@@ -6,16 +6,16 @@ import { useEffect, useState } from 'react';
 import LS_attendance from 'components/pmt_performance/LS_attendance';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPerformanceData } from 'stores/redux/apiSlices/pmt_PerformanceSlice';
+import SectionHeading from 'components/common/SectionHeading';
+import GrayButton from 'components/common/GrayButton';
 
-export default function ParliamentAttendanceContainer() {
+export default function LsAttendanceDetails_Component() {
   const [filter, setFilter] = useState(false);
   const handleFilterClick = () => {
     setFilter(!filter);
   };
   const dispatch = useDispatch();
-  const {
-    pageData,
-  } = useSelector((state) => state?.pmtPerformance);
+  const { pageData } = useSelector((state) => state?.pmtPerformance);
   useEffect(() => {
     dispatch(fetchPerformanceData());
   }, [dispatch]);
@@ -40,45 +40,14 @@ export default function ParliamentAttendanceContainer() {
               font={'Sora'}
               text={'MPS PARTICIPATION IN LOK SABHA ATTENDANCE'}
             />
-            {/* <Text
-              sx={{
-                fontSize: '1rem',
-                marginTop: '1rem',
-                color: '#434343',
-                letterSpacing: '-0.3px',
-                fontWeight: 500,
-              }}
-              font={'Sora'}
-              text={'Lok Sabha Attendance'}
-            /> */}
           </Box>
-          <Button
+          <GrayButton
             className="MobileViewRemove"
             onClick={() => handleFilterClick()}
-            sx={{
-              background: '#b5b5b5',
-              textTransform: 'none',
-              color: '#fff',
-              fontWeight: '600',
-              fontSize: '12px',
-              height: 'min-content',
-              borderRadius: '18px',
-              padding: '0.2rem 1rem',
-              '&:hover': {
-                background: 'grey',
-                color: '#fff',
-              },
-              '.MuiButton-startIcon': {
-                marginRight: '2px',
-              },
-              '.MuiButton-startIcon>*:nth-of-type(1)': {
-                fontSize: '14px',
-              },
-            }}
             startIcon={<FilterAltOutlinedIcon />}
           >
             {filter ? 'Clear' : 'Filter'}
-          </Button>
+          </GrayButton>
         </Box>
         <LS_attendance
           attendance_details={pageData?.attendance_details}
@@ -86,7 +55,8 @@ export default function ParliamentAttendanceContainer() {
         />
         <Divider sx={{ margin: '1rem' }} />
         <Box sx={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-          <Box
+            <SectionHeading title={'State Wise'} />
+          {/* <Box
             sx={{ height: '1rem', width: '1rem', background: '#ff000070' }}
             className="MobileViewRemove"
           ></Box>
@@ -94,7 +64,7 @@ export default function ParliamentAttendanceContainer() {
             font={'Sora'}
             sx={{ fontWeight: '600', marginTop: '0.1rem' }}
             text={'State Wise'}
-          />
+          /> */}
         </Box>
 
         <Box
@@ -160,13 +130,15 @@ export default function ParliamentAttendanceContainer() {
         <Box
           sx={{
             display: 'flex',
-            gap: '1rem',
+            gap: '1rem 0',
             flexWrap: 'wrap',
             justifyContent: 'center',
           }}
         >
           {Array.from({ length: 20 }).map((_, index) => (
-            <StateAttendance key={index} />
+            <Box sx={{width : {xs :'12rem', md:'25%'}}}>
+                <StateAttendance key={index} />
+            </Box>
           ))}
         </Box>
       </Box>
