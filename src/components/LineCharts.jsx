@@ -13,7 +13,7 @@ const xLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'];
 export default function LineCharts({width}) {
   return (
     <ChartContainer
-      width={width||500}
+      width={width||450}
       height={250}
       series={[{ type: 'line', data: pData, curve: 'linear' }]} // Disable curve
       xAxis={[{ scaleType: 'point', data: xLabels }]}
@@ -40,7 +40,7 @@ export default function LineCharts({width}) {
       {pData.map((y, index) => (
         <text
           key={index}
-          x={((width || 500) / xLabels.length) * (index + 0.5)} // Dynamic x position
+          x={((width || 450) / xLabels.length) * (index + 0.5)} // Dynamic x position
           y={index % 2 === 0 ? 190 - y * 10 :220 - y * 10 } // Dynamic y position (scaled for simplicity)
           textAnchor="middle"
           style={{

@@ -18,7 +18,7 @@ const QuestionTextGroup = ({ title, value, date, index }) => {
           ? 'none'
           : '2px solid #E0E0E0',
         padding: '1rem',
-        minWidth: '30%',
+        width: [6,8].includes(index) ? '40%' : '30%',
         maxWidth: '21rem',
         textWrap: 'wrap',
       }}
@@ -36,7 +36,7 @@ const QuestionTextGroup = ({ title, value, date, index }) => {
           sx={{
             display: 'flex',
             gap: '5px',
-            alignItems: 'end',
+            alignItems: 'center',
             marginTop: '0.3rem',
           }}
         >
@@ -45,12 +45,13 @@ const QuestionTextGroup = ({ title, value, date, index }) => {
               fontSize: '1rem',
               fontWeight: 600,
               lineHeight: 1,
+              textTransform:"uppercase",
             }}
             text={value}
           />
           <Text
             sx={{
-              fontSize: '0.9rem',
+              fontSize: '0.8rem',
               fontWeight: 500,
             }}
             text={getDateInMonthNameFormate(date)}
@@ -69,7 +70,9 @@ const DebateTextGroup = ({ index, title, percentage, mobTextWrap }) => {
         gap: '1rem',
         alignItems: mobTextWrap ? 'start' : 'center',
         fontSize: '1rem',
-        width: mobTextWrap ? '10rem' : '23%',
+        maxWidth: mobTextWrap ? '10rem' : '23%',
+        width: '48%',
+        // width: mobTextWrap ? '10rem' : '23%',
       }}
     >
       <GrayDot />
@@ -79,17 +82,16 @@ const DebateTextGroup = ({ index, title, percentage, mobTextWrap }) => {
             color: '#FF936F',
             fontWeight: '600',
             fontFamily: '"Sora", sans-serif',
-            textWrap: ' ',
             wordWrap: 'break-word',
           }}
         >
-          <span style={{ fontWeight: '800', fontSize: '1.5rem' }}>
+          <span style={{ fontWeight: '800', fontSize: '1rem' }}>
             {percentage}
           </span>{' '}
           %
         </span>{' '}
         <br />
-        <span >{title}</span>
+        <span style={{ fontSize: '12px',}}>{title}</span>
       </div>
     </div>
   );
@@ -99,7 +101,7 @@ function Debates_In_LS({ debateListData, questionsData, BottomRightChip }) {
   return (
     <>
       {/* ****Mobile*** */}
-      <Box sx={{ display: { xs: 'block', md: 'none' }, padding: '1rem' }}>
+      <Box sx={{ display: { xs: 'block', md: 'none' } }}>
         <h3 style={{ textAlign: 'center' }}>{debateListData.title}</h3>
         <Box
           sx={{
@@ -128,11 +130,11 @@ function Debates_In_LS({ debateListData, questionsData, BottomRightChip }) {
           sx={{
             display: 'flex',
             flexDirection: 'row',
-            gap: '2rem 0',
+            gap: '2rem 2%',
             // overflow: 'auto',
-            padding: '0 1rem',
+            // padding: '0 1rem',
             flexWrap:'wrap',
-            justifyContent:'space-between'
+            justifyContent:'center',
           }}
         >
           {debateListData.listData.map((item, index) => (
@@ -149,7 +151,8 @@ function Debates_In_LS({ debateListData, questionsData, BottomRightChip }) {
           sx={{
             display: 'flex',
             flexDirection: 'row',
-            flexWrap:'wrap'
+            flexWrap:'wrap',
+            gap:'2rem 2%'
           }}
         >
           {questionsData.slice(0,6).map((item, index) => (
@@ -159,10 +162,8 @@ function Debates_In_LS({ debateListData, questionsData, BottomRightChip }) {
              display: 'flex',
              alignItems: 'center',
              gap: '0.8rem',
-             padding: '1rem',
-             minWidth:  'auto',
-            //  textWrap:'nowrap',
-             width:'12rem'
+            maxWidth: '13rem',
+            width: '48%',
            }}
          >
            <GrayDot />
@@ -270,7 +271,7 @@ function Debates_In_LS({ debateListData, questionsData, BottomRightChip }) {
         >
           <Grid xs={12} md={8}></Grid>
         </Grid>
-        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'center', marginBottom:'1rem' }}>
           <BottomRightChip  chipLabal={'MPs Participation in Lok Sabha Debate'}/>
         </Box>
       </Box>

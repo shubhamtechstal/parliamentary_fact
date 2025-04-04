@@ -158,10 +158,14 @@ function LS_attendance({ attendance_details, className, pageData, BottomRightChi
               dotPercent_y="57%"
             />
           </Grid>
-          <Grid Grid md={5}  sx={{ display: 'flex', flexWrap:'wrap', alignItems: 'start', justifyContent:'space-between'}}>
+          <Grid Grid md={5.5}  sx={{ display: 'flex', flexWrap:'wrap', alignItems: 'start', justifyContent:'space-between', gap:'2rem 0'}}>
           {attendance_details?.map((item, index) => (
             <Box key={index} sx={{ display: 'flex', alignItems: 'center', gap: '0.8rem', width:'48%' }}>
-              <GrayDot />
+               {index == 0 || index == 1 ? (
+                  <GrayDot icon_url={'Assets/icons/small_arrow_Up.png'} />
+                ) : (
+                    <GrayDot icon_url={'Assets/icons/small_arrow_Down.png'} />
+                )}
               <Box>
                 <Text
                   sx={{
@@ -175,7 +179,7 @@ function LS_attendance({ attendance_details, className, pageData, BottomRightChi
                   sx={{
                     display: 'flex',
                     gap: '5px',
-                    alignItems: 'end',
+                    alignItems: 'center',
                     marginTop: '0.3rem',
                   }}
                 >
@@ -184,14 +188,14 @@ function LS_attendance({ attendance_details, className, pageData, BottomRightChi
                       // color: '#434343',
                       fontSize: '1rem',
                       fontWeight: 600,
-                      lineHeight: 1,
+                      lineHeight: 1, textTransform:"uppercase",
                     }}
                     text={item?.count}
                   />
                   <Text
                     sx={{
                       color: '#00000080',
-                      fontSize: '0.9rem',
+                      fontSize: '0.8rem',
                       fontWeight: 500,
                     }}
                     text={getDateInMonthNameFormate(item?.date)}
@@ -201,7 +205,7 @@ function LS_attendance({ attendance_details, className, pageData, BottomRightChi
             </Box>
           ))}
           </Grid>
-          <Grid md={4}>
+          <Grid md={3.5}>
             <LineCharts />
           </Grid>
         </Grid>

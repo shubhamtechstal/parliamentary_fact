@@ -32,6 +32,7 @@ export default function mobileFooter({ data,setIndex }) {
     { label: 'Contact', link: '/contact-us' },
     { label: 'Advertise with us', link: '/advertise-with-us' },
     { label: 'Parliament Performance', link: '/parliament-performance' },
+    { label: 'MPs Performance', link: '/mps-performance' },
     // { label: 'Do not share or sell my info', link: '' },
     // { label: 'Contact technical support', link: '' },
   ];

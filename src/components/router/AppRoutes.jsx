@@ -7,6 +7,7 @@ import AppLayoutContainer from 'containers/Layout/AppLayoutContainer';
 import ParliamentAttendancePage from 'pages/ParliamentAttendancePage';
 import NotFoundPage from 'pages/NotFoundPage';
 import ParliamentPerformancePage from 'pages/ParliamentPerformancePage';
+import MPsPerformancePage from 'pages/MPsPerformancePage';
 
 // Public route pages
 const LoginPage = lazy(() => import('pages/LoginPage'));
@@ -96,6 +97,10 @@ const routes = [
       {
         path: 'parliament-performance',
         element: <PrivateRoute component={<ParliamentPerformancePage/>} />,
+      },
+      {
+        path: 'mps-performance',
+        element: <PrivateRoute component={<MPsPerformancePage/>} />,
       },
     ],
   },
