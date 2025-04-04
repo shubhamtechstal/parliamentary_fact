@@ -1,6 +1,6 @@
 import Box from './Box';
 
-export default function GrayDot() {
+export default function GrayDot({icon_url}) {
   return (
     <Box
       sx={{
@@ -10,6 +10,8 @@ export default function GrayDot() {
         borderRadius: '50%',
         background: '#D3D3D3',
       }}
-    ></Box>
+    >
+      {icon_url&& <img width={20} height={20} src={icon_url} />}
+    </Box>
   );
 }

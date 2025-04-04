@@ -1,14 +1,17 @@
-import Button from './Button';
+// import Button from './Button';
 
-export default function GrayButton({ children, ...restProps }) {
+import { Button } from "@mui/material";
+
+export default function GrayButton({ children, bgColor, textColor, ...restProps }) {
   return (
     <Button
       {...restProps}
       sx={{
-        background: '#b5b5b5',
-        color: '#fff',
+        background: bgColor ?? '#b5b5b5',
+        color: textColor ?? '#fff',
         borderRadius: '18px',
         padding: '0.2rem 2rem',
+        textWrap:'nowrap',
         '&:hover': {
           background: 'grey',
           color: '#fff',

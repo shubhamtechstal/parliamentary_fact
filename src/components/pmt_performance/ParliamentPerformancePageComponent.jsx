@@ -1,4 +1,5 @@
 import { Box, Chip, CircularProgress } from '@mui/material';
+import AdvertiseSection from 'components/addLayout/HorizontalAdvertiseSection';
 import Text from 'components/common/Text';
 import Debates_In_LS from 'components/pmt_performance/Debates_In_LS';
 import LS_attendance from 'components/pmt_performance/LS_attendance';
@@ -17,36 +18,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPerformanceData } from 'stores/redux/apiSlices/pmt_PerformanceSlice';
 
-const AdvertiseSection = () => {
-  return (
-    <>
-      <Box
-        sx={{
-          background: 'white',
-          display: { xs: 'none', md: 'flex' },
-          justifyContent: 'center',
-          padding: '1rem',
-          borderTop: '1px solid #00000080',
-          borderBottom: '1px solid #00000080',
-        }}
-      >
-        <img src="/advertise.jpg" />
-      </Box>
-      <Box
-        sx={{
-          background: 'white',
-          display: { xs: 'flex', md: 'none' },
-          justifyContent: 'center',
-          padding: '1rem',
-          borderTop: '1px solid #00000080',
-          borderBottom: '1px solid #00000080',
-        }}
-      >
-        <img style={{ width: '100%' }} src="/advertise.jpg" />
-      </Box>
-    </>
-  );
-};
+
 const Productivity_bottomCards = ({
   cardData = productivity_bottomCardsdata,
   BottomRightChip,
@@ -74,13 +46,13 @@ const Productivity_bottomCards = ({
             <div>
               <Box
                 sx={{
-                  padding: '5px 10px',
+                  padding: '10px',
                   borderRadius: '1rem',
                   backgroundColor: '#fff',
                   // boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.1)',
                   display: 'flex',
                   flexDirection: 'row',
-                  justifyContent: 'center',
+                  justifyContent: 'start',
                   alignItems: 'left',
                   minWidth: '180px',
                 }}
@@ -102,7 +74,7 @@ const Productivity_bottomCards = ({
                   <Text
                     text={data.title}
                     sx={{
-                      fontSize: '0.8rem',
+                      fontSize: '0.7rem',
                       fontWeight: 600,
                     }}
                   />
@@ -119,7 +91,8 @@ const Productivity_bottomCards = ({
                 text={'Know More >>'}
                 sx={{
                   // color: '#FF936F',
-                  fontSize: '14px',
+                  fontSize: '10px',
+                  textAlign:'center',
                   fontWeight: 600,
                   marginTop: '10px',
                 }}
@@ -193,7 +166,7 @@ function ParliamentPerformancePageComponent({ handleSectionDetailClick }) {
           return <Chip key={i} label={title} variant="outlined" />;
         })}
       </Box>
-      <Box
+      {/* <Box
         className="performanceSection"
         sx={{
           display: 'flex',
@@ -201,8 +174,6 @@ function ParliamentPerformancePageComponent({ handleSectionDetailClick }) {
           flexDirection: { xs: 'column', md: 'row' },
           textAlign: { xs: 'center', md: 'left' },
           justifyContent: 'space-between',
-          // marginBottom: '20px',
-          // padding: { md: '0rem 10rem', xs: '1rem' },
         }}
       >
         <Text
@@ -258,7 +229,7 @@ function ParliamentPerformancePageComponent({ handleSectionDetailClick }) {
           </div>{' '}
           Read before check performance
         </Box>
-      </Box>
+      </Box> */}
       <LS_productivity
         productivity_schedule={pageData?.schedule_data ?? []}
         productivity_details={pageData?.productivity_details}
@@ -267,6 +238,7 @@ function ParliamentPerformancePageComponent({ handleSectionDetailClick }) {
         pageData={pageData}
         privateBillCount={privateBillCount}
         BottomRightChip={BottomRightChip}
+        loksabhaName={loksabhaName}
       />
       <Productivity_bottomCards
         cardData={pageData?.other_performing_data}

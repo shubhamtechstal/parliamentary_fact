@@ -3,14 +3,17 @@ import React from "react";
 const ColorfulArc = ({ progressValues, height, width }) => {
     const arcData = [
         { radius: 95, strokeWidth: 10, color: "white", progress: 100 }, // White background arc
-        { radius: 90, strokeWidth: 6, color: "#f5b797", progress: progressValues[0] || 0 },
-        { radius: 80, strokeWidth: 6, color: "#e795a2", progress: progressValues[1] || 0 },
-        { radius: 70, strokeWidth: 6, color: "#b979a4", progress: progressValues[2] || 0 },
-        { radius: 60, strokeWidth: 6, color: "#686091", progress: progressValues[3] || 0 },
+        { radius: 90, strokeWidth: 4, color: "#f5b797", progress: progressValues[0] || 0 },
+        { radius: 85, strokeWidth: 4, color: "white", progress: 100 }, // White background arc
+        { radius: 80, strokeWidth: 4, color: "#e795a2", progress: progressValues[1] || 0 },
+        { radius: 75, strokeWidth: 4, color: "white", progress: 100 }, // White background arc
+        { radius: 70, strokeWidth: 4, color: "#b979a4", progress: progressValues[2] || 0 },
+        { radius: 65, strokeWidth: 4, color: "white", progress: 100 }, // White background arc
+        { radius: 60, strokeWidth: 4, color: "#686091", progress: progressValues[3] || 0 },
     ];
 
     return (
-        <svg width={width || "450"} height={height || "225"} viewBox="0 0 200 100">
+        <svg width={width || "350"} height={height || "180"} viewBox="0 0 200 100">
             {arcData.map((arc, index) => {
                 const circumference = Math.PI * arc.radius;
                 const dashLength = (arc.progress / 100) * circumference;

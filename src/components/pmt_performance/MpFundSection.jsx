@@ -26,7 +26,7 @@ const FundSpentInTopAreaTextGroup = ({ category, value, date, index }) => {
         />
         <Text
           sx={{
-            fontSize: '0.9rem',
+            fontSize: '0.8rem',
             fontWeight: 500,
           }}
           text={category}
@@ -43,7 +43,7 @@ const FundDataTextGroup = ({ index, title, unit, percentage }) => {
         display: 'flex',
         gap: '1rem',
         alignItems: 'center',
-        fontSize: '14px',
+        fontSize: '0.8rem',
         width: { xs: '10rem', md: '25%' },
         minWidth: '160px',
       }}
@@ -56,12 +56,12 @@ const FundDataTextGroup = ({ index, title, unit, percentage }) => {
             fontWeight: '600',
           }}
         >
-          <span style={{ fontWeight: '800', fontSize: '1.5rem' }}>
+          <span style={{ fontWeight: '800', fontSize: '1.2rem' }}>
             {percentage}
           </span>
         </span>{' '}
         <br />
-        <h3 style={{ margin: '0px' }}>{unit}</h3>
+        <h3 style={{ margin: '0px', fontSize: '1rem' }}>{unit}</h3>
         <span style={{ textWrap: 'wrap' }}>{title}</span>
       </div>
     </Box>

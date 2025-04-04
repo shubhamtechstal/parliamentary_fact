@@ -21,11 +21,15 @@ const QuestionTextGroup = ({ title, value, date, index }) => {
           ? 'none'
           : '2px solid #E0E0E0',
         padding: '1rem',
-        minWidth: '30%',
+        width: [6,8].includes(index) ? '40%' : '30%',
         maxWidth: '21rem',
       }}
     >
-      <GrayDot />
+      {[3,4,5,8,9].includes(index) ? (
+        <GrayDot icon_url={'Assets/icons/small_arrow_Down.png'} />
+      ) : (
+        <GrayDot icon_url={'Assets/icons/small_arrow_Up.png'} />
+      )}
       <Box>
         <Text
           sx={{
@@ -38,25 +42,47 @@ const QuestionTextGroup = ({ title, value, date, index }) => {
           sx={{
             display: 'flex',
             gap: '5px',
-            alignItems: 'end',
+            alignItems: 'center',
             marginTop: '0.3rem',
           }}
         >
-          <Text
-            sx={{
-              fontSize: '1rem',
-              fontWeight: 600,
-              lineHeight: 1,
-            }}
-            text={[6, 8].includes(index) ? `MINISTRY OF ${value}` : value}
-          />
-          <Text
-            sx={{
-              fontSize: '0.9rem',
-              fontWeight: 500,
-            }}
-            text={getDateInMonthNameFormate(date)}
-          />
+          {[6, 8].includes(index) ? (
+            <>
+              <Text
+                sx={{
+                  fontSize: '1rem',
+                  fontWeight: 600,
+                  lineHeight: 1, textTransform:"uppercase",
+                }}
+                text={getDateInMonthNameFormate(date)}
+              />
+              <Text
+                sx={{
+                  fontSize: '0.8rem',
+                  fontWeight: 500,
+                }}
+                text={`MINISTRY OF ${value}`}
+              />
+            </>
+          ) : (
+            <>
+              <Text
+                sx={{
+                  fontSize: '1rem',
+                  fontWeight: 600,
+                  lineHeight: 1, textTransform:"uppercase",
+                }}
+                text={value}
+              />
+              <Text
+                sx={{
+                  fontSize: '0.8rem',
+                  fontWeight: 500,
+                }}
+                text={getDateInMonthNameFormate(date)}
+              />
+            </>
+          )}
         </Box>
       </Box>
     </Box>
@@ -110,6 +136,8 @@ function LS_QuestionsComponent({
             display: 'flex',
             flexDirection: 'row',
             flexWrap: 'wrap',
+            justifyContent:'center',
+            gap:"2rem 2%"
           }}
         >
           {questionsData.slice(0, 6).map((item, index) => (
@@ -119,10 +147,9 @@ function LS_QuestionsComponent({
                 display: 'flex',
                 alignItems: 'center',
                 gap: '0.8rem',
-                padding: '1rem',
-                minWidth: 'auto',
-                //  textWrap:'nowrap',
-                width: '12rem',
+                // padding: '1rem',
+                maxWidth: '13rem',
+                width: '48%',
               }}
             >
               <GrayDot />
@@ -136,9 +163,9 @@ function LS_QuestionsComponent({
                 />
                 <Box
                   sx={{
-                    //  display: 'flex',
+                     display: 'flex',
                     gap: '5px',
-                    alignItems: 'end',
+                    alignItems: 'center',
                     marginTop: '0.3rem',
                   }}
                 >
@@ -214,7 +241,6 @@ function LS_QuestionsComponent({
               </Box>
             </Box>
           ))}
-
         </Box>
 
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
