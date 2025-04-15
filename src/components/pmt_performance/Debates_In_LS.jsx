@@ -102,7 +102,7 @@ function Debates_In_LS({ debateListData, questionsData, BottomRightChip }) {
     <>
       {/* ****Mobile*** */}
       <Box sx={{ display: { xs: 'block', md: 'none' } }}>
-        <h3 style={{ textAlign: 'center' }}>{debateListData.title}</h3>
+        <h3 style={{ textAlign: 'center' }}>{debateListData?.title}</h3>
         <Box
           sx={{
             display: 'flex',
@@ -110,9 +110,9 @@ function Debates_In_LS({ debateListData, questionsData, BottomRightChip }) {
           }}
         >
           <ProgressMeter
-            titleText={debateListData.progressTitle}
-            subTiteText={debateListData.progressSubTitle}
-            centerDate={debateListData.date}
+            titleText={debateListData?.progressTitle}
+            subTiteText={debateListData?.progressSubTitle}
+            centerDate={debateListData?.date}
             percentText={'100.'}
             subPercentText={'20%'}
             width={230}
@@ -137,7 +137,7 @@ function Debates_In_LS({ debateListData, questionsData, BottomRightChip }) {
             justifyContent:'center',
           }}
         >
-          {debateListData.listData.map((item, index) => (
+          {debateListData?.listData?.map((item, index) => (
             <DebateTextGroup
               index={index}
               title={item.title}
@@ -155,7 +155,7 @@ function Debates_In_LS({ debateListData, questionsData, BottomRightChip }) {
             gap:'2rem 2%'
           }}
         >
-          {questionsData.slice(0,6).map((item, index) => (
+          {questionsData?.slice(0,6).map((item, index) => (
            <Box
            key={index}
            sx={{
@@ -202,7 +202,7 @@ function Debates_In_LS({ debateListData, questionsData, BottomRightChip }) {
            </Box>
          </Box>
           ))}
-          {questionsData.slice(6).map((item, index) => (
+          {questionsData?.slice(6).map((item, index) => (
            <Box
            key={index}
            sx={{
@@ -253,7 +253,7 @@ function Debates_In_LS({ debateListData, questionsData, BottomRightChip }) {
            </Box>
          </Box>
           ))}
-          {/* {debateListData.listData2.map((item, index) => (
+          {/* {debateListData?.listData2.map((item, index) => (
             <QuestionTextGroup index={index} {...item} mobTextWrap={'nowrap'} />
           ))} */}
         </Box>
@@ -284,7 +284,7 @@ function Debates_In_LS({ debateListData, questionsData, BottomRightChip }) {
           display: { xs: 'none', md: 'block' },
         }}
       >
-        <SectionHeading title={debateListData.title} />
+        <SectionHeading title={debateListData?.title} />
         <Grid
           container
           spacing={2}
@@ -309,9 +309,9 @@ function Debates_In_LS({ debateListData, questionsData, BottomRightChip }) {
             }}
           >
             <ProgressMeter
-              titleText={debateListData.progressTitle}
-              subTiteText={debateListData.progressSubTitle}
-              centerDate={debateListData.date}
+              titleText={debateListData?.progressTitle}
+              subTiteText={debateListData?.progressSubTitle}
+              centerDate={debateListData?.date}
               percentText={'100.'}
               subPercentText={'20%'}
               width={230}
@@ -335,7 +335,7 @@ function Debates_In_LS({ debateListData, questionsData, BottomRightChip }) {
                 alignItems: 'start',
               }}
             >
-              {debateListData.listData.map((item, index) => (
+              {debateListData?.listData.map((item, index) => (
                 <DebateTextGroup
                   index={index}
                   title={item.title}
@@ -351,7 +351,7 @@ function Debates_In_LS({ debateListData, questionsData, BottomRightChip }) {
                 flexWrap: 'wrap',
               }}
             >
-              {questionsData.map((item, index) => (
+              {questionsData?.map((item, index) => (
                 <QuestionTextGroup index={index} {...item} />
               ))}
             </Box>

@@ -7,6 +7,7 @@ import LineCharts from 'components/LineCharts';
 import { getDateInMonthNameFormate, extractPercentage } from 'helpers/utills/utilityFunctions';
 
 function LS_attendance({ attendance_details, className, pageData, BottomRightChip }) {
+  console.log('attendance_percentage attendance_details', attendance_details)
   return (
     <>
       {/* **********Mobile********** */}
@@ -31,8 +32,8 @@ function LS_attendance({ attendance_details, className, pageData, BottomRightChi
             titleText={'ATTENDANCE'}
             subTiteText={`LOK SABHA`}
             centerDate={'Till 20 March 2024'}
-            percentText={`${extractPercentage(pageData?.attendance_percentage?.attendance_percentage)?.a }`}
-            subPercentText={`${extractPercentage(pageData?.attendance_percentage?.attendance_percentage)?.b }`}            
+            percentText={`${extractPercentage(pageData?.attendance_percentage?.attendance_percentage ?? pageData?.value.toString())?.a }`}
+            subPercentText={`${extractPercentage(pageData?.attendance_percentage?.attendance_percentage ?? pageData?.value.toString())?.b }`}            
             width={230}
             height={250}
             innerRadius={98}
@@ -131,20 +132,17 @@ function LS_attendance({ attendance_details, className, pageData, BottomRightChi
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-evenly',
-            padding:'0 8rem 0 0'
+            
+            // padding:'0 8rem 0 0'
           }}
         >
-          <Grid md={3}
-            sx={{
-              width: { xs: '47%', md: 'auto' },
-            }}
-          >
+          <Grid md={3}>
             <ProgressMeter
               titleText={'ATTENDANCE'}
               subTiteText={`LOK SABHA`}
               centerDate={'Till 20 March 2024'}
-              percentText={`${extractPercentage(pageData?.attendance_percentage?.attendance_percentage)?.a }`}
-              subPercentText={`${extractPercentage(pageData?.attendance_percentage?.attendance_percentage)?.b }`}
+              percentText={`${extractPercentage(pageData?.attendance_percentage?.attendance_percentage ?? pageData?.value.toString())?.a }`}
+              subPercentText={`${extractPercentage(pageData?.attendance_percentage?.attendance_percentage ?? pageData?.value.toString())?.b }`}
               // percentText={'100.'}
               // subPercentText={'20%'}
               width={230}
@@ -158,9 +156,9 @@ function LS_attendance({ attendance_details, className, pageData, BottomRightChi
               dotPercent_y="57%"
             />
           </Grid>
-          <Grid Grid md={5.5}  sx={{ display: 'flex', flexWrap:'wrap', alignItems: 'start', justifyContent:'space-between', gap:'2rem 0'}}>
+          <Grid Grid md={4}  sx={{ display: 'flex', flexWrap:'wrap', alignItems: 'start', justifyContent:'space-between', gap:'2rem 0'}}>
           {attendance_details?.map((item, index) => (
-            <Box key={index} sx={{ display: 'flex', alignItems: 'center', gap: '0.8rem', width:'48%' }}>
+            <Box key={index} sx={{ display: 'flex', alignItems: 'center', gap: '0.8rem',  }}>
                {index == 0 || index == 1 ? (
                   <GrayDot icon_url={'Assets/icons/small_arrow_Up.png'} />
                 ) : (
@@ -170,7 +168,7 @@ function LS_attendance({ attendance_details, className, pageData, BottomRightChi
                 <Text
                   sx={{
                     color: '#00000080',
-                    fontSize: '0.8rem',
+                    fontSize: '0.6em',
                     fontWeight: 600,
                   }}
                   text={item?.title}
@@ -186,7 +184,7 @@ function LS_attendance({ attendance_details, className, pageData, BottomRightChi
                   <Text
                     sx={{
                       // color: '#434343',
-                      fontSize: '1rem',
+                      fontSize: '0.8rem',
                       fontWeight: 600,
                       lineHeight: 1, textTransform:"uppercase",
                     }}
@@ -195,7 +193,7 @@ function LS_attendance({ attendance_details, className, pageData, BottomRightChi
                   <Text
                     sx={{
                       color: '#00000080',
-                      fontSize: '0.8rem',
+                      fontSize: '0.6rem',
                       fontWeight: 500,
                     }}
                     text={getDateInMonthNameFormate(item?.date)}
@@ -205,7 +203,7 @@ function LS_attendance({ attendance_details, className, pageData, BottomRightChi
             </Box>
           ))}
           </Grid>
-          <Grid md={3.5}>
+          <Grid md={5}>
             <LineCharts />
           </Grid>
         </Grid>

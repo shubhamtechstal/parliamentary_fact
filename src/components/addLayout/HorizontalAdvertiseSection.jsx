@@ -8,9 +8,7 @@ const AdvertiseSection = () => {
           background: 'white',
           display: { xs: 'none', md: 'flex' },
           justifyContent: 'center',
-          padding: '1rem',
-          borderTop: '1px solid #00000080',
-          borderBottom: '1px solid #00000080',
+          padding: '1rem',          
         }}
       >
         <img src="/advertise.jpg" />
@@ -20,9 +18,7 @@ const AdvertiseSection = () => {
           background: 'white',
           display: { xs: 'flex', md: 'none' },
           justifyContent: 'center',
-          padding: '1rem',
-          borderTop: '1px solid #00000080',
-          borderBottom: '1px solid #00000080',
+          padding: '1rem',          
         }}
       >
         <img style={{ width: '100%' }} src="/advertise.jpg" />

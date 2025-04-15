@@ -1,42 +1,48 @@
 import React, { useState } from 'react';
-import {
-  Container,
-  Grid,
-  Box,
-} from '@mui/material';
+import { Container, Grid, Box } from '@mui/material';
 import GrayButton from 'components/common/GrayButton';
 import SectionHeading from 'components/common/SectionHeading';
-import MpsPerformanceCard from './MpsPerformanceCard';
+import MpsPerformanceCard from './cards/MpsPerformanceCard';
 
-const mpData = new Array(18).fill({
-  rank: '000',
-  name: 'Neeraj Ram Mandola',
-  constituency: 'Choudheer Mandola',
-  performance: '52.9',
-  image: 'https://via.placeholder.com/50', // Replace with actual image URL
-});
-
-export default function MPPerformance({ title, handleDetailsClick }) {
-  const [visibleMPs, setVisibleMPs] = useState(12);
-
-  const loadMore = () => {
-    setVisibleMPs((prev) => prev + 6);
-  };
-
+export default function MPPerformance({
+  detailsPage,
+  title,
+  handleDetailsClick,
+  handleOpenSharePopup,
+  mpsData,
+}) {
   return (
     <Container maxWidth="lg" sx={{ py: 4 }}>
-      <SectionHeading title={title} />
-      <Grid container spacing={2}>
-        {mpData.slice(0, visibleMPs).map((mp, index) => (
-          <MpsPerformanceCard mp={mp} index={index} />
+      <Box display={{xs: 'flex', md:'none' }} textAlign={'center'}>
+        <h3 style={{margin:'0 auto 2rem',}} >{title} </h3>
+      </Box>
+      <Box display={{ xs: 'none', md: 'flex' }}>
+        <SectionHeading title={title} />
+      </Box>
+      <Grid
+        py={1}
+        gap={{ xs: 3, md: 0 }}
+        spacing={{ xs: 0, md: 2 }}
+        container
+        flexWrap={{ md: 'wrap', xs: 'nowrap' }}
+        overflow={'auto'}
+      >
+        {mpsData.slice(0, 12).map((mp, index) => (
+          <Grid item xs={6} sm={4} md={3} lg={2} key={index}>
+            <MpsPerformanceCard
+              mp={mp}
+              index={index}
+              handleOpenSharePopup={handleOpenSharePopup}
+            />
+          </Grid>
         ))}
       </Grid>
 
-      {visibleMPs < mpData.length && (
-        <Box textAlign="right" mt={3} mr={1}>
-          <GrayButton onClick={()=>{handleDetailsClick("populer-mps");loadMore() }}>Load More</GrayButton>
-        </Box>
-      )}
+      <Box textAlign={{ xs: 'center', md: 'right' }} mt={3} mr={1}>
+        <GrayButton onClick={() => handleDetailsClick(detailsPage)}>
+          Load More
+        </GrayButton>
+      </Box>
     </Container>
   );
 }

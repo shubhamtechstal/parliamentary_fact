@@ -5,14 +5,33 @@ import { useState } from 'react';
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 import GrayButton from 'components/common/GrayButton';
 import RankingTable from 'components/common/modals/RankingTable';
+import MobMPsRankingCards from 'components/common/mobile/MobMPsRankingCards';
+import AdvertiseSection from 'components/addLayout/HorizontalAdvertiseSection';
+import FilterController from 'components/common/modals/FilterController';
 
-function PopulerMpsDetailsComponent ({onFilterClick}) {
-  const [filter, setFilter] = useState(false);
+function PopulerMpsDetailsComponent({ onFilterClick, handleOpenSharePopup, handleClearfilter, sessionsLoading, sessions, onChangeFilter }) {
+  const [isClearfilter, setClearfilter] = useState(false);
 
   const handleFilterClick = () => {
-    setFilter(!filter);
-    onFilterClick();
+    if (!isClearfilter) {
+        onFilterClick();
+    } else 
+    if (isClearfilter) {
+        handleClearfilter();
+    }
+    setClearfilter(!isClearfilter);
   };
+  // Sample Data
+  const mpsdata = Array(10).fill({
+    rank: '001',
+    name: 'Rahul Rajeev Sonia Gandhi Rajeev Sonia Gandhi',
+    party: 'BJP',
+    constituency: 'Sagar',
+    state: 'MP',
+    performance: '85',
+    presence: '80/80',
+    imageUrl: 'https://randomuser.me/api/portraits/women/1.jpg',
+  });
   return (
     <>
       {/* **********Mobile********** */}
@@ -25,125 +44,47 @@ function PopulerMpsDetailsComponent ({onFilterClick}) {
           alignItems: 'center',
         }}
       >
-        <h3 style={{ textAlign: 'center' }}>{questionsDetailsData.title}</h3>
+        <h3 style={{ textAlign: 'center' }}>MPs Public Rating Top to Bottom</h3>
+      </Box>
+      <Box display={{ md: 'none', xs: 'flex', flexDirection: 'column', gap: '2em' }}>
+        {mpsdata.map((mp, index) => (
+            <>
+                <MobMPsRankingCards mp={mp} key={index} handleOpenSharePopup={handleOpenSharePopup}/>
+                {(index + 1) % 5 === 0 && <AdvertiseSection />}
+            </>
+        ))}
       </Box>
 
       {/* ******Desktop**** */}
       <Box
-        className="performanceSection"
+        // className="performanceSection"
         sx={{
           position: 'relative',
-          display: { xs: 'none', md: 'block' }, marginBottom:'10rem'
+          //   display: { xs: 'none', md: 'block' },
+          marginBottom: '10rem',
         }}
       >
         <Box
+          className="performanceSection"
           sx={{
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
+            display: { md: 'flex', xs: 'none' },
           }}
         >
-          <SectionHeading title={"MPs Public Rating Top to Bottom"} />
+          <SectionHeading title={'MPs Public Rating Top to Bottom'} />
           <GrayButton
             className="MobileViewRemove"
             onClick={() => handleFilterClick()}
             startIcon={<FilterAltOutlinedIcon />}
           >
-            {filter ? 'Clear' : 'Filter'}
+            {isClearfilter ? 'Clear' : 'Filter'}
           </GrayButton>
         </Box>
-        {/* <Grid
-          container
-          md={12}
-          sx={{
-            background: '#E8EDF1',
-            padding: '1rem',
-            margin: '2rem 0',
-            fontSize: '0.8rem',
-          }}
-        >
-          <Grid md={4}>
-            <h3>
-              {questionsDetailsData.select_year_label} {'>'}{' '}
-            </h3>
-            <FormGroup aria-label="position" row sx={{ gap: '0 1rem ' }}>
-              {questionsDetailsData.year_options.map((item, i) => {
-                return (
-                  <FormControlLabel
-                    value={item.label}
-                    control={<Checkbox color="default" />}
-                    label={
-                      <Typography
-                        variant="body2"
-                        color="textSecondary"
-                        sx={{ fontSize: '0.8rem' }}
-                      >
-                        {item.label}
-                      </Typography>
-                    }
-                    labelPlacement="end"
-                  />
-                );
-              })}
-            </FormGroup>
-          </Grid>
-          <Grid md={4}>
-            <h3>
-              {questionsDetailsData.select_session_1_label} {'>'}{' '}
-            </h3>
-            <FormGroup aria-label="position" row>
-              {questionsDetailsData.session_1_options.map((item, i) => {
-                return (
-                  <FormControlLabel
-                    value={item.label}
-                    control={<Checkbox color="default" />}
-                    label={
-                      <Typography
-                        variant="body2"
-                        color="textSecondary"
-                        sx={{ fontSize: '0.8rem' }}
-                      >
-                        {item.label}
-                      </Typography>
-                    }
-                    labelPlacement="end"
-                    sx={{ fontSize: '0.8rem', width: '48%' }}
-                  />
-                );
-              })}
-            </FormGroup>
-          </Grid>
-          <Grid md={4}>
-            <h3>
-              {questionsDetailsData.select_session_2_label} {'>'}{' '}
-            </h3>
-            <FormGroup aria-label="position" row>
-              {questionsDetailsData.session_2_options.map((item, i) => {
-                return (
-                  <FormControlLabel
-                    value={item.label}
-                    control={<Checkbox color="default" />}
-                    label={
-                      <Typography
-                        variant="body2"
-                        color="textSecondary"
-                        sx={{ fontSize: '0.8rem' }}
-                      >
-                        {item.label}
-                      </Typography>
-                    }
-                    labelPlacement="end"
-                    sx={{ fontSize: '0.8rem', width: '48%' }}
-                  />
-                );
-              })}
-            </FormGroup>
-          </Grid>
-        </Grid>
-        <GrayButton>Done</GrayButton> */}
-
-        <RankingTable/>
-
+        <Box display={{ xs: 'none', md: 'block' }}>
+          <RankingTable mpsdata={mpsdata} handleOpenSharePopup={handleOpenSharePopup} />
+        </Box>
       </Box>
     </>
   );

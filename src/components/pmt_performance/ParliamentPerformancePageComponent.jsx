@@ -18,7 +18,6 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPerformanceData } from 'stores/redux/apiSlices/pmt_PerformanceSlice';
 
-
 const Productivity_bottomCards = ({
   cardData = productivity_bottomCardsdata,
   BottomRightChip,
@@ -92,7 +91,7 @@ const Productivity_bottomCards = ({
                 sx={{
                   // color: '#FF936F',
                   fontSize: '10px',
-                  textAlign:'center',
+                  textAlign: 'center',
                   fontWeight: 600,
                   marginTop: '10px',
                 }}
@@ -102,19 +101,35 @@ const Productivity_bottomCards = ({
         })}
       </Box>
       <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-        <BottomRightChip chipLabal={'MPs Participation in Lok Sabha Productivity'} />
+        <BottomRightChip
+          chipLabal={'MPs Participation in Lok Sabha Productivity'}
+        />
       </Box>
     </Box>
   );
 };
 
-function ParliamentPerformancePageComponent({ handleSectionDetailClick }) {
+function ParliamentPerformancePageComponent(props) {
+  const {
+    handleSectionDetailClick,
+    attendanceDetails,
+    questionsData,
+    privateBillCount,
+    govtBillCount,
+    loksabhaName,
+    pageData,
+    loading,
+  } = props;
   const BottomRightChip = ({ chipLabal, sectionDetailName }) => {
     return (
       <Chip
         label={chipLabal ?? 'MPs Participation in Lok Sabha Attendance'}
         Filled
-        onClick={() => sectionDetailName ? handleSectionDetailClick(sectionDetailName) : ()=>{}}
+        onClick={() =>
+          sectionDetailName
+            ? handleSectionDetailClick(sectionDetailName)
+            : () => {}
+        }
         sx={{
           marginTop: '2rem',
           color: 'white',
@@ -124,20 +139,6 @@ function ParliamentPerformancePageComponent({ handleSectionDetailClick }) {
       />
     );
   };
-  const dispatch = useDispatch();
-  const {
-    attendanceDetails,
-    questionsData,
-    privateBillCount,
-    govtBillCount,
-    loksabhaName,
-    pageData,
-    loading,
-    error,
-  } = useSelector((state) => state?.pmtPerformance);
-  useEffect(() => {
-    dispatch(fetchPerformanceData());
-  }, [dispatch]);
   return loading ? (
     <Box
       sx={{

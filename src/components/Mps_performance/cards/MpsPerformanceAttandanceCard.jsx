@@ -1,8 +1,9 @@
 import { Avatar, Box, Card, Grid } from '@mui/material';
 import { Gauge, gaugeClasses } from '@mui/x-charts';
+import IconButton from 'components/common/IconButton';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 
-
-function MpsPerformanceAttandanceCard({ mp, index }) {
+function MpsPerformanceAttandanceCard({ mp, index, handleOpenSharePopup }) {
   return (
     <Grid item xs={12} sm={6} md={4} lg={4} key={index}>
       <Card
@@ -15,7 +16,7 @@ function MpsPerformanceAttandanceCard({ mp, index }) {
           color: 'rgb(0 0 0 / 50%)',
           background: '#f9f9f9',
           fontFamily: '"Sora", sans-serif',
-          position:'relative'
+          position: 'relative',
         }}
       >
         <Box
@@ -25,8 +26,8 @@ function MpsPerformanceAttandanceCard({ mp, index }) {
             alignItems: 'top',
           }}
         >
-          <Box>
-            <h3
+          <Box display={'flex'} alignItems={'center'} gap={1}>
+            {/* <h3
               style={{
                 margin: '0 0',
                 // color: '#E19B00',
@@ -34,32 +35,52 @@ function MpsPerformanceAttandanceCard({ mp, index }) {
               }}
             >
               # MPsPerformance
-            </h3>
-            <h4
-              style={{
-                margin: '0 0',
-                fontSize: '0.5rem',
-                textTransform: 'uppercase',
-                borderBottom: '1px solid #d3d2d2',
-                paddingBottom:'5px'
+            </h3> */}
+            <Avatar
+              // alt={mp.name}
+              sx={{
+                width: 35,
+                height: 35,
+                background: 'linear-gradient(#ffdb00, orange, #dc752c)',
+                color: 'rgb(0 0 0 / 50%)',
+                fontSize: '0.8rem',
+                fontFamily: '"Sora", sans-serif',
               }}
             >
-              Attendance + Questions + Debates + Pvt Member bill + MPLADS
-            </h4>
+              {mp.rank}
+            </Avatar>
+            <Box>
+              <Box
+                style={{
+                  margin: '0 0',
+                  color: '#E19B00',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',                  
+                }}
+              >
+                <h2 style={{ fontSize: '1rem', margin:'0 0' }}>{mp.rankTitle} </h2>
+                <IconButton
+                  onClick={() => handleOpenSharePopup()}
+                  sx={{ position: 'absolute', right: 0, top: 0 }}
+                >
+                  <MoreVertIcon />
+                </IconButton>
+              </Box>
+              <h4
+                style={{
+                  margin: '0 0',
+                  fontSize: '0.5rem',
+                  textTransform: 'uppercase',
+                  borderBottom: '1px solid #d3d2d2',
+                  paddingBottom: '5px',
+                }}
+              >
+                Attendance + Questions + Debates + Pvt Member bill + MPLADS
+              </h4>
+            </Box>
           </Box>
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <Avatar
-              sx={{ width: '30px', height: '30px' }}
-              src="Assets/icons/shareYellowIcon.png"
-              alt="icon3dot"
-            />
-            <img
-              width={16}
-              height={16}
-              src="Assets/icons/icon3dot.png"
-              alt="icon3dot"
-            />
-          </Box>
+          <Box sx={{ display: 'flex', alignItems: 'center' }}></Box>
         </Box>
 
         <h3
@@ -67,6 +88,7 @@ function MpsPerformanceAttandanceCard({ mp, index }) {
             fontSize: '1rem',
             width: '80%',
             margin: '1rem 0 0 0',
+            lineHeight:'1.3'
           }}
         >
           {mp.name} {mp.constituency}
@@ -84,7 +106,7 @@ function MpsPerformanceAttandanceCard({ mp, index }) {
                 margin: '0 0 10px 0',
                 fontSize: '0.6rem',
                 fontWeight: 'bold',
-                width:'200px'
+                width: '200px',
               }}
             >
               {mp.partyName ?? 'Samajwadi Party'}
@@ -95,12 +117,19 @@ function MpsPerformanceAttandanceCard({ mp, index }) {
               {mp.city ?? 'Azamgarh'}
             </p>
             <p
-              style={{ margin: '0 0', fontSize: '0.6rem', fontWeight: 'bold', width:'120px' }}
+              style={{
+                margin: '0 0',
+                fontSize: '0.6rem',
+                fontWeight: 'bold',
+                width: '120px',
+              }}
             >
               {mp.state ?? 'Uttar Pradesh'}
             </p>
           </Box>
-          <Box sx={{ display: 'flex', alignItems: 'center', marginTop:'-20px'}}>
+          <Box
+            sx={{ display: 'flex', alignItems: 'center', marginTop: '-20px' }}
+          >
             <Avatar
               src="Assets/icons/mpGirlImage.png"
               alt={mp.name}
@@ -109,14 +138,15 @@ function MpsPerformanceAttandanceCard({ mp, index }) {
             <Gauge
               width={120}
               height={120}
-              value={52.25}
+              value={mp?.performance}
               cornerRadius="50%"
               sx={{
                 [`& .${gaugeClasses.valueText}`]: {
-                  fontSize: 16,
-                  fontWeight:'bold',
+                  fontSize: { md: 20, xs: 18 },
+                  fontWeight: 'bold',
                   transform: 'translate(0px, 0px)',
-                  color:'rgb(0 0 0 / 50%)'
+                  color: 'rgb(0 0 0 / 50%)',
+                  fontFamily: "'Saira', sans-serif",
                 },
                 [`& .${gaugeClasses.valueArc}`]: {
                   fill: '#E59B00',
@@ -124,7 +154,7 @@ function MpsPerformanceAttandanceCard({ mp, index }) {
               }}
               text={({ value }) => `${value}%`}
             />
-            <Box width={65}>
+            {/* <Box width={65}>
               <Avatar
                 // alt={mp.name}
                 sx={{
@@ -136,10 +166,14 @@ function MpsPerformanceAttandanceCard({ mp, index }) {
                   fontFamily: '"Sora", sans-serif',
                 }}
               >
-                438
+                {mp.rank}
               </Avatar>
               <p
-                style={{ margin: '0 0', color: 'rgb(251 195 1)', fontSize: '0.6rem' }}
+                style={{
+                  margin: '0 0',
+                  color: 'rgb(251 195 1)',
+                  fontSize: '0.6rem',
+                }}
               >
                 National Rank
               </p>
@@ -166,10 +200,12 @@ function MpsPerformanceAttandanceCard({ mp, index }) {
                   Below Avg. Performer
                 </span>{' '}
               </Box>
-            </Box>
+            </Box> */}
           </Box>
         </Box>
+        <a href="/mps-performance">
         <img height={20} src="/pfLogo.png" alt="pmt website logo" />
+        </a>
       </Card>
     </Grid>
   );

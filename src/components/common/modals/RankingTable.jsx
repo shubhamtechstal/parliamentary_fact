@@ -12,221 +12,187 @@ import {
   IconButton,
   Box,
   Typography,
+  Tooltip,
 } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import GrayButton from '../GrayButton';
 import AdvertiseSection from 'components/addLayout/HorizontalAdvertiseSection';
 
-// Sample Data
-const data = Array(10).fill({
-  rank: '001',
-  name: 'Rahul Rajeev Sonia Gandhi Rajeev Sonia Gandhi',
-  party: 'BJP',
-  constituency: 'Sagar',
-  state: 'MP',
-  performance: '85%',
-  presence: '80/80 Days',
-  imageUrl: 'https://randomuser.me/api/portraits/women/1.jpg',
-});
 
-const RankingTable = () => {
+const RankingTable = ({mpsdata, handleOpenSharePopup}) => {
   return (
     <TableContainer>
       <Table>
-        {/* Table Head */}
-        <TableHead sx={{ backgroundColor: '#ECEFF1' }}>
+        <TableHead>
           <TableRow>
-            {[
-              'Ranking',
-              'MPs Name',
-              'Party',
-              'Constituency',
-              'State',
-              'Performance',
-              'Presence',
-              'Sharing',
-              'More',
-            ].map((head, index) => (
-              <TableCell
-                key={index}
-                sx={{ fontWeight: 'bold', color: '#455A64' }}
+            <TableCell colSpan={9} sx={{ border: 'none', paddingBottom: 1 }}>
+              <Box
+                sx={{
+                  display: 'grid',
+                  gridTemplateColumns:
+                    '2fr 3fr 0.5fr 1fr 0.5fr 1.5fr 1.5fr 1.5fr 0.5fr',
+                  gap: 2,
+                  color: '#455A64',
+                  fontWeight: 'bold',
+                  fontSize: '0.7rem',
+                  padding: '0 2rem',
+                }}
               >
-                {head}
-              </TableCell>
-            ))}
+                <div>Ranking</div>
+                <div>MPs Name</div>
+                <div>Party</div>
+                <div>Constituency</div>
+                <div>State</div>
+                <div>Performance</div>
+                <div>Presence</div>
+                <div>Sharing</div>
+                <div>More</div>
+              </Box>
+            </TableCell>
           </TableRow>
         </TableHead>
 
-        {/* Table Body */}
-        {/* <TableBody>
-          {data.map((row, index) => (
-            <TableRow
-              key={index}
-              sx={{
-                backgroundColor: index % 2 === 0 ? '#F9FAFB' : 'white',
-                fontSize: '0.6rem',
-              }}
-            >
-              
-              <TableCell>
-                <Box
-                  sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    color: '#e7a917',
-                    gap: 2,
-                  }}
-                >
-                  <Avatar
-                    sx={{
-                      width: 35,
-                      height: 35,
-                      background: '#e7a917',
-                      color: '#fff',
-                      fontSize: '0.8rem',
-                      fontFamily: '"Sora", sans-serif',
-                    }}
+        <TableBody>
+          {mpsdata?.map((row, index)=> (
+              <>
+                <TableRow key={index}>
+                  <TableCell
+                    colSpan={9}
+                    sx={{ border: 'none', padding: '1em 2rem' }}
                   >
-                    {row.rank}
-                  </Avatar>{' '}
-                  <span>National Rank</span>
-                </Box>
-              </TableCell>
+                    <Box
+                      sx={{
+                        display: 'grid',
+                        gridTemplateColumns:
+                          '2fr 4fr 1fr 1fr 1fr 1fr 1fr 1.5fr 0.5fr',
+                        gap: 2,
+                        alignItems: 'center',
+                        backgroundColor: '#fff',
+                        borderRadius: '16px',
+                        padding: '0.2rem 1rem',
+                        boxShadow: '0 2px 6px rgba(0,0,0,0.05)',
+                        fontSize: '0.8rem',
+                        px: 2,
+                      }}
+                    >
+                      {/* Ranking */}
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: 2,
+                          color: '#e7a917',
+                          maxWidth: '6rem',
+                        }}
+                      >
+                        <Avatar
+                          sx={{
+                            width: 35,
+                            height: 35,
+                            background: '#e7a917',
+                            color: '#fff',
+                            fontSize: '0.8rem',
+                            fontFamily: '"Sora", sans-serif',
+                          }}
+                        >
+                          {row.rank}
+                        </Avatar>
+                        <span>National Rank</span>
+                      </Box>
 
-              
-              <TableCell>
-                <Box display="flex" alignItems="center">
-                  <Avatar
-                    src={row.imageUrl}
-                    sx={{ width: 40, height: 40, marginRight: 2 }}
-                  />
-                  <Typography
-                    variant="body1"
-                    sx={{ fontWeight: 600, fontSize: '0.8rem', width: '13rem' }}
-                  >
-                    {row.name}
-                  </Typography>
-                </Box>
-              </TableCell>
+                      {/* MP Name */}
+                      <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                        <Avatar
+                          src={row.imageUrl}
+                          sx={{ width: 50, height: 50, marginRight: 2 }}
+                        />
+                        {row?.name?.length > 50 ? (
+                          <Tooltip title={row.name} arrow>
+                            <Typography
+                              variant="body1"
+                              sx={{
+                                fontSize: '0.7rem',
+                                fontWeight: 600,
+                                maxWidth: '10rem',
+                                display: '-webkit-box',
+                                WebkitLineClamp: 2,
+                                WebkitBoxOrient: 'vertical',
+                                overflow: 'hidden',
+                                textOverflow: 'ellipsis',
+                                whiteSpace: 'normal',
+                                lineHeight: '1.2rem',
+                                cursor: 'default',
+                              }}
+                            >
+                              {row.name}
+                            </Typography>
+                          </Tooltip>
+                        ) : (
+                          <Typography
+                            variant="body1"
+                            sx={{
+                              fontSize: '0.7rem',
+                              fontWeight: 600,
+                              maxWidth: '10rem',
+                              display: '-webkit-box',
+                              WebkitLineClamp: 2,
+                              WebkitBoxOrient: 'vertical',
+                              overflow: 'hidden',
+                              textOverflow: 'ellipsis',
+                              whiteSpace: 'normal',
+                              lineHeight: '1.2rem',
+                              cursor: 'default',
+                            }}
+                          >
+                            {row.name}
+                          </Typography>
+                        )}
+                      </Box>
 
-              <TableCell>{row.party}</TableCell>
-              <TableCell>{row.constituency}</TableCell>
-              <TableCell>{row.state}</TableCell>
+                      {/* Party */}
+                      <Box>{row.party}</Box>
 
-              <TableCell>
-                <Typography sx={{ color: '#e7a917', fontWeight: 'bold' }}>
-                  {row.performance}
-                </Typography>
-              </TableCell>
+                      {/* Constituency */}
+                      <Box>{row.constituency}</Box>
 
-              <TableCell sx={{ textWrap: 'nowrap' }}>{row.presence}</TableCell>
+                      {/* State */}
+                      <Box>{row.state}</Box>
 
-              <TableCell>
-                <GrayButton>Share Now</GrayButton>
-              </TableCell>
+                      {/* Performance */}
+                      <Box sx={{ color: '#e7a917', fontSize: '1rem' }}>
+                        <span style={{ fontSize: '1.5rem' }}>
+                          {row.performance}
+                        </span>
+                        %
+                      </Box>
 
-              <TableCell>
-                <IconButton>
-                  <MoreVertIcon />
-                </IconButton>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody> */}
+                      {/* Presence */}
+                      <Box sx={{ whiteSpace: 'nowrap' }}>
+                        <span style={{ fontSize: '1.5rem' }}>
+                          {row.presence}
+                        </span>{' '}
+                        Days
+                      </Box>
+
+                      {/* Share Button */}
+                      <Box>
+                        <GrayButton fontSize="0.6rem" onClick={() => handleOpenSharePopup()}>Share Now</GrayButton>
+                      </Box>
+
+                      {/* More Icon */}
+                      <Box>
+                        <IconButton>
+                          <MoreVertIcon />
+                        </IconButton>
+                      </Box>
+                    </Box>
+                  </TableCell>
+                </TableRow>
+                {(index + 1) % 5 === 0 && <AdvertiseSection />}
+              </>
+            ))}
+        </TableBody>
       </Table>
-      <Box
-        sx={{
-          padding: '1rem 0',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '2rem 0',
-        }}
-      >
-        {data.map((row, index) => (
-          <>
-            <Box
-              key={index}
-              sx={{
-                display: 'flex',
-                fontSize: '0.8rem',
-                justifyContent: 'space-between',
-                borderRadius: '20px',
-                background: '#fff',
-                padding: '1rem',
-                alignItems: 'center',
-              }}
-            >
-              {/* Ranking */}
-              <Box>
-                <Box
-                  sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    color: '#e7a917',
-                    gap: 2,
-                  }}
-                >
-                  <Avatar
-                    sx={{
-                      width: 35,
-                      height: 35,
-                      background: '#e7a917',
-                      color: '#fff',
-                      fontSize: '0.8rem',
-                      fontFamily: '"Sora", sans-serif',
-                    }}
-                  >
-                    {row.rank}
-                  </Avatar>{' '}
-                  <span>National Rank</span>
-                </Box>
-              </Box>
-
-              {/* MP Name with Avatar */}
-              <Box>
-                <Box display="flex" alignItems="center">
-                  <Avatar
-                    src={row.imageUrl}
-                    sx={{ width: 40, height: 40, marginRight: 2 }}
-                  />
-                  <Typography
-                    variant="body1"
-                    sx={{ fontWeight: 600, fontSize: '0.8rem', width: '13rem' }}
-                  >
-                    {row.name}
-                  </Typography>
-                </Box>
-              </Box>
-
-              {/* Other Data */}
-              <Box>{row.party}</Box>
-              <Box>{row.constituency}</Box>
-              <Box>{row.state}</Box>
-
-              {/* Performance */}
-              <Box>
-                <Typography sx={{ color: '#e7a917', fontWeight: 'bold' }}>
-                  {row.performance}
-                </Typography>
-              </Box>
-
-              {/* Presence */}
-              <Box sx={{ textWrap: 'nowrap' }}>{row.presence}</Box>
-
-              {/* Share Button */}
-              <Box>
-                <GrayButton>Share Now</GrayButton>
-              </Box>
-
-              {/* More Options */}
-              <Box>
-                <MoreVertIcon />
-              </Box>
-            </Box>
-            {(index+1) % 5 === 0 && <AdvertiseSection />}
-          </>
-        ))}
-      </Box>
     </TableContainer>
   );
 };
