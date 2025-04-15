@@ -25,10 +25,52 @@ export const fetchPerformanceData = createAsyncThunk(
   }
 );
 
+export const fetchQuestionDetailsData = createAsyncThunk( 
+    "pmtPerformance/fetchQuestionDetailsData",
+    async (params, { rejectWithValue }) => {
+      try {
+        const queryString = new URLSearchParams(params).toString();
+        const response = await fetch(
+          `https://parliamentryfact.revanshrenewable.com/API/questions_detail_api.php?${queryString}`
+        );
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const result = await response.json();
+        return {
+          questionDetails: result.qut_data,
+        };
+      } catch (err) {
+        return rejectWithValue(err.message);
+      }
+    }
+  );
+export const fetchAttendanceDetailsData = createAsyncThunk( 
+    "pmtPerformance/fetchAttendanceDetailsData",
+    async (params, { rejectWithValue }) => {
+      try {
+        const queryString = new URLSearchParams(params).toString();
+        const response = await fetch(
+          `https://parliamentryfact.revanshrenewable.com/API/Attendance_detail_api.php?${queryString}`
+        );
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const result = await response.json();
+        return {
+          data: result,
+        };
+      } catch (err) {
+        return rejectWithValue(err.message);
+      }
+    }
+  );
+  
 const performanceSlice = createSlice({
   name: "pmtPerformance",
   initialState: {
     attendanceDetails: [],
+    attendanceDetailsPageData: [],
     questionsData:[],
     govtBillCount:[],
     privateBillCount:[],
@@ -36,6 +78,7 @@ const performanceSlice = createSlice({
     pageData: null,
     loading: false,
     error: null,
+    questionDetails: [],   // 👈 Added
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -56,10 +99,35 @@ const performanceSlice = createSlice({
       .addCase(fetchPerformanceData.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
-      });
+      })
+    // Fetch question details data
+      .addCase(fetchQuestionDetailsData.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchQuestionDetailsData.fulfilled, (state, action) => {
+        state.loading = false;
+        state.questionDetails = action.payload.questionDetails;
+      })
+      .addCase(fetchQuestionDetailsData.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+    // Fetch attendanceDetails PageData details data
+      .addCase(fetchAttendanceDetailsData.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchAttendanceDetailsData.fulfilled, (state, action) => {
+        state.loading = false;
+        state.attendanceDetailsPageData = action.payload.data;
+      })
+      .addCase(fetchAttendanceDetailsData.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      
   },
 });
-
-// export default performanceSlice.reducer;
 
 export const performanceReducer = performanceSlice.reducer;

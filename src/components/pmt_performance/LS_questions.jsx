@@ -107,7 +107,7 @@ function LS_QuestionsComponent({
           alignItems: 'center',
         }}
       >
-        <h3 style={{ textAlign: 'center' }}>{questionsListData.title}</h3>
+        <h3 style={{ textAlign: 'center' }}>{questionsListData?.title}</h3>
         <Box
           sx={{
             position: 'relative',
@@ -115,9 +115,9 @@ function LS_QuestionsComponent({
           }}
         >
           <ProgressMeter
-            titleText={questionsListData.progressTitle}
-            subTiteText={questionsListData.progressSubTitle}
-            centerDate={questionsListData.date}
+            titleText={questionsListData?.progressTitle}
+            subTiteText={questionsListData?.progressSubTitle}
+            centerDate={questionsListData?.date}
             percentText={'100.'}
             subPercentText={'20%'}
             width={230}
@@ -140,7 +140,7 @@ function LS_QuestionsComponent({
             gap:"2rem 2%"
           }}
         >
-          {questionsData.slice(0, 6).map((item, index) => (
+          {questionsData?.slice(0, 6).map((item, index) => (
             <Box
               key={index}
               sx={{
@@ -188,7 +188,7 @@ function LS_QuestionsComponent({
               </Box>
             </Box>
           ))}
-          {questionsData.slice(6).map((item, index) => (
+          {questionsData?.slice(6).map((item, index) => (
             <Box
               key={index}
               sx={{
@@ -264,7 +264,7 @@ function LS_QuestionsComponent({
           display: { xs: 'none', md: 'block' },
         }}
       >
-        <SectionHeading title={questionsListData.title} />
+        <SectionHeading title={questionsListData?.title} />
         <Grid
           container
           spacing={2}
@@ -287,9 +287,9 @@ function LS_QuestionsComponent({
             }}
           >
             <ProgressMeter
-              titleText={questionsListData.progressTitle}
-              subTiteText={questionsListData.progressSubTitle}
-              centerDate={questionsListData.date}
+              titleText={questionsListData?.progressTitle}
+              subTiteText={questionsListData?.progressSubTitle}
+              centerDate={questionsListData?.date}
               percentText={`${extractPercentage(pageData?.questions_percentage?.question_percentage)?.a}`}
               subPercentText={`${extractPercentage(pageData?.questions_percentage?.question_percentage)?.b}`}
               // percentText={'100.'}
@@ -315,7 +315,7 @@ function LS_QuestionsComponent({
               flexWrap: 'wrap',
             }}
           >
-            {questionsData.map((item, index) => (
+            {questionsData?.map((item, index) => (
               <QuestionTextGroup index={index} {...item} />
             ))}
           </Grid>
@@ -326,7 +326,7 @@ function LS_QuestionsComponent({
           <LineCharts />
         </Box>
         {BottomRightChip && (
-          <Box sx={{ position: 'absolute', right: '10rem', bottom: '15%' }}>
+          <Box sx={{ position: 'absolute', right: '2rem', bottom: '15%' }}>
             <BottomRightChip
               sectionDetailName={'questions-detail'}
               chipLabal={'MPs Participation in Lok Sabha Questions'}

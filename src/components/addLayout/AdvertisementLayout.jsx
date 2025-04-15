@@ -16,7 +16,7 @@ const AdvertisementLayout = ({ children }) => {
       <Box
         className="MobileViewRemove"
         sx={{
-          width: '180px',
+          width: '140px',
           height: '100vh',
           background: '#fff',
           position: 'sticky',
@@ -39,7 +39,7 @@ const AdvertisementLayout = ({ children }) => {
       <Box
         className="MobileViewRemove"
         sx={{
-          width: '180px',
+          width: '140px',
           height: '100vh',
           background: '#fff',
           position: 'sticky',

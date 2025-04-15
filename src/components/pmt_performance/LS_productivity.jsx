@@ -878,7 +878,7 @@ function LS_productivity({
             </div>
             <Grid container spacing={2} columns={{ xs: 12, sm: 12, md: 12 }} sx={{position:'absolute', right:'-2rem', width:'13rem', }}>
               <Grid item xs={6} md={6} sx={{ textAlign: 'right' }}>
-                {privateBillCount.map((item, i) => {
+                {privateBillCount?.map((item, i) => {
                   switch (i) {
                     case 1:
                       return;
@@ -893,7 +893,7 @@ function LS_productivity({
                 })}
               </Grid>
               <Grid item xs={6} md={6} sx={{ textAlign: 'left' }}>
-                {privateBillCount.map((item, i) => {
+                {privateBillCount?.map((item, i) => {
                   switch (i) {
                     case 0:
                       return;

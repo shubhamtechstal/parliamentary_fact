@@ -4,7 +4,6 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 import AppLayoutContainer from 'containers/Layout/AppLayoutContainer';
-import ParliamentAttendancePage from 'pages/ParliamentAttendancePage';
 import NotFoundPage from 'pages/NotFoundPage';
 import ParliamentPerformancePage from 'pages/ParliamentPerformancePage';
 import MPsPerformancePage from 'pages/MPsPerformancePage';
@@ -22,8 +21,8 @@ const PrivacyPolicy = lazy(() => import('pages/PrivacyPolicy'));
 const TermsAndConditions = lazy(() => import('pages/TermsAndConditions'));
 const ContactPage = lazy(() => import('pages/ContactPage'));
 const AdvertiseWithUs = lazy(() => import('pages/AdvertiseWithUs'));
-const MpsPublicRating = lazy(() => import('pages/MpsPublicRating'));
-const MpsRatingAllList = lazy(() => import('pages/MpsRatingAllList'));
+// const MpsPublicRating = lazy(() => import('pages/MpsPublicRating'));
+// const MpsRatingAllList = lazy(() => import('pages/MpsRatingAllList'));
 const RateYourMp = lazy(() => import('pages/RateYourMp'));
 const NewsLetter = lazy(() => import('pages/NewsLetter'));
 
@@ -90,10 +89,10 @@ const routes = [
         path: 'newsletter/loksabha/*',
         element: <PrivateRoute component={<NewsLetter/>} />,
       },
-      {
-        path: 'parliament-performance-attendance',
-        element: <PrivateRoute component={<ParliamentAttendancePage/>} />,
-      },
+      // {
+      //   path: 'parliament-performance-attendance',
+      //   element: <PrivateRoute component={<ParliamentAttendancePage/>} />,
+      // },
       {
         path: 'parliament-performance',
         element: <PrivateRoute component={<ParliamentPerformancePage/>} />,

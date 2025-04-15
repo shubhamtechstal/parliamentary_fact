@@ -1,10 +1,10 @@
-import { Box, Card, Grid } from '@mui/material'
-import Avatar from 'components/common/Avatar'
-import React from 'react'
+import { Box, Card, Grid } from '@mui/material';
+import Avatar from 'components/common/Avatar';
+import IconButton from 'components/common/IconButton';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 
-function MpsPerformanceCard({mp, index}) {
+function MpsPerformanceCard({ mp, handleOpenSharePopup }) {
   return (
-    <Grid item xs={6} sm={4} md={3} lg={2} key={index}>
     <Card
       sx={{
         p: 1.5,
@@ -13,6 +13,7 @@ function MpsPerformanceCard({mp, index}) {
         boxShadow: 2,
         textAlign: 'left',
         color: 'rgb(0 0 0 / 50%)',
+        minWidth: { xs: '12rem', md: 'auto' },
       }}
     >
       <Box
@@ -42,36 +43,34 @@ function MpsPerformanceCard({mp, index}) {
             style={{
               margin: '0 0',
               color: '#E19B00',
-              fontSize: '0.8rem',
+              fontSize: '0.7rem',
             }}
           >
             {' '}
-            National Rank:{' '}
+            {/* National Rank:{' '} */}
+            {mp.rankTitle}
           </h3>
           <h4 style={{ margin: '0 0', fontSize: '0.4rem' }}>
             Att + Qs + Dbt + Pmb + Mpf
           </h4>
         </Box>
-        <img
-          width={16}
-          height={16}
-          src="Assets/icons/icon3dot.png"
-          alt="icon3dot"
+        <MoreVertIcon
+          cursor={'pointer'}
+          onClick={() => handleOpenSharePopup()}
         />
       </Box>
-
-      <h3
-        style={{
-          fontSize: '0.8rem',
-          width: '70%',
-          margin: '10px 0 0 0',
-        }}
-      >
-        {mp.name}
-      </h3>
-      <h3 style={{ fontSize: '0.8rem', margin: '0 0' }}>
-        {mp.constituency}
-      </h3>
+      <Box height={50}>
+        <h3
+          style={{
+            fontSize: '0.8rem',
+            width: '70%',
+            margin: '10px 0 0 0',
+          }}
+        >
+          {mp.name}
+        </h3>
+        <h5 style={{ fontSize: '0.6rem', margin: '0 0' }}>{mp.constituency}</h5>
+      </Box>
       <Box
         sx={{
           display: 'flex',
@@ -108,8 +107,7 @@ function MpsPerformanceCard({mp, index}) {
         />
       </Box>
     </Card>
-  </Grid>
-  )
+  );
 }
 
-export default MpsPerformanceCard
+export default MpsPerformanceCard;
