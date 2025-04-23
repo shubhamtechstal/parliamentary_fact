@@ -7,6 +7,8 @@ import AppLayoutContainer from 'containers/Layout/AppLayoutContainer';
 import NotFoundPage from 'pages/NotFoundPage';
 import ParliamentPerformancePage from 'pages/ParliamentPerformancePage';
 import MPsPerformancePage from 'pages/MPsPerformancePage';
+import HomePage from 'pages/HomePage';
+import MpsConstituencyPage from 'pages/MpsConstituencyPage';
 
 // Public route pages
 const LoginPage = lazy(() => import('pages/LoginPage'));
@@ -28,15 +30,20 @@ const NewsLetter = lazy(() => import('pages/NewsLetter'));
 
 // Define routes config here
 const routes = [
-  {
-    path: '/',
-    element: <Navigate to="/news" replace />,
-  },
+  // {
+  //   path: '/',
+  //   element: <Navigate to="/news" replace />,
+  // },
   {
     path: '/news',
     isLayoutRoute: true,
     element: <AppLayoutContainer />,
     children: [
+      
+      {
+        path: '/',
+        element:  <PrivateRoute component={<HomePage />} />,
+      },
       {
         path: '/news',
         element: <PrivateRoute component={<DashboardPage />} />,
@@ -100,6 +107,10 @@ const routes = [
       {
         path: 'mps-performance',
         element: <PrivateRoute component={<MPsPerformancePage/>} />,
+      },
+      {
+        path: 'mps-constituency',
+        element: <PrivateRoute component={<MpsConstituencyPage/>} />,
       },
     ],
   },

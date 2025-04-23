@@ -12,18 +12,49 @@ export default function MpsPerformanceInAttandance({
   handleStepperChange,
   activeSection,
   sections,
+  handleStateRankClick,
+  isStateRank,
+  cardCatagory,
+  handleDetailsClick,
+  detailsPage
 }) {
+  const [isRankLoading, setIsRankLoading] = useState(false);
+
+  useEffect(() => {
+    setIsRankLoading(true);
+    setTimeout(() => {
+      setIsRankLoading(false);
+    }, 200);
+  }, [isStateRank, activeSection]);
   return (
     <Container maxWidth="lg" sx={{ py: 4 }}>
       <Box
-        display={'flex'}
-        justifyContent={'space-between'}
+        display="flex"
+        flexDirection={{ md: 'row', xs: 'column' }}
+        justifyContent={{ md: 'space-between', xs: 'center' }}
         alignItems={'center'}
       >
-        <SectionHeading title={title} />
-        <Box display={{ md: 'block', xs: 'none' }}>
-          <GrayButton bgColor="#fff" textColor="#00000080">
-            Know More
+        <Box display={{ xs: 'flex', md: 'none' }} textAlign={'center'}>
+          <h3 style={{ margin: '0 auto 1rem', width: '80%' }}>{title} </h3>
+        </Box>
+        <Box display={{ xs: 'none', md: 'block' }} textAlign={'center'}>
+          <SectionHeading title={title} />
+        </Box>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+          mb={2}
+        >
+          <GrayButton
+            onClick={() => handleStateRankClick(false)}
+            fontWeight="600"
+            bgColor="#fff"
+            textColor="#00000080"
+          >
+            {!isStateRank ? 'Check State Ranking' : 'Back  to National Rank'}
           </GrayButton>
         </Box>
       </Box>
@@ -59,14 +90,16 @@ export default function MpsPerformanceInAttandance({
             handleOpenSharePopup={handleOpenSharePopup}
             mp={mp}
             index={index}
+            cardCatagory={cardCatagory}
+            isLoading={isRankLoading}
           />
         ))}
       </Grid>
       <Grid
         container
         gap={{ xs: 3, md: 0 }}
-        spacing={{ xs: 0, md: 2 }}
-        py={1}
+        spacing={{ xs: 0, md: 1 }}
+        p={1}
         flexWrap={{ md: 'wrap', xs: 'nowrap' }}
         overflow={'auto'}
       >
@@ -76,17 +109,16 @@ export default function MpsPerformanceInAttandance({
               handleOpenSharePopup={handleOpenSharePopup}
               mp={mp}
               index={index}
+              isLoading={isRankLoading}
+              cardCatagory={cardCatagory}
             />
           </Grid>
         ))}
       </Grid>
-      <Box
-        display={{ md: 'none', xs: 'flex' }}
-        justifyContent={'center'}
-        alignItems={'center'}
-        mt={3}
-      >
-        <GrayButton>Know More</GrayButton>
+      <Box textAlign={{ xs: 'center', md: 'right' }} mt={3} mr={1}>
+        <GrayButton onClick={() => handleDetailsClick(detailsPage)}>
+          Load More
+        </GrayButton>
       </Box>
     </Container>
   );

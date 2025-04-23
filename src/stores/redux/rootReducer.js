@@ -9,6 +9,7 @@ import { performanceReducer } from './apiSlices/pmt_PerformanceSlice';
 import { dashboardNewsApiAction, dashboardNewsApiReducer } from './apiSlices/DashboardNewsSlice/dashboardNewsApiSlice';
 import { newsLetterApiAction, newsLetterApiReducer } from './apiSlices/newsLetterApiSlice';
 import { pmtSessionsReducer } from './apiSlices/commonSlice';
+import { mpsPerformanceReducer } from './apiSlices/mps_PerformanceSlice';
 
 const rootReducers = combineReducers({
   toast: toastReducers,
@@ -17,6 +18,7 @@ const rootReducers = combineReducers({
   [dashboardNewsApiAction.reducerPath]: dashboardNewsApiReducer,
   [newsLetterApiAction.reducerPath]:newsLetterApiReducer,
   pmtPerformance: performanceReducer,
+  mpsPerformance: mpsPerformanceReducer,
   pmtSessions :pmtSessionsReducer,
 });
 

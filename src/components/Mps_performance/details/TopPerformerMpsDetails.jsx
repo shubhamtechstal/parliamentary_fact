@@ -1,27 +1,17 @@
 import { Box } from '@mui/material';
 import SectionHeading from 'components/common/SectionHeading';
-import { useState } from 'react';
-import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
-import GrayButton from 'components/common/GrayButton';
 import RankingTable from 'components/common/modals/RankingTable';
 import MobMPsRankingCards from 'components/common/mobile/MobMPsRankingCards';
 import AdvertiseSection from 'components/addLayout/HorizontalAdvertiseSection';
+import IconButton from 'components/common/IconButton';
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
+import FilterController from 'components/common/modals/FilterController';
 
 function TopPerformerMpsDetails({
-  onFilterClick,
   handleOpenSharePopup,
-  handleClearfilter,
+  handleBack,
 }) {
-  const [isClearfilter, setClearfilter] = useState(false);
 
-  const handleFilterClick = () => {
-    if (!isClearfilter) {
-      onFilterClick();
-    } else if (isClearfilter) {
-      handleClearfilter();
-    }
-    setClearfilter(!isClearfilter);
-  };
   // Sample Data
   const mpsdata = Array(10).fill({
     rank: '001',
@@ -40,12 +30,16 @@ function TopPerformerMpsDetails({
         sx={{
           position: 'relative',
           display: { xs: 'flex', md: 'none' },
+          gap: '1em',
           justifyContent: 'center',
-          flexDirection: 'column',
           alignItems: 'center',
         }}
       >
-        <h3 style={{ textAlign: 'center' }}>Top performer Mps</h3>
+        {/* <IconButton onClick={handleBack}>
+          <KeyboardBackspaceIcon />
+        </IconButton> */}
+
+        <h3 style={{ textAlign: 'center', fontSize:'1.5rem' }}>Top performer Mps</h3>
       </Box>
       <Box
         display={{
@@ -86,13 +80,7 @@ function TopPerformerMpsDetails({
           }}
         >
           <SectionHeading title={'Top Performer MPs'} />
-          <GrayButton
-            className="MobileViewRemove"
-            onClick={() => handleFilterClick()}
-            startIcon={<FilterAltOutlinedIcon />}
-          >
-            {isClearfilter ? 'Clear' : 'Filter'}
-          </GrayButton>
+         <FilterController/>
         </Box>
         <Box display={{ xs: 'none', md: 'block' }}>
           <RankingTable

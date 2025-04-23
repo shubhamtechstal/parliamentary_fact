@@ -14,9 +14,11 @@ import {
   // productivity_schedule,
   questionsListData,
 } from 'helpers/performanceConstants';
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { fetchPerformanceData } from 'stores/redux/apiSlices/pmt_PerformanceSlice';
+import PerformanceChips from './PerformanceChips';
 
 const Productivity_bottomCards = ({
   cardData = productivity_bottomCardsdata,
@@ -139,6 +141,7 @@ function ParliamentPerformancePageComponent(props) {
       />
     );
   };
+
   return loading ? (
     <Box
       sx={{
@@ -153,125 +156,58 @@ function ParliamentPerformancePageComponent(props) {
     </Box>
   ) : (
     <Box>
-      <Box
-        className="performanceSection"
-        sx={{
-          display: 'flex',
-          justifyContent: 'flex-start',
-          gap: '1rem',
-          // padding: { md: '2rem 10rem', xs: '2rem  1rem 10px' },
-          overflowX: 'auto',
-        }}
-      >
-        {performace_chipList?.map((title, i) => {
-          return <Chip key={i} label={title} variant="outlined" />;
-        })}
-      </Box>
-      {/* <Box
-        className="performanceSection"
-        sx={{
-          display: 'flex',
-          gap: { xs: '0.8rem', md: '2rem' },
-          flexDirection: { xs: 'column', md: 'row' },
-          textAlign: { xs: 'center', md: 'left' },
-          justifyContent: 'space-between',
-        }}
-      >
-        <Text
-          sx={{
-            fontSize: { xs: '1rem', md: '1.5rem' },
-            letterSpacing: '-0.3px',
-            fontWeight: 600,
-          }}
-          font={'Sora'}
-          text={`Parliament Performance ${loksabhaName}`}
+      <PerformanceChips sections={performace_chipList} />
+      <div id="Lok_Sabha_Productivity">
+        <LS_productivity
+          productivity_schedule={pageData?.schedule_data ?? []}
+          productivity_details={pageData?.productivity_details}
+          mobCardsData={pageData?.other_performing_data ?? []}
+          govtBillCount={govtBillCount}
+          pageData={pageData}
+          privateBillCount={privateBillCount}
+          BottomRightChip={BottomRightChip}
+          loksabhaName={loksabhaName}
         />
-        <Text
-          sx={{
-            fontSize: { xs: '1rem', md: '1.5rem' },
-            letterSpacing: '-0.3px',
-            fontWeight: 400,
-            display: { xs: 'block', md: 'none' },
-          }}
-          font={'Sora'}
-          text={'Lok Sabha Productivity'}
+        <Productivity_bottomCards
+          cardData={pageData?.other_performing_data}
+          BottomRightChip={BottomRightChip}
         />
-        <Text
-          sx={{
-            display: { xs: 'flex', md: 'none' },
-            justifyContent: 'center',
-          }}
-        >
-          <span style={{ fontWeight: '600' }}>Till Now | </span> 23 September
-          2020
-        </Text>
-        <Box
-          sx={{
-            color: '#00000080',
-            borderBottom: '1px solid #D3D3D3',
-            display: { md: 'flex', xs: 'none' },
-            gap: '5px',
-            alignItems: 'center',
-            padding: '0 30px 5px',
-          }}
-        >
-          <div
-            style={{
-              padding: '1px 7px',
-              border: '1px solid #00000080',
-              borderRadius: '50%',
-              fontSize: '10px',
-              height: '18px',
-              width: '18px',
-            }}
-          >
-            {' '}
-            i
-          </div>{' '}
-          Read before check performance
-        </Box>
-      </Box> */}
-      <LS_productivity
-        productivity_schedule={pageData?.schedule_data ?? []}
-        productivity_details={pageData?.productivity_details}
-        mobCardsData={pageData?.other_performing_data ?? []}
-        govtBillCount={govtBillCount}
-        pageData={pageData}
-        privateBillCount={privateBillCount}
-        BottomRightChip={BottomRightChip}
-        loksabhaName={loksabhaName}
-      />
-      <Productivity_bottomCards
-        cardData={pageData?.other_performing_data}
-        BottomRightChip={BottomRightChip}
-      />
+      </div>
       {/* <BottomRightChip /> */}
       <AdvertiseSection />
-      <LS_attendance
-        attendance_details={attendanceDetails}
-        pageData={pageData}
-        BottomRightChip={BottomRightChip}
-        className="performanceSection"
-      />
+      <div id="Lok_Sabha_Attandance">
+        <LS_attendance
+          attendance_details={attendanceDetails}
+          pageData={pageData}
+          BottomRightChip={BottomRightChip}
+          className="performanceSection"
+        />
+      </div>
       <AdvertiseSection />
-      <LS_QuestionsComponent
-        questionsListData={questionsListData}
-        questionsData={questionsData}
-        pageData={pageData}
-        BottomRightChip={BottomRightChip}
-      />
+      <div id="Lok_Sabha_Question">
+        <LS_QuestionsComponent
+          questionsListData={questionsListData}
+          questionsData={questionsData}
+          pageData={pageData}
+          BottomRightChip={BottomRightChip}
+        />
+      </div>
       <AdvertiseSection />
-      <Debates_In_LS
-        debateListData={debateListData}
-        BottomRightChip={BottomRightChip}
-        questionsData={questionsData}
-      />
+      <div id="Lok_Sabha_Debates">
+        <Debates_In_LS
+          debateListData={debateListData}
+          BottomRightChip={BottomRightChip}
+          questionsData={questionsData}
+        />
+      </div>
       <AdvertiseSection />
-      <MpFundSection
-        MpFundSection={MpFundsectionData}
-        mpsFundData={pageData?.mps_fund_data}
-        BottomRightChip={BottomRightChip}
-      />
+      <div id="Lok_Sabha_Private_Member_Bills">
+        <MpFundSection
+          MpFundSection={MpFundsectionData}
+          mpsFundData={pageData?.mps_fund_data}
+          BottomRightChip={BottomRightChip}
+        />
+      </div>
     </Box>
   );
 }

@@ -101,7 +101,7 @@ function Debates_In_LS({ debateListData, questionsData, BottomRightChip }) {
   return (
     <>
       {/* ****Mobile*** */}
-      <Box sx={{ display: { xs: 'block', md: 'none' } }}>
+      <Box className="performanceSection" sx={{ display: { xs: 'block', md: 'none' } }}>
         <h3 style={{ textAlign: 'center' }}>{debateListData?.title}</h3>
         <Box
           sx={{

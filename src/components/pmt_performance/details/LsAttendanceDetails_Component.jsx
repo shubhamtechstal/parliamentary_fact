@@ -1,4 +1,4 @@
-import { Autocomplete, Box, Divider, TextField } from '@mui/material';
+import { Autocomplete, Box, Divider, Skeleton, TextField } from '@mui/material';
 import StateAttendance from 'components/attendence/StateAttendance';
 import Text from 'components/common/Text';
 import { useEffect, useState } from 'react';
@@ -12,7 +12,7 @@ import AdvertiseSection from 'components/addLayout/HorizontalAdvertiseSection';
 
 export default function LsAttendanceDetails_Component() {
   const dispatch = useDispatch();
-  const { attendanceDetailsPageData } = useSelector(
+  const { attendanceDetailsPageData, attendanceLoading } = useSelector(
     (state) => state?.pmtPerformance
   );
   const [appliedFilterFromPoup, setAppliedFilterFromPoup] = useState(null);
@@ -64,7 +64,11 @@ export default function LsAttendanceDetails_Component() {
             font={'Sora'}
             text={'MPS PARTICIPATION IN LOK SABHA ATTENDANCE'}
           />
-          <FilterController setAppliedFilter={(e)=>setAppliedFilterFromPoup(e)} />
+          <Box  sx={{ position:{ xs : 'absolute', md:'static'}, right: 11, top:11}}>
+            <FilterController
+              setAppliedFilter={(e) => setAppliedFilterFromPoup(e)}
+            />
+          </Box>
         </Box>
         <LS_attendance
           attendance_details={attendanceDetailsPageData?.attendance_summary}
@@ -162,18 +166,60 @@ export default function LsAttendanceDetails_Component() {
               gap: '1rem 0',
               flexWrap: 'wrap',
               justifyContent: 'space-between',
+              alignItems: 'center',
             }}
           >
-            {(loadmoreStates
-              ? filteredStatesData
-              : filteredStatesData?.slice(0, 8)
-            )?.map((item, index) => (
-              <Box sx={{ width: { xs: '12rem', md: '25%' } }}>
-                <StateAttendance item={item} key={index} />
+            {selectedState &&
+              filteredStatesData.map((item, index) => (
+                <Box
+                  sx={{
+                    width: { xs: '12rem', md: '20%' },
+                    background: '#ab8f8f',
+                    color: '#fff',
+                    borderRadius: '5px',
+                    padding: '1rem',
+                  }}
+                >
+                  <StateAttendance item={item} key={index} textColor="#fff" />
+                  <small> Your selected State </small>
+                </Box>
+              ))}
+            {attendanceLoading ? (
+              <Box
+                sx={{
+                  display: 'flex',
+                  gap: '1rem',
+                  flexWrap: 'wrap',
+                  justifyContent: 'space-between',
+                  width: '100%',
+                }}
+              >
+                {Array.from({ length: 12 }).map((_, index) => (
+                  <Box
+                    sx={{
+                      width: { xs: '12rem', md: '20%' },
+                      display: 'flex',
+                      gap: '1rem',
+                    }}
+                  >
+                    <Skeleton variant="circular" height={80} width={80} />
+                    <Skeleton variant="rectangular" height={80} width={5} />
+                    <Skeleton variant="rounded" height={80} width={80} />
+                  </Box>
+                ))}
               </Box>
-            ))}
+            ) : (
+              (loadmoreStates
+                ? attendanceDetailsPageData?.statewise_summary
+                : attendanceDetailsPageData?.statewise_summary?.slice(0, 12)
+              )?.map((item, index) => (
+                <Box sx={{ width: { xs: '12rem', md: '25%' } }}>
+                  <StateAttendance item={item} key={index} />
+                </Box>
+              ))
+            )}
           </Box>
-          {filteredStatesData?.length > 6 && (
+          {attendanceDetailsPageData?.statewise_summary?.length > 12 && (
             <Box
               display={'flex'}
               justifyContent={{ xs: 'center', md: 'end' }}
@@ -188,7 +234,11 @@ export default function LsAttendanceDetails_Component() {
         </Box>
       </Box>
       <AdvertiseSection />
-      <Box className="performanceSection" id="Party_Wise" sx={{backgroundColor: "#fff"}}>
+      <Box
+        className="performanceSection"
+        id="Party_Wise"
+        sx={{ backgroundColor: '#fff' }}
+      >
         <Divider sx={{ margin: '0 0 1rem' }} />
         <Box
           sx={{
@@ -280,18 +330,60 @@ export default function LsAttendanceDetails_Component() {
             gap: '1rem 0',
             flexWrap: 'wrap',
             justifyContent: 'space-between',
+            width: '100%',
           }}
         >
-          {(loadParties
-            ? filteredPartiesData
-            : filteredPartiesData?.slice(0, 8)
-          )?.map((item, index) => (
-            <Box key={index} sx={{ width: { xs: '12rem', md: '25%' } }}>
-              <StateAttendance key={index} item={item} />
+          {selectedParty &&
+            filteredPartiesData.map((item, index) => (
+              <Box
+                sx={{
+                  width: { xs: '12rem', md: 'auto' },
+                  background: '#ab8f8f',
+                  color: '#fff',
+                  borderRadius: '5px',
+                  padding: '1rem',
+                }}
+              >
+                <StateAttendance item={item} key={index} textColor="#fff" />
+                <small> Your selected Paty </small>
+              </Box>
+            ))}
+          {attendanceLoading ? (
+            <Box
+              sx={{
+                display: 'flex',
+                gap: '1rem',
+                flexWrap: 'wrap',
+                justifyContent: 'space-between',
+                width: '100%',
+              }}
+            >
+              {Array.from({ length: 12 }).map((_, index) => (
+                <Box
+                  sx={{
+                    width: { xs: '12rem', md: '20%' },
+                    display: 'flex',
+                    gap: '1rem',
+                  }}
+                >
+                  <Skeleton variant="circular" height={80} width={80} />
+                  <Skeleton variant="rectangular" height={80} width={5} />
+                  <Skeleton variant="rounded" height={80} width={80} />
+                </Box>
+              ))}
             </Box>
-          ))}
+          ) : (
+            (loadParties
+              ? attendanceDetailsPageData?.partywise_summary
+              : attendanceDetailsPageData?.partywise_summary?.slice(0, 12)
+            )?.map((item, index) => (
+              <Box key={index} sx={{ width: { xs: '12rem', md: '25%' } }}>
+                <StateAttendance key={index} item={item} />
+              </Box>
+            ))
+          )}
         </Box>
-        {filteredPartiesData?.length > 8 && (
+        {attendanceDetailsPageData?.partywise_summary?.length > 12 && (
           <Box
             display={'flex'}
             justifyContent={{ xs: 'center', md: 'end' }}

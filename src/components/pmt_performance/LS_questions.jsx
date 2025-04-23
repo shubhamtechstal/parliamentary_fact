@@ -98,7 +98,7 @@ function LS_QuestionsComponent({
   return (
     <>
       {/* **********Mobile********** */}
-      <Box
+      <Box className="performanceSection"
         sx={{
           position: 'relative',
           display: { xs: 'flex', md: 'none' },
@@ -244,7 +244,7 @@ function LS_QuestionsComponent({
         </Box>
 
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-          <LineCharts width={350} />
+          <LineCharts width={350} data={[10, 4, 6, 5, 14, 14, 15]} labels={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul']}/>
         </Box>
         {BottomRightChip && (
           <Box sx={{ position: 'relative', bottom: '1rem' }}>
@@ -298,7 +298,7 @@ function LS_QuestionsComponent({
               height={250}
               innerRadius={98}
               percentNumFontSize={'2.5rem'}
-              percent_x="45%"
+              percent_x="37%"
               percent_y="55%"
               dotPercentFontSize={'1.5rem'}
               dotPercent_x="62%"
@@ -323,7 +323,10 @@ function LS_QuestionsComponent({
         <Box
           sx={{ display: 'flex', justifyContent: 'center', marginTop: '-2rem' }}
         >
-          <LineCharts />
+          <LineCharts  
+            data={[10, 4, 6, 5, 14, 14, 15]}
+            labels={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul']}
+            width={540} />
         </Box>
         {BottomRightChip && (
           <Box sx={{ position: 'absolute', right: '2rem', bottom: '15%' }}>

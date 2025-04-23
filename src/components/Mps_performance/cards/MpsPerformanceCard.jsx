@@ -1,19 +1,20 @@
-import { Box, Card, Grid } from '@mui/material';
+import { Box, Card, Grid, Skeleton } from '@mui/material';
 import Avatar from 'components/common/Avatar';
 import IconButton from 'components/common/IconButton';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
-function MpsPerformanceCard({ mp, handleOpenSharePopup }) {
+const MpsPerformanceCardSkeleton = () => {
   return (
     <Card
       sx={{
-        p: 1.5,
+        py: 1.5,
+        px: 1,
         textAlign: 'center',
         borderRadius: 6,
         boxShadow: 2,
         textAlign: 'left',
         color: 'rgb(0 0 0 / 50%)',
-        minWidth: { xs: '12rem', md: 'auto' },
+        minWidth: { xs: '12rem', md: 'auto' },minHeight:170, 
       }}
     >
       <Box
@@ -21,56 +22,18 @@ function MpsPerformanceCard({ mp, handleOpenSharePopup }) {
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'top',
+          mb: 1,
         }}
       >
-        <Box
-          sx={{
-            height: '30px',
-            width: '30px',
-            borderRadius: '50%',
-            background: '#E19B00',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            fontSize: '0.6rem',
-            color: '#fff',
-          }}
-        >
-          {mp.rank}
-        </Box>
+        <Skeleton variant="circular" height={30} width={30} />
         <Box>
-          <h3
-            style={{
-              margin: '0 0',
-              color: '#E19B00',
-              fontSize: '0.7rem',
-            }}
-          >
-            {' '}
-            {/* National Rank:{' '} */}
-            {mp.rankTitle}
-          </h3>
-          <h4 style={{ margin: '0 0', fontSize: '0.4rem' }}>
-            Att + Qs + Dbt + Pmb + Mpf
-          </h4>
+          <Skeleton variant="text" height={20} width={90} />
+          <Skeleton variant="text" height={10} width={90} />
         </Box>
-        <MoreVertIcon
-          cursor={'pointer'}
-          onClick={() => handleOpenSharePopup()}
-        />
+        <Skeleton variant="text" height={20} width={10} />
       </Box>
-      <Box height={50}>
-        <h3
-          style={{
-            fontSize: '0.8rem',
-            width: '70%',
-            margin: '10px 0 0 0',
-          }}
-        >
-          {mp.name}
-        </h3>
-        <h5 style={{ fontSize: '0.6rem', margin: '0 0' }}>{mp.constituency}</h5>
-      </Box>
+      <Skeleton variant="text" height={40} width={90} mb={1} />
+      <Skeleton variant="text" height={10} width={90} />
       <Box
         sx={{
           display: 'flex',
@@ -92,21 +55,140 @@ function MpsPerformanceCard({ mp, handleOpenSharePopup }) {
                 fontSize: '28px',
               }}
             >
-              {mp.performance}
+              <Skeleton variant="text" height={30} width={80} />
             </span>
-            % <br />
           </p>
           <h4 style={{ fontSize: '0.6rem', margin: '-0.5rem 0 0 0' }}>
-            Performance
+            <Skeleton variant="text" width={80} />
           </h4>
         </Box>
-        <Avatar
-          src="Assets/icons/mpGirlImage.png"
-          alt={mp.name}
-          sx={{ width: 60, height: 60 }}
-        />
+        <Skeleton variant="circular" height={60} width={60} />
       </Box>
     </Card>
+  );
+};
+
+function MpsPerformanceCard({
+  mp,
+  handleOpenSharePopup,
+  cardCatagory,
+  isLoading,
+}) {
+  return (
+    <>
+      {isLoading ? (
+        MpsPerformanceCardSkeleton()
+      ) : (
+        <Card
+          sx={{
+            py: 1.5,
+            px: 1,
+            textAlign: 'center',
+            borderRadius: 6,
+            boxShadow: 2,
+            textAlign: 'left',
+            color: 'rgb(0 0 0 / 50%)',
+            minWidth: { xs: '12rem', md: 'auto' },
+            minHeight:170, 
+          }}
+        >
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'top',
+            }}
+          >
+            <Box
+              sx={{
+                height: '30px',
+                width: '30px',
+                borderRadius: '50%',
+                background: '#E19B00',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                fontSize: '0.6rem',
+                color: '#fff',
+              }}
+            >
+              {mp.rank}
+            </Box>
+            <Box borderBottom={'1px solid #d3d2d2'}>
+              <h3
+                style={{
+                  margin: '0 0',
+                  color: '#E19B00',
+                  fontSize: '0.7rem',
+                }}
+              >
+                {' '}
+                {/* National Rank:{' '} */}
+                {mp.rankTitle}
+              </h3>
+              <h4 style={{ margin: '0 0', fontSize: '0.4rem' }}>
+                {cardCatagory ?? 'Att + Qs + Dbt + Pmb + Mpf'}
+              </h4>
+            </Box>
+            <MoreVertIcon
+              cursor={'pointer'}
+              onClick={() => handleOpenSharePopup()}
+            />
+          </Box>
+          <h3
+            style={{
+              fontSize: '0.8rem',
+              width: '70%',
+              margin: '10px 0 0 0',
+              height: '2.5rem',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            {mp.name} <br />
+            {/* <span style={{ fontSize: '0.6rem', margin: '0 0' }}> */}
+            {mp.constituency}
+            {/* </span> */}
+          </h3>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}
+          >
+            <Box>
+              <p
+                style={{
+                  color: '#E59B00',
+                  fontSize: '18px',
+                  margin: '0 0',
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: "'Saira', sans-serif",
+                    fontSize: '28px',
+                  }}
+                >
+                  {mp.performance}
+                </span>
+                % <br />
+              </p>
+              <h4 style={{ fontSize: '0.6rem', margin: '-0.5rem 0 0 0' }}>
+                Performance
+              </h4>
+            </Box>
+            <Avatar
+              src={mp.image}
+              alt={mp.name}
+              sx={{ width: 60, height: 60 }}
+            />
+          </Box>
+        </Card>
+      )}
+    </>
   );
 }
 

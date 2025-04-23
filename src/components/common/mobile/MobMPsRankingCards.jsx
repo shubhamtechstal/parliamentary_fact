@@ -3,14 +3,9 @@ import { Gauge, gaugeClasses } from '@mui/x-charts';
 import Avatar from 'components/common/Avatar';
 // import GrayButton from '../GrayButton';
 
-function MobMPsRankingCards({mp, key, handleOpenSharePopup}) {
-//   const mp = {
-//     rank: '000',
-//     name: 'Neeraj Ram Mandola',
-//     constituency: 'Choudheer Mandola',
-//     performance: '52.9',
-//     image: 'https://via.placeholder.com/50', // Replace with actual image URL
-//   };
+function MobMPsRankingCards({mp, cardName, key, handleOpenSharePopup}) {
+
+  
   return (
     <Card
     key={key}
@@ -54,11 +49,11 @@ function MobMPsRankingCards({mp, key, handleOpenSharePopup}) {
                 fontSize: '0.7em',
               }}
             >
-              {' '}
-              National Rank:{' '}
+              {' '}{mp.rankTitle}
+              {/* National Rank:{' '} */}
             </h3>
             <h4 style={{ margin: '0 0', fontSize: '0.4em' }}>
-              Att + Qs + Dbt + Pmb + Mpf
+              {cardName ?? 'Att + Qs + Dbt + Pmb + Mpf'}
             </h4>
           </Box>
         </Box>
@@ -108,7 +103,7 @@ function MobMPsRankingCards({mp, key, handleOpenSharePopup}) {
           text={({ value }) => `${value}%`}
         />
         <Avatar
-          src="Assets/icons/mpGirlImage.png"
+          src={mp.imageUrl}
           alt={mp.name}
           sx={{ width: 60, height: 60 }}
         />

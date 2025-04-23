@@ -82,7 +82,7 @@ function MpFundSection({ MpFundSection, mpsFundData, BottomRightChip }) {
           width: '100%',
         }}
       >
-        <h3 style={{ textAlign: 'center' }}>{MpFundSection.title}</h3>
+        <h3 style={{ textAlign: 'center', margin:'0 ' }}>{MpFundSection.title}</h3>
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           <ProgressMeter
             titleText={MpFundSection.progressTitle}
@@ -124,7 +124,7 @@ function MpFundSection({ MpFundSection, mpsFundData, BottomRightChip }) {
           ))}
         </Box>
         <hr style={{ margin: '2rem 0' }} />
-        <h3
+        {/* <h3
           style={{
             borderBottom: '4px solid #FF936F',
             paddingBottom: '5px',
@@ -145,7 +145,7 @@ function MpFundSection({ MpFundSection, mpsFundData, BottomRightChip }) {
           {MpFundSection.fundSpentInTopArea.items.map((item, index) => (
             <FundSpentInTopAreaTextGroup index={index} {...item} />
           ))}
-        </Box>
+        </Box> */}
         {BottomRightChip&&
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           <BottomRightChip />
@@ -255,7 +255,7 @@ function MpFundSection({ MpFundSection, mpsFundData, BottomRightChip }) {
               ))}
             </Box>
             <hr style={{ margin: '2rem 0' }} />
-            <h3
+            {/* <h3
               style={{
                 borderBottom: '4px solid #FF936F',
                 width: '300px',
@@ -275,7 +275,7 @@ function MpFundSection({ MpFundSection, mpsFundData, BottomRightChip }) {
               {MpFundSection.fundSpentInTopArea.items.map((item, index) => (
                 <FundSpentInTopAreaTextGroup index={index} {...item} />
               ))}
-            </Box>
+            </Box> */}
           </Grid>
         </Grid>
         {BottomRightChip&&

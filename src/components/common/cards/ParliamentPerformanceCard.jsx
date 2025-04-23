@@ -113,6 +113,7 @@ export default function ParliamentPerformanceCard() {
           </Box>
           <Avatar
             src={'Assets/dummy-profile-image.png'}
+            alt={'Neeraj Ram Mandola'}
             sx={{ width: 70, height: 70, mt: 1 }}
           />
         </Box>

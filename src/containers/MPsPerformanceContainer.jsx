@@ -1,61 +1,43 @@
-import { Button } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import MpsPerformancePageComponent from 'components/Mps_performance/MpsPerformancePageComponent';
 import PopulerMpsDetailsComponent from 'components/Mps_performance/details/PopulerMPsDetails';
 import AdvertisementLayout from 'components/addLayout/AdvertisementLayout';
-import FilterModal from 'components/common/modals/FilterModal';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchSessionsFilterData } from 'stores/redux/apiSlices/commonSlice';
 import ShareModal from 'components/common/modals/ShareModal';
 import TopPerformerMpsDetails from 'components/Mps_performance/details/TopPerformerMpsDetails';
+import AutocompleteSearchBox from 'components/common/modals/AutoCompleateSearchBox';
+import { Box } from '@mui/material';
+import IconButton from 'components/common/IconButton';
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchMpsPerformanceData } from 'stores/redux/apiSlices/mps_PerformanceSlice';
 
 const MPsPerformanceContainer = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const initialSection = searchParams.get('section');
   const [activeSection, setActiveSection] = useState(initialSection);
-  const [openFilterModal, setOpenFilterModal] = useState(false);
   const [openShare, setOpenShare] = useState(false);
-  const [selectedYears, setSelectedYears] = useState([]);
-  const [selectedSessions, setSelectedSessions] = useState([]);
-  const [filterParams, setFilterParams] = useState({
-    // year_id: '',
-    loksabha_id: '6',
-    // session_id: '',
-  });
-  const handleYearChange = (year) => {
-    setSelectedYears((prev) =>
-      prev.includes(year) ? prev.filter((y) => y !== year) : [...prev, year]
-    );
-    onChangeFilter({ name: 'year_id', value: year });
+  const [shareMpId, setshareMpId] = useState('00');
+  const [filterParams, setFilterParams] = useState({});
+  const onSelectSearchBox = (value) => {
+    setFilterParams((prev) => ({
+      ...prev,
+      mp_full_name: value?.full_name,
+    }));
   };
 
-  const handleSessionChange = (session) => {
-    setSelectedSessions((prev) =>
-      prev.includes(session)
-        ? prev.filter((s) => s !== session)
-        : [...prev, session]
-    );
-    onChangeFilter({ name: 'session_id', value: session });
-  };
-  const onFilterClick = () => {
-    setOpenFilterModal((prev) => !prev);
-  };
-  const handleClearfilter = () => {
-    setSelectedYears([]);
-    setSelectedSessions([]);
-    setFilterParams({
-      // year_id: '',
-      loksabha_id: '6',
-      // session_id: '',
-    });
-  };
-
-  const handleOpenSharePopup = () => {
+  const handleOpenSharePopup = (mp_id) => {
     setOpenShare((prev) => !prev);
+    setshareMpId(mp_id);
   };
 
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchMpsPerformanceData());
+  }, [dispatch]);
+  const { mps_attendance_data } = useSelector((state) => state?.mpsPerformance);
+  console.log('mps_attendance_data', mps_attendance_data);
   useEffect(() => {
     const section = searchParams.get('section');
     if (section) {
@@ -72,65 +54,162 @@ const MPsPerformanceContainer = () => {
     setActiveSection(null);
     navigate('/mps-performance');
   };
+  const mpsDataNetionalRank =
+    mps_attendance_data?.map((data) => {
+      return {
+        rank: data.national_rank,
+        name: data.name,
+        constituency: data.constituency,
+        state: data.state_name,
+        performance: data.national_percentage,
+        rankTitle: 'National Rank:',
+        party: data.party_full_name,
+        mp_id: data.mp_id,
+        presence: data.attendance_days,
+        imageUrl: data.image,
+      };
+    }) ?? [];
+  const mpsDataStateRank =
+    mps_attendance_data?.map((data) => {
+      return {
+        rank: data.national_rank,
+        name: data.name,
+        constituency: data.constituency,
+        state: data.state_name,
+        performance: data.national_percentage,
+        rankTitle: 'State Rank:',
+        party: data.party_full_name,
+        mp_id: data.mp_id,
+        presence: data.attendance_days,
+        imageUrl: data.image,
+      };
+    }) ?? [];
+
   const sectionsComponets = [
     {
       id: 'popular-mps',
-      component: <PopulerMpsDetailsComponent handleOpenSharePopup={handleOpenSharePopup} onFilterClick={onFilterClick} handleClearfilter={handleClearfilter} />,
+      component: (
+        <PopulerMpsDetailsComponent
+          handleBack={handleBack}
+          handleOpenSharePopup={handleOpenSharePopup}
+          mps_data={mps_attendance_data}
+          pageTitle={'Populer Mps Performance'}
+          mpsDataNetionalRank={mpsDataNetionalRank}
+          mpsDataStateRank={mpsDataStateRank}
+
+          // onFilterClick={onFilterClick}
+        />
+      ),
     },
     {
       id: 'top-performer-mps',
-      component: <TopPerformerMpsDetails handleOpenSharePopup={handleOpenSharePopup} onFilterClick={onFilterClick} handleClearfilter={handleClearfilter}/>,
+      component: (
+        <PopulerMpsDetailsComponent
+          handleBack={handleBack}
+          handleOpenSharePopup={handleOpenSharePopup}
+          mps_data={mps_attendance_data}
+          pageTitle={'Top performer Mps Rating and Ranking'}
+          mpsDataNetionalRank={mpsDataNetionalRank}
+          mpsDataStateRank={mpsDataStateRank}
+          // onFilterClick={onFilterClick}
+        />
+        // <TopPerformerMpsDetails
+        //   handleBack={handleBack}
+        //   handleOpenSharePopup={handleOpenSharePopup}
+        //   // onFilterClick={onFilterClick}
+        // />
+      ),
     },
-    { id: 'health', component: 'Healthcare_Development' },
-    { id: 'infrastructure', component: 'Infrastructure_Growth' },
-    { id: 'defense', component: 'Defense_Policies' },
+    {
+      id: 'mps-attendance',
+      component: (
+        <PopulerMpsDetailsComponent
+          handleBack={handleBack}
+          handleOpenSharePopup={handleOpenSharePopup}
+          mps_data={mps_attendance_data}
+          pageTitle={'MPs Performance In Attendance'}
+          mpsDataNetionalRank={mpsDataNetionalRank}
+          mpsDataStateRank={mpsDataStateRank}
+          // onFilterClick={onFilterClick}
+        />
+      ),
+    },
+    {
+      id: 'mps-questions',
+      component: (
+        <PopulerMpsDetailsComponent
+          handleBack={handleBack}
+          handleOpenSharePopup={handleOpenSharePopup}
+          mps_data={mps_attendance_data}
+          pageTitle={'MPs Performance In Questions'}
+          mpsDataNetionalRank={mpsDataNetionalRank}
+          mpsDataStateRank={mpsDataStateRank}
+          // onFilterClick={onFilterClick}
+        />
+      ),
+    },
+    {
+      id: 'mps-debates',
+      component: (
+        <PopulerMpsDetailsComponent
+          handleBack={handleBack}
+          handleOpenSharePopup={handleOpenSharePopup}
+          mps_data={mps_attendance_data}
+          pageTitle={'MPs Performance In Debates'}
+          mpsDataNetionalRank={mpsDataNetionalRank}
+          mpsDataStateRank={mpsDataStateRank}
+          // onFilterClick={onFilterClick}
+        />
+      ),
+    },
+    {
+      id: 'mps-private-member-bill',
+      component: (
+        <PopulerMpsDetailsComponent
+          handleBack={handleBack}
+          handleOpenSharePopup={handleOpenSharePopup}
+          mps_data={mps_attendance_data}
+          pageTitle={'MPs Performance In Private Member Bill'}
+          mpsDataNetionalRank={mpsDataNetionalRank}
+          mpsDataStateRank={mpsDataStateRank}
+          // onFilterClick={onFilterClick}
+        />
+      ),
+    },
   ];
-  const dispatch = useDispatch();
-  const onChangeFilter = ({ name, value }) => {
-    setFilterParams((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-  const { sessions, loading } = useSelector((state) => state?.pmtSessions);
-  useEffect(() => {
-    dispatch(fetchSessionsFilterData(filterParams));
-  }, [dispatch, filterParams]);
   return (
     <AdvertisementLayout>
       {activeSection && (
-        <Button
-          onClick={handleBack}
-          sx={{ margin: '1rem 2rem 0' }}
-          variant="outlined"
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: { xs: 'start', md: 'space-between' },
+            gap: 2,
+          }}
         >
-          Back
-        </Button>
+          <IconButton onClick={handleBack}>
+            <KeyboardBackspaceIcon />
+          </IconButton>
+          <Box sx={{width:{xs: '80%', md : 'auto'}}}>
+            <AutocompleteSearchBox onSelectMP={onSelectSearchBox} />
+          </Box>
+        </Box>
       )}
-
       {activeSection ? (
         sectionsComponets.find((s) => s.id === activeSection)?.component
       ) : (
         <MpsPerformancePageComponent
-          onFilterClick={() => setOpenFilterModal(true)}
           handleDetailsClick={handleSectionChange}
           handleOpenSharePopup={handleOpenSharePopup}
+          mps_attendance_data={mps_attendance_data}
         />
       )}
-      <FilterModal
-        openModal={openFilterModal}
-        handleClose={() => setOpenFilterModal(false)}
-        sessionsData={sessions}
-        sessionsLoading={loading}
-        onChangeFilter={onChangeFilter}
-        filterParams={filterParams}
-        selectedYears={selectedYears}
-        selectedSessions={selectedSessions}
-        handleYearChange={handleYearChange}
-        handleSessionChange={handleSessionChange}
-      />
 
-      <ShareModal open={openShare} handleOpenSharePopup={handleOpenSharePopup} />
+      <ShareModal
+        open={openShare}
+        shareMpId={shareMpId}
+        handleOpenSharePopup={handleOpenSharePopup}
+      />
     </AdvertisementLayout>
   );
 };
