@@ -1,11 +1,11 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const fetchMpsPerformanceData = createAsyncThunk(
-  "pmtPerformance/fetchData",
+  'pmtPerformance/fetchData',
   async (_, { rejectWithValue }) => {
     try {
       const response = await fetch(
-       'https://parliamentryfact.revanshrenewable.com/API/attendance_filter_api.php'
+        'https://parliamentryfact.revanshrenewable.com/API/mps_performance_data.php'
       );
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
@@ -22,9 +22,9 @@ export const fetchMpsPerformanceData = createAsyncThunk(
 );
 
 const mpsPerformanceSlice = createSlice({
-  name: "mpsPerformance",
+  name: 'mpsPerformance',
   initialState: {
-    attendanceDetails: [],
+    mps_attendance_data: [],
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -35,8 +35,7 @@ const mpsPerformanceSlice = createSlice({
       })
       .addCase(fetchMpsPerformanceData.fulfilled, (state, action) => {
         state.loading = false;
-        state.attendanceDetails = action.payload.attendanceDetails;
-        state.pageData = action.payload.data;
+        state.mps_attendance_data = action.payload.data.attendance_data;
       })
       .addCase(fetchMpsPerformanceData.rejected, (state, action) => {
         state.loading = false;

@@ -41,7 +41,7 @@ console.log('selectedValueselectedValue', selectedValue)
   }, [searchQuery]);
 
   return (
-    <Stack spacing={2} sx={{ width: { md: 500, xs: '80%' } }}>
+    <Stack spacing={2} sx={{ width: { md: 500, xs: '80%' } }} mt={2} mr={2}>
       <Autocomplete
         id="mp-autocomplete"
         options={suggestions}
@@ -53,6 +53,7 @@ console.log('selectedValueselectedValue', selectedValue)
           }`
         }
         value={selectedValue}
+        noOptionsText={'Type somthing to load mps list'}
         onChange={(event, newValue) => {
           setSelectedValue(newValue);
           setSearchQuery(newValue?.full_name || '');
@@ -97,7 +98,7 @@ console.log('selectedValueselectedValue', selectedValue)
                   {loading ? (
                     <CircularProgress color="inherit" size={20} />
                   ) : null}
-                  {params.InputProps.endAdornment}
+                  {/* {params.InputProps.endAdornment} */}
                 </>
               ),
             }}

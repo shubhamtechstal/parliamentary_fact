@@ -29,38 +29,10 @@ const sortByPerformance = (data, type) => {
   return sorted.sort((a, b) => a.performance - b.performance);
 };
 
-function MpsPerformancePageComponent({
+function MpsConstituencyPageComponent({
   handleDetailsClick,
   handleOpenSharePopup,
-  mps_attendance_data,
 }) {
-  const mpsDataNetionalRank =
-    mps_attendance_data?.map((data) => {
-      return {
-        rank: data.national_rank,
-        name: data.name,
-        constituency: data.constituency,
-        state_name: data.state_name,
-        performance: data.national_percentage,
-        partyName: data.party_full_name,
-        rankTitle: 'National Rank:',
-        image: data.image,
-      };
-    }) ?? [];
-  const mpsDataStateRank =
-    mps_attendance_data?.map((data) => {
-      return {
-        rank: data.state_rank,
-        name: data.name,
-        constituency: data.constituency,
-        state_name: data.state_name,
-        performance: data.state_percentage,
-        partyName: data.party_full_name,
-        rankTitle: 'State Rank:',
-        image: data.image,
-      };
-    }) ?? [];
-
   const [activeSections, setActiveSections] = useState({
     Attendance: sections[0].id,
     Questions: sections[0].id,
@@ -83,32 +55,7 @@ function MpsPerformancePageComponent({
       [title]: sections[0].id,
     }));
   };
-  // const mpsData = useMemo(
-  //   () => (isStateRank ? mpsDataStateRank : mpsDataNetionalRank),
-  //   [isStateRank]
-  // );
-  const performanceData = useMemo(() => {
-    return Object.fromEntries(
-      performanceTitles.map((title) => {
-        const data = rankView[title] ? mpsDataStateRank : mpsDataNetionalRank;
-        // const data = rankView[title] ? mpsDataStateRank : mpsDataNetionalRank;
-        return [title, sortByPerformance(data, activeSections[title])];
-      })
-    );
-  }, [rankView, activeSections, mpsDataNetionalRank, mpsDataStateRank]);
 
-  // const performanceData = useMemo(() => {
-  //   return Object.fromEntries(
-  //     Object.entries(activeSections).map(([key, sectionId]) => [
-  //       key,
-  //       sortByPerformance(mpsData, sectionId),
-  //     ])
-  //   );
-  // }, [mpsData, activeSections]);
-
-  const handleSectionChange = (section, sectionId) => {
-    setActiveSections((prev) => ({ ...prev, [section]: sectionId }));
-  };
 
   return (
     <Box sx={{ py: 4, backgroundColor: '#EEF3F7', color: '#00000080' }}>
@@ -174,49 +121,7 @@ function MpsPerformancePageComponent({
           Read before check performance
         </Box>
       </Container>
-      {/* <Box
-        sx={{
-          position: 'sticky',
-          top: 10,
-          zIndex: 100,
-          display: 'flex',
-          justifyContent: 'space-around',
-          gap: 2,
-          maxWidth: { md: '400px', xs: '100%' },
-          margin: '1rem 3rem',
-          float: { md: 'right', xs: 'none' },
-          background: '#fff',
-          p: 2,
-          borderRadius: 2,
-        }}
-      >
-        <Button
-          variant={!isStateRank ? 'contained' : 'outlined'}
-          sx={{
-            color: !isStateRank ? '#fff' : 'gray',
-            borderColor: 'gray',
-            background: !isStateRank
-              ? 'linear-gradient(#ffdb00, orange, #dc752c)'
-              : 'transparent',
-          }}
-          onClick={() => setIsStateRank(false)}
-        >
-          National Rank
-        </Button>
-        <Button
-          variant={isStateRank ? 'contained' : 'outlined'}
-          sx={{
-            color: isStateRank ? '#fff' : 'gray',
-            borderColor: 'gray',
-            background: isStateRank
-              ? 'linear-gradient(#ffdb00, orange, #dc752c)'
-              : 'transparent',
-          }}
-          onClick={() => setIsStateRank(true)}
-        >
-          State Rank
-        </Button>
-      </Box> */}
+
       {/* Popular MPs */}
       <MPPerformance
         title="Popular MPs Performance"
@@ -239,31 +144,27 @@ function MpsPerformancePageComponent({
         mpsDataStateRank={mpsDataStateRank}
       />
       <AdvertiseSection />
-
-      {/* Performance Sections */}
-      {performanceTitles.map((title, idx) => (
-        <Box key={idx}>
-          <MpsPerformanceSectionComponent
-            title={`MPs Performance In ${title}`}
-            cardCatagory={title}
-            handleOpenSharePopup={handleOpenSharePopup}
-            mpsData={performanceData[title]}
-            sections={sections}
-            activeSection={activeSections[title]}
-            handleStateRankClick={() => handleRankViewToggle(title)}
-            isStateRank={rankView[title]}
-            mps_attendance_data={mps_attendance_data}
-            handleStepperChange={(sectionId) =>
-              handleSectionChange(title, sectionId)
-            }
-            detailsPage={`mps-${title.replaceAll(' ', '-').toLowerCase()}`}
-            handleDetailsClick={handleDetailsClick}
-          />
-          <AdvertiseSection />
-        </Box>
-      ))}
+      {/* Bottom Performer Section */}
+      <MPPerformance
+        title="Bottom Performer MPs Rating and Ranking"
+        detailsPage="top-performer-mps"
+        handleDetailsClick={handleDetailsClick}
+        handleOpenSharePopup={handleOpenSharePopup}
+        mpsDataNetionalRank={mpsDataNetionalRank}
+        mpsDataStateRank={mpsDataStateRank}
+      />
+      <AdvertiseSection />
+      {/* Non Performer Section */}
+      <MPPerformance
+        title="Non Performer MPs Rating and Ranking"
+        detailsPage="top-performer-mps"
+        handleDetailsClick={handleDetailsClick}
+        handleOpenSharePopup={handleOpenSharePopup}
+        mpsDataNetionalRank={mpsDataNetionalRank}
+        mpsDataStateRank={mpsDataStateRank}
+      />
     </Box>
   );
 }
 
-export default MpsPerformancePageComponent;
+export default MpsConstituencyPageComponent;

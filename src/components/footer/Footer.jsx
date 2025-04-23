@@ -1,4 +1,4 @@
-import { Box, Divider, Menu, MenuItem } from '@mui/material';
+import { Box, Divider, Menu, MenuItem, useMediaQuery } from '@mui/material';
 import Text from 'components/common/Text';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -6,12 +6,9 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import XIcon from '@mui/icons-material/X';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { StickyFooter } from './StickyFooter';
 
-import YouTubeIcon from '@mui/icons-material/YouTube';
-import InstagramIcon from '@mui/icons-material/Instagram';
-
-
-export default function Footer({ data,setIndex }) {
+export default function Footer({ data, setIndex }) {
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -36,30 +33,46 @@ export default function Footer({ data,setIndex }) {
     // { label: 'Do not share or sell my info', link: '' },
     // { label: 'Contact technical support', link: '' },
   ];
-
   return (
-    <Box sx={{ width: '100%', background: '#cfcfcf', padding: '0 1rem',display:'flex',justifyContent:'center' }}>
+    <Box
+      sx={{
+        width: '100%',
+        background: '#cfcfcf',
+        padding: '0 1rem',
+        display: 'flex',
+        justifyContent: 'center',
+      }}
+    >
       <Box
         sx={{
           margin: '2rem 0',
           display: 'flex',
           flexDirection: 'column',
-          width:{xs:'100%',md:'min-content'},
+          width: { xs: '100%', md: 'min-content' },
           justifyContent: 'center',
           alignItems: 'center',
+          paddingBottom: { xs: '3rem', md: '0' },
         }}
       >
         <Box>
           <Box
-            sx={{ display: 'flex', justifyContent: 'flex-start', cursor: 'pointer',alignItems:'center',gap:'1.5rem',marginBottom:'2rem',flexWrap:'wrap' }}
+            sx={{
+              display: 'flex',
+              justifyContent: 'flex-start',
+              cursor: 'pointer',
+              alignItems: 'center',
+              gap: '1.5rem',
+              marginBottom: '2rem',
+              flexWrap: 'wrap',
+            }}
           >
-            <img src="/footer_logo.png" alt="logo"/>
-            <Text 
-                 sx={{fontSize:'0.8rem',width:{xs:'100%',md:'80%'},}}
-                  text={
-                    'Parliamentary fact is an specialized research and media platform which is working as a think tank on parliamentary system, promoting parliamentary values. platform is working as a watchdog and create performance of Parliament, state assemblies and its members Parliamentarian (MPs) and legislature (MLAs).'
-                  }
-                ></Text>
+            <img src="/footer_logo.png" alt="logo" />
+            <Text
+              sx={{ fontSize: '0.8rem', width: { xs: '100%', md: '80%' } }}
+              text={
+                'Parliamentary fact is an specialized research and media platform which is working as a think tank on parliamentary system, promoting parliamentary values. platform is working as a watchdog and create performance of Parliament, state assemblies and its members Parliamentarian (MPs) and legislature (MLAs).'
+              }
+            ></Text>
           </Box>
           <Box>
             <Box
@@ -70,7 +83,12 @@ export default function Footer({ data,setIndex }) {
               }}
             >
               <Box className="footerCategory">
-                <Box sx={{ display: 'flex' }} onClick={() => {navigate('/'),setIndex(-1)}}>
+                <Box
+                  sx={{ display: 'flex' }}
+                  onClick={() => {
+                    navigate('/'), setIndex(-1);
+                  }}
+                >
                   <Text
                     text={'Home'}
                     sx={{
@@ -86,11 +104,12 @@ export default function Footer({ data,setIndex }) {
                 {footer?.slice(0, 6).map((val, index) => (
                   <Box
                     sx={{ display: 'flex' }}
-                    onClick={() =>
-                    {  navigate(`/news/categories/${val?.url}`, {
+                    onClick={() => {
+                      navigate(`/news/categories/${val?.url}`, {
                         state: { category: val?.category },
-                      }),setIndex(index)}
-                    }
+                      }),
+                        setIndex(index);
+                    }}
                     key={index}
                   >
                     <Text
@@ -99,7 +118,7 @@ export default function Footer({ data,setIndex }) {
                         fontSize: '0.9rem',
                         fontWeight: 700,
                         cursor: 'pointer',
-                        textWrap:'nowrap',
+                        textWrap: 'nowrap',
                         '&:hover': {
                           color: '#162eb7',
                         },
@@ -110,10 +129,10 @@ export default function Footer({ data,setIndex }) {
                 ))}
                 {footer?.length > 6 && (
                   <Box
-                  sx={{ display: 'flex', cursor: 'pointer' }}
-                  onClick={handleMoreClick}
-                >
-                  {/* <Text
+                    sx={{ display: 'flex', cursor: 'pointer' }}
+                    onClick={handleMoreClick}
+                  >
+                    {/* <Text
                     text={'More'}
                     sx={{
                       fontSize: '0.9rem',
@@ -124,8 +143,8 @@ export default function Footer({ data,setIndex }) {
                       },
                     }}
                   /> */}
-                  <MoreVertIcon sx={{fontSize:'1.2rem'}}/>
-                </Box>
+                    <MoreVertIcon sx={{ fontSize: '1.2rem' }} />
+                  </Box>
                 )}
               </Box>
               <Menu
@@ -156,14 +175,16 @@ export default function Footer({ data,setIndex }) {
               <Box
                 display="flex"
                 justifyContent="space-between"
-                maxWidth={"89%"}
+                maxWidth={'89%'}
                 flexWrap="wrap-reverse"
                 gap="5px"
               >
                 <Box className="footerCategory">
                   {footerDescrip.map((val) => (
                     <Text
-                      onClick={() => {navigate(val.link),setIndex(-2)}}
+                      onClick={() => {
+                        navigate(val.link), setIndex(-2);
+                      }}
                       key={val.label}
                       text={val.label}
                       sx={{
@@ -178,40 +199,45 @@ export default function Footer({ data,setIndex }) {
                   ))}
                 </Box>
                 <Box display="flex" gap="8px">
-                <img
-                      style={{ height: '25px', cursor: 'pointer' }}
-                      onClick={() =>
-                        (window.location.href =
-                          'https://www.facebook.com/profile.php?id=100088959852699')
-                      }
-                      src="/Assets/icons/facebook.png"
-                    />
-                    <img
-                      style={{ height: '25px', cursor: 'pointer' }}
-                      onClick={() =>
-                        (window.location.href = 'https://x.com/parliamentaryf7')
-                      }
-                      src="/Assets/icons/twitterX.png"
-                    />
-                    <img
-                      style={{ height: '25px', cursor: 'pointer' }}
-                      onClick={() =>
-                        (window.location.href =
-                          'https://www.instagram.com/parliamentaryfacts/?hl=en')
-                      }
-                      src="/Assets/icons/instagram.png"
-                    />
-                    <img
-                      style={{ height: '25px', cursor: 'pointer' }}
-                      onClick={() =>
-                        (window.location.href =
-                          'https://www.youtube.com/channel/UCmiD-5GplSufIcKYQ-fHNUQ')
-                      }
-                      src="/Assets/icons/youtube.png"
-                    />
+                  <img
+                    style={{ height: '25px', cursor: 'pointer' }}
+                    onClick={() =>
+                      (window.location.href =
+                        'https://www.facebook.com/profile.php?id=100088959852699')
+                    }
+                    src="/Assets/icons/facebook.png"
+                  />
+                  <img
+                    style={{ height: '25px', cursor: 'pointer' }}
+                    onClick={() =>
+                      (window.location.href = 'https://x.com/parliamentaryf7')
+                    }
+                    src="/Assets/icons/twitterX.png"
+                  />
+                  <img
+                    style={{ height: '25px', cursor: 'pointer' }}
+                    onClick={() =>
+                      (window.location.href =
+                        'https://www.instagram.com/parliamentaryfacts/?hl=en')
+                    }
+                    src="/Assets/icons/instagram.png"
+                  />
+                  <img
+                    style={{ height: '25px', cursor: 'pointer' }}
+                    onClick={() =>
+                      (window.location.href =
+                        'https://www.youtube.com/channel/UCmiD-5GplSufIcKYQ-fHNUQ')
+                    }
+                    src="/Assets/icons/youtube.png"
+                  />
                 </Box>
               </Box>
-              <Box display="flex" gap="15px" flexWrap="wrap-reverse" sx={{ width:{xs:'auto',md:'max-content'}}}>
+              <Box
+                display="flex"
+                gap="15px"
+                flexWrap="wrap-reverse"
+                sx={{ width: { xs: 'auto', md: 'max-content' } }}
+              >
                 <Box
                   sx={{
                     display: 'flex',
@@ -261,6 +287,7 @@ export default function Footer({ data,setIndex }) {
           </Box>
         </Box>
       </Box>
+      <StickyFooter />
     </Box>
   );
 }

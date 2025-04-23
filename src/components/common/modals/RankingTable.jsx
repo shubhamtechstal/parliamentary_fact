@@ -19,7 +19,7 @@ import GrayButton from '../GrayButton';
 import AdvertiseSection from 'components/addLayout/HorizontalAdvertiseSection';
 
 
-const RankingTable = ({mpsdata, handleOpenSharePopup}) => {
+const RankingTable = ({mpsdata=[],loadMoreMpsData, handleOpenSharePopup}) => {
   return (
     <TableContainer>
       <Table>
@@ -30,7 +30,7 @@ const RankingTable = ({mpsdata, handleOpenSharePopup}) => {
                 sx={{
                   display: 'grid',
                   gridTemplateColumns:
-                    '2fr 3fr 0.5fr 1fr 0.5fr 1.5fr 1.5fr 1.5fr 0.5fr',
+                    '3fr 2fr 2fr 1.5fr 1fr 1.5fr 1.5fr 1.5fr 0.5fr',
                   gap: 2,
                   color: '#455A64',
                   fontWeight: 'bold',
@@ -53,7 +53,7 @@ const RankingTable = ({mpsdata, handleOpenSharePopup}) => {
         </TableHead>
 
         <TableBody>
-          {mpsdata?.map((row, index)=> (
+          {mpsdata?.slice(0, loadMoreMpsData)?.map((row, index)=> (
               <>
                 <TableRow key={index}>
                   <TableCell
@@ -64,7 +64,7 @@ const RankingTable = ({mpsdata, handleOpenSharePopup}) => {
                       sx={{
                         display: 'grid',
                         gridTemplateColumns:
-                          '2fr 4fr 1fr 1fr 1fr 1fr 1fr 1.5fr 0.5fr',
+                          '2fr 2fr 2fr 1fr 1fr 1fr 1fr 1.5fr 0.5fr',
                         gap: 2,
                         alignItems: 'center',
                         backgroundColor: '#fff',
@@ -82,7 +82,7 @@ const RankingTable = ({mpsdata, handleOpenSharePopup}) => {
                           alignItems: 'center',
                           gap: 2,
                           color: '#e7a917',
-                          maxWidth: '6rem',
+                          // maxWidth: '6rem',
                         }}
                       >
                         <Avatar
@@ -97,7 +97,8 @@ const RankingTable = ({mpsdata, handleOpenSharePopup}) => {
                         >
                           {row.rank}
                         </Avatar>
-                        <span>National Rank</span>
+                        <span>{row.rankTitle}</span>
+                        {/* <span>National Rank</span> */}
                       </Box>
 
                       {/* MP Name */}
@@ -106,7 +107,7 @@ const RankingTable = ({mpsdata, handleOpenSharePopup}) => {
                           src={row.imageUrl}
                           sx={{ width: 50, height: 50, marginRight: 2 }}
                         />
-                        {row?.name?.length > 50 ? (
+                        {row?.name?.length > 40 ? (
                           <Tooltip title={row.name} arrow>
                             <Typography
                               variant="body1"
@@ -176,7 +177,7 @@ const RankingTable = ({mpsdata, handleOpenSharePopup}) => {
 
                       {/* Share Button */}
                       <Box>
-                        <GrayButton fontSize="0.6rem" onClick={() => handleOpenSharePopup()}>Share Now</GrayButton>
+                        <GrayButton fontSize="0.6rem" onClick={() => handleOpenSharePopup(row.mp_id)}>Share Now</GrayButton>
                       </Box>
 
                       {/* More Icon */}
@@ -188,7 +189,7 @@ const RankingTable = ({mpsdata, handleOpenSharePopup}) => {
                     </Box>
                   </TableCell>
                 </TableRow>
-                {(index + 1) % 5 === 0 && <AdvertiseSection />}
+                {(index + 1) % 7 === 0 && <AdvertiseSection />}
               </>
             ))}
         </TableBody>

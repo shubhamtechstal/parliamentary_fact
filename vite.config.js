@@ -49,7 +49,7 @@ export default ({ mode }) => {
           '.js': 'jsx',
         },
       },
-      include: ['@mui/icons-material', '@mui/material', '@emotion/react', '@emotion/styled'],
+      include: ['@mui/icons-material', '@mui/material', '@emotion/react', '@emotion/styled', '@mui/x-charts/BarChart'],
     },
   });
 };

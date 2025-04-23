@@ -10,10 +10,10 @@ import {
   InputAdornment,
   Typography
 } from "@mui/material";
-import { Facebook, Twitter, Instagram, WhatsApp, Telegram, ContentCopy, Link as LinkIcon, Close } from "@mui/icons-material";
+import { Facebook, Twitter, Instagram, WhatsApp, Telegram, Link as LinkIcon, Close } from "@mui/icons-material";
 import GrayButton from "../GrayButton";
 
-const ShareModal = ({open ,handleOpenSharePopup}) => {
+const ShareModal = ({open, shareMpId, handleOpenSharePopup}) => {
 //   const [open, setOpen] = useState(false);
   const [copied, setCopied] = useState(false);
   const inputRef = useRef(null);
@@ -51,7 +51,7 @@ const ShareModal = ({open ,handleOpenSharePopup}) => {
             </InputAdornment>
             <TextField
               inputRef={inputRef}
-              value="https://parliamentary-fact.vercel.app/"
+              value={`${window.location.origin}/mps-profile/${shareMpId}`}
               variant="standard"
               fullWidth
               InputProps={{ disableUnderline: true, readOnly: true }}

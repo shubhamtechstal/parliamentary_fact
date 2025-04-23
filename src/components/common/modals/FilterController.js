@@ -7,8 +7,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchSessionsFilterData } from 'stores/redux/apiSlices/commonSlice';
 
 const FilterController = ({
-  sessionsData,
-  sessionsLoading,
   setAppliedFilter, // <-- NEW PROP
 }) => {
   const { sessions, date_range, loading } = useSelector(
@@ -31,7 +29,9 @@ const FilterController = ({
     if (dates.length > 0) params.date = dates.join(',');
 
     setFilterParams(params);
-    dispatch(fetchSessionsFilterData(params)); // Trigger API call
+    if (dates.length == 0) {
+      dispatch(fetchSessionsFilterData(params)); // Trigger API call
+    }
   };
 
   const handleYearChange = (year) => {
@@ -39,6 +39,7 @@ const FilterController = ({
       ? selectedYears.filter((y) => y !== year)
       : [...selectedYears, year];
     setSelectedYears(updated);
+    setSelectedDates([]); // Clear selected dates when session changes
     updateFilterParams(updated, selectedSessions, selectedDates);
   };
 
@@ -47,14 +48,19 @@ const FilterController = ({
       ? selectedSessions.filter((s) => s !== session)
       : [...selectedSessions, session];
     setSelectedSessions(updated);
+    setSelectedDates([]); // Clear selected dates when session changes
     updateFilterParams(selectedYears, updated, selectedDates);
   };
 
   const handleDateChange = (date) => {
-    const updated = selectedDates.includes(date)
-      ? selectedDates.filter((d) => d !== date)
-      : [...selectedDates, date];
+    // singel date selection
+    const updated = [date];
     setSelectedDates(updated);
+    // // multiple date selection code if needed ......
+    // const updated = selectedDates.includes(date)
+    //   ? selectedDates.filter((d) => d !== date)
+    //   : [...selectedDates, date];
+    // setSelectedDates(updated);
     updateFilterParams(selectedYears, selectedSessions, updated);
   };
 
@@ -92,15 +98,23 @@ const FilterController = ({
       <GrayButton
         onClick={handleFilterClick}
         startIcon={<FilterAltOutlinedIcon />}
+        display ={{ xs: 'none', md: 'flex' }}
       >
         Filter
+      </GrayButton>
+      <GrayButton
+        onClick={handleFilterClick}
+        startIcon={<FilterAltOutlinedIcon />}
+        display ={{ md: 'none', xs: 'flex' }}
+      >
+        
       </GrayButton>
 
       <FilterModal
         openModal={openFilterModal}
         handleClose={() => setOpenFilterModal(false)}
-        sessionsData={sessionsData ?? sessions}
-        sessionsLoading={sessionsLoading ?? loading}
+        sessionsData={sessions}
+        sessionsLoading={loading}
         onChangeFilter={onChangeFilter}
         filterParams={filterParams}
         sessionDatesData={date_range}

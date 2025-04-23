@@ -19,34 +19,20 @@ import IconButton from 'components/common/IconButton';
 const ParliamentPerformanceContainer = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
-  // Read section from URL or default to first section
+  
   const initialSection = searchParams.get('section');
   const [activeSection, setActiveSection] = useState(initialSection);
   const [filterParams, setFilterParams] = useState({});
-  const [selectedSearchValue, setSelectedSearchValue] = useState(null); // holds full object
-  const [appliedFilterFromPoup, setAppliedFilterFromPoup] = useState(null);
-  console.log('appliedFilterFromPoup', appliedFilterFromPoup);
-
-  // const onChangeFilter = ({ name, value }) => {
-  //   setFilterParams((prev) => ({
-  //     ...prev,
-  //     [name]: value,
-  //   }));
-  // };
-  // const handleClearfilter = () => {
-  //   setFilterParams({});
-  // };
-  const handleSetAppliedFilterFromPoup = (filterParams) => {
-    setAppliedFilterFromPoup(filterParams);
-  };
+  //   const [selectedSearchValue, setSelectedSearchValue] = useState(null); // holds full object
   useEffect(() => {
     const section = searchParams.get('section');
     if (section) {
       setActiveSection(section);
     }
+    setFilterParams({})
   }, [searchParams, initialSection]);
 
-  // Handle button click
+  // Handle details chip  click
   const handleSectionChange = (sectionId) => {
     setActiveSection(sectionId);
     setSearchParams({ section: sectionId });
@@ -59,7 +45,7 @@ const ParliamentPerformanceContainer = () => {
   };
 
   const onSelectSearchBox = (value) => {
-    setSelectedSearchValue(value);
+    // setSelectedSearchValue(value); // getting full object
     setFilterParams((prev) => ({
       ...prev,
       mp_full_name: value?.full_name,
@@ -69,10 +55,7 @@ const ParliamentPerformanceContainer = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchPerformanceData());
-    dispatch(
-      fetchQuestionDetailsData({ ...filterParams, ...appliedFilterFromPoup })
-    );
-  }, [dispatch, filterParams, appliedFilterFromPoup]);
+  }, [dispatch]);
   const {
     attendanceDetails,
     questionsData,
@@ -81,8 +64,8 @@ const ParliamentPerformanceContainer = () => {
     loksabhaName,
     pageData,
     loading,
-    error,
     questionDetails,
+    questionsLoading,
   } = useSelector((state) => state?.pmtPerformance);
   const sectionsComponets = [
     {
@@ -90,21 +73,14 @@ const ParliamentPerformanceContainer = () => {
       component: (
         <QuestionsDetail_Component
           questionDetails={questionDetails}
-          isLoading={loading}
-          selectedSearchValue={selectedSearchValue}
-          setAppliedFilter={handleSetAppliedFilterFromPoup}
-          //   onFilterClick={onFilterClick}
+          filterParams={filterParams}
+          isLoading={questionsLoading}
         />
       ),
     },
     {
       id: 'attendance-details',
-      component: (
-        <LsAttendanceDetails_Component
-          setAppliedFilter={handleSetAppliedFilterFromPoup}
-          isLoading={loading}
-        />
-      ),
+      component: <LsAttendanceDetails_Component />,
     },
   ];
   return (
@@ -114,22 +90,22 @@ const ParliamentPerformanceContainer = () => {
           <Box
             sx={{
               display: 'flex',
-              margin: '1rem 3rem 0 2rem',
+              // margin: '1rem 3rem 0 2rem',
               justifyContent: 'space-between',
               position: 'relative',
               alignItems: 'center',
             }}
           >
-            <IconButton
+            <Button
               onClick={handleBack}
-              // sx={{ position: 'absolute', left: '10px', top: '10px' }}
+              variant="outlined"
+              sx={{ color: 'black', margin: '1rem 2rem 0' }}
             >
-              <KeyboardBackspaceIcon />
-            </IconButton>
-            <AutocompleteSearchBox onSelectMP={onSelectSearchBox} />
-            {/* <GrayButton onClick={handleBack} height="30px" width='200px' variant="outlined">
-              Search
-            </GrayButton> */}
+              <KeyboardBackspaceIcon /> back
+            </Button>
+            {activeSection == 'questions-detail' && (
+              <AutocompleteSearchBox onSelectMP={onSelectSearchBox} />
+            )}
           </Box>
         </>
       )}

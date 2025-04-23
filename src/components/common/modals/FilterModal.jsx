@@ -7,10 +7,11 @@ import {
   FormControlLabel,
   Button,
   IconButton,
-  CircularProgress,
   Dialog,
+  Skeleton,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import CustomFilterDatePicker from '../CustomFilterDatePicker';
 
 const years = [
   { name: '1st year', id: 1 },
@@ -59,27 +60,12 @@ const FilterModal = ({
   handleClearfilter,
   handleApllyfilter,
 }) => {
-  //   const [selectedYears, setSelectedYears] = useState([]);
-  //   const [selectedSessions, setSelectedSessions] = useState([]);
-
-  //   const handleYearChange = (year) => {
-  //     setSelectedYears((prev) =>
-  //       prev.includes(year) ? prev.filter((y) => y !== year) : [...prev, year]
-  //     );
-  //     onChangeFilter({ name: 'year_id', value: year });
-  //   };
-
-  //   const handleSessionChange = (session) => {
-  //     setSelectedSessions((prev) =>
-  //       prev.includes(session)
-  //         ? prev.filter((s) => s !== session)
-  //         : [...prev, session]
-  //     );
-  //     onChangeFilter({ name: 's_id', value: session });
-  //   };
-
   return (
-    <Dialog open={openModal} onClose={() => handleClose}>
+    <Dialog
+      className="filterController"
+      open={openModal}
+      onClose={() => handleClose}
+    >
       <Box
         sx={{
           bgcolor: 'white',
@@ -100,7 +86,7 @@ const FilterModal = ({
             <CloseIcon />
           </IconButton>
         </Box>
-        <Box sx={{ maxHeight: '400px', overflowY: 'auto' }}>
+        <Box sx={{ height: '400px', overflowY: 'auto' }}>
           <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 1 }}>
             Select Year
           </Typography>
@@ -128,14 +114,26 @@ const FilterModal = ({
           {sessionsLoading ? (
             <Box
               sx={{
-                height: '100%',
                 width: '100%',
                 display: 'flex',
-                justifyContent: 'center',
+                justifyContent: 'space-between',
+                flexWrap: 'wrap',
                 alignItems: 'center',
+                gap: 1,
               }}
             >
-              <CircularProgress />
+              <Box display={'flex'} gap={1} height={40} alignItems={'center'}>
+                <Skeleton variant="rectangular" width={20} height={20} />
+                <Skeleton variant="text" width={200} height={30} />
+              </Box>
+              <Box display={'flex'} gap={1} height={40} alignItems={'center'}>
+                <Skeleton variant="rectangular" width={20} height={20} />
+                <Skeleton variant="text" width={200} height={30} />
+              </Box>
+              <Box display={'flex'} gap={1} height={40} alignItems={'center'}>
+                <Skeleton variant="rectangular" width={20} height={20} />
+                <Skeleton variant="text" width={200} height={30} />
+              </Box>
             </Box>
           ) : (
             <Box display="flex" flexWrap="wrap" gap={1}>
@@ -169,31 +167,31 @@ const FilterModal = ({
           {sessionsLoading ? (
             <Box
               sx={{
-                height: '100%',
                 width: '100%',
                 display: 'flex',
-                justifyContent: 'center',
+                justifyContent: 'space-between',
+                flexWrap: 'wrap',
                 alignItems: 'center',
+                gap: 1,
               }}
             >
-              <CircularProgress />
+              <Box display={'flex'} gap={1} height={40} alignItems={'center'}>
+                <Skeleton variant="rectangular" width={20} height={20} />
+                <Skeleton variant="text" width={200} height={30} />
+              </Box>
+              <Box display={'flex'} gap={1} height={40} alignItems={'center'}>
+                <Skeleton variant="rectangular" width={20} height={20} />
+                <Skeleton variant="text" width={200} height={30} />
+              </Box>
+              <Box display={'flex'} gap={1} height={40} alignItems={'center'}>
+                <Skeleton variant="rectangular" width={20} height={20} />
+                <Skeleton variant="text" width={200} height={30} />
+              </Box>
             </Box>
           ) : (
             <Box display="flex" flexWrap="wrap" gap={1}>
               {sessionDatesData?.length > 0 ? (
-                sessionDatesData?.map((date) => (
-                  <FormControlLabel
-                    fontSize={'0.5rem'}
-                    key={date}
-                    control={
-                      <Checkbox
-                        checked={selectedDates.includes(date)}
-                        onChange={() => handleDateChange(date)}
-                      />
-                    }
-                    label={date}
-                  />
-                ))
+                <CustomFilterDatePicker sessionDatesData={sessionDatesData} selectedDates={selectedDates} handleDateChange={handleDateChange} />
               ) : (
                 <Typography variant="body2" sx={{ color: 'gray' }}>
                   No Dates available

@@ -71,7 +71,9 @@ const performanceSlice = createSlice({
   initialState: {
     attendanceDetails: [],
     attendanceDetailsPageData: [],
+    attendanceLoading: false,
     questionsData:[],
+    questionsLoading: false,
     govtBillCount:[],
     privateBillCount:[],
     loksabhaName: "",
@@ -102,28 +104,28 @@ const performanceSlice = createSlice({
       })
     // Fetch question details data
       .addCase(fetchQuestionDetailsData.pending, (state) => {
-        state.loading = true;
+        state.questionsLoading = true;
         state.error = null;
       })
       .addCase(fetchQuestionDetailsData.fulfilled, (state, action) => {
-        state.loading = false;
+        state.questionsLoading = false;
         state.questionDetails = action.payload.questionDetails;
       })
       .addCase(fetchQuestionDetailsData.rejected, (state, action) => {
-        state.loading = false;
+        state.questionsLoading = false;
         state.error = action.payload;
       })
     // Fetch attendanceDetails PageData details data
       .addCase(fetchAttendanceDetailsData.pending, (state) => {
-        state.loading = true;
+        state.attendanceLoading = true;
         state.error = null;
       })
       .addCase(fetchAttendanceDetailsData.fulfilled, (state, action) => {
-        state.loading = false;
+        state.attendanceLoading = false;
         state.attendanceDetailsPageData = action.payload.data;
       })
       .addCase(fetchAttendanceDetailsData.rejected, (state, action) => {
-        state.loading = false;
+        state.attendanceLoading = false;
         state.error = action.payload;
       })
       

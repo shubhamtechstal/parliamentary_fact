@@ -180,3 +180,27 @@
     top: -100px;
   }
 }
+
+/* Sticky footer */
+.sticky-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #fff;
+  border-top: 1px solid #ccc;
+  /* display: flex; */
+  justify-content: space-around;
+  padding: 10px 0;
+  z-index: 1000;
+}
+
+.footer-tab {
+  font-size: 12px;
+  text-align: center;
+  flex: 1;
+  color: #000;
+}
+/* ------- */
+.filterController .MuiDialog-paper{
+  border-radius: 20px !important;
+}

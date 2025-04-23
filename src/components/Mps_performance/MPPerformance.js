@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Container, Grid, Box } from '@mui/material';
 import GrayButton from 'components/common/GrayButton';
 import SectionHeading from 'components/common/SectionHeading';
@@ -9,30 +9,90 @@ export default function MPPerformance({
   title,
   handleDetailsClick,
   handleOpenSharePopup,
-  mpsData,
+  mpsDataStateRank,
+  mpsDataNetionalRank,
 }) {
+  const [isStateRank, setIsStateRank] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const handleStateRankClick = () => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsStateRank((prev) => !prev);
+      setIsLoading(false);
+    }, 300);
+  };
+  const mpsData =  isStateRank ? mpsDataStateRank : mpsDataNetionalRank;
+  // const mpsData = useMemo(
+  //   () => (isStateRank ? mpsDataStateRank : mpsDataNetionalRank),
+  //   [isStateRank]
+  // );
+
   return (
-    <Container maxWidth="lg" sx={{ py: 4 }}>
-      <Box display={{xs: 'flex', md:'none' }} textAlign={'center'}>
-        <h3 style={{margin:'0 auto 2rem',}} >{title} </h3>
-      </Box>
-      <Box display={{ xs: 'none', md: 'flex' }}>
-        <SectionHeading title={title} />
+    <Container maxWidth="lg" sx={{ py: 2 }}>
+      <Box
+        display="flex"
+        flexDirection={{ md: 'row', xs: 'column' }}
+        justifyContent={{ md: 'space-between', xs: 'center' }}
+        alignItems={'center'}
+      >
+        <Box display={{ xs: 'flex', md: 'none' }} textAlign={'center'}>
+          <h3 style={{ margin: '0 auto 2rem' }}>{title} </h3>
+        </Box>
+        <Box display={{ xs: 'none', md: 'block' }} textAlign={'center'}>
+          <SectionHeading title={title} />
+        </Box>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+          mb={2}
+        >
+          <GrayButton
+            onClick={() => handleStateRankClick(false)}
+            fontWeight="600"
+            bgColor="#fff"
+            textColor="#00000080"
+          >
+            {!isStateRank ? 'Check State Ranking' : 'Back  to National Rank'}
+          </GrayButton>
+        </Box>
       </Box>
       <Grid
-        py={1}
+        p={1}
         gap={{ xs: 3, md: 0 }}
         spacing={{ xs: 0, md: 2 }}
         container
         flexWrap={{ md: 'wrap', xs: 'nowrap' }}
         overflow={'auto'}
       >
-        {mpsData.slice(0, 12).map((mp, index) => (
+        {mpsData.slice(0, 6).map((mp, index) => (
           <Grid item xs={6} sm={4} md={3} lg={2} key={index}>
             <MpsPerformanceCard
               mp={mp}
               index={index}
               handleOpenSharePopup={handleOpenSharePopup}
+              isLoading={isLoading}
+            />
+          </Grid>
+        ))}
+      </Grid>
+      <Grid
+        p={1}
+        gap={{ xs: 3, md: 0 }}
+        spacing={{ xs: 0, md: 2 }}
+        container
+        flexWrap={{ md: 'wrap', xs: 'nowrap' }}
+        overflow={'auto'}
+      >
+        {mpsData.slice(6, 12).map((mp, index) => (
+          <Grid item xs={6} sm={4} md={3} lg={2} key={index}>
+            <MpsPerformanceCard
+              mp={mp}
+              index={index}
+              handleOpenSharePopup={handleOpenSharePopup}
+              isLoading={isLoading}
             />
           </Grid>
         ))}

@@ -21,7 +21,10 @@ const PercentageTextgroup = (props) => {
           fontFamily: '"Sora", sans-serif',
         }}
       >
-        <span style={{ fontWeight: '800' }}>{props?.percentage?.replace('%', '')}</span>%
+        <span style={{ fontWeight: '800' }}>
+          {props?.percentage?.replace('%', '')}
+        </span>
+        %
       </span>
     </div>
   );
@@ -103,18 +106,22 @@ const ScheduleTimeTextgroup = ({ schedule, i }) => {
         // maxWidth: '12%'
       }}
     >
-      {i==1 ? 
-      <GrayDot icon_url={'Assets/icons/small_arrow_Down.png'} />
-      :
-      <GrayDot/>
-      }
+      {i == 1 ? (
+        <GrayDot icon_url={'Assets/icons/small_arrow_Down.png'} />
+      ) : (
+        <GrayDot />
+      )}
       <div>
-        <span style={{ textWrap: 'nowrap', fontSize:'10px' }}>{schedule.name}</span> <br />
+        <span style={{ textWrap: 'nowrap', fontSize: '10px' }}>
+          {schedule.name}
+        </span>{' '}
+        <br />
         <span
           style={{ textWrap: 'nowrap', fontWeight: '600', fontSize: '1rem' }}
         >
           {schedule.value}
-        </span> Hrs.
+        </span>{' '}
+        Hrs.
       </div>
     </Box>
   );
@@ -127,12 +134,12 @@ function LS_productivity({
   BottomRightChip,
   privateBillCount,
   pageData,
-  loksabhaName
+  loksabhaName,
 }) {
   const Arc_progressData = [85, 91, 90, 87];
   return (
     <Box className="performanceSection">
-       <Box
+      <Box
         sx={{
           display: 'flex',
           gap: { xs: '0.8rem', md: '2rem' },
@@ -285,7 +292,7 @@ function LS_productivity({
             width: '30%',
             bottom: '10%',
             left: '0px',
-            border:'1px solid #D3D3D3'
+            border: '1px solid #D3D3D3',
           }}
         />
         <hr
@@ -293,7 +300,7 @@ function LS_productivity({
             position: 'absolute',
             width: '30%',
             bottom: '10%',
-            border:'1px solid #D3D3D3',
+            border: '1px solid #D3D3D3',
             right: '0px',
           }}
         />
@@ -317,12 +324,6 @@ function LS_productivity({
                 />
               );
             })}
-            {/* <PercentageTextgroup title={'ZERO HOUR'} percentage={'8'} />
-            <PercentageTextgroup
-              title={'LEGISTATIVE BUSINESS'}
-              percentage={'85.1'}
-            />
-            <PercentageTextgroup title={'OTHER BUSINESS'} percentage={'10'} /> */}
           </div>
           <Box
             sx={{
@@ -505,8 +506,9 @@ function LS_productivity({
               subTiteText={'20 March 2024'}
               percentText={'100%'}
               subPercentText={'Passes'}
-              width={150}
-              height={170}
+              width={230}
+              height={270}
+              innerRadius={98}
             />
           </div>
           <Box
@@ -582,8 +584,9 @@ function LS_productivity({
               subTiteText={'20 March 2024'}
               percentText={'100%'}
               subPercentText={'Passes'}
-              width={150}
-              height={170}
+              width={230}
+              height={270}
+              innerRadius={98}
             />
           </div>
           <Box
@@ -596,47 +599,39 @@ function LS_productivity({
               flexWrap: 'wrap',
             }}
           >
-            {
-              // [
-              //   { title: 'INTRODUCE', value: '12.5' },
-              //   { title: 'PENDING', value: '8' },
-              //   { title: 'PASSED', value: '12.5' },
-              //   { title: 'WITHDRAWN', value: '8' },
-              // ]
-              privateBillCount?.map((data, i) => {
-                return (
-                  <Box
-                    key={i}
+            {privateBillCount?.map((data, i) => {
+              return (
+                <Box
+                  key={i}
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'left',
+                    padding: '10px 1rem',
+                    borderRadius: '1rem',
+                    backgroundColor: '#fff',
+                    textAlign: 'left',
+                    width: '40%',
+                  }}
+                >
+                  <Text
+                    text={data.value}
                     sx={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'left',
-                      padding: '10px 1rem',
-                      borderRadius: '1rem',
-                      backgroundColor: '#fff',
-                      textAlign: 'left',
-                      width: '40%',
+                      fontSize: '1.5rem',
+                      fontWeight: 600,
                     }}
-                  >
-                    <Text
-                      text={data.value}
-                      sx={{
-                        fontSize: '1.5rem',
-                        fontWeight: 600,
-                      }}
-                    />
-                    <Text
-                      text={data.name}
-                      sx={{
-                        fontSize: '0.8rem',
-                        fontWeight: 600,
-                        textWrap: 'nowrap',
-                      }}
-                    />
-                  </Box>
-                );
-              })
-            }
+                  />
+                  <Text
+                    text={data.name}
+                    sx={{
+                      fontSize: '0.8rem',
+                      fontWeight: 600,
+                      textWrap: 'nowrap',
+                    }}
+                  />
+                </Box>
+              );
+            })}
           </Box>
         </Box>
       </Box>
@@ -648,16 +643,21 @@ function LS_productivity({
         spacing={2}
         columns={{ xs: 4, sm: 8, md: 12 }}
       >
-        <Grid item xs={12} md={2}  sx={{ textAlign: 'left', position:'relative' }}>
+        <Grid
+          item
+          xs={12}
+          md={2}
+          sx={{ textAlign: 'left', position: 'relative' }}
+        >
           <div
             style={{
               display: 'flex',
               // gap: '4rem',
               flexDirection: 'row',
               justifyContent: 'start',
-              position:'absolute',
-              left:'8px',
-              gap:'1rem'
+              position: 'absolute',
+              left: '8px',
+              gap: '1rem',
             }}
           >
             {productivity_details.map((item, i) => {
@@ -684,7 +684,7 @@ function LS_productivity({
               width: { md: '70%', xs: '100%' },
               paddingTop: '1rem',
               top: '4.5rem',
-              position:'relative'
+              position: 'relative',
             }}
           >
             <div
@@ -709,7 +709,12 @@ function LS_productivity({
                 height={170}
               />
             </div>
-            <Grid container spacing={2} columns={{ xs: 12, sm: 12, md: 12 }}  sx={{position:'absolute', left:'-2rem', width:'12rem', }}>
+            <Grid
+              container
+              spacing={2}
+              columns={{ xs: 12, sm: 12, md: 12 }}
+              sx={{ position: 'absolute', left: '-2rem', width: '12rem' }}
+            >
               <Grid item xs={6} md={6} sx={{ textAlign: 'right' }}>
                 {govtBillCount.map((item, i) => {
                   switch (i) {
@@ -778,12 +783,17 @@ function LS_productivity({
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'end',
-                gap:'10px', marginTop:'3rem' 
+                gap: '10px',
+                marginTop: '3rem',
               }}
             >
-              <p style={{width:'2rem', textAlign:'right',margin:'0 0'}}>0</p>
+              <p style={{ width: '2rem', textAlign: 'right', margin: '0 0' }}>
+                0
+              </p>
               <ColorfulArc progressValues={Arc_progressData} />
-              <p style={{width:'2rem', textAlign:'right',margin:'0 0'}}>100+</p>
+              <p style={{ width: '2rem', textAlign: 'right', margin: '0 0' }}>
+                100+
+              </p>
             </Box>
             <Box
               sx={{
@@ -815,15 +825,20 @@ function LS_productivity({
             alt="parliament"
           />
         </Grid>
-        <Grid item xs={12} md={2} sx={{ textAlign: 'right', position:'relative' }}>
+        <Grid
+          item
+          xs={12}
+          md={2}
+          sx={{ textAlign: 'right', position: 'relative' }}
+        >
           <div
             style={{
               display: 'flex',
               flexDirection: 'row',
               justifyContent: 'space-between',
-              position:'absolute',
-              right:'8px',
-              gap:'1rem'
+              position: 'absolute',
+              right: '8px',
+              gap: '1rem',
             }}
           >
             {' '}
@@ -876,7 +891,12 @@ function LS_productivity({
                 height={170}
               />
             </div>
-            <Grid container spacing={2} columns={{ xs: 12, sm: 12, md: 12 }} sx={{position:'absolute', right:'-2rem', width:'13rem', }}>
+            <Grid
+              container
+              spacing={2}
+              columns={{ xs: 12, sm: 12, md: 12 }}
+              sx={{ position: 'absolute', right: '-2rem', width: '13rem' }}
+            >
               <Grid item xs={6} md={6} sx={{ textAlign: 'right' }}>
                 {privateBillCount?.map((item, i) => {
                   switch (i) {
