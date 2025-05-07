@@ -174,49 +174,7 @@ function MpsPerformancePageComponent({
           Read before check performance
         </Box>
       </Container>
-      {/* <Box
-        sx={{
-          position: 'sticky',
-          top: 10,
-          zIndex: 100,
-          display: 'flex',
-          justifyContent: 'space-around',
-          gap: 2,
-          maxWidth: { md: '400px', xs: '100%' },
-          margin: '1rem 3rem',
-          float: { md: 'right', xs: 'none' },
-          background: '#fff',
-          p: 2,
-          borderRadius: 2,
-        }}
-      >
-        <Button
-          variant={!isStateRank ? 'contained' : 'outlined'}
-          sx={{
-            color: !isStateRank ? '#fff' : 'gray',
-            borderColor: 'gray',
-            background: !isStateRank
-              ? 'linear-gradient(#ffdb00, orange, #dc752c)'
-              : 'transparent',
-          }}
-          onClick={() => setIsStateRank(false)}
-        >
-          National Rank
-        </Button>
-        <Button
-          variant={isStateRank ? 'contained' : 'outlined'}
-          sx={{
-            color: isStateRank ? '#fff' : 'gray',
-            borderColor: 'gray',
-            background: isStateRank
-              ? 'linear-gradient(#ffdb00, orange, #dc752c)'
-              : 'transparent',
-          }}
-          onClick={() => setIsStateRank(true)}
-        >
-          State Rank
-        </Button>
-      </Box> */}
+   
       {/* Popular MPs */}
       <MPPerformance
         title="Popular MPs Performance"

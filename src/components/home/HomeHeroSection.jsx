@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Grid, Typography, Card } from '@mui/material';
 import MultiColorProgressRings from './MultiColorProgressRings';
+import { Link } from 'react-router-dom';
 
 const performanceData = [
   { label: 'Attendance', value: '52.25%', color: '#ff9383', subtitle: 'Att.' },
@@ -19,17 +20,17 @@ const performanceData = [
 const HomeHeroSection = () => {
   return (
     <>
-      <Grid container spacing={{xs:1, md:5}} mb={5} mt={2} alignItems={'center'}>
+      <Grid container spacing={{xs:1, md:5}} alignItems={'center'}>
         <Grid item xs={12} md={5}>
           <MultiColorProgressRings />
-          <Box display={'flex'} justifyContent="space-between" mb={2}>
+          <Box display={'flex'} justifyContent="space-between" flexWrap={'wrap'} gap={2} mb={2}>
             {performanceData.map((item, index) => {
               if (item.isCTA) return null;
               return (
                 <Box
                   display={'flex'}
                   alignItems="center"
-                  fontSize={'0.6rem'}
+                  fontSize={'0.8rem'}
                   gap={1}
                   key={index}
                 >
@@ -66,7 +67,9 @@ const HomeHeroSection = () => {
                   }}
                 >
                   {item.isCTA ? (
-                    <Typography fontWeight="bold"color={'#fff'} textAlign={'center'} >▶ <br /> Know More</Typography>
+                     <Link style={{textDecoration:'none'}} to={'/parliament-performance'}>
+                       <Typography fontWeight="bold"color={'#fff'} textAlign={'center'} >▶ <br /> Know More</Typography>
+                      </Link>
                   ) : (
                     <>
                       <Typography variant="h6" fontWeight="bold" color={'black'}>

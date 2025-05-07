@@ -98,17 +98,17 @@ const FilterController = ({
       <GrayButton
         onClick={handleFilterClick}
         startIcon={<FilterAltOutlinedIcon />}
-        display ={{ xs: 'none', md: 'flex' }}
+        // display ={{ xs: 'none', md: 'flex' }}
       >
         Filter
       </GrayButton>
-      <GrayButton
+      {/* <GrayButton
         onClick={handleFilterClick}
         startIcon={<FilterAltOutlinedIcon />}
         display ={{ md: 'none', xs: 'flex' }}
       >
         
-      </GrayButton>
+      </GrayButton> */}
 
       <FilterModal
         openModal={openFilterModal}

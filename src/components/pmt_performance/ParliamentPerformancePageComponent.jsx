@@ -141,7 +141,11 @@ function ParliamentPerformancePageComponent(props) {
       />
     );
   };
-
+  const scrollRef = useRef(null);
+  useEffect(() => {
+    if (scrollRef.current)
+      scrollRef.current.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
   return loading ? (
     <Box
       sx={{
@@ -155,7 +159,7 @@ function ParliamentPerformancePageComponent(props) {
       <CircularProgress />
     </Box>
   ) : (
-    <Box>
+    <Box ref={scrollRef}>
       <PerformanceChips sections={performace_chipList} />
       <div id="Lok_Sabha_Productivity">
         <LS_productivity

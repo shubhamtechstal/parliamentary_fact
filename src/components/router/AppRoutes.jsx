@@ -1,5 +1,5 @@
-import { lazy } from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { lazy, useLayoutEffect } from 'react';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
@@ -23,7 +23,7 @@ const PrivacyPolicy = lazy(() => import('pages/PrivacyPolicy'));
 const TermsAndConditions = lazy(() => import('pages/TermsAndConditions'));
 const ContactPage = lazy(() => import('pages/ContactPage'));
 const AdvertiseWithUs = lazy(() => import('pages/AdvertiseWithUs'));
-// const MpsPublicRating = lazy(() => import('pages/MpsPublicRating'));
+const MpsPublicRating = lazy(() => import('pages/MpsPublicRating'));
 // const MpsRatingAllList = lazy(() => import('pages/MpsRatingAllList'));
 const RateYourMp = lazy(() => import('pages/RateYourMp'));
 const NewsLetter = lazy(() => import('pages/NewsLetter'));
@@ -39,10 +39,9 @@ const routes = [
     isLayoutRoute: true,
     element: <AppLayoutContainer />,
     children: [
-      
       {
         path: '/',
-        element:  <PrivateRoute component={<HomePage />} />,
+        element: <PrivateRoute component={<HomePage />} />,
       },
       {
         path: '/news',
@@ -80,21 +79,21 @@ const routes = [
         path: 'advertise-with-us',
         element: <PrivateRoute component={<AdvertiseWithUs />} />,
       },
-      // {
-      //   path: 'mps-public-rating',
-      //   element: <PrivateRoute component={<MpsPublicRating/>} />,
-      // },
+      {
+        path: 'mps-public-rating',
+        element: <PrivateRoute component={<MpsPublicRating />} />,
+      },
       // {
       //   path: 'mps-public-rating-list',
       //   element: <PrivateRoute component={<MpsRatingAllList/>} />,
       // },
       {
         path: 'rate-your-mp',
-        element: <PrivateRoute component={<RateYourMp/>} />,
+        element: <PrivateRoute component={<RateYourMp />} />,
       },
       {
         path: 'newsletter/loksabha/*',
-        element: <PrivateRoute component={<NewsLetter/>} />,
+        element: <PrivateRoute component={<NewsLetter />} />,
       },
       // {
       //   path: 'parliament-performance-attendance',
@@ -102,15 +101,15 @@ const routes = [
       // },
       {
         path: 'parliament-performance',
-        element: <PrivateRoute component={<ParliamentPerformancePage/>} />,
+        element: <PrivateRoute component={<ParliamentPerformancePage />} />,
       },
       {
         path: 'mps-performance',
-        element: <PrivateRoute component={<MPsPerformancePage/>} />,
+        element: <PrivateRoute component={<MPsPerformancePage />} />,
       },
       {
         path: 'mps-constituency',
-        element: <PrivateRoute component={<MpsConstituencyPage/>} />,
+        element: <PrivateRoute component={<MpsConstituencyPage />} />,
       },
     ],
   },
@@ -121,15 +120,41 @@ const routes = [
 ];
 
 const AppRoutes = () => {
+  const location = useLocation();
+  const Wrapper = ({ children }) => {
+    useLayoutEffect(() => {
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 0);
+    }, [location.pathname]);
+    return children;
+  };
   return (
-    <Routes>
-      {routes.map((nav, navI) => {
-        // Nested routes
-        if (nav?.children?.length) {
-          // Render if layout route
-          if (nav?.isLayoutRoute) {
+    <Wrapper>
+      <Routes>
+        {routes.map((nav, navI) => {
+          // Nested routes
+          if (nav?.children?.length) {
+            // Render if layout route
+            if (nav?.isLayoutRoute) {
+              return (
+                <Route key={`nav_${navI}`} element={nav.element}>
+                  {nav.children.map((subnav, subnavI) => {
+                    return (
+                      <Route
+                        key={`subnav_${navI}_${subnavI}`}
+                        path={subnav.path}
+                        element={subnav.element}
+                      />
+                    );
+                  })}
+                </Route>
+              );
+            }
+
+            // Render if only nested route
             return (
-              <Route key={`nav_${navI}`} element={nav.element}>
+              <Route key={`nav_${navI}`} path={nav.path} element={nav.element}>
                 {nav.children.map((subnav, subnavI) => {
                   return (
                     <Route
@@ -143,30 +168,14 @@ const AppRoutes = () => {
             );
           }
 
-          // Render if only nested route
+          // Direct route
           return (
-            <Route key={`nav_${navI}`} path={nav.path} element={nav.element}>
-              {nav.children.map((subnav, subnavI) => {
-                return (
-                  <Route
-                    key={`subnav_${navI}_${subnavI}`}
-                    path={subnav.path}
-                    element={subnav.element}
-                  />
-                );
-              })}
-            </Route>
+            <Route key={`nav_${navI}`} path={nav.path} element={nav.element} />
           );
-        }
-
-        // Direct route
-        return (
-          <Route key={`nav_${navI}`} path={nav.path} element={nav.element} />
-        );
-      })}
-       <Route path="*" element={<NotFoundPage />} />
-       
-    </Routes>
+        })}
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </Wrapper>
   );
 };
 

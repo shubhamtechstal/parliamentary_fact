@@ -37,7 +37,7 @@ const MPsPerformanceContainer = () => {
     dispatch(fetchMpsPerformanceData());
   }, [dispatch]);
   const { mps_attendance_data } = useSelector((state) => state?.mpsPerformance);
-  console.log('mps_attendance_data', mps_attendance_data);
+
   useEffect(() => {
     const section = searchParams.get('section');
     if (section) {
@@ -92,11 +92,9 @@ const MPsPerformanceContainer = () => {
         <PopulerMpsDetailsComponent
           handleBack={handleBack}
           handleOpenSharePopup={handleOpenSharePopup}
-          mps_data={mps_attendance_data}
           pageTitle={'Populer Mps Performance'}
           mpsDataNetionalRank={mpsDataNetionalRank}
           mpsDataStateRank={mpsDataStateRank}
-
           // onFilterClick={onFilterClick}
         />
       ),
@@ -107,7 +105,6 @@ const MPsPerformanceContainer = () => {
         <PopulerMpsDetailsComponent
           handleBack={handleBack}
           handleOpenSharePopup={handleOpenSharePopup}
-          mps_data={mps_attendance_data}
           pageTitle={'Top performer Mps Rating and Ranking'}
           mpsDataNetionalRank={mpsDataNetionalRank}
           mpsDataStateRank={mpsDataStateRank}
@@ -126,7 +123,6 @@ const MPsPerformanceContainer = () => {
         <PopulerMpsDetailsComponent
           handleBack={handleBack}
           handleOpenSharePopup={handleOpenSharePopup}
-          mps_data={mps_attendance_data}
           pageTitle={'MPs Performance In Attendance'}
           mpsDataNetionalRank={mpsDataNetionalRank}
           mpsDataStateRank={mpsDataStateRank}
@@ -140,7 +136,6 @@ const MPsPerformanceContainer = () => {
         <PopulerMpsDetailsComponent
           handleBack={handleBack}
           handleOpenSharePopup={handleOpenSharePopup}
-          mps_data={mps_attendance_data}
           pageTitle={'MPs Performance In Questions'}
           mpsDataNetionalRank={mpsDataNetionalRank}
           mpsDataStateRank={mpsDataStateRank}
@@ -154,7 +149,6 @@ const MPsPerformanceContainer = () => {
         <PopulerMpsDetailsComponent
           handleBack={handleBack}
           handleOpenSharePopup={handleOpenSharePopup}
-          mps_data={mps_attendance_data}
           pageTitle={'MPs Performance In Debates'}
           mpsDataNetionalRank={mpsDataNetionalRank}
           mpsDataStateRank={mpsDataStateRank}
@@ -168,7 +162,6 @@ const MPsPerformanceContainer = () => {
         <PopulerMpsDetailsComponent
           handleBack={handleBack}
           handleOpenSharePopup={handleOpenSharePopup}
-          mps_data={mps_attendance_data}
           pageTitle={'MPs Performance In Private Member Bill'}
           mpsDataNetionalRank={mpsDataNetionalRank}
           mpsDataStateRank={mpsDataStateRank}
@@ -190,7 +183,7 @@ const MPsPerformanceContainer = () => {
           <IconButton onClick={handleBack}>
             <KeyboardBackspaceIcon />
           </IconButton>
-          <Box sx={{width:{xs: '80%', md : 'auto'}}}>
+          <Box sx={{width:{xs: '60%', md : 'auto'}}}>
             <AutocompleteSearchBox onSelectMP={onSelectSearchBox} />
           </Box>
         </Box>

@@ -32,7 +32,7 @@ const CircularProgressRing = ({ radius, stroke, progress, color }) => {
 
 const MultiColorProgressRings = () => {
   const strokeWidth = 15;
-  const baseRadius = 200;
+  const baseRadius = 175;
 
   const rings = [
     { progress: 62.25, color: "#FFB5B5" },
@@ -43,7 +43,7 @@ const MultiColorProgressRings = () => {
   ];
 
   return (
-    <div style={{ position: "relative", width: "400px", height: "400px", margin: "0 auto",transform: 'rotate(90deg)', }}>
+    <div style={{ position: "relative", width: "350px", height: "350px", margin: "0 auto",transform: 'rotate(90deg)', }}>
       {rings.map((ring, index) => {
         const currentRadius = baseRadius - index * (strokeWidth + 5); // Add padding between rings
         return (

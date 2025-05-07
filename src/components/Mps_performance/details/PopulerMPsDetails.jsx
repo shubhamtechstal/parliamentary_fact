@@ -22,6 +22,10 @@ const mpsSkeleton = () => {
     >
       <Skeleton variant="text" width={'90%'} height={70} />
       <Skeleton variant="text" width={'90%'} height={70} />
+      <Skeleton variant="text" width={'90%'} height={70} />
+      <Skeleton variant="text" width={'90%'} height={70} />
+      <Skeleton variant="text" width={'90%'} height={70} />
+      <Skeleton variant="text" width={'90%'} height={70} />
       <Skeleton variant="text" width={'100%'} height={170} />
     </Box>
   );
@@ -68,11 +72,24 @@ function PopulerMpsDetailsComponent({
           flexDirection: 'column',
         }}
       >
-        <h3 style={{ textAlign: 'center', fontSize: '1.5rem' }}>{pageTitle}</h3>
+        <h3 style={{ textAlign: 'center', fontSize: '1.2rem', margin: '10px' }}>
+          {' '}
+          <span
+            style={{
+              display: 'inline-block',
+              width: '14px',
+              height: '14px',
+              backgroundColor: '#f1807c',
+              borderRadius: '3px',
+              marginRight: '6px',
+            }}
+          ></span>{' '}
+          {pageTitle}
+        </h3>
         <Box sx={{ position: 'absolute', top: '-2rem', right: '1rem' }}>
           <FilterController />
         </Box>
-        <Box mb={5}>
+        <Box mb={2}>
           <GrayButton
             onClick={() => handleStateRankClick(false)}
             fontWeight="600"
@@ -88,20 +105,23 @@ function PopulerMpsDetailsComponent({
           md: 'none',
           xs: 'flex',
           flexDirection: 'column',
-          gap: '2em',
+          gap: '1em',
         }}
       >
-        {mpsdata?.slice(0, loadMoreMpsData).map((mp, index) => (
-          <>
-            <MobMPsRankingCards
-              mp={mp}
-              key={index}
-              handleOpenSharePopup={handleOpenSharePopup}
-              cardName={cardName}
-            />
-            {(index + 1) % 5 === 0 && <AdvertiseSection />}
-          </>
-        ))}
+        {mpsdata?.length > 0
+          ? mpsdata?.slice(0, loadMoreMpsData).map((mp, index) => (
+              <>
+                <MobMPsRankingCards
+                  mp={mp}
+                  isLoading={isLoading}
+                  key={index}
+                  handleOpenSharePopup={handleOpenSharePopup}
+                  cardName={cardName}
+                />
+                {(index + 1) % 5 === 0 && <AdvertiseSection />}
+              </>
+            ))
+          : mpsSkeleton()}
       </Box>
 
       {/* ******Desktop**** */}
@@ -130,6 +150,7 @@ function PopulerMpsDetailsComponent({
             display: 'flex',
             justifyContent: { xs: 'center', md: 'end' },
             alignItems: 'center',
+            display: { md: 'flex', xs: 'none' },
             pr: 5,
           }}
           mb={2}
@@ -144,12 +165,17 @@ function PopulerMpsDetailsComponent({
           </GrayButton>
         </Box>
         <Box display={{ xs: 'none', md: 'block' }}>
-          <RankingTable
-            mpsdata={mpsdata}
-            handleOpenSharePopup={handleOpenSharePopup}
-            loadMoreMpsData={loadMoreMpsData}
-            cardName={cardName}
-          />
+          {mpsdata?.length > 0 ? (
+            <RankingTable
+              mpsdata={mpsdata}
+              handleOpenSharePopup={handleOpenSharePopup}
+              loadMoreMpsData={loadMoreMpsData}
+              cardName={cardName}
+              isLoading={isLoading}
+            />
+          ) : (
+            mpsSkeleton()
+          )}
         </Box>
         {showMoreLoder && mpsSkeleton()}
         <Box
