@@ -14,7 +14,8 @@ const MpsPerformanceCardSkeleton = () => {
         boxShadow: 2,
         textAlign: 'left',
         color: 'rgb(0 0 0 / 50%)',
-        minWidth: { xs: '12rem', md: 'auto' },minHeight:170, 
+        minWidth: { xs: '10.5rem', md: 'auto' },
+        minHeight: 170,
       }}
     >
       <Box
@@ -68,12 +69,22 @@ const MpsPerformanceCardSkeleton = () => {
   );
 };
 
+const mpDomy = {
+  rank: '001',
+  name: 'Amit Kumar Singh',
+  constituency: 'Varanasi',
+  performance: '78.2',
+  rankTitle: 'State Rank:',
+  image: 'https://via.placeholder.com/50',
+  partyName: 'BJP',
+};
 function MpsPerformanceCard({
-  mp,
+  mpInfo,
   handleOpenSharePopup,
   cardCatagory,
   isLoading,
 }) {
+  const mp = mpInfo ?? mpDomy
   return (
     <>
       {isLoading ? (
@@ -88,8 +99,8 @@ function MpsPerformanceCard({
             boxShadow: 2,
             textAlign: 'left',
             color: 'rgb(0 0 0 / 50%)',
-            minWidth: { xs: '12rem', md: 'auto' },
-            minHeight:170, 
+            minWidth: { xs: '10.5rem', md: 'auto' },
+            minHeight: 170,
           }}
         >
           <Box
@@ -138,24 +149,25 @@ function MpsPerformanceCard({
           <h3
             style={{
               fontSize: '0.8rem',
-              width: '70%',
+              maxWidth: '70%',
               margin: '10px 0 0 0',
-              height: '2.5rem',
+              height: '3rem',
               overflow: 'hidden',
+              lineHeight:'1rem',
               textOverflow: 'ellipsis',
-              whiteSpace: 'nowrap',
+              // whiteSpace: 'nowrap',
             }}
           >
-            {mp.name} <br />
-            {/* <span style={{ fontSize: '0.6rem', margin: '0 0' }}> */}
-            {mp.constituency}
-            {/* </span> */}
+            {mp.name}
+            {/* {mp.partyName} <br />
+            {mp.constituency} */}
           </h3>
           <Box
             sx={{
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
+              marginTop:'-8px'
             }}
           >
             <Box>

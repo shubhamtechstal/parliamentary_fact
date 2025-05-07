@@ -125,13 +125,12 @@ function MpsPerformanceAttandanceCard({
               p: 1.5,
               textAlign: 'center',
               borderRadius: 5,
-              boxShadow: 0,
               textAlign: 'left',
               color: 'rgb(0 0 0 / 50%)',
-              background: '#f9f9f9',
+              // background: '#f9f9f9',
               fontFamily: '"Sora", sans-serif',
               position: 'relative',
-              minHeight: 250,
+              minHeight: 230,
             }}
           >
             <Box
@@ -148,7 +147,7 @@ function MpsPerformanceAttandanceCard({
                     width: 35,
                     height: 35,
                     background: 'linear-gradient(#ffdb00, orange, #dc752c)',
-                    color: 'rgb(0 0 0 / 50%)',
+                    // color: 'rgb(0 0 0 / 50%)',
                     fontSize: '0.8rem',
                     fontFamily: '"Sora", sans-serif',
                     mb: '0.5rem',
@@ -193,16 +192,16 @@ function MpsPerformanceAttandanceCard({
             <h3
               style={{
                 fontSize: '1rem',
-                width: '70%',
-                margin: '1rem 0 0 0',
+                width: '80%',
+                margin: '0.5rem 0 0 0',
                 lineHeight: '1.3',
-                height: '3rem',
+                height: '2.5rem',
                 overflow: 'hidden',
                 textOverflow: 'ellipsis',
-                whiteSpace: 'nowrap',
+                // whiteSpace: 'nowrap',
               }}
             >
-              {mp.name} <br /> {mp.constituency}
+              {mp.name}
             </h3>
             <Box
               sx={{
@@ -211,13 +210,16 @@ function MpsPerformanceAttandanceCard({
                 alignItems: 'top',
               }}
             >
-              <Box width={120}>
+              <Box width={120} pt={2}>
                 <p
                   style={{
                     margin: '0  0',
                     fontSize: '0.6rem',
                     fontWeight: 'bold',
-                    width: '200px',
+                    width: '120px',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    whiteSpace: 'nowrap',
                   }}
                 >
                   {mp.partyName ?? 'Samajwadi Party'}
@@ -246,13 +248,13 @@ function MpsPerformanceAttandanceCard({
                 sx={{
                   display: 'flex',
                   alignItems: 'center',
-                  marginTop: '-30px',
+                  marginTop: '-20px',
                 }}
               >
                 <Avatar
                   src={mp.image}
                   alt={mp.name}
-                  sx={{ width: 80, height: 80, border: '10px solid #fff' }}
+                  sx={{ width: 80, height: 80,}}
                 />
                 <Gauge
                   width={120}

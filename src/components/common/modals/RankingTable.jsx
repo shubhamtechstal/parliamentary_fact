@@ -13,13 +13,76 @@ import {
   Box,
   Typography,
   Tooltip,
+  Skeleton,
 } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import GrayButton from '../GrayButton';
 import AdvertiseSection from 'components/addLayout/HorizontalAdvertiseSection';
 
+const rankingSkelaton = () => {
+  return (
+    <TableRow>
+      <TableCell colSpan={9} sx={{ border: 'none', padding: '1em 2rem' }}>
+        <Box
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: '2fr 2fr 2fr 1fr 1fr 1fr 1fr 1.5fr 0.5fr',
+            gap: 2,
+            alignItems: 'center',
+            backgroundColor: '#fff',
+            borderRadius: '16px',
+            padding: '0.2rem 1rem',
+            boxShadow: '0 2px 6px rgba(0,0,0,0.05)',
+            fontSize: '0.8rem',
+            px: 2,
+          }}
+        >
+          {/* Ranking */}
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 2,
+              color: '#e7a917',
+              // maxWidth: '6rem',
+            }}
+          >
+            <Skeleton height={35} width={35} variant="circular" />
+            <Skeleton height={20} width={70} variant="text" />
+            {/* <span>National Rank</span> */}
+          </Box>
 
-const RankingTable = ({mpsdata=[],loadMoreMpsData, handleOpenSharePopup}) => {
+          {/* MP Name */}
+          <Box sx={{ display: 'flex', alignItems: 'center', gap:2 }}>
+            <Skeleton height={50} width={50} variant="circular" />
+            <Skeleton height={20} width={90} variant="text" />
+          </Box>
+          <Skeleton height={20} width={90} variant="text" />
+          <Skeleton height={20} width={40} variant="text" />
+          <Skeleton height={20} width={40} variant="text" />
+          <Skeleton height={20} width={40} variant="text" />
+          <Skeleton height={20} width={40} variant="text" />
+          {/* Share Button */}
+          <Skeleton height={20} width={40} variant="rounded" />
+
+          {/* More Icon */}
+          <Box>
+            <IconButton>
+              <MoreVertIcon />
+            </IconButton>
+          </Box>
+        </Box>
+      </TableCell>
+    </TableRow>
+  );
+};
+
+const RankingTable = ({
+  mpsdata = [],
+  isLoading,
+  loadMoreMpsData,
+  handleOpenSharePopup,
+}) => {
   return (
     <TableContainer>
       <Table>
@@ -53,8 +116,11 @@ const RankingTable = ({mpsdata=[],loadMoreMpsData, handleOpenSharePopup}) => {
         </TableHead>
 
         <TableBody>
-          {mpsdata?.slice(0, loadMoreMpsData)?.map((row, index)=> (
-              <>
+          {mpsdata?.slice(0, loadMoreMpsData)?.map((row, index) => (
+            <>
+              {isLoading ? (
+                rankingSkelaton()
+              ) : (
                 <TableRow key={index}>
                   <TableCell
                     colSpan={9}
@@ -177,7 +243,12 @@ const RankingTable = ({mpsdata=[],loadMoreMpsData, handleOpenSharePopup}) => {
 
                       {/* Share Button */}
                       <Box>
-                        <GrayButton fontSize="0.6rem" onClick={() => handleOpenSharePopup(row.mp_id)}>Share Now</GrayButton>
+                        <GrayButton
+                          fontSize="0.6rem"
+                          onClick={() => handleOpenSharePopup(row.mp_id)}
+                        >
+                          Share Now
+                        </GrayButton>
                       </Box>
 
                       {/* More Icon */}
@@ -189,9 +260,10 @@ const RankingTable = ({mpsdata=[],loadMoreMpsData, handleOpenSharePopup}) => {
                     </Box>
                   </TableCell>
                 </TableRow>
-                {(index + 1) % 7 === 0 && <AdvertiseSection />}
-              </>
-            ))}
+              )}
+              {(index + 1) % 7 === 0 && <AdvertiseSection />}
+            </>
+          ))}
         </TableBody>
       </Table>
     </TableContainer>

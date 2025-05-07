@@ -1,9 +1,13 @@
 import { useEffect, useState } from 'react';
-import { Container, Grid, Box } from '@mui/material';
+import { Container, Grid, Box, Skeleton } from '@mui/material';
 import GrayButton from 'components/common/GrayButton';
 import SectionHeading from 'components/common/SectionHeading';
 import MpsPerformanceCard from './cards/MpsPerformanceCard';
 import MpsPerformanceAttandanceCard from './cards/MpsPerformanceAttandanceCard';
+import {
+  MpsBigCardsSkeleton,
+  MpsSmallCardsSkeleton,
+} from './cards/mpsCardsSkeleton';
 
 export default function MpsPerformanceInAttandance({
   title,
@@ -16,7 +20,7 @@ export default function MpsPerformanceInAttandance({
   isStateRank,
   cardCatagory,
   handleDetailsClick,
-  detailsPage
+  detailsPage,
 }) {
   const [isRankLoading, setIsRankLoading] = useState(false);
 
@@ -81,39 +85,49 @@ export default function MpsPerformanceInAttandance({
         container
         gap={{ xs: 2, md: 0 }}
         spacing={{ xs: 0, md: 2 }}
-        sx={{ py: 4 }}
+        sx={{ py: 2, pl: '5px' }}
         flexWrap={{ md: 'wrap', xs: 'nowrap' }}
         overflow={'auto'}
       >
-        {mpsData?.slice(0, 3)?.map((mp, index) => (
-          <MpsPerformanceAttandanceCard
-            handleOpenSharePopup={handleOpenSharePopup}
-            mp={mp}
-            index={index}
-            cardCatagory={cardCatagory}
-            isLoading={isRankLoading}
-          />
-        ))}
+        {mpsData.length > 0 ? (
+          mpsData
+            ?.slice(0, 3)
+            ?.map((mp, index) => (
+              <MpsPerformanceAttandanceCard
+                handleOpenSharePopup={handleOpenSharePopup}
+                mp={mp}
+                index={index}
+                cardCatagory={cardCatagory}
+                isLoading={isRankLoading}
+              />
+            ))
+        ) : (
+          <MpsBigCardsSkeleton />
+        )}
       </Grid>
       <Grid
         container
-        gap={{ xs: 3, md: 0 }}
+        gap={{ xs: 1.5, md: 0 }}
         spacing={{ xs: 0, md: 1 }}
-        p={1}
+        p={'5px'}
         flexWrap={{ md: 'wrap', xs: 'nowrap' }}
         overflow={'auto'}
       >
-        {mpsData?.slice(3, 9)?.map((mp, index) => (
-          <Grid item xs={6} sm={4} md={3} lg={2} key={index}>
-            <MpsPerformanceCard
-              handleOpenSharePopup={handleOpenSharePopup}
-              mp={mp}
-              index={index}
-              isLoading={isRankLoading}
-              cardCatagory={cardCatagory}
-            />
-          </Grid>
-        ))}
+        {mpsData.length > 0 ? (
+          mpsData?.slice(3, 9)?.map((mp, index) => (
+            <Grid item xs={6} sm={4} md={3} lg={2} key={index}>
+              <MpsPerformanceCard
+                handleOpenSharePopup={handleOpenSharePopup}
+                mpInfo={mp}
+                index={index}
+                isLoading={isRankLoading}
+                cardCatagory={cardCatagory}
+              />
+            </Grid>
+          ))
+        ) : (
+            <MpsSmallCardsSkeleton />
+        )}
       </Grid>
       <Box textAlign={{ xs: 'center', md: 'right' }} mt={3} mr={1}>
         <GrayButton onClick={() => handleDetailsClick(detailsPage)}>

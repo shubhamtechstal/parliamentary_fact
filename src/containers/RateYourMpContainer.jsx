@@ -13,7 +13,7 @@ import SearchMpDropdowns from 'components/mpRating/SearchMpDropdowns';
 import StarIcon from '@mui/icons-material/Star';
 import * as React from 'react';
 import Text from 'components/common/Text';
-import MpsRatingCard from 'components/common/MpsRatingCard';
+import MpsStartRatingCard from 'components/common/cards/MpsStartRatingCard';
 import RatingCardSection from 'components/mpRating/RatingsCardSection';
 import ThankYouModal from 'components/mpRating/ThankYouModal';
 import "../App.css"
@@ -175,7 +175,7 @@ export default function RateYourMpContainer() {
         }}
       >
         {data.map((data, index) => (
-          <MpsRatingCard />
+          <MpsStartRatingCard />
         ))}
       </Box>
       </Box>

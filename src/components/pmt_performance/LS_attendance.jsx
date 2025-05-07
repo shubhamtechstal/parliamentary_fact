@@ -248,7 +248,7 @@ function LS_attendance({
             <LineCharts
               data={[90, 4, 66, 25, 14, 84, 45]}
               labels={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul']}
-              width={540}
+              width={440}
             />
             {/* <BasicBarChart/> */}
           </Grid>

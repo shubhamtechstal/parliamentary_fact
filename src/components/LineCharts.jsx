@@ -7,51 +7,58 @@ import {
   markElementClasses,
 } from '@mui/x-charts/LineChart';
 
-const pData = [10, 4, 6, 5, 14, 14, 15]; // Percentages as data points
-const xLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'];
+export default function LineCharts({ width = 450, data = [], labels = [] }) {
+  const chartHeight = 250;
+  const paddingTop = 45;
+  const paddingBottom = 40;
+  const maxY = Math.max(...data, 10);
+  const labelAreaHeight = chartHeight - paddingTop - paddingBottom;
 
-export default function LineCharts({width}) {
   return (
     <ChartContainer
-      width={width||450}
-      height={250}
-      series={[{ type: 'line', data: pData, curve: 'linear' }]} // Disable curve
-      xAxis={[{ scaleType: 'point', data: xLabels }]}
+      width={width}
+      height={chartHeight}
+      series={[{ type: 'line', data, curve: 'linear' }]}
+      xAxis={[{ scaleType: 'point', data: labels }]}
       sx={{
         [`& .${lineElementClasses.root}`]: {
-          stroke: '#FF9C93', // Light pink color for the line
+          stroke: '#FF9C93',
           strokeWidth: 5,
         },
         [`& .${markElementClasses.root}`]: {
-          stroke: '#FF9C93', // Match the color of the line
-          scale: '1',
-          fill: '#FF9C93', // White center for the point
+          stroke: '#FF9C93',
+          fill: '#FF9C93',
           strokeWidth: 1,
         },
       }}
     >
-      {/* Line plot */}
       <LinePlot />
-
-      {/* Mark plot */}
       <MarkPlot />
 
-      {/* Custom labels */}
-      {pData.map((y, index) => (
-        <text
-          key={index}
-          x={((width || 450) / xLabels.length) * (index + 0.5)} // Dynamic x position
-          y={index % 2 === 0 ? 190 - y * 10 :220 - y * 10 } // Dynamic y position (scaled for simplicity)
-          textAnchor="middle"
-          style={{
-            fill: '#666', // Label color
-            fontSize: '12px', // Font size
-            fontWeight: 'bold', // Bold labels
-          }}
-        >
-          {`${y}%`}
-        </text>
-      ))}
+      {/* Custom zig-zag labels */}
+      {data.map((y, index) => {
+        const x = (width / labels.length) * (index + 0.5);
+        const dotY = chartHeight - paddingBottom - (y / maxY) * labelAreaHeight;
+
+        const labelYOffset = index % 2 === 0 ? -10 : 20; // alternate above/below
+        const labelY = dotY + labelYOffset;
+
+        return (
+          <text
+            key={index}
+            x={x}
+            y={labelY}
+            textAnchor="middle"
+            style={{
+              fill: '#444',
+              fontSize: '12px',
+              fontWeight: 'bold',
+            }}
+          >
+            {`${y}%`}
+          </text>
+        );
+      })}
     </ChartContainer>
   );
 }

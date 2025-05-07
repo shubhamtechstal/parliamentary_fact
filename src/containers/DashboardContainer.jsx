@@ -18,6 +18,7 @@ import {
 } from '@mui/x-charts/Gauge';
 import { newsLetterApiAction } from 'stores/redux/apiSlices/newsLetterApiSlice';
 import { useNavigate } from 'react-router-dom';
+import NewsSectionHome from 'components/news/NewsSectionHome';
 
 export default function DashboardContainer() {
   function formatNumber(num) {
@@ -734,8 +735,8 @@ export default function DashboardContainer() {
           <Box>
             <HeadingNewCards data={topLatestNewsApi?.latest_top_news[0]} />
           </Box>
-
-          <Box className="homeNewsContainer" sx={{ padding: '1rem 1rem' }}>
+            <NewsSectionHome/>
+          {/* <Box className="homeNewsContainer" sx={{ padding: '1rem 1rem' }}>
             <Box className="homePageNewsBox1">
               <Box sx={{ display: 'flex', gap: '5px' }}>
                 <Text
@@ -781,7 +782,7 @@ export default function DashboardContainer() {
                 ))}
               </Box>
             </Box>
-          </Box>
+          </Box> */}
           <Box
             sx={{
               width: '100%',

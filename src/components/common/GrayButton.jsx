@@ -2,7 +2,7 @@
 
 import { Button } from "@mui/material";
 
-export default function GrayButton({text, height, children, bgColor, width, fontWeight, fontSize,display, textColor, ...restProps }) {
+export default function GrayButton({text, height, children, bgColor, width, fontWeight, position, fontSize,display, textColor, ...restProps }) {
   return (
     <Button
       {...restProps}
@@ -18,6 +18,7 @@ export default function GrayButton({text, height, children, bgColor, width, font
         fontSize: fontSize ?? '0.8rem',
         display: display || '',
         fontWeight: fontWeight ?? 400,
+        position: position ||'static',
         '&:hover': {
           background: 'grey',
           color: '#fff',
