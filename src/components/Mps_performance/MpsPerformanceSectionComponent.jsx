@@ -3,7 +3,7 @@ import { Container, Grid, Box, Skeleton } from '@mui/material';
 import GrayButton from 'components/common/GrayButton';
 import SectionHeading from 'components/common/SectionHeading';
 import MpsPerformanceCard from './cards/MpsPerformanceCard';
-import MpsPerformanceAttandanceCard from './cards/MpsPerformanceAttandanceCard';
+import MpsTopPerformanceCard from './cards/MpsTopPerformanceCard';
 import {
   MpsBigCardsSkeleton,
   MpsSmallCardsSkeleton,
@@ -93,7 +93,7 @@ export default function MpsPerformanceInAttandance({
           mpsData
             ?.slice(0, 3)
             ?.map((mp, index) => (
-              <MpsPerformanceAttandanceCard
+              <MpsTopPerformanceCard
                 handleOpenSharePopup={handleOpenSharePopup}
                 mp={mp}
                 index={index}

@@ -11,6 +11,7 @@ export const fetchMpsPerformanceData = createAsyncThunk(
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       const result = await response?.json();
+      console.log('attendance_details result', result)
       return {
         // attendanceDetails: result?.attendance_details ?? [],
         data: result,
@@ -25,6 +26,14 @@ const mpsPerformanceSlice = createSlice({
   name: 'mpsPerformance',
   initialState: {
     mps_attendance_data: [],
+    mp_debate_data: [],
+    mp_fund_data: [],
+    private_bill_data: [],
+    question_data: [],
+    top_performance: [],
+    popular_mps: [],
+    loksabha_id: '',
+    loading: false
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -36,6 +45,13 @@ const mpsPerformanceSlice = createSlice({
       .addCase(fetchMpsPerformanceData.fulfilled, (state, action) => {
         state.loading = false;
         state.mps_attendance_data = action.payload.data.attendance_data;
+        state.mp_debate_data = action.payload.data.mp_debate_data;
+        state.mp_fund_data = action.payload.data.mp_fund_data;
+        state.private_bill_data = action.payload.data.private_bill_data;
+        state.question_data = action.payload.data.question_data;
+        state.top_performance = action.payload.data.top_performance;
+        state.popular_mps = action.payload.data.popular_mps;
+        state.loksabha_id = action.payload.data.loksabha_id;
       })
       .addCase(fetchMpsPerformanceData.rejected, (state, action) => {
         state.loading = false;

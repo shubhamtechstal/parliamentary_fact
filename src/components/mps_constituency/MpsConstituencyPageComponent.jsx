@@ -8,6 +8,8 @@ import {
   mpsDataStateRank,
 } from 'helpers/performanceConstants';
 import { useEffect, useMemo, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchMpsPerformanceData } from 'stores/redux/apiSlices/mps_PerformanceSlice';
 
 const sections = [
   { id: 'top-performer', title: 'Top Performer' },
@@ -56,7 +58,20 @@ function MpsConstituencyPageComponent({
     }));
   };
 
-
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchMpsPerformanceData());
+  }, [dispatch]);
+  const {
+    mps_attendance_data,
+    mp_debate_data,
+    mp_fund_data,
+    private_bill_data,
+    question_data,
+    top_performance,
+    popular_mps,
+  } = useSelector((state) => state?.mpsPerformance);
+  const sorted = [...mp_fund_data];
   return (
     <Box sx={{ py: 4, backgroundColor: '#EEF3F7', color: '#00000080' }}>
       {/* Rank Toggle */}
@@ -128,9 +143,9 @@ function MpsConstituencyPageComponent({
         detailsPage="popular-mps"
         handleDetailsClick={handleDetailsClick}
         handleOpenSharePopup={handleOpenSharePopup}
-        // mpsData={mpsData}
-        mpsDataNetionalRank={mpsDataNetionalRank}
-        mpsDataStateRank={mpsDataStateRank}
+        mps_Data={popular_mps}
+        // mpsDataNetionalRank={mpsDataNetionalRank}
+        // mpsDataStateRank={mpsDataStateRank}
       />
       <AdvertiseSection />
 
@@ -140,8 +155,9 @@ function MpsConstituencyPageComponent({
         detailsPage="top-performer-mps"
         handleDetailsClick={handleDetailsClick}
         handleOpenSharePopup={handleOpenSharePopup}
-        mpsDataNetionalRank={mpsDataNetionalRank}
-        mpsDataStateRank={mpsDataStateRank}
+        mps_Data={mp_fund_data}
+        // mpsDataNetionalRank={mpsDataNetionalRank}
+        // mpsDataStateRank={mpsDataStateRank}
       />
       <AdvertiseSection />
       {/* Bottom Performer Section */}
@@ -150,8 +166,9 @@ function MpsConstituencyPageComponent({
         detailsPage="top-performer-mps"
         handleDetailsClick={handleDetailsClick}
         handleOpenSharePopup={handleOpenSharePopup}
-        mpsDataNetionalRank={mpsDataNetionalRank}
-        mpsDataStateRank={mpsDataStateRank}
+        mps_Data={sorted.sort((a, b) => a.performance - b.performance)}
+        // mpsDataNetionalRank={mpsDataNetionalRank}
+        // mpsDataStateRank={mpsDataStateRank}
       />
       <AdvertiseSection />
       {/* Non Performer Section */}
@@ -159,9 +176,10 @@ function MpsConstituencyPageComponent({
         title="Non Performer MPs Rating and Ranking"
         detailsPage="top-performer-mps"
         handleDetailsClick={handleDetailsClick}
+        mps_Data={mp_fund_data}
         handleOpenSharePopup={handleOpenSharePopup}
-        mpsDataNetionalRank={mpsDataNetionalRank}
-        mpsDataStateRank={mpsDataStateRank}
+        // mpsDataNetionalRank={mpsDataNetionalRank}
+        // mpsDataStateRank={mpsDataStateRank}
       />
     </Box>
   );
