@@ -129,7 +129,7 @@ function MobMPsRankingCards({
               {mp.rankTitle}
               {/* National Rank:{' '} */}
             </h3>
-            <h4 style={{ margin: '0 0', fontSize: '0.4em' }}>
+            <h4 style={{ margin: '0 0', fontSize: '0.5em' }}>
               {cardName ?? 'Att + Qs + Dbt + Pmb + Mpf'}
             </h4>
           </Box>
@@ -138,7 +138,7 @@ function MobMPsRankingCards({
           <Box>
             <h3
               style={{
-                fontSize: '0.6rem',
+                fontSize: '0.8rem',
                 fontWeight: 600,
                 maxWidth: '10rem',
                 display: '-webkit-box',

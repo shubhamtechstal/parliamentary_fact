@@ -16,6 +16,7 @@ import { useEffect } from 'react';
 import { fetchPerformanceData } from 'stores/redux/apiSlices/pmt_PerformanceSlice';
 import HomePmtPerformanceSection from './HomePmtPerformanceSection';
 import ProgressMeter from 'components/common/ProgressMeter';
+import { fetchMpsPerformanceData } from 'stores/redux/apiSlices/mps_PerformanceSlice';
 
 function HomePageComponent() {
   const data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
@@ -25,7 +26,17 @@ function HomePageComponent() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchPerformanceData());
+    dispatch(fetchMpsPerformanceData());
   }, [dispatch]);
+  const {
+    // mps_attendance_data,
+    // mp_debate_data,
+    mp_fund_data,
+    // private_bill_data,
+    // question_data,
+    top_performance,
+    // popular_mps,
+  } = useSelector((state) => state?.mpsPerformance);
   const { loksabhaName, pageData, loading } = useSelector(
     (state) => state?.pmtPerformance
   );
@@ -72,32 +83,32 @@ function HomePageComponent() {
 
       <AdvertiseSection />
       <MpsSectionDynamic
-        mpsData={mpsData}
+        mps_Data={top_performance}
         title={'MPs Parliament Performance'}
         subTitle={'Top Ranking MPs'}
         linkTo={'/mps-performance'}
       />
       <AdvertiseSection />
       <MpsSectionDynamic
-        mpsData={mpsData}
+        mps_Data={mp_fund_data}
         title={'MPs Constituency Performance'}
         subTitle={'Top Ranking MPs in Fund Spending'}
         linkTo={'/mps-constituency'}
-        topMinistersData={data}
+        topMinisters_Data={mp_fund_data}
         topMinisterTitle={'Top Ranking Ministers'}
       />
       <AdvertiseSection />
       {/* Mps Rating cars  section  */}
-      <MpsSectionDynamic
-        mpsData={mpsData}
+      {/* <MpsSectionDynamic
+        mps_Data={mp_fund_data}
         title={'MPs Public Rating'}
         subTitle={'Top Rated MPs'}
         linkTo={'/mps-public-rating'}
-        topMinistersData={data}
+        topMinisters_Data={mp_fund_data}
         topMinisterTitle={'Top Rated Ministers'}
         isRatingCard={true}
       />
-      <AdvertiseSection />
+      <AdvertiseSection /> */}
       <Box
         style={{
           background: '#fff',

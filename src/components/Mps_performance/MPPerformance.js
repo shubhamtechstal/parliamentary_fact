@@ -4,14 +4,16 @@ import GrayButton from 'components/common/GrayButton';
 import SectionHeading from 'components/common/SectionHeading';
 import MpsPerformanceCard from './cards/MpsPerformanceCard';
 import { MpsSmallCardsSkeleton } from './cards/mpsCardsSkeleton';
+import { mpsDataNetionalRank, mpsDataStateRank } from 'helpers/performanceConstants';
 
 export default function MPPerformance({
   detailsPage,
   title,
   handleDetailsClick,
   handleOpenSharePopup,
-  mpsDataStateRank,
-  mpsDataNetionalRank,
+  mps_Data
+  // mpsDataStateRank,
+  // mpsDataNetionalRank,
 }) {
   const [isStateRank, setIsStateRank] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -22,7 +24,7 @@ export default function MPPerformance({
       setIsLoading(false);
     }, 300);
   };
-  const mpsData = isStateRank ? mpsDataStateRank : mpsDataNetionalRank;
+  const mpsData = isStateRank ? mpsDataStateRank(mps_Data) : mpsDataNetionalRank(mps_Data);
   // const mpsData = useMemo(
   //   () => (isStateRank ? mpsDataStateRank : mpsDataNetionalRank),
   //   [isStateRank]
@@ -61,15 +63,15 @@ export default function MPPerformance({
         </Box>
       </Box>
       <Grid
-        p={1}
-        gap={{ xs: 2, md: 0 }}
-        spacing={{ xs: 0, md: 2 }}
+        spacing={{ md: 2, xs: 0 }}
+        gap={{ xs: 1.5, md: 0 }}
+        padding={{ xs: '6px', md: 1 }}
         container
         flexWrap={{ md: 'wrap', xs: 'nowrap' }}
         overflow={'auto'}
       >
         {mpsData.length > 0 ? (
-          mpsData.slice(0, 6).map((mp, index) => (
+          mpsData?.slice(0, 6)?.map((mp, index) => (
             <Grid item xs={6} sm={4} md={3} lg={2} key={index}>
               <MpsPerformanceCard
                 mpInfo={mp}
@@ -84,15 +86,15 @@ export default function MPPerformance({
         )}
       </Grid>
       <Grid
-        p={1}
-        gap={{ xs: 2, md: 0 }}
-        spacing={{ xs: 0, md: 2 }}
+        spacing={{md:2, xs: 0}}
+        gap={{xs: 1.5, md:0}}
+        padding={{xs:'6px', md:1}}
         container
         flexWrap={{ md: 'wrap', xs: 'nowrap' }}
         overflow={'auto'}
       >
         {mpsData.length > 0 ? (
-          mpsData.slice(6, 12).map((mp, index) => (
+          mpsData?.slice(6, 12).map((mp, index) => (
             <Grid item xs={6} sm={4} md={3} lg={2} key={index}>
               <MpsPerformanceCard
                 mpInfo={mp}

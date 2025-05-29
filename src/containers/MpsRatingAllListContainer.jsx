@@ -6,6 +6,7 @@ import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
 import React, { useState } from 'react';
 import '../App.css'
+import Avatar from 'components/common/Avatar';
 
 export default function MpsRatingAllListContainer() {
     const [filter,setFilter] = useState(false);
@@ -194,17 +195,13 @@ export default function MpsRatingAllListContainer() {
        gap: {xs:'0.5rem',md:'1rem'},
      }}
    >
-     <Box sx={{ display: 'flex',  gap: {xs:'0.5rem',md:'1rem'},}}>
-       <Text
-         sx={{ padding: '1rem', borderRadius: '50%', background: '#cfcfcf',fontSize:{xs:'o.7rem'} }}
-         text={'001'}
-       />
-       <Box className="MobileViewRemove"
-         sx={{ padding: '1rem', borderRadius: '50%', background: '#cfcfcf' }}
-         text={'001'}
-       >
+     <Box sx={{ display: 'flex',  gap: {xs:'0.5rem',md:'1rem'}, alignItems:'center'}}>
+       <Avatar alt={'00'} sx={{height :'40px',width:'40px'}} >
          001
-       </Box>
+       </Avatar>
+       <Avatar alt={'00'} sx={{height :'50px',width:'50px'}} >
+         001
+       </Avatar>
      </Box>
      <Box sx={{display:"flex",alignItems:'center',   gap: {xs:'0.5rem',md:'1rem'},flexWrap:'wrap'}}>
 

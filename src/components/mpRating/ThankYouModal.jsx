@@ -14,6 +14,7 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: 500,
   p: 4,
+  minHeight: '300px'
 };
 
 export default function ThankYouModal({ open, handleClose }) {
@@ -34,7 +35,7 @@ export default function ThankYouModal({ open, handleClose }) {
             <CloseIcon onClick={handleClose}/>
           </IconButton>
           <Box>
-            <Card sx={{ maxWidth: 400, borderRadius: "20px", maxHeight: 490 }} className="modal_card">
+            <Card sx={{ maxWidth: 400, borderRadius: "20px", maxHeight: 490, minHeight: '250px', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', gap:1 }} className="modal_card">
               <Box sx={{ display: "flex", justifyContent: "center", mt: 0.5 }}>
                 <Typography
                   variant="h5"

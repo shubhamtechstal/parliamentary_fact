@@ -5,7 +5,6 @@ import AdvertisementLayout from 'components/addLayout/AdvertisementLayout';
 import IconButton from 'components/common/IconButton';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import ShareModal from 'components/common/modals/ShareModal';
-import TopPerformerMpsDetails from 'components/Mps_performance/details/TopPerformerMpsDetails';
 import AutocompleteSearchBox from 'components/common/modals/AutoCompleateSearchBox';
 import MpsConstituencyPageComponent from 'components/mps_constituency/MpsConstituencyPageComponent';
 import { Box } from '@mui/material';
@@ -30,7 +29,9 @@ const MpsConstituencyContainer = () => {
   useEffect(() => {
     dispatch(fetchMpsPerformanceData());
   }, [dispatch]);
-  const { mps_attendance_data } = useSelector((state) => state?.mpsPerformance);
+  const { mps_attendance_data, mp_fund_data } = useSelector(
+    (state) => state?.mpsPerformance
+  );
 
   const handleOpenSharePopup = () => {
     setOpenShare((prev) => !prev);
@@ -52,6 +53,7 @@ const MpsConstituencyContainer = () => {
     setActiveSection(null);
     navigate('/mps-constituency');
   };
+  console.log('mp_fund_data= ', mp_fund_data);
   const mpsDataNetionalRank =
     mps_attendance_data?.map((data) => {
       return {
@@ -61,7 +63,7 @@ const MpsConstituencyContainer = () => {
         state: data.state_name,
         performance: data.national_percentage,
         rankTitle: 'National Rank:',
-        party: data.party_full_name,
+        party: data.party_short_name,
         mp_id: data.mp_id,
         presence: data.attendance_days,
         imageUrl: data.image,
@@ -76,7 +78,7 @@ const MpsConstituencyContainer = () => {
         state: data.state_name,
         performance: data.national_percentage,
         rankTitle: 'State Rank:',
-        party: data.party_full_name,
+        party: data.party_short_name,
         mp_id: data.mp_id,
         presence: data.attendance_days,
         imageUrl: data.image,
@@ -94,7 +96,6 @@ const MpsConstituencyContainer = () => {
           pageTitle={'Populer Mps Performance'}
           mpsDataNetionalRank={mpsDataNetionalRank}
           mpsDataStateRank={mpsDataStateRank}
-
           // onFilterClick={onFilterClick}
         />
       ),
@@ -102,9 +103,13 @@ const MpsConstituencyContainer = () => {
     {
       id: 'top-performer-mps',
       component: (
-        <TopPerformerMpsDetails
+        <PopulerMpsDetailsComponent
           handleBack={handleBack}
           handleOpenSharePopup={handleOpenSharePopup}
+          mps_data={mps_attendance_data}
+          pageTitle={'Populer Mps Performance'}
+          mpsDataNetionalRank={mpsDataNetionalRank}
+          mpsDataStateRank={mpsDataStateRank}
           // onFilterClick={onFilterClick}
         />
       ),

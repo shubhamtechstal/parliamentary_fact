@@ -93,7 +93,7 @@ const RankingTable = ({
                 sx={{
                   display: 'grid',
                   gridTemplateColumns:
-                    '3fr 2fr 2fr 1.5fr 1fr 1.5fr 1.5fr 1.5fr 0.5fr',
+                    '2fr 2fr 2fr 1.5fr 1fr 1.5fr 1.5fr 1.5fr 0.5fr',
                   gap: 2,
                   color: '#455A64',
                   fontWeight: 'bold',
@@ -130,7 +130,7 @@ const RankingTable = ({
                       sx={{
                         display: 'grid',
                         gridTemplateColumns:
-                          '2fr 2fr 2fr 1fr 1fr 1fr 1fr 1.5fr 0.5fr',
+                          '1fr 2fr 2fr 1fr 1fr 1fr 1fr 1.5fr 0.5fr',
                         gap: 2,
                         alignItems: 'center',
                         backgroundColor: '#fff',
@@ -139,6 +139,7 @@ const RankingTable = ({
                         boxShadow: '0 2px 6px rgba(0,0,0,0.05)',
                         fontSize: '0.8rem',
                         px: 2,
+                        fontSize:'0.7rem'
                       }}
                     >
                       {/* Ranking */}
@@ -146,7 +147,7 @@ const RankingTable = ({
                         sx={{
                           display: 'flex',
                           alignItems: 'center',
-                          gap: 2,
+                          gap: '10px',
                           color: '#e7a917',
                           // maxWidth: '6rem',
                         }}
@@ -178,7 +179,7 @@ const RankingTable = ({
                             <Typography
                               variant="body1"
                               sx={{
-                                fontSize: '0.7rem',
+                                fontSize: '0.8rem',
                                 fontWeight: 600,
                                 maxWidth: '10rem',
                                 display: '-webkit-box',
@@ -198,7 +199,7 @@ const RankingTable = ({
                           <Typography
                             variant="body1"
                             sx={{
-                              fontSize: '0.7rem',
+                              fontSize: '0.8rem',
                               fontWeight: 600,
                               maxWidth: '10rem',
                               display: '-webkit-box',
