@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const fetchMpsPerformanceData = createAsyncThunk(
-  'pmtPerformance/fetchData',
+  'mpsPerformance/fetchData',
   async (_, { rejectWithValue }) => {
     try {
       const response = await fetch(
@@ -11,7 +11,6 @@ export const fetchMpsPerformanceData = createAsyncThunk(
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       const result = await response?.json();
-      console.log('attendance_details result', result)
       return {
         // attendanceDetails: result?.attendance_details ?? [],
         data: result,

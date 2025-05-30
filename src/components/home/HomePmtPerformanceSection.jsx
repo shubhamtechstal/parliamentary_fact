@@ -1,10 +1,10 @@
 import { CircularProgress } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import Box from 'components/common/Box';
-import GrayDot from 'components/common/GrayDot';
 import ProgressMeter from 'components/common/ProgressMeter';
 import Text from 'components/common/Text';
 import ColorfulArc from 'components/pmt_performance/ColorfulArc';
+import { useSelector } from 'react-redux';
 
 const ChartProgressTextgroup = (props) => {
   return (
@@ -175,8 +175,12 @@ const Productivity_bottomCards = ({ cardData }) => {
     </Box>
   );
 };
-const HomePmtPerformanceSection = ({ pageData, loksabhaName, loading }) => {
+
+const HomePmtPerformanceSection = () => {
   const Arc_progressData = [85, 91, 90, 87];
+  const { loksabhaName, pageData, loading } = useSelector(
+    (state) => state?.pmtPerformance
+  );
   return loading ? (
     <Box
       sx={{
@@ -189,7 +193,7 @@ const HomePmtPerformanceSection = ({ pageData, loksabhaName, loading }) => {
     >
       <CircularProgress />
     </Box>
-  ) : (
+  ) : ( loksabhaName &&
     <div>
       <Box
         sx={{
@@ -419,9 +423,7 @@ const HomePmtPerformanceSection = ({ pageData, loksabhaName, loading }) => {
           </Box>
         </Grid>
       </Grid>
-      <Productivity_bottomCards
-        cardData={pageData?.other_performing_data}
-      />
+      <Productivity_bottomCards cardData={pageData?.other_performing_data} />
     </div>
   );
 };
