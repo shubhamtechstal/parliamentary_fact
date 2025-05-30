@@ -54,40 +54,7 @@ function MpsPerformancePageComponent({
   //   question_data,
   // } = useSelector((state) => state?.mpsPerformance);
 
-  const mpsDataNetionalRank = (mps__data) => {
-    const result = [];
-    mps__data?.forEach((data) => {
-      result.push({
-        rank: data.national_rank,
-        mp_id: data.mp_id,
-        name: data.name,
-        constituency: data.constituency,
-        state_name: data.state_name,
-        performance: data.national_percentage,
-        partyName: data.party_short_name,
-        rankTitle: 'National Rank:',
-        image: data.image,
-      });
-    });
-    return result;
-  };
-  const mpsDataStateRank = (mps__data) => {
-    const result = [];
-    mps__data?.forEach((data) => {
-      result.push({
-        rank: data.state_rank,
-        mp_id: data.mp_id,
-        name: data.name,
-        constituency: data.constituency,
-        state_name: data.state_name,
-        performance: data.state_percentage,
-        partyName: data.party_short_name,
-        rankTitle: 'State Rank:',
-        image: data.image,
-      });
-    });
-    return result;
-  };
+
   // const mpsDataNetionalRank =
   //   mps_attendance_data?.map((data) => {
   //     return {
@@ -256,9 +223,9 @@ function MpsPerformancePageComponent({
         detailsPage="popular-mps"
         handleDetailsClick={handleDetailsClick}
         handleOpenSharePopup={handleOpenSharePopup}
-        // mpsData={mpsData}
-        mpsDataNetionalRank={mpsDataNetionalRank(popular_mps)}
-        mpsDataStateRank={mpsDataStateRank(popular_mps)}
+        mps_Data={popular_mps}
+        // mpsDataNetionalRank={mpsDataNetionalRank(popular_mps)}
+        // mpsDataStateRank={mpsDataStateRank(popular_mps)}
       />
       <AdvertiseSection />
 
@@ -268,8 +235,9 @@ function MpsPerformancePageComponent({
         detailsPage="top-performer-mps"
         handleDetailsClick={handleDetailsClick}
         handleOpenSharePopup={handleOpenSharePopup}
-        mpsDataNetionalRank={mpsDataNetionalRank(top_performance)}
-        mpsDataStateRank={mpsDataStateRank(top_performance)}
+        mps_Data={top_performance}
+        // mpsDataNetionalRank={mpsDataNetionalRank(top_performance)}
+        // mpsDataStateRank={mpsDataStateRank(top_performance)}
       />
       <AdvertiseSection />
 

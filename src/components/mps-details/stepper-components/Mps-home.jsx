@@ -25,7 +25,7 @@ function MpsHomeComponent() {
   };
   return (
     <>
-    <Box sx={{ display: 'flex',  gap: 2, justifyContent: 'space-between', flexWrap: 'wrap' }}>
+    <Box sx={{ display: 'flex',  gap: 3,   flexWrap: 'wrap' }}>
       <Box>
         <p>National Ranking</p>
         <Box minWidth={350}>

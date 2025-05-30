@@ -139,7 +139,7 @@ function MpsSectionDynamic({
         )}
       </Grid>
 
-      {topMinistersData && (
+      {topMinistersData&& topMinisterTitle && (
         <>
           <SectionHeading title={topMinisterTitle} />
           <Grid
