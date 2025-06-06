@@ -91,7 +91,7 @@ const routes = [
       {
         path: 'mps-public-rating-list',
         element: <PrivateRoute component={<MpsRatingAllList/>} />,
-      },
+      },//already exist need to test
       {
         path: 'rate-your-mp',
         element: <PrivateRoute component={<RateYourMp />} />,

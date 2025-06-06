@@ -91,7 +91,7 @@ function MpsPerformanceCard({
       {isLoading ? (
         MpsPerformanceCardSkeleton()
       ) : (
-        <Link style={{textDecoration:'none', color:"inherit"}} to={mp?.mp_id ? `/mps-details/${mp?.mp_id}` : '#'}>
+        <Link style={{textDecoration:'none', color:"inherit"}} to={mp?.mp_id ? `/mps-details/${mp?.name.replaceAll(" ", '-')?.toLowerCase() }_${mp?.mp_id}` : '#'}>
           <Card
             sx={{
               py: 1.5,
@@ -191,7 +191,7 @@ function MpsPerformanceCard({
                       fontSize: '26px',
                     }}
                   >
-                    {mp.performance}
+                    {`${mp?.performance}`.replaceAll(".00", '')}
                   </span>
                   % <br />
                 </p>

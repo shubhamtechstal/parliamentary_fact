@@ -144,6 +144,7 @@ function MpsConstituencyPageComponent({
         handleDetailsClick={handleDetailsClick}
         handleOpenSharePopup={handleOpenSharePopup}
         mps_Data={popular_mps}
+        cardCatagory={'Mp LD fund'}
         // mpsDataNetionalRank={mpsDataNetionalRank}
         // mpsDataStateRank={mpsDataStateRank}
       />
@@ -155,6 +156,7 @@ function MpsConstituencyPageComponent({
         detailsPage="top-performer-mps"
         handleDetailsClick={handleDetailsClick}
         handleOpenSharePopup={handleOpenSharePopup}
+        cardCatagory={'Mp LD fund'}
         mps_Data={mp_fund_data}
         // mpsDataNetionalRank={mpsDataNetionalRank}
         // mpsDataStateRank={mpsDataStateRank}
@@ -166,6 +168,7 @@ function MpsConstituencyPageComponent({
         detailsPage="top-performer-mps"
         handleDetailsClick={handleDetailsClick}
         handleOpenSharePopup={handleOpenSharePopup}
+        cardCatagory={'Mp LD fund'}
         mps_Data={sorted.sort((a, b) => a.performance - b.performance)}
         // mpsDataNetionalRank={mpsDataNetionalRank}
         // mpsDataStateRank={mpsDataStateRank}
@@ -177,6 +180,7 @@ function MpsConstituencyPageComponent({
         detailsPage="top-performer-mps"
         handleDetailsClick={handleDetailsClick}
         mps_Data={mp_fund_data}
+        cardCatagory={'Mp LD fund'}
         handleOpenSharePopup={handleOpenSharePopup}
         // mpsDataNetionalRank={mpsDataNetionalRank}
         // mpsDataStateRank={mpsDataStateRank}

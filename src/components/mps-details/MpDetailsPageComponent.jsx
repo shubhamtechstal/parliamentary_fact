@@ -26,7 +26,6 @@ function MpDetailsPageComponent() {
   const handleSectionChange = (sectionId) => {
     setActiveSection(sectionId);
   };
-
   const sectionComponets = [
     {
       id: 'mps-home',
@@ -60,7 +59,6 @@ function MpDetailsPageComponent() {
   return (
     <Box
       sx={{
-        maxWidth: '1200px',
         margin: 'auto',
       }}
     >
@@ -76,12 +74,21 @@ function MpDetailsPageComponent() {
       </Box>
       <Box
         sx={{
-          padding: { md: '2rem', xs: '1rem' },
+          // padding: { md: '2rem', xs: '1rem' },
           background:
             'transparent linear-gradient(15deg, #FFFFFF 0%, #EDF2F6 100%) 0% 0% no-repeat padding-box',
         }}
       >
-        <Box sx={{overflowX: 'auto', display: 'flex', flexWrap: 'nowrap', textWrap: 'nowrap'}}>
+        <Box
+          sx={{
+            overflowX: 'auto',
+            display: 'flex',
+            flexWrap: 'nowrap',
+            textWrap: 'nowrap',
+            pt: { md: '2rem', xs: '1rem' },
+            pl: 3,
+          }}
+        >
           {mpsStapperTitles?.map((section) => (
             <button
               key={section.id}
@@ -95,6 +102,8 @@ function MpDetailsPageComponent() {
                   activeSection == section.id ? '3px solid #f1807c' : 'none',
                 background: 'transparent',
                 paddingBottom: '5px',
+                fontSize: '16px',
+                fontWeight: 'bold',
               }}
             >
               {section.title}
@@ -102,7 +111,7 @@ function MpDetailsPageComponent() {
           ))}
         </Box>
 
-        <Box pt={5}>
+        <Box>
           {sectionComponets.find((s) => s.id === activeSection)?.component}
         </Box>
       </Box>
