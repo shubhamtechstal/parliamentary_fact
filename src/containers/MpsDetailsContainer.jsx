@@ -1,10 +1,13 @@
+import AdvertisementLayout from 'components/addLayout/AdvertisementLayout';
 import MpDetailsPageComponent from 'components/mps-details/MpDetailsPageComponent';
 import React from 'react';
 
 function MpsDetailsContainer() {
   return (
     <div>
-      <MpDetailsPageComponent />{' '}
+      <AdvertisementLayout>
+        <MpDetailsPageComponent />{' '}
+      </AdvertisementLayout>
     </div>
   );
 }

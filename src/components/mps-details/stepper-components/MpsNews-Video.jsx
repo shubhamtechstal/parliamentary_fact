@@ -1,8 +1,10 @@
-import React from 'react'
+import NewsSectionHome from 'components/news/NewsSectionHome'
 
 function MpsNewsAndVideo() {
   return (
-    <div>MpsNews & Video</div>
+    <div>
+      <NewsSectionHome />
+    </div>
   )
 }
 

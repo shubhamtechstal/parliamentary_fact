@@ -17,7 +17,10 @@ export const StickyFooter = () => {
         </p>
         <p style={{ margin: '0 10px', textWrap: 'nowrap' }}>MPs Performance</p>
       </Link>
-      <div className="footer-tab">
+      <Link
+        className="footer-tab"
+        to="/rate-your-mp"
+      >
         <p style={{ margin: '0 0' }}>
           {' '}
           <StarBorderPurple500OutlinedIcon />
@@ -25,7 +28,7 @@ export const StickyFooter = () => {
           <StarBorderPurple500OutlinedIcon />
         </p>{' '}
         Rate your MP
-      </div>
+      </Link>
       <div className="footer-tab">
         <p style={{ margin: '0 0' }}>
           {' '}

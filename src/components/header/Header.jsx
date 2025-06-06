@@ -17,18 +17,18 @@ import XIcon from '@mui/icons-material/X';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import images from 'helpers/images';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import '../../components/common/cards/NewsCard.css';
 import { dashboardNewsApiAction } from 'stores/redux/apiSlices/DashboardNewsSlice/dashboardNewsApiSlice';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-export default function Header({ data,setIndex,selected }) {
+export default function Header({ data, setIndex, selected }) {
   const { data: trendingDataApi } = dashboardNewsApiAction.getDashboardNews({
     limit: 10,
   });
 
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
-  const [newLetter,setNewsletter] = useState(true)
+  const [newLetter, setNewsletter] = useState(true);
 
   const handleMoreClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -99,7 +99,7 @@ export default function Header({ data,setIndex,selected }) {
       id: val.id,
       title: val?.news_description?.[0]?.title || '',
       url: val?.url || '',
-      subCategory:val?.sub_category || ''
+      subCategory: val?.sub_category || '',
     })) || [];
 
   const limitWords = (text, wordLimit) => {
@@ -114,7 +114,41 @@ export default function Header({ data,setIndex,selected }) {
     arrNews.length > 0 ? limitWords(arrNews[trendingNews]?.title, 15) : '';
 
   const header = data;
-
+  const pageNavigtionLinks = [
+    {
+      title: 'Home',
+      pageUrl: '/',
+    },
+    {
+      title: 'Parliament Performance',
+      pageUrl: '/parliament-performance',
+    },
+    {
+      title: 'MPs Parliament Performance',
+      pageUrl: '/mps-performance',
+    },
+    {
+      title: 'MPs Constituency Performance',
+      pageUrl: '/mps-constituency',
+    },
+    {
+      title: 'MPs Public Rating',
+      pageUrl: '/mps-public-rating',
+    },
+    {
+      title: 'News & Videos',
+      pageUrl: '/news',
+    },
+    {
+      title: 'Your MPs',
+      pageUrl: '/your-mps',
+    },
+    {
+      title: 'Newsletter',
+      pageUrl: '/newsletter',
+    },
+  ];
+  const [isSubNavigationMenu, setisSubNavigationMenu] = useState(false);
   const handleRightClick = () => {
     setTrendingNews((prev) => (prev === arrNews.length - 1 ? 0 : prev + 1));
   };
@@ -139,7 +173,7 @@ export default function Header({ data,setIndex,selected }) {
   };
 
   const handleSearch = () => {
-    setIndex(-2)
+    setIndex(-2);
     if (keyword.trim()) {
       navigate(`/news/search/${createSlug(keyword)}`, {
         state: { keyword: createSlug(keyword) },
@@ -151,23 +185,33 @@ export default function Header({ data,setIndex,selected }) {
   const location = useLocation();
   const { id } = location.state || {};
   useEffect(() => {
-    if(id!==undefined)setIndex(-2);
+    if ( window.location.pathname.includes('news')) {
+      setisSubNavigationMenu(true);
+    } else {
+      setisSubNavigationMenu(false);
+    }
   }, [id]);
   const parts = window.location.href.split('/');
- useEffect(()=>{
-  const index = data?.findIndex(item => item.url === parts[parts.length-1]);
-  if(parts[parts.length-1]!=="news" && index===-1){setIndex(-2)}else{setIndex(index)}
-  if(parts[parts.length-1]!=="newsletter")setNewsletter(true);else setNewsletter(false)
- },[window.location.href,data])
+  useEffect(() => {
+    const index = data?.findIndex(
+      (item) => item.url === parts[parts.length - 1]
+    );
+    if (parts[parts.length - 1] !== 'news' && index === -1) {
+      setIndex(-2);
+    } else {
+      setIndex(index);
+    }
+    if (parts[parts.length - 1] !== 'newsletter') setNewsletter(true);
+    else setNewsletter(false);
+  }, [window.location.href, data]);
   return (
     <Box
       sx={{
         width: '100%',
         boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
-        paddingBottom: '0.8rem',
+        marginBottom: '3px',
       }}
     >
-      <Container>
       {/* {newLetter &&  <>
       <Box
           sx={{
@@ -428,6 +472,7 @@ export default function Header({ data,setIndex,selected }) {
         </Button>
         </Box>
         </>} */}
+      <Container>
         <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <Box
             sx={{
@@ -449,9 +494,11 @@ export default function Header({ data,setIndex,selected }) {
             <Text
               onClick={() =>
                 navigate(
-                  `/news/details/${arrNews[trendingNews]?.subCategory?.toLowerCase().replace(/\s+/g, '-')}/${arrNews[trendingNews]?.url}`, {
-                  state: { id: arrNews[trendingNews]?.id },
-                })
+                  `/news/details/${arrNews[trendingNews]?.subCategory?.toLowerCase().replace(/\s+/g, '-')}/${arrNews[trendingNews]?.url}`,
+                  {
+                    state: { id: arrNews[trendingNews]?.id },
+                  }
+                )
               }
               text={truncatedText}
               sx={
@@ -507,7 +554,7 @@ export default function Header({ data,setIndex,selected }) {
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            marginTop:'0.5rem'
+            marginTop: '0.5rem',
           }}
         >
           <Text
@@ -523,44 +570,44 @@ export default function Header({ data,setIndex,selected }) {
               <img src="/pfLogo.png" alt="logo" className="pfLogo" />
             </Box>
             {/* <Text
-              text={'Local Coronavirus informations'}
-              sx={{ color: '#767676', fontSize: '0.75rem' }}
-            /> */}
+                text={'Local Coronavirus informations'}
+                sx={{ color: '#767676', fontSize: '0.75rem' }}
+              /> */}
           </Box>
           <Box sx={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-          <Box display="flex" gap="2px">
-          <img
-                      style={{ height: '25px', cursor: 'pointer' }}
-                      onClick={() =>
-                        (window.location.href =
-                          'https://www.facebook.com/profile.php?id=100088959852699')
-                      }
-                      src="/Assets/icons/facebook.png"
-                    />
-                    <img
-                      style={{ height: '25px', cursor: 'pointer' }}
-                      onClick={() =>
-                        (window.location.href = 'https://x.com/parliamentaryf7')
-                      }
-                      src="/Assets/icons/twitterX.png"
-                    />
-                    <img
-                      style={{ height: '25px', cursor: 'pointer' }}
-                      onClick={() =>
-                        (window.location.href =
-                          'https://www.instagram.com/parliamentaryfacts/?hl=en')
-                      }
-                      src="/Assets/icons/instagram.png"
-                    />
-                    <img
-                      style={{ height: '25px', cursor: 'pointer' }}
-                      onClick={() =>
-                        (window.location.href =
-                          'https://www.youtube.com/channel/UCmiD-5GplSufIcKYQ-fHNUQ')
-                      }
-                      src="/Assets/icons/youtube.png"
-                    />
-                </Box>
+            <Box display="flex" gap="2px">
+              <img
+                style={{ height: '25px', cursor: 'pointer' }}
+                onClick={() =>
+                  (window.location.href =
+                    'https://www.facebook.com/profile.php?id=100088959852699')
+                }
+                src="/Assets/icons/facebook.png"
+              />
+              <img
+                style={{ height: '25px', cursor: 'pointer' }}
+                onClick={() =>
+                  (window.location.href = 'https://x.com/parliamentaryf7')
+                }
+                src="/Assets/icons/twitterX.png"
+              />
+              <img
+                style={{ height: '25px', cursor: 'pointer' }}
+                onClick={() =>
+                  (window.location.href =
+                    'https://www.instagram.com/parliamentaryfacts/?hl=en')
+                }
+                src="/Assets/icons/instagram.png"
+              />
+              <img
+                style={{ height: '25px', cursor: 'pointer' }}
+                onClick={() =>
+                  (window.location.href =
+                    'https://www.youtube.com/channel/UCmiD-5GplSufIcKYQ-fHNUQ')
+                }
+                src="/Assets/icons/youtube.png"
+              />
+            </Box>
             <Box
               onClick={() => setSearchShow(!searchShow)}
               sx={{
@@ -609,32 +656,90 @@ export default function Header({ data,setIndex,selected }) {
             )}
           </Box>
         </Box>
-        <Box
-          sx={{ display: 'flex', justifyContent: 'start', marginTop: '1rem' }}
+      </Container>
+      <Box
+        sx={{
+          display: 'flex',
+          marginTop: '1rem',
+          background: '#f7f7f7',
+          padding: '0.5rem 0',
+        }}
+      >
+        <Container
+          sx={{ display: 'flex', justifyContent: 'start', gap: '1.5rem' }}
+        >
+          {pageNavigtionLinks?.slice(0, 6).map((val, index) => {
+            const isActive = (val?.pageUrl !== '/')&& window.location.pathname.includes(val?.pageUrl) || (val?.pageUrl === '/' && window.location.pathname === '/');
+            return (
+              <Link
+                style={{
+                  textDecoration: 'none',
+                  color: isActive ? '#F44336' : 'inherit',
+                  borderBottom: isActive ? '2px solid #FF936F' : 'none',
+                }}
+                to={`${val?.pageUrl}`}
+                key={index}
+              >
+                <Text
+                  text={val?.title}
+                  sx={{
+                    fontSize: '0.9rem',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                  }}
+                />
+                {val?.subhead && <ExpandMoreIcon />}
+              </Link>
+            );
+          })}
+          {pageNavigtionLinks?.length > 6 && (
+            <Box
+              sx={{ display: 'flex', cursor: 'pointer' }}
+              onClick={handleMoreClick}
+            >
+              <MoreVertIcon sx={{ fontSize: '1.2rem' }} />
+            </Box>
+          )}
+        </Container>
+        <Menu
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
+          onClose={handleClose}
+        >
+          {pageNavigtionLinks?.slice(6).map((val, index) => (
+            <MenuItem
+              sx={{ fontSize: '12px' }}
+              onClick={() => {
+                {
+                  navigate(`/news/categories/${val?.pageUrl}`, {
+                    state: { category: val?.title },
+                  }),
+                    setIndex(index + 6);
+                }
+                handleClose();
+              }}
+              key={index}
+            >
+              {val?.title}
+            </MenuItem>
+          ))}
+        </Menu>
+      </Box>
+      {/* Subheader navigations */}
+      {isSubNavigationMenu && (
+        <Container
+          sx={{ display: 'flex', justifyContent: 'start',  padding: '0.5rem' }}
         >
           <Box sx={{ display: 'flex', gap: '1.5rem' }}>
-            <Box sx={{ display: 'flex' }} onClick={() => {navigate('/'),setIndex(-1)}}>
-              <Text
-                text={'Home'}
-                sx={{
-                  fontSize: '0.9rem',
-                  fontWeight: 700,
-                  cursor: 'pointer',
-                  color:selected===-1?"#162eb7":"",
-                  '&:hover': {
-                    color: '#162eb7',
-                  },
-                }}
-              />
-            </Box>
             {header?.slice(0, 6).map((val, index) => (
               <Box
                 sx={{ display: 'flex' }}
-                onClick={() =>
-                 { navigate(`/news/categories/${val?.url}`, {
+                onClick={() => {
+                  navigate(`/news/categories/${val?.url}`, {
                     state: { category: val?.category },
-                  }),setIndex(index)}
-                }
+                  }),
+                    setIndex(index);
+                }}
                 key={index}
               >
                 <Text
@@ -643,7 +748,7 @@ export default function Header({ data,setIndex,selected }) {
                     fontSize: '0.9rem',
                     fontWeight: 700,
                     cursor: 'pointer',
-                    color:selected===index?"#162eb7":"",
+                    color: selected === index ? '#162eb7' : '',
                     '&:hover': {
                       color: '#162eb7',
                     },
@@ -657,18 +762,7 @@ export default function Header({ data,setIndex,selected }) {
                 sx={{ display: 'flex', cursor: 'pointer' }}
                 onClick={handleMoreClick}
               >
-                {/* <Text
-                  text={'More'}
-                  sx={{
-                    fontSize: '0.9rem',
-                    fontWeight: 700,
-                    cursor: 'pointer',
-                    '&:hover': {
-                      color: '#162eb7',
-                    },
-                  }}
-                /> */}
-                <MoreVertIcon sx={{fontSize:'1.2rem'}}/>
+                <MoreVertIcon sx={{ fontSize: '1.2rem' }} />
               </Box>
             )}
           </Box>
@@ -681,9 +775,12 @@ export default function Header({ data,setIndex,selected }) {
               <MenuItem
                 sx={{ fontSize: '12px' }}
                 onClick={() => {
-                 { navigate(`/news/categories/${val?.url}`, {
-                    state: { category: val?.category },
-                  }),setIndex(index+6)};
+                  {
+                    navigate(`/news/categories/${val?.url}`, {
+                      state: { category: val?.category },
+                    }),
+                      setIndex(index + 6);
+                  }
                   handleClose();
                 }}
                 key={index}
@@ -692,8 +789,8 @@ export default function Header({ data,setIndex,selected }) {
               </MenuItem>
             ))}
           </Menu>
-        </Box>
-      </Container>
+        </Container>
+      )}
     </Box>
   );
 }

@@ -11,7 +11,8 @@ export default function MPPerformance({
   title,
   handleDetailsClick,
   handleOpenSharePopup,
-  mps_Data
+  mps_Data,
+  cardCatagory
   // mpsDataStateRank,
   // mpsDataNetionalRank,
 }) {
@@ -78,6 +79,7 @@ export default function MPPerformance({
                 index={index}
                 handleOpenSharePopup={handleOpenSharePopup}
                 isLoading={isLoading}
+                cardCatagory={cardCatagory}
               />
             </Grid>
           ))
@@ -101,6 +103,7 @@ export default function MPPerformance({
                 index={index}
                 handleOpenSharePopup={handleOpenSharePopup}
                 isLoading={isLoading}
+                cardCatagory={cardCatagory}
               />
             </Grid>
           ))
