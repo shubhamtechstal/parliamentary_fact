@@ -26,9 +26,9 @@ const QuestionTextGroup = ({ title, value, date, index }) => {
       }}
     >
       {[3,4,5,8,9].includes(index) ? (
-        <GrayDot icon_url={'Assets/icons/small_arrow_Down.png'} />
+        <GrayDot icon_url={'/Assets/icons/small_arrow_Down.png'} />
       ) : (
-        <GrayDot icon_url={'Assets/icons/small_arrow_Up.png'} />
+        <GrayDot icon_url={'/Assets/icons/small_arrow_Up.png'} />
       )}
       <Box>
         <Text
@@ -111,7 +111,7 @@ function LS_QuestionsComponent({
         <Box
           sx={{
             position: 'relative',
-            marginTop: '-3rem',
+            marginTop: '-2rem',
           }}
         >
           <ProgressMeter
@@ -249,7 +249,7 @@ function LS_QuestionsComponent({
         {BottomRightChip && (
           <Box sx={{ position: 'relative', bottom: '1rem' }}>
             <BottomRightChip
-              sectionDetailName={'questions-detail'}
+              sectionDetailName={'lok-sabha-question'}
               chipLabal={'MPs Participation in Lok Sabha Questions'}
             />
           </Box>
@@ -283,7 +283,7 @@ function LS_QuestionsComponent({
             md={3}
             sx={{
               position: 'relative',
-              top: '-5.5rem',
+              top: '-3.5rem',
             }}
           >
             <ProgressMeter
@@ -331,7 +331,7 @@ function LS_QuestionsComponent({
         {BottomRightChip && (
           <Box sx={{ position: 'absolute', right: '2rem', bottom: '15%' }}>
             <BottomRightChip
-              sectionDetailName={'questions-detail'}
+              sectionDetailName={'lok-sabha-question'}
               chipLabal={'MPs Participation in Lok Sabha Questions'}
             />
           </Box>

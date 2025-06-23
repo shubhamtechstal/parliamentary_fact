@@ -81,7 +81,7 @@ export default function AdvertiseContainer() {
         sx={{
           alignSelf: 'flex-start',
           position: 'sticky',
-          top: '2rem',
+          top: '1rem',
           marginLeft: '1rem',
           gap: '1rem',
         }}

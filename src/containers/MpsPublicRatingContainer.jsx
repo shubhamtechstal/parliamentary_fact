@@ -90,7 +90,8 @@ export default function MpsPublicRatingContainer() {
           container
           spacing={2}
           sx={{
-            display: 'grid',
+            display:{md : 'grid', xs : 'flex'},
+            flexWrap: { xs: 'nowrap', md: 'wrap' },
             gridTemplateColumns: { xs: '1fr', md: '1fr 1fr 1fr 1fr 1fr 1fr' },
             overflowX: { xs: 'auto', md: 'unset' },
             justifyContent: 'space-around',
@@ -139,8 +140,9 @@ export default function MpsPublicRatingContainer() {
        <Grid
           container
           spacing={2}
-          sx={{
-            display: 'grid',
+          sx={{            
+            display:{md : 'grid', xs : 'flex'},
+            flexWrap: { xs: 'nowrap', md: 'wrap' },
             gridTemplateColumns: { xs: '1fr', md: '1fr 1fr 1fr 1fr 1fr 1fr' },
             overflowX: { xs: 'auto', md: 'unset' },
             justifyContent: 'space-around',
@@ -162,7 +164,8 @@ export default function MpsPublicRatingContainer() {
           container
           spacing={2}
           sx={{
-            display: 'grid',
+            display:{md : 'grid', xs : 'flex'},
+            flexWrap: { xs: 'nowrap', md: 'wrap' },
             gridTemplateColumns: { xs: '1fr', md: '1fr 1fr 1fr 1fr 1fr 1fr' },
             overflowX: { xs: 'auto', md: 'unset' },
             justifyContent: 'space-around',

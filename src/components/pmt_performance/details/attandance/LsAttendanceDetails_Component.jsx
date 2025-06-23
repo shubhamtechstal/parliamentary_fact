@@ -2,7 +2,7 @@ import { Autocomplete, Box, Divider, Skeleton, TextField } from '@mui/material';
 import StateAttendance from 'components/attendence/StateAttendance';
 import Text from 'components/common/Text';
 import { useEffect, useState } from 'react';
-import LS_attendance from 'components/pmt_performance/LS_attendance';
+import LS_attendance from 'components/pmt_performance/pmt_prfrmc_home/LS_attendance';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAttendanceDetailsData } from 'stores/redux/apiSlices/pmt_PerformanceSlice';
 import SectionHeading from 'components/common/SectionHeading';
@@ -48,11 +48,36 @@ export default function LsAttendanceDetails_Component() {
         <Box
           sx={{
             display: { md: 'flex', xs: 'block' },
-            justifyContent: 'space-between',
+            justifyContent: 'right',
             alignItems: 'center',
             textAlign: { xs: 'right', md: 'left' },
           }}
         >
+          {/* <Text
+            sx={{
+              fontSize: '1.3rem',
+              color: '#434343',
+              letterSpacing: '-0.3px',
+              fontWeight: 500,
+              textAlign: { xs: 'center', md: 'left' },
+            }}
+            font={'Sora'}
+            text={'MPS PARTICIPATION IN LOK SABHA ATTENDANCE'}
+          /> */}
+          <Box  sx={{ position:{ xs : 'absolute', md:'static'}, right: 11, top:11}}>
+            <FilterController
+              setAppliedFilter={(e) => setAppliedFilterFromPoup(e)}
+            />
+          </Box>
+        </Box>
+        <LS_attendance
+          attendance_details={attendanceDetailsPageData?.attendance_summary}
+          percentageValue={attendanceDetailsPageData?.attendance_percentage?.value}
+          titleHeadign={'Lok Sabha Attendance'}
+          // attendance_percentage={attendance_percentage}
+        />
+        <Box id="State_Wise">
+          <Divider sx={{ margin: '1rem 0 2rem 0' }} />
           <Text
             sx={{
               fontSize: '1.3rem',
@@ -64,19 +89,6 @@ export default function LsAttendanceDetails_Component() {
             font={'Sora'}
             text={'MPS PARTICIPATION IN LOK SABHA ATTENDANCE'}
           />
-          <Box  sx={{ position:{ xs : 'absolute', md:'static'}, right: 11, top:11}}>
-            <FilterController
-              setAppliedFilter={(e) => setAppliedFilterFromPoup(e)}
-            />
-          </Box>
-        </Box>
-        <LS_attendance
-          attendance_details={attendanceDetailsPageData?.attendance_summary}
-          pageData={attendanceDetailsPageData?.attendance_percentage}
-          // attendance_percentage={attendance_percentage}
-        />
-        <Box id="State_Wise">
-          <Divider sx={{ margin: '1rem' }} />
           <Box
             sx={{
               display: 'flex',

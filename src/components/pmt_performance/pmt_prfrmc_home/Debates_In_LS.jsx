@@ -272,7 +272,7 @@ function Debates_In_LS({ debateListData, questionsData, BottomRightChip }) {
           <Grid xs={12} md={8}></Grid>
         </Grid>
         <Box sx={{ display: 'flex', justifyContent: 'center', marginBottom:'1rem' }}>
-          <BottomRightChip  chipLabal={'MPs Participation in Lok Sabha Debate'}/>
+          <BottomRightChip sectionDetailName={'lok-sabha-debates'} chipLabal={'MPs Participation in Lok Sabha Debate'}/>
         </Box>
       </Box>
 
@@ -358,7 +358,7 @@ function Debates_In_LS({ debateListData, questionsData, BottomRightChip }) {
           </Grid>
         </Grid>
         <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <BottomRightChip  chipLabal={'MPs Participation in Lok Sabha Debate'} />
+          <BottomRightChip  sectionDetailName={'lok-sabha-debates'} chipLabal={'MPs Participation in Lok Sabha Debate'} />
         </Box>
       </Box>
     </>

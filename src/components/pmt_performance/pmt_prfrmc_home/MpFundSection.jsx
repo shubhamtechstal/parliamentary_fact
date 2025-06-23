@@ -4,37 +4,37 @@ import ProgressMeter from 'components/common/ProgressMeter';
 import SectionHeading from 'components/common/SectionHeading';
 import Text from 'components/common/Text';
 
-const FundSpentInTopAreaTextGroup = ({ category, value, date, index }) => {
-  return (
-    <Box
-      key={index}
-      sx={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: '0.8rem',
-        width: { md: '20%', xs: '10rem' },
-      }}
-    >
-      <GrayDot />
-      <Box>
-        <Text
-          sx={{
-            fontSize: '1rem',
-            fontWeight: 600,
-          }}
-          text={value}
-        />
-        <Text
-          sx={{
-            fontSize: '0.8rem',
-            fontWeight: 500,
-          }}
-          text={category}
-        />
-      </Box>
-    </Box>
-  );
-};
+// const FundSpentInTopAreaTextGroup = ({ category, value, date, index }) => {
+//   return (
+//     <Box
+//       key={index}
+//       sx={{
+//         display: 'flex',
+//         alignItems: 'center',
+//         gap: '0.8rem',
+//         width: { md: '20%', xs: '10rem' },
+//       }}
+//     >
+//       <GrayDot />
+//       <Box>
+//         <Text
+//           sx={{
+//             fontSize: '1rem',
+//             fontWeight: 600,
+//           }}
+//           text={value}
+//         />
+//         <Text
+//           sx={{
+//             fontSize: '0.8rem',
+//             fontWeight: 500,
+//           }}
+//           text={category}
+//         />
+//       </Box>
+//     </Box>
+//   );
+// };
 const FundDataTextGroup = ({ index, title, unit, percentage }) => {
   return (
     <Box
@@ -148,7 +148,7 @@ function MpFundSection({ MpFundSection, mpsFundData, BottomRightChip }) {
         </Box> */}
         {BottomRightChip&&
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-          <BottomRightChip />
+          <BottomRightChip sectionDetailName={"lok-sabha-private-member-bills"} chipLabal={'MPs Participation in Lok Sabha pvt member Bills'} />
         </Box>
         }
       </Box>
@@ -280,7 +280,7 @@ function MpFundSection({ MpFundSection, mpsFundData, BottomRightChip }) {
         </Grid>
         {BottomRightChip&&
         <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <BottomRightChip />
+          <BottomRightChip sectionDetailName={"lok-sabha-private-member-bills"} chipLabal={'MPs Participation in Lok Sabha pvt member Bills'} />
         </Box>}
       </Box>
     </>

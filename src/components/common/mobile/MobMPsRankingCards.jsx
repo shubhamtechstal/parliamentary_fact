@@ -206,12 +206,12 @@ function MobMPsRankingCards({
             <img
               width={16}
               height={16}
-              src="Assets/icons/icon3dot.png"
+              src="/Assets/icons/icon3dot.png"
               alt="icon3dot"
             />
             <Avatar
               sx={{ width: '30px', height: '30px' }}
-              src="Assets/icons/shareYellowIcon.png"
+              src="/Assets/icons/shareYellowIcon.png"
               alt="icon3dot"
               onClick={() => handleOpenSharePopup()}
             />

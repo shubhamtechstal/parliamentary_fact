@@ -5,6 +5,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import StarIcon from '@mui/icons-material/Star';
 import GrayButton from 'components/common/GrayButton';
 import Button from 'components/common/Button';
+import { Link } from 'react-router-dom';
 
 function AttandanceSkeletonCard(index) {
   return (
@@ -294,17 +295,19 @@ function MpsTopPerformanceRatingCard({
                     padding: '5px',
                   }}
                 />
-                <Button
-                  style={{
-                    background: '#E39A00 0% 0% no-repeat padding-box',
-                    height: '18px',
-                    width: '91px',
-                    borderRadius: '20px',
-                    fontSize: '12px',
-                  }}
-                >
-                  Rate Now
-                </Button>
+                <Link  to={'/rate-your-mp'}>
+                  <Button
+                    style={{
+                      background: '#E39A00 0% 0% no-repeat padding-box',
+                      height: '18px',
+                      width: '91px',
+                      borderRadius: '20px',
+                      fontSize: '12px',
+                    }}
+                  >
+                    Rate Now
+                  </Button>
+                </Link>
               </Box>
             </Box>
           </Card>

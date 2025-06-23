@@ -1,24 +1,25 @@
 import { Box, Chip, CircularProgress } from '@mui/material';
 import AdvertiseSection from 'components/addLayout/HorizontalAdvertiseSection';
 import Text from 'components/common/Text';
-import Debates_In_LS from 'components/pmt_performance/Debates_In_LS';
-import LS_attendance from 'components/pmt_performance/LS_attendance';
-import LS_productivity from 'components/pmt_performance/LS_productivity';
-import LS_QuestionsComponent from 'components/pmt_performance/LS_questions';
-import MpFundSection from 'components/pmt_performance/MpFundSection';
+import Debates_In_LS from 'components/pmt_performance/pmt_prfrmc_home/Debates_In_LS';
+import LS_attendance from 'components/pmt_performance/pmt_prfrmc_home/LS_attendance';
+import LS_productivity from 'components/pmt_performance/pmt_prfrmc_home/LS_productivity';
+import LS_QuestionsComponent from 'components/pmt_performance/pmt_prfrmc_home/LS_questions';
+import MpFundSection from 'components/pmt_performance/pmt_prfrmc_home/MpFundSection';
 import {
   debateListData,
   MpFundsectionData,
-  performace_chipList,
+  // performace_chipList,
   productivity_bottomCardsdata,
   // productivity_schedule,
   questionsListData,
 } from 'helpers/performanceConstants';
-import { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { fetchPerformanceData } from 'stores/redux/apiSlices/pmt_PerformanceSlice';
-import PerformanceChips from './PerformanceChips';
+import { useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { Link } from 'react-router-dom';
+// import { fetchPerformanceData } from 'stores/redux/apiSlices/pmt_PerformanceSlice';
+// import PerformanceChips from './PerformanceChips';
 
 const Productivity_bottomCards = ({
   cardData = productivity_bottomCardsdata,
@@ -59,7 +60,7 @@ const Productivity_bottomCards = ({
                 }}
               >
                 <img
-                  src="Assets/icons/statueImg.png"
+                  src="/Assets/icons/statueImg.png"
                   alt="statueImg"
                   height={50}
                 />
@@ -102,11 +103,12 @@ const Productivity_bottomCards = ({
           );
         })}
       </Box>
-      <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+     {!window.location.pathname.includes('lok-sabha-productivity') && ( <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
         <BottomRightChip
-          chipLabal={'MPs Participation in Lok Sabha Productivity'}
+            sectionDetailName={'lok-sabha-productivity'}
+            chipLabal={'MPs Participation in Lok Sabha Productivity'}
         />
-      </Box>
+      </Box>)}
     </Box>
   );
 };
@@ -122,6 +124,8 @@ function ParliamentPerformancePageComponent(props) {
     pageData,
     loading,
   } = props;
+  console.log('pageData?.attendance_percentage?.attendance_percentage ', pageData?.attendance_percentage?.attendance_percentage )
+  const navigate = useNavigate();
   const BottomRightChip = ({ chipLabal, sectionDetailName }) => {
     return (
       <Chip
@@ -129,7 +133,9 @@ function ParliamentPerformancePageComponent(props) {
         Filled
         onClick={() =>
           sectionDetailName
-            ? handleSectionDetailClick(sectionDetailName)
+            ? 
+            navigate(`/parliament-performance/lok-sabha-performance/${sectionDetailName}`)
+            // handleSectionDetailClick(sectionDetailName)
             : () => {}
         }
         sx={{
@@ -160,7 +166,6 @@ function ParliamentPerformancePageComponent(props) {
     </Box>
   ) : (
     <Box ref={scrollRef}>
-      <PerformanceChips sections={performace_chipList} />
       <div id="Lok_Sabha_Productivity">
         <LS_productivity
           productivity_schedule={pageData?.schedule_data ?? []}
@@ -177,41 +182,45 @@ function ParliamentPerformancePageComponent(props) {
           BottomRightChip={BottomRightChip}
         />
       </div>
-      {/* <BottomRightChip /> */}
-      <AdvertiseSection />
-      <div id="Lok_Sabha_Attandance">
-        <LS_attendance
-          attendance_details={attendanceDetails}
-          pageData={pageData}
-          BottomRightChip={BottomRightChip}
-          className="performanceSection"
-        />
-      </div>
-      <AdvertiseSection />
-      <div id="Lok_Sabha_Question">
-        <LS_QuestionsComponent
-          questionsListData={questionsListData}
-          questionsData={questionsData}
-          pageData={pageData}
-          BottomRightChip={BottomRightChip}
-        />
-      </div>
-      <AdvertiseSection />
-      <div id="Lok_Sabha_Debates">
-        <Debates_In_LS
-          debateListData={debateListData}
-          BottomRightChip={BottomRightChip}
-          questionsData={questionsData}
-        />
-      </div>
-      <AdvertiseSection />
-      <div id="Lok_Sabha_Private_Member_Bills">
-        <MpFundSection
-          MpFundSection={MpFundsectionData}
-          mpsFundData={pageData?.mps_fund_data}
-          BottomRightChip={BottomRightChip}
-        />
-      </div>
+      {!window.location.pathname.includes('lok-sabha-productivity') && (
+        <>
+          <AdvertiseSection />
+          <div id="Lok_Sabha_Attandance">
+            <LS_attendance
+              attendance_details={attendanceDetails}
+              percentageValue={pageData?.attendance_percentage?.attendance_percentage }
+              titleHeadign={'Lok Sabha Attendance'}
+              BottomRightChip={BottomRightChip}
+              className="performanceSection"
+            />
+          </div>
+          <AdvertiseSection />
+          <div id="Lok_Sabha_Question">
+            <LS_QuestionsComponent
+              questionsListData={questionsListData}
+              questionsData={questionsData}
+              pageData={pageData}
+              BottomRightChip={BottomRightChip}
+            />
+          </div>
+          <AdvertiseSection />
+          <div id="Lok_Sabha_Debates">
+            <Debates_In_LS
+              debateListData={debateListData}
+              BottomRightChip={BottomRightChip}
+              questionsData={questionsData}
+            />
+          </div>
+          <AdvertiseSection />
+          <div id="Lok_Sabha_Private_Member_Bills">
+            <MpFundSection
+              MpFundSection={MpFundsectionData}
+              mpsFundData={pageData?.mps_fund_data}
+              BottomRightChip={BottomRightChip}
+            />
+          </div>
+        </>
+      )}
     </Box>
   );
 }

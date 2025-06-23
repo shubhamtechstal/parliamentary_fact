@@ -101,7 +101,7 @@ function MpsPerformanceCard({
               boxShadow: 2,
               textAlign: 'left',
               color: 'rgb(0 0 0 / 50%)',
-              minWidth: { xs: '9.5rem', md: 'auto' },
+              width: { xs: '10rem', md: 'auto' },
               height: 160,
             }}
           >
@@ -188,7 +188,7 @@ function MpsPerformanceCard({
                   <span
                     style={{
                       fontFamily: "'Saira', sans-serif",
-                      fontSize: '26px',
+                      fontSize: '22px',
                     }}
                   >
                     {`${mp?.performance}`.replaceAll(".00", '')}
@@ -202,7 +202,7 @@ function MpsPerformanceCard({
               <Avatar
                 src={mp.image}
                 alt={mp.name}
-                sx={{ width: 60, height: 60 }}
+                sx={{ width: 50, height: 50 }}
               />
             </Box>
           </Card>

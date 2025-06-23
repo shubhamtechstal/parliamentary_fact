@@ -1,4 +1,4 @@
-import { Box, Container } from '@mui/material';
+import { Avatar, Box, Container } from '@mui/material';
 import HomeHeroSection from './HomeHeroSection';
 import Button from 'components/common/Button';
 import { Link } from 'react-router-dom';
@@ -11,6 +11,7 @@ import { fetchPerformanceData } from 'stores/redux/apiSlices/pmt_PerformanceSlic
 import { useEffect } from 'react';
 import { fetchMpsPerformanceData } from 'stores/redux/apiSlices/mps_PerformanceSlice';
 
+
 function HomePageComponent() {
   // const data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
   // const mpsData = [
@@ -22,8 +23,16 @@ function HomePageComponent() {
     dispatch(fetchMpsPerformanceData());
   }, [dispatch]);
   return (
-    <div style={{ position: 'relative', top: '2rem' }}>
-      <Container>
+    <div>
+      <Box sx={{ display: 'flex', gap: 2, overflow: 'auto', p:{md : '1rem 2rem 0 3rem', xs : '1rem'}, textAlign:'center', backgroundColor:'#fff', alignItems:'center', borderBottom:'2px solid #d3d2d2' }}>
+        {Array.from({ length: 20 }, (_, index) => (
+        <Box key={index}>
+          <Avatar sx={{height:'60px', width:'60px'}} alt="Test" src={"kk"} />
+          <p style={{fontSize:'12px', marginTop:'5px'}}>Rahul Gandhi</p>
+        </Box>
+        ))}
+      </Box>
+      <Container sx={{ mt: 5,}}>
         <HomePmtPerformanceSection />
         <Container sx={{ display: { xs: 'block', md: 'none' }, mb: 4 }}>
           <HomeHeroSection />

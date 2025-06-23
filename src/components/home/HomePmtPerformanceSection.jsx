@@ -21,14 +21,14 @@ const ChartProgressTextgroup = (props) => {
       >
         {props.direction === 'down' ? (
           <img
-            src="Assets/icons/downGrowthIcon.png"
+            src="/Assets/icons/downGrowthIcon.png"
             alt=""
             height={30}
             width={40}
           />
         ) : (
           <img
-            src="Assets/icons/upGrowthIcon.png"
+            src="/Assets/icons/upGrowthIcon.png"
             alt=""
             height={30}
             width={40}
@@ -76,7 +76,7 @@ const Productivity_bottomCards = ({ cardData }) => {
         {cardData?.map((data, i) => {
           if (i == 3) {
             return (
-              <Box sx={{ background: 'rgb(238, 243, 247)' }}>
+              <Box sx={{ background: '#f6f6f6' }}>
                 <ProgressMeter
                   titleText={'Productivity'}
                   percentText={'100'}
@@ -102,7 +102,7 @@ const Productivity_bottomCards = ({ cardData }) => {
                 }}
               >
                 <img
-                  src="Assets/icons/statueImg.png"
+                  src="/Assets/icons/statueImg.png"
                   alt="statueImg"
                   height={50}
                 />
@@ -145,7 +145,7 @@ const Productivity_bottomCards = ({ cardData }) => {
               mb: 4,
             }}
           >
-            <img src="Assets/icons/statueImg.png" alt="statueImg" height={50} />
+            <img src="/Assets/icons/statueImg.png" alt="statueImg" height={50} />
             <Box
               sx={{
                 display: 'flex',
@@ -377,7 +377,7 @@ const HomePmtPerformanceSection = () => {
           </div>
           <img
             style={{ height: '165px', bottom: '8%' }}
-            src="Assets/icons/Parliament-dot-image1.png"
+            src="/Assets/icons/pmt_dot_image_home.png"
             // src="Assets/icons/pmt_whiteImage.png"
             className="parliamentCenterImgDesktop"
             alt="parliament"
