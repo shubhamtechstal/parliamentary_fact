@@ -370,7 +370,7 @@ export default function DashboardContainer() {
                   }}
                 >
                   <img
-                    src="Assets/icons/Adjournment-image1.png"
+                    src="/Assets/icons/Adjournment-image1.png"
                     alt="adjournment-1"
                     style={{ width: '100%' }}
                   />
@@ -523,7 +523,7 @@ export default function DashboardContainer() {
         <Box sx={{ position: 'relative' }}>
           <img
             className="parliamentDotImage"
-            src="Assets/icons/Parliament-dot-image1.png"
+            src="/Assets/icons/Parliament-dot-image1.png"
             alt="parliament"
             style={{ position: 'absolute' }}
           />
@@ -650,7 +650,7 @@ export default function DashboardContainer() {
                 }}
               >
                 <img
-                  src="Assets/icons/Adjournment-image1.png"
+                  src="/Assets/icons/Adjournment-image1.png"
                   alt="adjournment-1"
                   style={{ width: '100%' }}
                 />

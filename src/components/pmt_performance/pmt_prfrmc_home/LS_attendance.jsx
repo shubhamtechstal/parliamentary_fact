@@ -13,10 +13,11 @@ import {
 function LS_attendance({
   attendance_details,
   className,
-  pageData,
+  percentageValue,
   BottomRightChip,
+  titleHeadign = 'Lok Sabha Attendance',
 }) {
-  console.log('attendance_percentage attendance_details', attendance_details);
+  // console.log('attendance_percentage attendance_details', attendance_details);
   return (
     <>
       {/* **********Mobile********** */}
@@ -29,7 +30,7 @@ function LS_attendance({
         }}
       >
         <h3 style={{ textAlign: 'center', margin: '0' }}>
-          Lok Sabha Attendance
+         {titleHeadign}
         </h3>
         <Box
           sx={{
@@ -42,8 +43,8 @@ function LS_attendance({
             titleText={'ATTENDANCE'}
             subTiteText={`LOK SABHA`}
             centerDate={'Till 20 March 2024'}
-            percentText={`${extractPercentage(pageData?.attendance_percentage?.attendance_percentage ?? pageData?.value?.toString())?.a}`}
-            subPercentText={`${extractPercentage(pageData?.attendance_percentage?.attendance_percentage ?? pageData?.value?.toString())?.b}`}
+            percentText={`${extractPercentage(percentageValue?.toString())?.a}`}
+            subPercentText={`${extractPercentage(percentageValue?.toString())?.b}`}
             width={230}
             height={250}
             innerRadius={98}
@@ -136,7 +137,7 @@ function LS_attendance({
             }}
           >
             <BottomRightChip
-              sectionDetailName={'attendance-details'}
+              sectionDetailName={'lok-sabha-attandance'}
               chipLabal={'MPs Participation in Lok Sabha Attendance'}
             />
           </Box>
@@ -151,7 +152,7 @@ function LS_attendance({
           display: { md: 'block', xs: 'none' },
         }}
       >
-        <SectionHeading title={'Lok Sabha Attendance'} />
+        <SectionHeading title={titleHeadign} />
         <Grid
           container
           md={12}
@@ -168,8 +169,8 @@ function LS_attendance({
               titleText={'ATTENDANCE'}
               subTiteText={`LOK SABHA`}
               centerDate={'Till 20 March 2024'}
-              percentText={`${extractPercentage(pageData?.attendance_percentage?.attendance_percentage ?? pageData?.value?.toString())?.a}`}
-              subPercentText={`${extractPercentage(pageData?.attendance_percentage?.attendance_percentage ?? pageData?.value?.toString())?.b}`}
+              percentText={`${extractPercentage(percentageValue?.toString())?.a}`}
+              subPercentText={`${extractPercentage(percentageValue?.toString())?.b}`}
               // percentText={'100.'}
               // subPercentText={'20%'}
               width={230}
@@ -200,9 +201,9 @@ function LS_attendance({
                 sx={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}
               >
                 {index == 0 || index == 1 ? (
-                  <GrayDot icon_url={'Assets/icons/small_arrow_Up.png'} />
+                  <GrayDot icon_url={'/Assets/icons/small_arrow_Up.png'} />
                 ) : (
-                  <GrayDot icon_url={'Assets/icons/small_arrow_Down.png'} />
+                  <GrayDot icon_url={'/Assets/icons/small_arrow_Down.png'} />
                 )}
                 <Box>
                   <Text
@@ -246,7 +247,7 @@ function LS_attendance({
           </Grid>
           <Grid md={5}>
             <LineCharts
-              data={[90, 4, 66, 25, 14, 84, 45]}
+              data={[10, 4, 6, 5, 14, 14, 15]}
               labels={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul']}
               width={440}
             />
@@ -256,7 +257,7 @@ function LS_attendance({
         {BottomRightChip && (
           <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
             <BottomRightChip
-              sectionDetailName={'attendance-details'}
+              sectionDetailName={'lok-sabha-attandance'}
               chipLabal={'MPs Participation in Lok Sabha Attendance'}
             />
           </Box>

@@ -3,7 +3,7 @@ import Box from 'components/common/Box';
 import GrayDot from 'components/common/GrayDot';
 import ProgressMeter from 'components/common/ProgressMeter';
 import SectionHeading from 'components/common/SectionHeading';
-import ColorfulArc from './ColorfulArc';
+import ColorfulArc from '../ColorfulArc';
 import Text from 'components/common/Text';
 
 const PercentageTextgroup = (props) => {
@@ -44,14 +44,14 @@ const ChartProgressTextgroup = (props) => {
       >
         {props.direction === 'down' ? (
           <img
-            src="Assets/icons/downGrowthIcon.png"
+            src="/Assets/icons/downGrowthIcon.png"
             alt=""
             height={30}
             width={40}
           />
         ) : (
           <img
-            src="Assets/icons/upGrowthIcon.png"
+            src="/Assets/icons/upGrowthIcon.png"
             alt=""
             height={30}
             width={40}
@@ -107,7 +107,7 @@ const ScheduleTimeTextgroup = ({ schedule, i }) => {
       }}
     >
       {i == 1 ? (
-        <GrayDot icon_url={'Assets/icons/small_arrow_Down.png'} />
+        <GrayDot icon_url={'/Assets/icons/small_arrow_Down.png'} />
       ) : (
         <GrayDot />
       )}
@@ -396,7 +396,7 @@ function LS_productivity({
             />
           </Box>
           <img
-            src="Assets/icons/Parliament-dot-image1.png"
+            src="/Assets/icons/Parliament-dot-image1.png"
             alt="parliament"
             style={{
               width: '28rem',
@@ -432,7 +432,7 @@ function LS_productivity({
                 }}
               >
                 <img
-                  src="Assets/icons/statueImg.png"
+                  src="/Assets/icons/statueImg.png"
                   alt="statueImg"
                   height={50}
                 />
@@ -468,6 +468,7 @@ function LS_productivity({
         {BottomRightChip && (
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
             <BottomRightChip
+            sectionDetailName={'lok-sabha-productivity'}
               chipLabal={'MPs Participation in Lok Sabha Productivity'}
             />
           </Box>
@@ -819,7 +820,7 @@ function LS_productivity({
             </Box>
           </div>
           <img
-            src="Assets/icons/Parliament-dot-image1.png"
+            src="/Assets/icons/Parliament-dot-image1.png"
             // src="Assets/icons/pmt_whiteImage.png"
             className="parliamentCenterImgDesktop"
             alt="parliament"

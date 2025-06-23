@@ -6,6 +6,7 @@ import StarIcon from '@mui/icons-material/Star';
 import Button from '@mui/material/Button';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { Box, Rating, Stack } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const mpDomy = {
   rank: 'test01',
@@ -31,8 +32,8 @@ export default function MpsRatingCard({ mpInfo, cardCatagory,handleOpenSharePopu
           color: 'rgb(0 0 0 / 50%)',
           // minWidth: { xs: '12rem', md: 'auto' },
           minHeight: 170,
-          width: '100%',
-          minWidth:'10rem'
+          // width: '100%',
+          maxWidth:'10rem'
         }}
       >
         <Box
@@ -138,16 +139,18 @@ export default function MpsRatingCard({ mpInfo, cardCatagory,handleOpenSharePopu
             paddingBottom: '10px',
           }}
         >
-          <Button
-            variant="secondary"
-            sx={{
-              borderBottom: '2px solid grey',
-              fontWeight: 'bold',
-              fontSize: '12px',
-            }}
-          >
-            Rate Now
-          </Button>
+          <Link to={'/rate-your-mp'} style={{ textDecoration: 'none', color: 'inherit' }}>
+            <Button
+              variant="secondary"
+              sx={{
+                borderBottom: '2px solid grey',
+                fontWeight: 'bold',
+                fontSize: '12px',
+              }}
+            >
+              Rate Now
+            </Button>
+          </Link>
         </Box>
       </Card>
     </>

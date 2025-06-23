@@ -1,11 +1,68 @@
+// export const performace_chipList = [
+//   'Lok Sabha Productivity',
+//   'Lok Sabha Attandance',
+//   'Lok Sabha Question',
+//   'Lok Sabha Debates',
+//   'Lok Sabha Private Member Bills',
+//   'Lok Sabha Adjiurnment',
+//   'Lok Sabha Walkout',
+//   'Lok Sabha on the floor',
+//   'Lok Sabha Interruption',
+//   'Lok Sabha Quoram Bell',
+//   'Lok Sabha Not Recorded',
+//   'Govt Bill',
+// ];
 export const performace_chipList = [
-  'Lok Sabha Productivity',
-  'Lok Sabha Attandance',
-  'Lok Sabha Question',
-  'Lok Sabha Debates',
-  'Lok Sabha Private Member Bills',
-  'Govt Bill',
+  {
+    title: 'Lok Sabha Productivity',
+    routeUrl: 'lok-sabha-productivity',
+  },
+  {
+    title: 'Lok Sabha Attandance',
+    routeUrl: 'lok-sabha-attandance',
+  },
+  {
+    title: 'Lok Sabha Question',
+    routeUrl: 'lok-sabha-question',
+  },
+  {
+    title: 'Lok Sabha Debates',
+    routeUrl: 'lok-sabha-debates',
+  },
+  {
+    title: 'Lok Sabha Private Member Bills',
+    routeUrl: 'lok-sabha-private-member-bills',
+  },
+  {
+    title: 'Lok Sabha Adjiurnment',
+    routeUrl: 'lok-sabha-adjiurnment',
+  },
+  {
+    title: 'Lok Sabha Walkout',
+    routeUrl: 'lok-sabha-walkout',
+  },
+  {
+    title: 'Lok Sabha on the floor',
+    routeUrl: 'lok-sabha-on-the-floor',
+  },
+  {
+    title: 'Lok Sabha Interruption',
+    routeUrl: 'lok-sabha-interruption',
+  },
+  {
+    title: 'Lok Sabha Quoram Bell',
+    routeUrl: 'lok-sabha-quoram-bell',
+  },
+  {
+    title: 'Lok Sabha Not Recorded',
+    routeUrl: 'lok-sabha-not-recorded',
+  },
+  {
+    title: 'Govt Bill',
+    routeUrl: 'govt-bill',
+  },
 ];
+
 export const productivity_schedule = [
   {
     name: 'SITTING SCHEDULED',
@@ -481,6 +538,28 @@ export const mpsDataStateRank = (mps__data) => {
   });
   return result;
 };
+
+export const attendance_details = [
+  {
+    title: 'Highest Attendance Day',
+    date: '2024-12-20',
+    count: 453,
+  },
+  {
+    title: 'Highest Attendance Session',
+    count: 'Winter Session 2024',
+  },
+  {
+    title: 'Lowest Attendance Day',
+    date: '2024-12-20',
+    count: 453,
+  },
+  {
+    title: 'Lowest Attendance Session',
+    count: 'Winter Session 2024',
+  },
+];
+
 // export const mpsDataNetionalRank = [
 //   {
 //     rank: '001',

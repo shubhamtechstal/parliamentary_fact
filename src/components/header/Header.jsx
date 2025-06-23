@@ -209,7 +209,7 @@ export default function Header({ data, setIndex, selected }) {
       sx={{
         width: '100%',
         boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
-        marginBottom: '3px',
+        // marginBottom: '3px',
       }}
     >
       {/* {newLetter &&  <>
@@ -661,8 +661,8 @@ export default function Header({ data, setIndex, selected }) {
         sx={{
           display: 'flex',
           marginTop: '1rem',
-          background: '#f7f7f7',
-          padding: '0.5rem 0',
+          background: '#dfdede',
+          opacity: '0.8',
         }}
       >
         <Container
@@ -675,7 +675,8 @@ export default function Header({ data, setIndex, selected }) {
                 style={{
                   textDecoration: 'none',
                   color: isActive ? '#F44336' : 'inherit',
-                  borderBottom: isActive ? '2px solid #FF936F' : 'none',
+                  borderBottom: isActive ? '4px solid rgb(241, 128, 124)' : 'none',
+                  padding: '10px 0 6px 0',
                 }}
                 to={`${val?.pageUrl}`}
                 key={index}
@@ -684,7 +685,7 @@ export default function Header({ data, setIndex, selected }) {
                   text={val?.title}
                   sx={{
                     fontSize: '0.9rem',
-                    fontWeight: 700,
+                    fontWeight: 500,
                     cursor: 'pointer',
                   }}
                 />
@@ -694,7 +695,7 @@ export default function Header({ data, setIndex, selected }) {
           })}
           {pageNavigtionLinks?.length > 6 && (
             <Box
-              sx={{ display: 'flex', cursor: 'pointer' }}
+              sx={{ display: 'flex', cursor: 'pointer', padding: '0.5rem' }}
               onClick={handleMoreClick}
             >
               <MoreVertIcon sx={{ fontSize: '1.2rem' }} />

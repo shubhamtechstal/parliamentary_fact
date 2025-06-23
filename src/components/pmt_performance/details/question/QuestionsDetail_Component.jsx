@@ -19,8 +19,8 @@ import FilterController from 'components/common/modals/FilterController';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import IconButton from 'components/common/IconButton';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
-import { useDispatch } from 'react-redux';
-import { fetchQuestionDetailsData } from 'stores/redux/apiSlices/pmt_PerformanceSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchPerformanceData, fetchQuestionDetailsData } from 'stores/redux/apiSlices/pmt_PerformanceSlice';
 
 const questionSkeleton = () => {
   return (
@@ -48,9 +48,9 @@ const questionSkeleton = () => {
   );
 };
 function QuestionsDetail_Component({
-  questionDetails=[],
+  // questionDetails=[],
   filterParams,
-  isLoading,
+  // isLoading,
 }) {
   const [expandedItems, setExpandedItems] = useState({});
   const [loadMoreQuestions, setloadMoreQuestions] = useState(10);
@@ -72,17 +72,22 @@ function QuestionsDetail_Component({
   const dispatch = useDispatch();
   const [appliedFilterFromPoup, setAppliedFilterFromPoup] = useState({});
   useEffect(() => {
+    dispatch(fetchPerformanceData());
     dispatch(
       fetchQuestionDetailsData({ ...filterParams, ...appliedFilterFromPoup })
     );
   }, [dispatch, filterParams, appliedFilterFromPoup]);
+
+  const { questionDetails, questionsLoading } = useSelector(
+    (state) => state?.pmtPerformance
+  );
   return (
     <>
       <Box
         className="performanceSection"
         sx={{
           position: 'relative',
-          marginBottom: '1rem',
+          // marginBottom: '1rem',
         }}
       >
         <Box
@@ -99,7 +104,7 @@ function QuestionsDetail_Component({
             setAppliedFilter={(e) => setAppliedFilterFromPoup(e)}
           />
         </Box>
-        {isLoading ? (
+        {questionsLoading ? (
           questionSkeleton()
         ) : (
           <>
