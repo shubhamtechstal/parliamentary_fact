@@ -121,7 +121,7 @@ export default function Header({ data, setIndex, selected }) {
     },
     {
       title: 'Parliament Performance',
-      pageUrl: '/parliament-performance',
+      pageUrl: '/parliament-performance/lok-sabha-performance',
     },
     {
       title: 'MPs Parliament Performance',
