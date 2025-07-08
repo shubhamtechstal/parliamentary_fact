@@ -29,7 +29,6 @@ const sortByPerformance = (data, type) => {
     return sorted.sort((a, b) => b.performance - a.performance);
   else if (type === 'bottom-performer') {
     const bottomperformer = sorted.filter((a) => Number(a.performance) > 0);
-    console.log('bottomperformer', bottomperformer);
     return sorted.sort((a, b) => a.performance - b.performance);
   }
   return sorted.sort((a, b) => a.performance - b.performance);

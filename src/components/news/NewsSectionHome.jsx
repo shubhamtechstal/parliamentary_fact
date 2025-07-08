@@ -39,8 +39,8 @@ function NewsSectionHome() {
             className="mobile-three-card-section"
             sx={{ display: 'flex', gap: '1.5rem' }}
           >
-            {dashboardNewsDataApi?.reviews?.slice(1, 3).map((data) => (
-              <Box>
+            {dashboardNewsDataApi?.reviews?.slice(1, 3).map((data, ) => (
+              <Box key={data.id}>
                 <BottomSubHeadingCards data={data} />
               </Box>
             ))}

@@ -146,7 +146,7 @@ export default function ProgressMeter(props) {
             subTiteText ? 
             <text
             x="50%"
-            y="85%"
+            y="86%"
             textAnchor="middle"
             dominantBaseline="middle"
             style={{

@@ -53,7 +53,6 @@ const MpsConstituencyContainer = () => {
     setActiveSection(null);
     navigate('/mps-constituency');
   };
-  console.log('mp_fund_data= ', mp_fund_data);
   const mpsDataNetionalRank =
     mps_attendance_data?.map((data) => {
       return {

@@ -68,7 +68,7 @@ const RatingCard = ({ item }) => {
 
 export default function ContributionRatingCard() {
   return (
-    <Box display={'flex'} p={1} flexWrap={'wrap'} justifyContent={'space-between'}>
+    <Box display={'flex'} p={1} flexWrap={'wrap'} gap={2}>
       {ratingData.map((item, index) => (
         <RatingCard key={index} item={item} />
       ))}

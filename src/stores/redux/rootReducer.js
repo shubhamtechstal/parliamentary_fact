@@ -10,6 +10,7 @@ import { dashboardNewsApiAction, dashboardNewsApiReducer } from './apiSlices/Das
 import { newsLetterApiAction, newsLetterApiReducer } from './apiSlices/newsLetterApiSlice';
 import { pmtSessionsReducer } from './apiSlices/commonSlice';
 import { mpsPerformanceReducer } from './apiSlices/mps_PerformanceSlice';
+import { yourMpsReducer } from './apiSlices/yourMpsSlice';
 
 const rootReducers = combineReducers({
   toast: toastReducers,
@@ -20,6 +21,7 @@ const rootReducers = combineReducers({
   pmtPerformance: performanceReducer,
   mpsPerformance: mpsPerformanceReducer,
   pmtSessions :pmtSessionsReducer,
+  yourMps: yourMpsReducer,
 });
 
 export default rootReducers;

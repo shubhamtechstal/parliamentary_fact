@@ -1,26 +1,30 @@
 import {
   Box,
-  Button,
-  Checkbox,
+  // Button,
+  // Checkbox,
   Chip,
-  CircularProgress,
-  FormControlLabel,
-  FormGroup,
-  Grid,
+  // CircularProgress,
+  // FormControlLabel,
+  // FormGroup,
+  // Grid,
   Skeleton,
-  Typography,
+  // Typography,
 } from '@mui/material';
 import SectionHeading from 'components/common/SectionHeading';
 import { questionsDetailsData } from 'helpers/performanceConstants';
 import { useEffect, useState } from 'react';
-import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
+// import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 import GrayButton from 'components/common/GrayButton';
 import FilterController from 'components/common/modals/FilterController';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import IconButton from 'components/common/IconButton';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchPerformanceData, fetchQuestionDetailsData } from 'stores/redux/apiSlices/pmt_PerformanceSlice';
+import {
+  fetchPerformanceData,
+  fetchQuestionDetailsData,
+} from 'stores/redux/apiSlices/pmt_PerformanceSlice';
+import AutocompleteSearchBox from 'components/common/modals/AutoCompleateSearchBox';
 
 const questionSkeleton = () => {
   return (
@@ -47,11 +51,14 @@ const questionSkeleton = () => {
     </Box>
   );
 };
-function QuestionsDetail_Component({
-  // questionDetails=[],
-  filterParams,
-  // isLoading,
-}) {
+function QuestionsDetail_Component(
+  {
+    // questionDetails=[],
+    // filterParams,
+    // isLoading,
+  }
+) {
+  const [filterParams, setFilterParams] = useState({});
   const [expandedItems, setExpandedItems] = useState({});
   const [loadMoreQuestions, setloadMoreQuestions] = useState(10);
   const [showMoreLoder, setShowMoreLoder] = useState(false);
@@ -81,6 +88,12 @@ function QuestionsDetail_Component({
   const { questionDetails, questionsLoading } = useSelector(
     (state) => state?.pmtPerformance
   );
+  const onSelectSearchBox = (value) => {
+    setFilterParams((prev) => ({
+      ...prev,
+      mp_full_name: value?.full_name,
+    }));
+  };
   return (
     <>
       <Box
@@ -95,7 +108,6 @@ function QuestionsDetail_Component({
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            marginBottom: '2rem',
             fontSize: { xs: '0.8rem', md: '1.2rem' },
           }}
         >
@@ -103,6 +115,16 @@ function QuestionsDetail_Component({
           <FilterController
             setAppliedFilter={(e) => setAppliedFilterFromPoup(e)}
           />
+        </Box>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'end',
+            marginBottom: '2rem',
+          }}
+        >
+          <AutocompleteSearchBox onSelectMP={onSelectSearchBox} />
         </Box>
         {questionsLoading ? (
           questionSkeleton()

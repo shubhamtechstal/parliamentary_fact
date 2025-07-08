@@ -1,5 +1,5 @@
 import { Box, Grid } from '@mui/material';
-import BasicBarChart from 'components/common/charts/BasicBarChart';
+// import BasicBarChart from 'components/common/charts/BasicBarChart';
 import GrayDot from 'components/common/GrayDot';
 import ProgressMeter from 'components/common/ProgressMeter';
 import SectionHeading from 'components/common/SectionHeading';
@@ -16,8 +16,12 @@ function LS_attendance({
   percentageValue,
   BottomRightChip,
   titleHeadign = 'Lok Sabha Attendance',
+  meterTitleText,
+  sectionDetailName,
+  chipLabal,
 }) {
-  // console.log('attendance_percentage attendance_details', attendance_details);
+  
+
   return (
     <>
       {/* **********Mobile********** */}
@@ -40,9 +44,10 @@ function LS_attendance({
           }}
         >
           <ProgressMeter
-            titleText={'ATTENDANCE'}
+            titleText={meterTitleText ?? 'ATTENDANCE'}
             subTiteText={`LOK SABHA`}
-            centerDate={'Till 20 March 2024'}
+            centerDate={'Till Now'}
+            value={Number(`${percentageValue}`?.replaceAll("%",""))}
             percentText={`${extractPercentage(percentageValue?.toString())?.a}`}
             subPercentText={`${extractPercentage(percentageValue?.toString())?.b}`}
             width={230}
@@ -137,8 +142,8 @@ function LS_attendance({
             }}
           >
             <BottomRightChip
-              sectionDetailName={'lok-sabha-attandance'}
-              chipLabal={'MPs Participation in Lok Sabha Attendance'}
+              sectionDetailName={sectionDetailName ?? 'lok-sabha-attandance'}
+              chipLabal={chipLabal ?? 'MPs Participation in Lok Sabha Attendance'}
             />
           </Box>
         )}
@@ -166,9 +171,10 @@ function LS_attendance({
         >
           <Grid md={3}>
             <ProgressMeter
-              titleText={'ATTENDANCE'}
+              titleText={meterTitleText ?? 'ATTENDANCE'}
               subTiteText={`LOK SABHA`}
-              centerDate={'Till 20 March 2024'}
+              centerDate={'Till Now'}
+              value={Number(`${percentageValue}`?.replaceAll("%",""))}
               percentText={`${extractPercentage(percentageValue?.toString())?.a}`}
               subPercentText={`${extractPercentage(percentageValue?.toString())?.b}`}
               // percentText={'100.'}
@@ -257,8 +263,8 @@ function LS_attendance({
         {BottomRightChip && (
           <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
             <BottomRightChip
-              sectionDetailName={'lok-sabha-attandance'}
-              chipLabal={'MPs Participation in Lok Sabha Attendance'}
+              sectionDetailName={sectionDetailName ?? 'lok-sabha-attandance'}
+              chipLabal={chipLabal ?? 'MPs Participation in Lok Sabha Attendance'}
             />
           </Box>
         )}

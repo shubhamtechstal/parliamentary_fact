@@ -1,15 +1,199 @@
-import { Box, Container, Typography } from '@mui/material';
+import { Box, Card, Container, Typography } from '@mui/material';
 import Divider from 'components/common/Divider';
 import GrayDot from 'components/common/GrayDot';
 import FilterController from 'components/common/modals/FilterController';
 import Text from 'components/common/Text';
 import LineCharts from 'components/LineCharts';
-import { attendance_details } from 'helpers/performanceConstants';
+// import { attendance_details } from 'helpers/performanceConstants';
 import { getDateInMonthNameFormate } from 'helpers/utills/utilityFunctions';
 
-const AgendaList = ({ data = [] }) => {
+export const AgendaList = ({
+  data = [],
+  type = 'adjournment',
+  showListAsCard,
+}) => {
+  const getDateKey = (day) => {
+    return (
+      day?.adjourned_date ||
+      day?.walkout_date ||
+      day?.performing_date ||
+      day?.date ||
+      ''
+    );
+  };
+
+  const renderByType = (item, idx) => {
+    switch (type) {
+      case 'adjournment':
+        return (
+          <>
+            <Typography
+              variant="body2"
+              fontWeight={500}
+              color="text.primary"
+              mb={0.5}
+            >
+              ADJOURNMENT - {idx + 1}
+              <Typography
+                component="span"
+                variant="caption"
+                color="text.secondary"
+                ml={2}
+              >
+                TIME - {item.start_time || 'N/A'}
+              </Typography>
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              <strong>Subject:</strong> {item.subject || '—'}
+            </Typography>
+          </>
+        );
+
+      case 'walkout':
+        return (
+          <>
+            <Typography
+              variant="body2"
+              fontWeight={500}
+              color="text.primary"
+              mb={0.5}
+            >
+              WALKOUT - {idx + 1}
+              <Typography
+                component="span"
+                variant="caption"
+                color="text.secondary"
+                ml={2}
+              >
+                TIME - {item.time || 'N/A'}
+              </Typography>
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              <strong>MP:</strong> {item.mp_name || '—'}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              <strong>Subject:</strong> {item.subject || '—'}
+            </Typography>
+          </>
+        );
+
+        case 'interruptions':
+          return (
+            <Card
+              variant="outlined"
+              sx={{
+                mb: 2,
+                p: 2,
+                backgroundColor: '#f9f9f9',
+                transition: '0.3s',
+                '&:hover': { boxShadow: 3 },
+              }}
+            >
+              <Typography variant="h6" color="#F15A29" gutterBottom>
+                🔇 Interruptions: {item?.interruptions?.toLocaleString()}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                🗓️ <strong>Session:</strong> {item.session_name}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                📅 <strong>Year:</strong> {item.year_name}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                🏛️ <strong>Loksabha:</strong> {item.loksabha_name}
+              </Typography>
+            </Card>
+          );        
+
+      case 'quoram_bell':
+        return (
+          <>
+            <Card
+              variant="outlined"
+              sx={{
+                mb: 2,
+                p: 2,
+                backgroundColor: '#f9f9f9',
+              }}
+            >
+              <Typography variant="h6" color="#F15A29" gutterBottom>
+                🔔 Quoram Bell: {item.coram_bell}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                🗓️ <strong>Session:</strong> {item.session_name}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                📅 <strong>Year:</strong> {item.year_name}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                🏛️ <strong>Loksabha:</strong> {item.loksabha_name}
+              </Typography>
+            </Card>
+          </>
+        );
+
+      case 'not_recorded':
+        return (
+          <Card
+            variant="outlined"
+            sx={{
+              mb: 2,
+              p: 2,
+              backgroundColor: '#f9f9f9',
+              transition: '0.3s',
+              '&:hover': { boxShadow: 3 },
+            }}
+          >
+            <Typography variant="h6" color="#F15A29" gutterBottom>
+              📋 Not Recorded: {item?.not_recorded?.toLocaleString()}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              🗓️ <strong>Session:</strong> {item.session_name}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              📅 <strong>Year:</strong> {item.year_name}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              🏛️ <strong>Loksabha:</strong> {item.loksabha_name}
+            </Typography>
+          </Card>
+        );
+
+        case 'in_the_well':
+          return (
+            <Card
+              variant="outlined"
+              sx={{
+                mb: 2,
+                p: 2,
+                backgroundColor: '#f9f9f9',
+                transition: '0.3s',
+                '&:hover': { boxShadow: 3 },
+              }}
+            >
+              <Typography variant="h6" color="#F15A29" gutterBottom>
+                🧱 In The Well: {item?.in_the_well?.toLocaleString()}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                🗓️ <strong>Session:</strong> {item?.session_name}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                📅 <strong>Year:</strong> {item?.year_name}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                🏛️ <strong>Loksabha:</strong> {item?.loksabha_name}
+              </Typography>
+            </Card>
+          );        
+
+      default:
+        return (
+          <Typography color="text.secondary">No content available.</Typography>
+        );
+    }
+  };
+
   return (
-    <Box maxWidth="lg" mx="auto" sx={{opacity:'0.7'}} px={2} py={4}>
+    <Box maxWidth="lg" mx="auto" sx={{ opacity: 0.7 }} px={2} py={4}>
       {data?.map((day, index) => (
         <Box key={index} mb={6}>
           <Typography
@@ -21,37 +205,19 @@ const AgendaList = ({ data = [] }) => {
               mb: 2,
             }}
           >
-            {day.date}
+            {getDateKey(day)}
           </Typography>
-
-          {day.items.map((item, idx) => (
-            <Box key={idx} mb={4}>
-              <Typography
-                variant="body2"
-                sx={{ fontWeight: 500, color: 'text.primary', mb: 0.5 }}
-              >
-                ADJOURNMENT - {item.adjournment}
-                <Typography
-                  component="span"
-                  variant="caption"
-                  sx={{ fontWeight: 400, color: 'text.secondary', ml: 2 }}
-                >
-                  TIME - {item.time}
-                </Typography>
-              </Typography>
-
-              <Typography variant="body2" color="text.secondary">
-                <Box
-                  component="span"
-                  sx={{ fontWeight: 600, textTransform: 'uppercase', mr: 1 }}
-                >
-                  Subject:
-                </Box>
-                {item.subject}
-              </Typography>
-            </Box>
-          ))}
-
+          <Box
+            sx={{
+              display: showListAsCard ? 'flex' : 'block',
+              flexWrap: 'wrap',
+              gap: 3,
+            }}
+          >
+            {day?.records?.map((item, idx) => (
+              <Box key={idx}>{renderByType(item, idx)}</Box>
+            ))}
+          </Box>
           {index < data.length - 1 && <Divider sx={{ mt: 3 }} />}
         </Box>
       ))}
@@ -60,10 +226,11 @@ const AgendaList = ({ data = [] }) => {
 };
 
 function AdjiurnmentUIComponent({
-//   title = 'Adjunment In Lok sabha',
-//   subtitle = 'Till 20 March 2024',
   dataList = [],
   heroData,
+  sectionInfo=[],
+  totalCount='0',
+  showListAsCard = false,
 }) {
   return (
     <Container sx={{ fontFamily: 'Sora, sans-serif' }}>
@@ -74,6 +241,7 @@ function AdjiurnmentUIComponent({
           alignItems: 'center',
           textAlign: { xs: 'right', md: 'left' },
           pt: 4,
+          mb: { md: '', xs: '1.5rem' },
         }}
       >
         <Box>
@@ -115,9 +283,9 @@ function AdjiurnmentUIComponent({
       <Box
         sx={{
           display: 'flex',
-          justifyContent: 'space-between',
+          justifyContent: { md: 'space-between', xs: 'center' },
           alignItems: 'center',
-          //   flexWrap: 'wrap',
+          flexWrap: { xs: 'wrap', md: 'nowrap' },
           fontFamily: "'Saira', sans-serif",
         }}
       >
@@ -142,10 +310,13 @@ function AdjiurnmentUIComponent({
                 margin: '0 0',
               }}
             >
-             {heroData.numCount}
+              {totalCount}
             </h3>
             <hr />
-            <Typography variant="subtitle2" textAlign={'center'}> {heroData.cardTitle}</Typography>
+            <Typography variant="subtitle2" textAlign={'center'}>
+              {' '}
+              {heroData.cardTitle}
+            </Typography>
           </Box>
         </Box>
         <Box
@@ -157,7 +328,7 @@ function AdjiurnmentUIComponent({
             padding: '1rem',
           }}
         >
-          {attendance_details?.map((item, index) => (
+          {sectionInfo?.map((item, index) => (
             <Box
               key={index}
               sx={{
@@ -211,7 +382,14 @@ function AdjiurnmentUIComponent({
             </Box>
           ))}
         </Box>
-        <Box>
+        <Box display={{ md: 'none', xs:'block' }}>
+          <LineCharts
+            data={[10, 4, 6, 5, 14, 15]}
+            labels={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul']}
+            width={300}
+          />
+        </Box>
+        <Box display={{ xs: 'none', md: 'block' }}>
           <LineCharts
             data={[10, 4, 6, 5, 14, 15]}
             labels={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul']}
@@ -220,7 +398,11 @@ function AdjiurnmentUIComponent({
         </Box>
       </Box>
       <Divider sx={{ my: 3 }} />
-      <AgendaList data={dataList} />
+      <AgendaList
+        data={dataList ?? []}
+        type={heroData?.type}
+        showListAsCard={showListAsCard}
+      />
     </Container>
   );
 }

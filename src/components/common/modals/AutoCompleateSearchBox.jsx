@@ -9,7 +9,6 @@ export default function AutocompleteSearchBox({ onSelectMP }) {
   const [searchQuery, setSearchQuery] = React.useState(''); // for input box text
   const [suggestions, setSuggestions] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
-console.log('selectedValueselectedValue', selectedValue)
   // Fetch suggestions when searchQuery changes
   React.useEffect(() => {
     const fetchSuggestions = async () => {
@@ -41,7 +40,7 @@ console.log('selectedValueselectedValue', selectedValue)
   }, [searchQuery]);
 
   return (
-    <Stack spacing={2} sx={{ width: { md: 500, xs: '80%' } }} mt={2} mr={2}>
+    <Stack  sx={{ width: { md: 500, xs: '80%' } }} mt={2}  >
       <Autocomplete
         id="mp-autocomplete"
         options={suggestions}
@@ -74,14 +73,11 @@ console.log('selectedValueselectedValue', selectedValue)
               padding: '0 2rem',
               backgroundColor: '#f5f5f5',
               '&:hover fieldset': {
-                borderColor: '#1976d2',
+                borderColor: '#ccc',
               },
             },
             '& .MuiInputBase-input': {
               padding: '1rem 0',
-            },
-            '& .MuiOutlinedInput-notchedOutline': {
-              border: 'none',
             },
             '.MuiInputLabel-root ':{
               fontSize: '0.8rem',

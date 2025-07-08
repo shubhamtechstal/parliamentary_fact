@@ -4,10 +4,8 @@ import AdvertiseSection from 'components/addLayout/HorizontalAdvertiseSection';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchMpsPerformanceData } from 'stores/redux/apiSlices/mps_PerformanceSlice';
 
-function HomeMpsPerformanceSection() {
-    const { mp_fund_data =[], top_performance=[] } = useSelector(
-        (state) => state?.mpsPerformance
-      );
+function HomeMpsPerformanceSection(props) {
+    const { mp_fund_data =[], top_performance=[] } = props;
 
   return (
     <div>

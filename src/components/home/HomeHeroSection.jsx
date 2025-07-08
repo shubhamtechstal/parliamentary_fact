@@ -2,27 +2,40 @@ import React from 'react';
 import { Box, Grid, Typography, Card } from '@mui/material';
 import MultiColorProgressRings from './MultiColorProgressRings';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
+const HomeHeroSection = () => {
+    const { loksabhaName, pageData, loading } = useSelector(
+      (state) => state?.pmtPerformance
+    );
+
 
 const performanceData = [
-  { label: 'Attendance', value: '52.25%', color: '#ff9383', subtitle: 'Att.' },
-  { label: 'Question', value: '52.25%', color: '#ff7e9d', subtitle: 'Qs' },
-  { label: 'Debates', value: '52.25%', color: '#c27ac4', subtitle: 'Dbt' },
+  { label: 'Attendance', value: pageData?.attendance_percentage?.attendance_percentage || '52.25%', color: '#ff9383', subtitle: 'Att.' },
+  { label: 'Question', value: pageData?.questions_percentage?.question_percentage || '52.25%', color: '#ff7e9d', subtitle: 'Qs' },
+  { label: 'Debates', value: pageData?.debate_percentage?.debate_percentage || '52.25%', color: '#c27ac4', subtitle: 'Dbt' },
   {
     label: 'Pvt Member Bill',
-    value: '52.25%',
+    value: pageData?.private_bill_percentage?.private_bill_percentage || '52.25%',
     color: '#87629a',
     subtitle: 'Pmb.',
   },
-  { label: 'MPlads', value: '52.25%', color: '#59597d', subtitle: 'Mpf' },
+  { label: 'MPlads', value: pageData?.mpLads_percentage?.mpLads_percentage || '52.25%', color: '#59597d', subtitle: 'Mpf' },
   { label: 'Know More', value: '', color: '#ccc', isCTA: true },
 ];
 
-const HomeHeroSection = () => {
+const rings = [
+  { progress: Number(pageData?.attendance_percentage?.attendance_percentage), color: "#FFB5B5" },
+  { progress: Number(pageData?.questions_percentage?.question_percentage), color: "#FF7B9C" },
+  { progress: Number(pageData?.debate_percentage?.debate_percentage) || 52.25, color: "#D16E82" },
+  { progress: Number(pageData?.private_bill_percentage?.private_bill_percentage), color: "#956784" },
+  { progress: Number(pageData?.mpLads_percentage?.mpLads_percentage) || 50 , color: "#4A5776" }
+];
   return (
     <>
       <Grid container spacing={{xs:1, md:5}} alignItems={'center'}>
         <Grid item xs={12} md={5}>
-          <MultiColorProgressRings />
+          <MultiColorProgressRings rings={rings} />
           <Box display={'flex'} justifyContent="space-between" flexWrap={'wrap'} gap={2} mb={2}>
             {performanceData.map((item, index) => {
               if (item.isCTA) return null;
@@ -48,8 +61,8 @@ const HomeHeroSection = () => {
             })}
           </Box>
         </Grid>
-        <Grid item xs={12} md={7}>
-          <Grid container spacing={2} mt={2}>
+        <Grid item xs={12}>
+          <Grid container spacing={1} mt={2}>
             {performanceData.map((item, index) => (
               <Grid item xs={4} key={index}>
                 <Card
@@ -67,8 +80,8 @@ const HomeHeroSection = () => {
                   }}
                 >
                   {item.isCTA ? (
-                     <Link style={{textDecoration:'none'}} to={'/parliament-performance'}>
-                       <Typography fontWeight="bold"color={'#fff'} textAlign={'center'} >▶ <br /> Know More</Typography>
+                     <Link style={{textDecoration:'none'}} to={'/parliament-performance/lok-sabha-performance'}>
+                       <Typography fontWeight="bold" fontSize={12} color={'#fff'} textAlign={'center'} >▶ <br /> Know More</Typography>
                       </Link>
                   ) : (
                     <>
@@ -78,7 +91,7 @@ const HomeHeroSection = () => {
                       <Typography fontSize={12} color={item.color}>
                         {item.subtitle}.
                       </Typography>
-                      <Typography fontSize={12} color={item.color}>
+                      <Typography fontSize={12} color={item.color} textAlign={'center'}>
                         <strong>{item.label}</strong>
                       </Typography>
                     </>

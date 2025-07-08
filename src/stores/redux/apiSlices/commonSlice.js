@@ -5,7 +5,6 @@ export const fetchSessionsFilterData = createAsyncThunk(
   async (params, { rejectWithValue }) => {
     try {
       const queryString = new URLSearchParams(params).toString();
-      console.log('Query:', queryString);
       const response = await fetch(
         `https://parliamentryfact.revanshrenewable.com/API/date_session_filter_api.php?${queryString}`,
         {
@@ -35,8 +34,6 @@ export const fetchStatesNameData = createAsyncThunk(
   async (params, { rejectWithValue }) => {
     try {
       const queryString = new URLSearchParams(params).toString();
-      console.log('Query:', queryString);
-
       const response = await fetch(
         `https://parliamentryfact.revanshrenewable.com/API/state_list.php`,
         {

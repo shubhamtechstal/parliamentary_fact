@@ -1,5 +1,6 @@
-import { Box, Chip, CircularProgress } from '@mui/material';
+import { Box, Chip } from '@mui/material';
 import AdvertiseSection from 'components/addLayout/HorizontalAdvertiseSection';
+import Loader from 'components/common/Loader';
 import Text from 'components/common/Text';
 import Debates_In_LS from 'components/pmt_performance/pmt_prfrmc_home/Debates_In_LS';
 import LS_attendance from 'components/pmt_performance/pmt_prfrmc_home/LS_attendance';
@@ -15,7 +16,7 @@ import {
   questionsListData,
 } from 'helpers/performanceConstants';
 import { useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 // import { useDispatch, useSelector } from 'react-redux';
 // import { Link } from 'react-router-dom';
 // import { fetchPerformanceData } from 'stores/redux/apiSlices/pmt_PerformanceSlice';
@@ -45,7 +46,7 @@ const Productivity_bottomCards = ({
       >
         {cardData?.map((data, i) => {
           return (
-            <div>
+            <Link to={`/parliament-performance/lok-sabha-performance/lok-sabha-${data?.title.replaceAll(" ", "-").toLowerCase()}`} key={i}>
               <Box
                 sx={{
                   padding: '10px',
@@ -55,14 +56,15 @@ const Productivity_bottomCards = ({
                   display: 'flex',
                   flexDirection: 'row',
                   justifyContent: 'start',
-                  alignItems: 'left',
+                  alignItems: 'center',
                   minWidth: '180px',
                 }}
               >
                 <img
-                  src="/Assets/icons/statueImg.png"
+                  src={data?.image ?? "/Assets/icons/statueImg.png"}
                   alt="statueImg"
-                  height={50}
+                  height={30}
+                  width={30}
                 />
                 <Box
                   key={i}
@@ -71,6 +73,7 @@ const Productivity_bottomCards = ({
                     flexDirection: 'column',
                     justifyContent: 'center',
                     alignItems: 'left',
+                    ml: '10px',
                   }}
                 >
                   <Text
@@ -99,23 +102,25 @@ const Productivity_bottomCards = ({
                   marginTop: '10px',
                 }}
               />
-            </div>
+            </Link>
           );
         })}
       </Box>
-     {!window.location.pathname.includes('lok-sabha-productivity') && ( <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-        <BottomRightChip
+      {!window.location.pathname.includes('lok-sabha-productivity') && (
+        <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <BottomRightChip
             sectionDetailName={'lok-sabha-productivity'}
             chipLabal={'MPs Participation in Lok Sabha Productivity'}
-        />
-      </Box>)}
+          />
+        </Box>
+      )}
     </Box>
   );
 };
 
 function ParliamentPerformancePageComponent(props) {
   const {
-    handleSectionDetailClick,
+    // handleSectionDetailClick,
     attendanceDetails,
     questionsData,
     privateBillCount,
@@ -124,7 +129,6 @@ function ParliamentPerformancePageComponent(props) {
     pageData,
     loading,
   } = props;
-  console.log('pageData?.attendance_percentage?.attendance_percentage ', pageData?.attendance_percentage?.attendance_percentage )
   const navigate = useNavigate();
   const BottomRightChip = ({ chipLabal, sectionDetailName }) => {
     return (
@@ -133,10 +137,11 @@ function ParliamentPerformancePageComponent(props) {
         Filled
         onClick={() =>
           sectionDetailName
-            ? 
-            navigate(`/parliament-performance/lok-sabha-performance/${sectionDetailName}`)
-            // handleSectionDetailClick(sectionDetailName)
-            : () => {}
+            ? navigate(
+                `/parliament-performance/lok-sabha-performance/${sectionDetailName}`
+              )
+            : // handleSectionDetailClick(sectionDetailName)
+              () => {}
         }
         sx={{
           marginTop: '2rem',
@@ -155,14 +160,14 @@ function ParliamentPerformancePageComponent(props) {
   return loading ? (
     <Box
       sx={{
-        height: '100vh',
+        height: '70vh',
         width: '100%',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
       }}
     >
-      <CircularProgress />
+      <Loader loading position='relative' />
     </Box>
   ) : (
     <Box ref={scrollRef}>
@@ -188,7 +193,9 @@ function ParliamentPerformancePageComponent(props) {
           <div id="Lok_Sabha_Attandance">
             <LS_attendance
               attendance_details={attendanceDetails}
-              percentageValue={pageData?.attendance_percentage?.attendance_percentage }
+              percentageValue={
+                pageData?.attendance_percentage?.attendance_percentage
+              }
               titleHeadign={'Lok Sabha Attendance'}
               BottomRightChip={BottomRightChip}
               className="performanceSection"
@@ -201,20 +208,42 @@ function ParliamentPerformancePageComponent(props) {
               questionsData={questionsData}
               pageData={pageData}
               BottomRightChip={BottomRightChip}
+              sectionDetailName={'lok-sabha-question'}
+              chipLabal={'MPs Participation in Lok Sabha Questions'}
             />
           </div>
           <AdvertiseSection />
           <div id="Lok_Sabha_Debates">
             <Debates_In_LS
+              pageData={pageData}
+              debate_data={pageData?.debate_data}
+              debates_count={pageData?.debates_count}
               debateListData={debateListData}
               BottomRightChip={BottomRightChip}
               questionsData={questionsData}
             />
           </div>
           <AdvertiseSection />
+          <div id="Lok_Sabha_Private_member_bill">
+            <LS_attendance
+              attendance_details={pageData?.private_bills_data}
+              percentageValue={
+                pageData?.private_bill_performance?.bill_performance_percentage
+              }
+              BottomRightChip={BottomRightChip}
+              sectionDetailName={'lok-sabha-private-member-bills'}
+              chipLabal={'MPs Participation in Lok Sabha Pvt. Member Bill'}
+              titleHeadign={'Lok Sabha Pvt. Member Bill'}
+              className="performanceSection"
+              meterTitleText={"Pvt. Member Bill"}
+            />
+          </div>
+          <AdvertiseSection />
+
           <div id="Lok_Sabha_Private_Member_Bills">
             <MpFundSection
               MpFundSection={MpFundsectionData}
+              pageData={pageData}
               mpsFundData={pageData?.mps_fund_data}
               BottomRightChip={BottomRightChip}
             />
