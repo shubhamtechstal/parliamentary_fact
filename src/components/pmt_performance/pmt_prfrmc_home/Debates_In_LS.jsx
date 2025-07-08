@@ -3,7 +3,7 @@ import GrayDot from 'components/common/GrayDot';
 import ProgressMeter from 'components/common/ProgressMeter';
 import SectionHeading from 'components/common/SectionHeading';
 import Text from 'components/common/Text';
-import { getDateInMonthNameFormate } from 'helpers/utills/utilityFunctions';
+import { extractPercentage, getDateInMonthNameFormate } from 'helpers/utills/utilityFunctions';
 // import { formattedDate } from 'helpers/performanceConstants';
 
 const QuestionTextGroup = ({ title, value, date, index }) => {
@@ -19,7 +19,7 @@ const QuestionTextGroup = ({ title, value, date, index }) => {
           : '2px solid #E0E0E0',
         padding: '1rem',
         width: [6,8].includes(index) ? '40%' : '30%',
-        maxWidth: '21rem',
+        // maxWidth: '21rem',
         textWrap: 'wrap',
       }}
     >
@@ -88,7 +88,6 @@ const DebateTextGroup = ({ index, title, percentage, mobTextWrap }) => {
           <span style={{ fontWeight: '800', fontSize: '1rem' }}>
             {percentage}
           </span>{' '}
-          %
         </span>{' '}
         <br />
         <span style={{ fontSize: '12px',}}>{title}</span>
@@ -97,7 +96,7 @@ const DebateTextGroup = ({ index, title, percentage, mobTextWrap }) => {
   );
 };
 
-function Debates_In_LS({ debateListData, questionsData, BottomRightChip }) {
+function Debates_In_LS({ debateListData, pageData, questionsData, BottomRightChip, debate_data, debates_count }) {
   return (
     <>
       {/* ****Mobile*** */}
@@ -113,8 +112,8 @@ function Debates_In_LS({ debateListData, questionsData, BottomRightChip }) {
             titleText={debateListData?.progressTitle}
             subTiteText={debateListData?.progressSubTitle}
             centerDate={debateListData?.date}
-            percentText={'100.'}
-            subPercentText={'20%'}
+            percentText={`${extractPercentage(pageData?.debate_percentage?.debate_percentage?.toString())?.a}` || '110.'}
+            subPercentText={`${extractPercentage(pageData?.debate_percentage?.debate_percentage?.toString())?.b}` || '20%'}
             width={230}
             height={250}
             innerRadius={98}
@@ -137,7 +136,7 @@ function Debates_In_LS({ debateListData, questionsData, BottomRightChip }) {
             justifyContent:'center',
           }}
         >
-          {debateListData?.listData?.map((item, index) => (
+          {debate_data?.map((item, index) => (
             <DebateTextGroup
               index={index}
               title={item.title}
@@ -335,7 +334,7 @@ function Debates_In_LS({ debateListData, questionsData, BottomRightChip }) {
                 alignItems: 'start',
               }}
             >
-              {debateListData?.listData.map((item, index) => (
+              {debate_data?.map((item, index) => (
                 <DebateTextGroup
                   index={index}
                   title={item.title}
@@ -351,7 +350,7 @@ function Debates_In_LS({ debateListData, questionsData, BottomRightChip }) {
                 flexWrap: 'wrap',
               }}
             >
-              {questionsData?.map((item, index) => (
+              {debates_count?.map((item, index) => (
                 <QuestionTextGroup index={index} {...item} />
               ))}
             </Box>

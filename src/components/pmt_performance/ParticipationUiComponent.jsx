@@ -7,30 +7,34 @@ import GrayButton from 'components/common/GrayButton';
 import FilterController from 'components/common/modals/FilterController';
 import AdvertiseSection from 'components/addLayout/HorizontalAdvertiseSection';
 import LS_attendance from './pmt_prfrmc_home/LS_attendance';
+import StateAttendance from 'components/attendence/StateAttendance';
+import Loader from 'components/common/Loader';
 
-export const MPText = ({ label, value }) => (
-  <Text
-    font={'Sora'}
-    sx={{
-      fontWeight: '500',
-      color: '#00000080',
-      marginTop: '0.1rem',
-      paddingRight: '1rem',
-      borderRight: '2px solid #00000050',
-    }}
-  >
-    {label}
-    <br />
-    <span style={{ color: '#FF936F', fontSize: '1.5rem' }}>{value}</span>
-  </Text>
-);
+// export const MPText = ({ label, value }) => (
+//   <Text
+//     font={'Sora'}
+//     sx={{
+//       fontWeight: '500',
+//       color: '#00000080',
+//       marginTop: '0.1rem',
+//       paddingRight: '1rem',
+//       borderRight: '2px solid #00000050',
+//     }}
+//   >
+//     {label}
+//     <br />
+//     <span style={{ color: '#FF936F', fontSize: '1.5rem' }}>{value}</span>
+//   </Text>
+// );
 
 export const CardList = ({
   data = [],
   loading,
-  RenderCard,
   loadMore,
   setLoadMore,
+  isSelectedCard,
+  filteredData,
+  selectedCardText,
 }) => {
   return (
     <Box
@@ -42,6 +46,22 @@ export const CardList = ({
         width: '100%',
       }}
     >
+      {isSelectedCard &&
+        filteredData.map((item, index) => (
+          <Box
+            sx={{
+              width: { xs: '12rem', md: '17rem' },
+              overflow: 'auto',
+              background: '#ab8f8f',
+              color: '#fff',
+              borderRadius: '5px',
+              padding: '1rem',
+            }}
+          >
+            <StateAttendance item={item} key={index} textColor="#fff" />
+            <small>{selectedCardText ?? ' Your selected State '}</small>
+          </Box>
+        ))}
       {loading
         ? Array.from({ length: 12 }).map((_, index) => (
             <Box
@@ -59,7 +79,7 @@ export const CardList = ({
           ))
         : (loadMore ? data : data?.slice(0, 12)).map((item, index) => (
             <Box key={index} sx={{ width: { xs: '12rem', md: '25%' } }}>
-              <RenderCard item={item} key={index} />
+              <StateAttendance item={item} key={index} />
             </Box>
           ))}
 
@@ -81,11 +101,9 @@ export const CardList = ({
 };
 export default function ParticipationUiComponent({
   title = 'Attendance Summary',
-  stateLabel = 'State Wise',
-  partyLabel = 'Party Wise',
+  pageName,
   fetchAction,
   dataSelector,
-  RenderCard,
   mpStats = { total: 543, current: 540, eligible: 501 },
 }) {
   const dispatch = useDispatch();
@@ -94,7 +112,10 @@ export default function ParticipationUiComponent({
   const [appliedFilterFromPoup, setAppliedFilterFromPoup] = useState(null);
   const [selectedState, setSelectedState] = useState(null);
   const [selectedParty, setSelectedParty] = useState(null);
+  const [selectedProfession, setSelectedProfession] = useState(null);
   const [loadParties, setLoadParties] = useState(false);
+  const [loadQuilification, setLoadQuilification] = useState(false);
+  const [loadProfessions, setLoadProfessions] = useState(false);
   const [loadmoreStates, setLoadmoreStates] = useState(false);
 
   useEffect(() => {
@@ -107,6 +128,9 @@ export default function ParticipationUiComponent({
     (item) => item.title
   );
   const statesList = attendanceDetailsPageData?.statewise_summary?.map(
+    (item) => item.title
+  );
+  const professionList = attendanceDetailsPageData?.professionwise_summary?.map(
     (item) => item.title
   );
 
@@ -122,7 +146,24 @@ export default function ParticipationUiComponent({
       )
     : attendanceDetailsPageData?.partywise_summary;
 
-  return (
+  const filteredProfessionData = selectedProfession
+    ? attendanceDetailsPageData?.professionwise_summary?.filter(
+        (item) => item.title === selectedProfession
+      )
+    : attendanceDetailsPageData?.professionwise_summary;
+
+  return attendanceLoading ? (
+    <Box
+      sx={{
+        minHeight: '80vh',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      <Loader position="relative" loading />
+    </Box>
+  ) : (
     <>
       <Box className="performanceSection">
         <Box
@@ -133,16 +174,6 @@ export default function ParticipationUiComponent({
             textAlign: { xs: 'right', md: 'left' },
           }}
         >
-          {/* <Text
-            sx={{
-              fontSize: '1.3rem',
-              color: '#434343',
-              fontWeight: 500,
-              textAlign: { xs: 'center', md: 'left' },
-            }}
-            font={'Sora'}
-            text={title}
-          /> */}
           <Box
             sx={{
               position: { xs: 'absolute', md: 'static' },
@@ -161,7 +192,8 @@ export default function ParticipationUiComponent({
           percentageValue={
             attendanceDetailsPageData?.attendance_percentage?.value
           }
-          titleHeadign={'Lok Sabha Questions'}
+          titleHeadign={`Lok Sabha ${pageName}`}
+          meterTitleText ={pageName}
         />
 
         {/* State Wise Section */}
@@ -185,7 +217,7 @@ export default function ParticipationUiComponent({
               justifyContent: 'space-between',
             }}
           >
-            <SectionHeading title={stateLabel} />
+            <SectionHeading title={`State Wise ${pageName}`} />
             <Autocomplete
               options={statesList || []}
               value={selectedState}
@@ -209,28 +241,76 @@ export default function ParticipationUiComponent({
               alignItems: 'center',
             }}
           >
-            <MPText
-              label="Current MPs in LS"
-              value={`${mpStats.current} out of ${mpStats.total}`}
-            />
-            <MPText
-              label="Eligible MPs in Performance"
-              value={`${mpStats.eligible} out of ${mpStats.current}`}
-            />
+            <Text
+              font={'Sora'}
+              sx={{
+                fontWeight: '500',
+                color: '#00000080',
+                marginTop: '0.1rem',
+                paddingRight: '1rem',
+                borderRight: '2px solid #00000050',
+              }}
+            >
+              Current MPs <br />
+              in LS
+            </Text>
+            <Text
+              font={'Sora'}
+              sx={{
+                fontWeight: '500',
+                color: '#00000080',
+                marginTop: '0.1rem',
+                paddingRight: '1rem',
+                borderRight: '2px solid #FF936F',
+              }}
+            >
+              <span style={{ color: '#FF936F', fontSize: '1.5rem' }}>
+                {mpStats.current}
+              </span>{' '}
+              out of <span style={{ fontSize: '1.5rem' }}>{mpStats.total}</span>
+            </Text>
+            <Text
+              font={'Sora'}
+              sx={{
+                fontWeight: '500',
+                color: '#00000080',
+                marginTop: '0.1rem',
+                paddingRight: '1rem',
+                borderRight: '2px solid #00000050',
+              }}
+            >
+              Eligible MPs <br />
+              in Performance
+            </Text>
+            <Text
+              font={'Sora'}
+              sx={{
+                fontWeight: '500',
+                color: '#00000080',
+                marginTop: '0.1rem',
+                paddingRight: '1rem',
+              }}
+            >
+              <span style={{ color: '#FF936F', fontSize: '1.5rem' }}>
+                {mpStats.eligible}
+              </span>{' '}
+              out of{' '}
+              <span style={{ fontSize: '1.5rem' }}>{mpStats.current}</span>
+            </Text>
           </Box>
 
           <CardList
-            data={filteredStatesData}
+            filteredData={filteredStatesData}
+            isSelectedCard={selectedState}
+            data={attendanceDetailsPageData?.statewise_summary}
             loading={attendanceLoading}
-            RenderCard={RenderCard}
             loadMore={loadmoreStates}
             setLoadMore={setLoadmoreStates}
+            selectedCardText="Your selected State"
           />
         </Box>
       </Box>
-
       <AdvertiseSection />
-
       {/* Party Wise Section */}
       <Box
         className="performanceSection"
@@ -246,7 +326,7 @@ export default function ParticipationUiComponent({
             justifyContent: 'space-between',
           }}
         >
-          <SectionHeading title={partyLabel} />
+          <SectionHeading title={`Party Wise ${pageName}`} />
           <Autocomplete
             options={partiesList || []}
             value={selectedParty}
@@ -261,7 +341,6 @@ export default function ParticipationUiComponent({
             sx={{ width: { md: 300, xs: 200 }, marginBottom: 2 }}
           />
         </Box>
-
         <Box
           sx={{
             display: 'flex',
@@ -270,22 +349,575 @@ export default function ParticipationUiComponent({
             alignItems: 'center',
           }}
         >
-          <MPText
-            label="Current MPs in LS"
-            value={`${mpStats.current} out of ${mpStats.total}`}
-          />
-          <MPText
-            label="Eligible MPs in Performance"
-            value={`${mpStats.eligible} out of ${mpStats.current}`}
-          />
+          <Text
+            font={'Sora'}
+            sx={{
+              fontWeight: '500',
+              color: '#00000080',
+              marginTop: '0.1rem',
+              paddingRight: '1rem',
+              borderRight: '2px solid #00000050',
+            }}
+          >
+            Current MPs <br />
+            in LS
+          </Text>
+          <Text
+            font={'Sora'}
+            sx={{
+              fontWeight: '500',
+              color: '#00000080',
+              marginTop: '0.1rem',
+              paddingRight: '1rem',
+              borderRight: '2px solid #FF936F',
+            }}
+          >
+            <span style={{ color: '#FF936F', fontSize: '1.5rem' }}>
+              {mpStats.current}
+            </span>{' '}
+            out of <span style={{ fontSize: '1.5rem' }}>{mpStats.total}</span>
+          </Text>
+          <Text
+            font={'Sora'}
+            sx={{
+              fontWeight: '500',
+              color: '#00000080',
+              marginTop: '0.1rem',
+              paddingRight: '1rem',
+              borderRight: '2px solid #00000050',
+            }}
+          >
+            Eligible MPs <br />
+            in Performance
+          </Text>
+          <Text
+            font={'Sora'}
+            sx={{
+              fontWeight: '500',
+              color: '#00000080',
+              marginTop: '0.1rem',
+              paddingRight: '1rem',
+            }}
+          >
+            <span style={{ color: '#FF936F', fontSize: '1.5rem' }}>
+              {mpStats.eligible}
+            </span>{' '}
+            out of <span style={{ fontSize: '1.5rem' }}>{mpStats.current}</span>
+          </Text>
         </Box>
 
         <CardList
-          data={filteredPartiesData}
+          filteredData={filteredPartiesData}
+          isSelectedCard={selectedParty}
+          data={attendanceDetailsPageData?.partywise_summary}
           loading={attendanceLoading}
-          RenderCard={RenderCard}
           loadMore={loadParties}
           setLoadMore={setLoadParties}
+          selectedCardText="Your selected Party"
+        />
+      </Box>
+      <AdvertiseSection />
+      {/* age Wise Section */}
+      <Box className="performanceSection" id="age_wise">
+        <Divider sx={{ margin: '0 0 1rem' }} />
+        <Box
+          sx={{
+            display: 'flex',
+            gap: '0.5rem',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+        >
+          <SectionHeading title={`Age Wise ${pageName}`} />
+        </Box>
+        <Box
+          sx={{
+            display: 'flex',
+            gap: '1rem',
+            margin: '2rem 1rem',
+            alignItems: 'center',
+          }}
+        >
+          <Text
+            font={'Sora'}
+            sx={{
+              fontWeight: '500',
+              color: '#00000080',
+              marginTop: '0.1rem',
+              paddingRight: '1rem',
+              borderRight: '2px solid #00000050',
+            }}
+          >
+            Current MPs <br />
+            in LS
+          </Text>
+          <Text
+            font={'Sora'}
+            sx={{
+              fontWeight: '500',
+              color: '#00000080',
+              marginTop: '0.1rem',
+              paddingRight: '1rem',
+              borderRight: '2px solid #FF936F',
+            }}
+          >
+            <span style={{ color: '#FF936F', fontSize: '1.5rem' }}>
+              {mpStats.current}
+            </span>{' '}
+            out of <span style={{ fontSize: '1.5rem' }}>{mpStats.total}</span>
+          </Text>
+          <Text
+            font={'Sora'}
+            sx={{
+              fontWeight: '500',
+              color: '#00000080',
+              marginTop: '0.1rem',
+              paddingRight: '1rem',
+              borderRight: '2px solid #00000050',
+            }}
+          >
+            Eligible MPs <br />
+            in Performance
+          </Text>
+          <Text
+            font={'Sora'}
+            sx={{
+              fontWeight: '500',
+              color: '#00000080',
+              marginTop: '0.1rem',
+              paddingRight: '1rem',
+            }}
+          >
+            <span style={{ color: '#FF936F', fontSize: '1.5rem' }}>
+              {mpStats.eligible}
+            </span>{' '}
+            out of <span style={{ fontSize: '1.5rem' }}>{mpStats.current}</span>
+          </Text>
+        </Box>
+        <CardList
+          // filteredData={filteredPartiesData}
+          // isSelectedCard={selectedParty}
+          data={attendanceDetailsPageData?.agewise_summary}
+          loading={attendanceLoading}
+          // loadMore={loadParties}
+          // setLoadMore={setLoadParties}
+          // selectedCardText = 'Your selected Age Group'
+        />
+      </Box>
+      <AdvertiseSection />
+      {/* profession  Wise Section */}
+      <Box
+        className="performanceSection"
+        id="profession_wise"
+        sx={{ backgroundColor: '#fff' }}
+      >
+        <Divider sx={{ margin: '0 0 1rem' }} />
+        <Box
+          sx={{
+            display: 'flex',
+            gap: '0.5rem',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+        >
+          <SectionHeading title={`Profession Wise ${pageName}`} />
+          <Autocomplete
+            options={professionList || []}
+            value={selectedProfession}
+            onChange={(e, newValue) => setSelectedProfession(newValue)}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Select Age group"
+                variant="standard"
+              />
+            )}
+            sx={{ width: { md: 300, xs: 200 }, marginBottom: 2 }}
+          />
+        </Box>
+        <Box
+          sx={{
+            display: 'flex',
+            gap: '1rem',
+            margin: '2rem 1rem',
+            alignItems: 'center',
+          }}
+        >
+          <Text
+            font={'Sora'}
+            sx={{
+              fontWeight: '500',
+              color: '#00000080',
+              marginTop: '0.1rem',
+              paddingRight: '1rem',
+              borderRight: '2px solid #00000050',
+            }}
+          >
+            Current MPs <br />
+            in LS
+          </Text>
+          <Text
+            font={'Sora'}
+            sx={{
+              fontWeight: '500',
+              color: '#00000080',
+              marginTop: '0.1rem',
+              paddingRight: '1rem',
+              borderRight: '2px solid #FF936F',
+            }}
+          >
+            <span style={{ color: '#FF936F', fontSize: '1.5rem' }}>
+              {mpStats.current}
+            </span>{' '}
+            out of <span style={{ fontSize: '1.5rem' }}>{mpStats.total}</span>
+          </Text>
+          <Text
+            font={'Sora'}
+            sx={{
+              fontWeight: '500',
+              color: '#00000080',
+              marginTop: '0.1rem',
+              paddingRight: '1rem',
+              borderRight: '2px solid #00000050',
+            }}
+          >
+            Eligible MPs <br />
+            in Performance
+          </Text>
+          <Text
+            font={'Sora'}
+            sx={{
+              fontWeight: '500',
+              color: '#00000080',
+              marginTop: '0.1rem',
+              paddingRight: '1rem',
+            }}
+          >
+            <span style={{ color: '#FF936F', fontSize: '1.5rem' }}>
+              {mpStats.eligible}
+            </span>{' '}
+            out of <span style={{ fontSize: '1.5rem' }}>{mpStats.current}</span>
+          </Text>
+        </Box>
+        <CardList
+          filteredData={filteredProfessionData}
+          isSelectedCard={selectedProfession}
+          data={attendanceDetailsPageData?.professionwise_summary}
+          loading={attendanceLoading}
+          loadMore={loadProfessions}
+          setLoadMore={setLoadProfessions}
+          selectedCardText="Your selected Profession"
+        />
+      </Box>
+      <AdvertiseSection />
+      {/* quilification   Wise Section */}
+      <Box className="performanceSection" id="quilification_wise">
+        <Divider sx={{ margin: '0 0 1rem' }} />
+        <Box
+          sx={{
+            display: 'flex',
+            gap: '0.5rem',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+        >
+          <SectionHeading title={`Quilification  Wise ${pageName}`} />
+          {/* <Autocomplete
+            options={partiesList || []}
+            value={selectedParty}
+            onChange={(e, newValue) => setSelectedParty(newValue)}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Select Age group"
+                variant="standard"
+              />
+            )}
+            sx={{ width: { md: 300, xs: 200 }, marginBottom: 2 }}
+          /> */}
+        </Box>
+        <Box
+          sx={{
+            display: 'flex',
+            gap: '1rem',
+            margin: '2rem 1rem',
+            alignItems: 'center',
+          }}
+        >
+          <Text
+            font={'Sora'}
+            sx={{
+              fontWeight: '500',
+              color: '#00000080',
+              marginTop: '0.1rem',
+              paddingRight: '1rem',
+              borderRight: '2px solid #00000050',
+            }}
+          >
+            Current MPs <br />
+            in LS
+          </Text>
+          <Text
+            font={'Sora'}
+            sx={{
+              fontWeight: '500',
+              color: '#00000080',
+              marginTop: '0.1rem',
+              paddingRight: '1rem',
+              borderRight: '2px solid #FF936F',
+            }}
+          >
+            <span style={{ color: '#FF936F', fontSize: '1.5rem' }}>
+              {mpStats.current}
+            </span>{' '}
+            out of <span style={{ fontSize: '1.5rem' }}>{mpStats.total}</span>
+          </Text>
+          <Text
+            font={'Sora'}
+            sx={{
+              fontWeight: '500',
+              color: '#00000080',
+              marginTop: '0.1rem',
+              paddingRight: '1rem',
+              borderRight: '2px solid #00000050',
+            }}
+          >
+            Eligible MPs <br />
+            in Performance
+          </Text>
+          <Text
+            font={'Sora'}
+            sx={{
+              fontWeight: '500',
+              color: '#00000080',
+              marginTop: '0.1rem',
+              paddingRight: '1rem',
+            }}
+          >
+            <span style={{ color: '#FF936F', fontSize: '1.5rem' }}>
+              {mpStats.eligible}
+            </span>{' '}
+            out of <span style={{ fontSize: '1.5rem' }}>{mpStats.current}</span>
+          </Text>
+        </Box>
+        <CardList
+          // filteredData={filteredPartiesData}
+          // isSelectedCard={selectedParty}
+          data={attendanceDetailsPageData?.qualificationwise_summary}
+          loading={attendanceLoading}
+          loadMore={loadQuilification}
+          setLoadMore={setLoadQuilification}
+          selectedCardText="Your selected Quilification"
+        />
+      </Box>
+      <AdvertiseSection />
+      {/* Term  Wise Section */}
+      <Box
+        className="performanceSection"
+        id="term_wise"
+        sx={{ backgroundColor: '#fff' }}
+      >
+        <Divider sx={{ margin: '0 0 1rem' }} />
+        <Box
+          sx={{
+            display: 'flex',
+            gap: '0.5rem',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+        >
+          <SectionHeading title={`Term Wise ${pageName}`} />
+          {/* <Autocomplete
+            options={partiesList || []}
+            value={selectedParty}
+            onChange={(e, newValue) => setSelectedParty(newValue)}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Select Age group"
+                variant="standard"
+              />
+            )}
+            sx={{ width: { md: 300, xs: 200 }, marginBottom: 2 }}
+          /> */}
+        </Box>
+        <Box
+          sx={{
+            display: 'flex',
+            gap: '1rem',
+            margin: '2rem 1rem',
+            alignItems: 'center',
+          }}
+        >
+          <Text
+            font={'Sora'}
+            sx={{
+              fontWeight: '500',
+              color: '#00000080',
+              marginTop: '0.1rem',
+              paddingRight: '1rem',
+              borderRight: '2px solid #00000050',
+            }}
+          >
+            Current MPs <br />
+            in LS
+          </Text>
+          <Text
+            font={'Sora'}
+            sx={{
+              fontWeight: '500',
+              color: '#00000080',
+              marginTop: '0.1rem',
+              paddingRight: '1rem',
+              borderRight: '2px solid #FF936F',
+            }}
+          >
+            <span style={{ color: '#FF936F', fontSize: '1.5rem' }}>
+              {mpStats.current}
+            </span>{' '}
+            out of <span style={{ fontSize: '1.5rem' }}>{mpStats.total}</span>
+          </Text>
+          <Text
+            font={'Sora'}
+            sx={{
+              fontWeight: '500',
+              color: '#00000080',
+              marginTop: '0.1rem',
+              paddingRight: '1rem',
+              borderRight: '2px solid #00000050',
+            }}
+          >
+            Eligible MPs <br />
+            in Performance
+          </Text>
+          <Text
+            font={'Sora'}
+            sx={{
+              fontWeight: '500',
+              color: '#00000080',
+              marginTop: '0.1rem',
+              paddingRight: '1rem',
+            }}
+          >
+            <span style={{ color: '#FF936F', fontSize: '1.5rem' }}>
+              {mpStats.eligible}
+            </span>{' '}
+            out of <span style={{ fontSize: '1.5rem' }}>{mpStats.current}</span>
+          </Text>
+        </Box>
+        <CardList
+          // filteredData={filteredPartiesData}
+          // isSelectedCard={selectedParty}
+          data={attendanceDetailsPageData?.termwise_summary}
+          loading={attendanceLoading}
+          loadMore={loadParties}
+          setLoadMore={setLoadParties}
+          selectedCardText="Your selected Term"
+        />
+      </Box>
+      <AdvertiseSection />
+      {/* catagory   Wise Section */}
+      <Box
+        className="performanceSection"
+        id="catagory_wise"
+        // sx={{ backgroundColor: '#fff' }}
+      >
+        <Divider sx={{ margin: '0 0 1rem' }} />
+        <Box
+          sx={{
+            display: 'flex',
+            gap: '0.5rem',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+        >
+          <SectionHeading title={`Catagory Wise ${pageName}`} />
+          {/* <Autocomplete
+            options={partiesList || []}
+            value={selectedParty}
+            onChange={(e, newValue) => setSelectedParty(newValue)}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Select Age group"
+                variant="standard"
+              />
+            )}
+            sx={{ width: { md: 300, xs: 200 }, marginBottom: 2 }}
+          /> */}
+        </Box>
+        <Box
+          sx={{
+            display: 'flex',
+            gap: '1rem',
+            margin: '2rem 1rem',
+            alignItems: 'center',
+          }}
+        >
+          <Text
+            font={'Sora'}
+            sx={{
+              fontWeight: '500',
+              color: '#00000080',
+              marginTop: '0.1rem',
+              paddingRight: '1rem',
+              borderRight: '2px solid #00000050',
+            }}
+          >
+            Current MPs <br />
+            in LS
+          </Text>
+          <Text
+            font={'Sora'}
+            sx={{
+              fontWeight: '500',
+              color: '#00000080',
+              marginTop: '0.1rem',
+              paddingRight: '1rem',
+              borderRight: '2px solid #FF936F',
+            }}
+          >
+            <span style={{ color: '#FF936F', fontSize: '1.5rem' }}>
+              {mpStats.current}
+            </span>{' '}
+            out of <span style={{ fontSize: '1.5rem' }}>{mpStats.total}</span>
+          </Text>
+          <Text
+            font={'Sora'}
+            sx={{
+              fontWeight: '500',
+              color: '#00000080',
+              marginTop: '0.1rem',
+              paddingRight: '1rem',
+              borderRight: '2px solid #00000050',
+            }}
+          >
+            Eligible MPs <br />
+            in Performance
+          </Text>
+          <Text
+            font={'Sora'}
+            sx={{
+              fontWeight: '500',
+              color: '#00000080',
+              marginTop: '0.1rem',
+              paddingRight: '1rem',
+            }}
+          >
+            <span style={{ color: '#FF936F', fontSize: '1.5rem' }}>
+              {mpStats.eligible}
+            </span>{' '}
+            out of <span style={{ fontSize: '1.5rem' }}>{mpStats.current}</span>
+          </Text>
+        </Box>
+        <CardList
+          // filteredData={filteredPartiesData}
+          // isSelectedCard={selectedParty}
+          data={attendanceDetailsPageData?.categorywise_summary}
+          loading={attendanceLoading}
+          loadMore={loadParties}
+          setLoadMore={setLoadParties}
+          selectedCardText="Your selected Catagory"
         />
       </Box>
     </>

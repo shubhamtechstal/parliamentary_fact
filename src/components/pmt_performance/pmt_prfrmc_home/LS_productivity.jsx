@@ -5,6 +5,8 @@ import ProgressMeter from 'components/common/ProgressMeter';
 import SectionHeading from 'components/common/SectionHeading';
 import ColorfulArc from '../ColorfulArc';
 import Text from 'components/common/Text';
+import { Link } from 'react-router-dom';
+import { extractPercentage } from 'helpers/utills/utilityFunctions';
 
 const PercentageTextgroup = (props) => {
   return (
@@ -232,8 +234,11 @@ function LS_productivity({
         >
           <ProgressMeter
             titleText={'Productivity'}
-            percentText={'100'}
-            subPercentText={'.20%'}
+            percentText={`${extractPercentage(productivity_schedule[3]?.value?.toString())?.a}`|| '100'}
+            subPercentText={`${extractPercentage(productivity_schedule[3]?.value?.toString())?.b}` || '.20%'}
+            value={productivity_schedule[3].value.replaceAll('%', '')}
+            percentNumFontSize={'3.5rem'}
+            dotPercentFontSize={'1.5rem'}
             width={230}
             height={270}
             // width={180}
@@ -367,12 +372,12 @@ function LS_productivity({
               <ChartProgressTextgroup
                 title={'DEBATES'}
                 isRight={true}
-                percentage={'89.5'}
+                percentage={`${pageData?.debate_percentage?.debate_percentage}` || '89.5'}
                 chartColor={'#b979a4'}
               />
               <ChartProgressTextgroup
                 title={'PRIVATE MEMBER BILL'}
-                percentage={`${pageData?.private_bill_percentage?.private_bill_percentage}`}
+                percentage={`${pageData?.private_bill_performance?.bill_performance_percentage}`}
                 isRight={true}
                 chartColor={'#686091'}
               />
@@ -417,8 +422,8 @@ function LS_productivity({
         >
           {mobCardsData?.map((data, i) => {
             return (
-              <Box
-                key={i}
+              <Link to={`/parliament-performance/lok-sabha-performance/lok-sabha-${data?.title.replaceAll(" ", "-").toLowerCase()}`} key={i}>
+               <Box
                 sx={{
                   padding: '5px 10px',
                   borderRadius: '1rem',
@@ -431,10 +436,11 @@ function LS_productivity({
                   minWidth: '120px',
                 }}
               >
-                <img
-                  src="/Assets/icons/statueImg.png"
+               <img
+                  src={data?.image ?? "/Assets/icons/statueImg.png"}
                   alt="statueImg"
-                  height={50}
+                  height={30}
+                  width={30}
                 />
                 <Box
                   key={i}
@@ -462,6 +468,7 @@ function LS_productivity({
                   />
                 </Box>
               </Box>
+              </Link>
             );
           })}
         </Box>
@@ -504,9 +511,12 @@ function LS_productivity({
           >
             <ProgressMeter
               titleText={'Till'}
-              subTiteText={'20 March 2024'}
-              percentText={'100%'}
+              subTiteText={'Now'}
+              percentText={pageData?.passed_govt_bills_data?.passed_bill_percentage ||'100%'}
+              value={pageData?.passed_govt_bills_data?.passed_bill_percentage?.replaceAll('%', '')}
               subPercentText={'Passes'}
+              percentNumFontSize={'2.5rem'}
+              dotPercentFontSize={'1.5rem'}
               width={230}
               height={270}
               innerRadius={98}
@@ -582,9 +592,12 @@ function LS_productivity({
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <ProgressMeter
               titleText={'Till'}
-              subTiteText={'20 March 2024'}
-              percentText={'100%'}
+              subTiteText={'Now'}
+              percentText={pageData?.passed_private_bills_data?.passed_bill_percentage ||'100%'}
+              value={pageData?.passed_private_bills_data?.passed_bill_percentage?.replaceAll('%', '')}
               subPercentText={'Passes'}
+              percentNumFontSize={'2.5rem'}
+              dotPercentFontSize={'1.5rem'}
               width={230}
               height={270}
               innerRadius={98}
@@ -703,8 +716,8 @@ function LS_productivity({
             <div style={{ display: 'flex', justifyContent: 'center' }}>
               <ProgressMeter
                 titleText={'Till'}
-                subTiteText={'20 March 2024'}
-                percentText={'100%'}
+                subTiteText={'Now'}
+                percentText={pageData?.passed_govt_bills_data?.passed_bill_percentage ||'100%'}
                 subPercentText={'Passes'}
                 width={150}
                 height={170}
@@ -806,13 +819,13 @@ function LS_productivity({
             >
               <ChartProgressTextgroup
                 title={'DEBATES'}
-                percentage={'89.5'}
+                percentage={`${pageData?.debate_percentage?.debate_percentage}` || '89.5'}
                 isRight={true}
                 chartColor={'#b979a4'}
               />
               <ChartProgressTextgroup
                 title={'PRIVATE MEMBER BILL'}
-                percentage={`${pageData?.private_bill_percentage?.private_bill_percentage}`}
+                percentage={`${pageData?.private_bill_performance?.bill_performance_percentage}`}
                 isRight={true}
                 chartColor={'#686091'}
               />
@@ -885,8 +898,8 @@ function LS_productivity({
             <div style={{ display: 'flex', justifyContent: 'center' }}>
               <ProgressMeter
                 titleText={'Till'}
-                subTiteText={'20 March 2024'}
-                percentText={'100%'}
+                subTiteText={'Now'}
+                percentText={pageData?.passed_private_bills_data?.passed_bill_percentage || '100%'}
                 subPercentText={'Passes'}
                 width={150}
                 height={170}

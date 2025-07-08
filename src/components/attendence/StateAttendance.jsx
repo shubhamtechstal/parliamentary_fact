@@ -6,7 +6,7 @@ export default function StateAttendance({item, textColor}) {
   return (
     <Box sx={{display:'flex',alignItems:'flex-start', gap: 1}}>
         {/* <img style={{height:'100px',width:'100px'}} src={'/Assets/madhyaPradesh.png'}/> */}
-        <img style={{height:'80px',width:'80px'}} src={item?.image_url}/>
+        { item?.image_url && <img style={{height:'80px',width:'80px'}} src={item?.image_url}/> }
         <Box sx={{display:'flex',flexDirection:'column',alignItems:'center', height:'70px'}}>
             <Box sx={{height:`${100 - item.percentage}%`,width:'2px',background:'grey'}}></Box>
             <Box sx={{height:`${item.percentage}%`,width:'6px',background:'#FF9C93'}}></Box>

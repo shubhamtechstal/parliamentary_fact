@@ -1,73 +1,77 @@
 import { Box } from '@mui/material';
+import AdvertiseSection from 'components/addLayout/HorizontalAdvertiseSection';
 import GrayButton from 'components/common/GrayButton';
-import GrayDot from 'components/common/GrayDot';
-import ProgressMeter from 'components/common/ProgressMeter';
-import Text from 'components/common/Text';
+// import GrayDot from 'components/common/GrayDot';
+// import ProgressMeter from 'components/common/ProgressMeter';
+// import Text from 'components/common/Text';
 import MpsTopPerformanceCard from 'components/Mps_performance/cards/MpsTopPerformanceCard';
-import { attendance_details } from 'helpers/performanceConstants';
-import { getDateInMonthNameFormate } from 'helpers/utills/utilityFunctions';
-import React from 'react';
+// import { attendance_details } from 'helpers/performanceConstants';
+// import { getDateInMonthNameFormate } from 'helpers/utills/utilityFunctions';
 
-function MpsPmtPerformance() {
-  const mpNationalDomy = {
-    rank: '001',
-    name: 'Amit Kumar Singh',
-    constituency: 'Varanasi',
-    performance: '78.2',
-    rankTitle: 'National Rank:',
-    image: 'https://via.placeholder.com/50',
-    partyName: 'BJP',
-  };
-  const mpStateDomy = {
-    rank: '001',
-    name: 'Amit Kumar Singh',
-    constituency: 'Varanasi',
-    performance: '78.2',
-    rankTitle: 'State Rank:',
-    image: '/Assets/icons/mpGirlImage.png',
-    partyName: 'BJP',
-  };
-  const sections = [
-    { name: 'Attendance', mpStateDomy, mpNationalDomy },
-    { name: 'Questions', mpStateDomy, mpNationalDomy },
-    { name: 'Debates', mpStateDomy, mpNationalDomy },
-    { name: 'Private Member Bill', mpStateDomy, mpNationalDomy },
-    // 'Questions',
-    // 'Debates',
-    // 'Private Member Bill',
-  ];
+
+function MpsPmtPerformance({ parliament_performance }) {
   return (
-    <Box sx={{ padding: { md: '2rem', xs: '1rem' } }}>
-      {sections.map((section, i) => {
+    <Box
+      sx={{
+        py: { md: '2rem', xs: '1rem' },
+      }}
+    >
+      {parliament_performance?.map((section, i) => {
+        const { title, data = {} } = section ?? {};
+        if(Object.keys(data).length < 1) return;
+        const mpNationalDomy = {
+          rank: data?.national_rank,
+          name: data?.name,
+          mp_id: data?.mp_id,
+          constituency: data?.constituency,
+          performance: data?.national_percentage,
+          rankTitle: 'National Rank:',
+          image: data?.image,
+          partyName: data?.party_short_name,
+        };
+        const mpStateDomy = {
+          rank: data?.state_rank,
+          name: data?.name,
+          mp_id: data?.mp_id,
+          constituency: data?.constituency,
+          performance: data?.state_percentage,
+          image: data?.image,
+          partyName: data?.party_short_name,
+          rankTitle: 'State Rank:',
+        };
         return (
-          <Box key={i} mb={3}>
+          <>
+          <Box key={i} py={5} maxWidth = {{md :'80%', sx:"100%"}} margin='auto'>
             <span
               style={{
                 borderBottom: '2px solid red',
                 margin: '0 0',
                 fontSize: '18px',
                 fontWeight: 'bold',
+                color: 'black',
+                opacity: '0.6',
+                paddingBottom: '5px',
               }}
             >
-              {section.name}
+              {title}
             </span>
             <Box
               sx={{
                 display: 'flex',
-                gap: { md: 3, xs: 2 },
+                gap: { md: '5rem', xs: 1 },
                 alignItems: 'center',
                 justifyContent: 'start',
                 overflow: 'auto',
-                p: 1,
-                pb: 2,
+                py: 5,
+                px: 1,
               }}
             >
               <Box>
                 <p style={{ margin: '0 0 10px 10px' }}>National Ranking</p>
                 <Box minWidth={310} margin={'auto'}>
                   <MpsTopPerformanceCard
-                    mp={section.mpNationalDomy}
-                    cardCatagory={section.name}
+                    mp={mpNationalDomy}
+                    cardCatagory={title}
                     // isLoading={isRankLoading}
                   />
                 </Box>
@@ -76,12 +80,12 @@ function MpsPmtPerformance() {
                 <p style={{ margin: '0 0 10px 10px' }}>State Ranking</p>
                 <Box minWidth={310} margin={'auto'}>
                   <MpsTopPerformanceCard
-                    cardCatagory={section.name}
-                    mp={section.mpStateDomy}
+                    cardCatagory={title}
+                    mp={mpStateDomy}
                   />
                 </Box>
               </Box>
-              <Box
+              {/* <Box
                 sx={{
                   display: 'flex',
                   justifyContent: 'center',
@@ -149,10 +153,16 @@ function MpsPmtPerformance() {
                     </Box>
                   ))}
                 </Box>
-              </Box>
+              </Box> */}
             </Box>
-            <GrayButton bgColor={'#E39A00'}> View More </GrayButton>
+            <Box
+              sx={{ justifyContent: 'right', display: 'flex', width: '100%',}}
+            >
+              <GrayButton bgColor={'#E39A00'}> View More </GrayButton>
+            </Box>
           </Box>
+          <AdvertiseSection/>
+          </>
         );
       })}
     </Box>

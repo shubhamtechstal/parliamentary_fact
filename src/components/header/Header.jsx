@@ -6,30 +6,38 @@ import {
   keyframes,
   Menu,
   MenuItem,
+  Popover,
+  Card,
 } from '@mui/material';
 import Text from 'components/common/Text';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import React, { useEffect, useRef, useState } from 'react';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import XIcon from '@mui/icons-material/X';
-import YouTubeIcon from '@mui/icons-material/YouTube';
-import InstagramIcon from '@mui/icons-material/Instagram';
+import { useEffect, useRef, useState } from 'react';
 import images from 'helpers/images';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import '../../components/common/cards/NewsCard.css';
 import { dashboardNewsApiAction } from 'stores/redux/apiSlices/DashboardNewsSlice/dashboardNewsApiSlice';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-export default function Header({ data, setIndex, selected }) {
+import { Close } from '@mui/icons-material';
+import IconButton from 'components/common/IconButton';
+
+export default function Header({
+  subNavData,
+  pageNavigtionLinks,
+  isSubNavigationMenu,
+}) {
   const { data: trendingDataApi } = dashboardNewsApiAction.getDashboardNews({
     limit: 10,
   });
 
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
-  const [newLetter, setNewsletter] = useState(true);
+  const [showMoreMenu, setShowMoreMenu] = useState(false);
 
+  const handleCloseMoreMenu = () => {
+    setShowMoreMenu(false);
+  };
   const handleMoreClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -113,42 +121,7 @@ export default function Header({ data, setIndex, selected }) {
   const truncatedText =
     arrNews.length > 0 ? limitWords(arrNews[trendingNews]?.title, 15) : '';
 
-  const header = data;
-  const pageNavigtionLinks = [
-    {
-      title: 'Home',
-      pageUrl: '/',
-    },
-    {
-      title: 'Parliament Performance',
-      pageUrl: '/parliament-performance/lok-sabha-performance',
-    },
-    {
-      title: 'MPs Parliament Performance',
-      pageUrl: '/mps-performance',
-    },
-    {
-      title: 'MPs Constituency Performance',
-      pageUrl: '/mps-constituency',
-    },
-    {
-      title: 'MPs Public Rating',
-      pageUrl: '/mps-public-rating',
-    },
-    {
-      title: 'News & Videos',
-      pageUrl: '/news',
-    },
-    {
-      title: 'Your MPs',
-      pageUrl: '/your-mps',
-    },
-    {
-      title: 'Newsletter',
-      pageUrl: '/newsletter',
-    },
-  ];
-  const [isSubNavigationMenu, setisSubNavigationMenu] = useState(false);
+  // const [isSubNavigationMenu, setisSubNavigationMenu] = useState(false);
   const handleRightClick = () => {
     setTrendingNews((prev) => (prev === arrNews.length - 1 ? 0 : prev + 1));
   };
@@ -173,7 +146,7 @@ export default function Header({ data, setIndex, selected }) {
   };
 
   const handleSearch = () => {
-    setIndex(-2);
+    // setIndex(-2);
     if (keyword.trim()) {
       navigate(`/news/search/${createSlug(keyword)}`, {
         state: { keyword: createSlug(keyword) },
@@ -182,28 +155,6 @@ export default function Header({ data, setIndex, selected }) {
       setKeyword('');
     }
   };
-  const location = useLocation();
-  const { id } = location.state || {};
-  useEffect(() => {
-    if ( window.location.pathname.includes('news')) {
-      setisSubNavigationMenu(true);
-    } else {
-      setisSubNavigationMenu(false);
-    }
-  }, [id]);
-  const parts = window.location.href.split('/');
-  useEffect(() => {
-    const index = data?.findIndex(
-      (item) => item.url === parts[parts.length - 1]
-    );
-    if (parts[parts.length - 1] !== 'news' && index === -1) {
-      setIndex(-2);
-    } else {
-      setIndex(index);
-    }
-    if (parts[parts.length - 1] !== 'newsletter') setNewsletter(true);
-    else setNewsletter(false);
-  }, [window.location.href, data]);
   return (
     <Box
       sx={{
@@ -212,266 +163,6 @@ export default function Header({ data, setIndex, selected }) {
         // marginBottom: '3px',
       }}
     >
-      {/* {newLetter &&  <>
-      <Box
-          sx={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'space-between',
-            padding:'1rem 0',
-            alignSelf:'center',
-          }}
-        >
-          <Box sx={{ width: { xs: 'min-content', md: '25%' } }}>
-            <Box
-              sx={{
-                display: 'flex',
-                gap: '0.2rem',
-                width: { xs: '120px', md: '100%' },
-                flexWrap: 'wrap',
-              }}
-            >
-              <Text
-                sx={{ color: 'grey', fontSize: '1.2rem', fontWeight: 700 }}
-                text={`TODAY'S`}
-              />
-              <Text
-                sx={{ color: 'grey', fontSize: '1.2rem', fontWeight: 700 }}
-                text={`LOK SABHA `}
-              />
-              <Text
-                sx={{ color: 'grey', fontSize: '1.2rem', fontWeight: 700 }}
-                text={`PERFORMANCE`}
-              />
-            </Box>
-          </Box>
-          <Box
-            sx={{
-              display: 'flex',
-              gap: '0.8rem',
-              width: { xs: '100%', md: 'fit-content' },
-              textAlign: 'end',
-              justifyContent: 'flex-end',
-              position: 'relative',
-            }}
-          >
-            <Box
-              sx={{
-                position: 'absolute',
-                top: { xs: 0, md: 35 },
-                left: { xs: '57%', md: '-90px' },
-              }}
-            >
-              <Text
-                sx={{
-                  color: '#fff',
-                  background: '#FF936F',
-                  fontSize: '0.8rem',
-                  fontWeight: '600',
-                  width: '80px',
-                  borderRadius: '15px',
-                  textAlign: 'center',
-                  position: 'absolute',
-                  top: -21,
-                  padding: '0.2rem 0',
-                }}
-                text={'7.3 Hrs'}
-              />
-              <Text
-                sx={{
-                  color: '#fff',
-                  background: '#919191',
-                  fontSize: '0.8rem',
-                  fontWeight: '600',
-                  width: '80px',
-                  borderRadius: '15px',
-                  zIndex: -1,
-                  textAlign: 'center',
-                  padding: '0.2rem 0',
-                }}
-                text={'Work'}
-              />
-            </Box>
-            <Box
-              sx={{
-                marginTop: '1rem',
-                position: 'relative',
-                display: {xs:'block',md:'flex'},
-                flexWrap: 'wrap',
-                justifyContent: 'flex-end',
-                textAlign: { xs: 'end', md: 'center' },
-                gap: { xs: 0, md: '1rem' },
-              }}
-            >
-              <Box
-                sx={{
-                  position: 'absolute',
-                  top: -65,
-                  left: -80,
-                  display: { xs: 'block', md: 'none' },
-                }}
-              >
-                <Box
-                  sx={{
-                    color: '#fff',
-                    //   background: '#cbcbcb',
-                    fontSize: '0.8rem',
-                    fontWeight: '600',
-                    borderRadius: '50%',
-                    textAlign: 'center',
-                    width: '55px',
-                    height: '55px',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}
-                >
-                  <img
-                    src="Assets/icons/Adjournment-image1.png"
-                    alt="adjournment-1"
-                    style={{ width: '100%' }}
-                  />
-                </Box>
-                <Text
-                  sx={{
-                    color: '#fff',
-                    //   background: '#FF936F',
-                    fontSize: '1.5rem',
-                    fontWeight: '500',
-                    borderRadius: '50%',
-                    textAlign: 'center',
-                    position: 'absolute',
-                    top: 43,
-                    backgroundImage:
-                      'url(/Assets/icons/Adjournment-image-2.png)', // Ensure the file extension is correct
-                    backgroundSize: 'cover', // To make the image cover the entire element
-                    backgroundRepeat: 'no-repeat',
-                    width: '55px',
-                    height: '55px',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}
-                  text={'06'}
-                />
-              </Box>
-              <Box>
-                <Text
-                  sx={{ color: 'grey', fontSize: '0.75rem', fontWeight: '600' }}
-                  text={'QUESTION HOUR'}
-                />
-                <Text
-                  sx={{
-                    color: '#FF936F',
-                    fontSize: '1.2rem',
-                    fontWeight: '700',
-                  }}
-                  text={'12.3%'}
-                />
-              </Box>
-              <Box>
-                <Text
-                  sx={{
-                    color: 'grey',
-                    fontSize: '0.75rem',
-                    fontWeight: '600',
-                    marginTop:{ xs:'0.5rem',md:'0'},
-                  }}
-                  text={'LEGISLATIVE BUSINESS'}
-                />
-                <Text
-                  sx={{
-                    color: '#FF936F',
-                    fontSize: '1.2rem',
-                    fontWeight: '700',
-                  }}
-                  text={'85.1%'}
-                />
-              </Box>
-            </Box>
-            <Box
-              sx={{
-                height: '110px',
-                width: '2px',
-                background: '#ff2100bf',
-                marginTop: '1rem',
-                display: { xs: 'block', md: 'none' },
-              }}
-            ></Box>
-            <Box
-              sx={{
-                textAlign: { xs: 'start', md: 'center' },
-                width: { xs: 'min-content', md: 'fit-content' },
-                marginTop: '1rem',
-                display: 'flex',
-                flexWrap: 'wrap',
-                gap: { xs: 0, md: '1rem' },
-              }}
-            >
-              <Box>
-                <Text
-                  sx={{
-                    color: 'grey',
-                    fontSize: '0.75rem',
-                    fontWeight: '600',
-                    textWrap: 'nowrap',
-                  }}
-                  text={'ZERO HOUR'}
-                />
-                <Text
-                  sx={{
-                    color: '#FF936F',
-                    fontSize: '1.2rem',
-                    fontWeight: '700',
-                  }}
-                  text={'8%'}
-                />
-              </Box>
-              <Box>
-                <Text
-                  sx={{
-                    color: 'grey',
-                    fontSize: '0.75rem',
-                    fontWeight: '600',
-                    textWrap: 'nowrap',
-                    // marginTop: '0.5rem',
-                  }}
-                  text={'OTHER BUSINESS'}
-                />
-                <Text
-                  sx={{
-                    color: '#FF936F',
-                    fontSize: '1.2rem',
-                    fontWeight: '700',
-                  }}
-                  text={'10%'}
-                />
-              </Box>
-            </Box>
-          </Box>
-        </Box>
-        <Box sx={{display:'flex',justifyContent:'center'}}>
-        <Button onClick={()=>navigate('/newsletter')}
-          sx={{
-            background: '#A6A6A6',
-            alignSelf: 'center',
-            color: '#fff',
-            fontSize: '0.8rem',
-            fontWeight: '600',
-            marginBottom: '1rem',
-            width: 'fit-content',
-            borderRadius: '18px',
-            padding: { xs: '0.4rem 2rem', md: '0.4rem 3rem' },
-            '&:hover': {
-              background: '#A6A6A6',
-              color: '#fff',
-            },
-          }}
-        >
-          Click here to check full News letter
-        </Button>
-        </Box>
-        </>} */}
       <Container>
         <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <Box
@@ -662,20 +353,25 @@ export default function Header({ data, setIndex, selected }) {
           display: 'flex',
           marginTop: '1rem',
           background: '#dfdede',
-          opacity: '0.8',
+          color: '#666565',
         }}
       >
         <Container
           sx={{ display: 'flex', justifyContent: 'start', gap: '1.5rem' }}
         >
-          {pageNavigtionLinks?.slice(0, 6).map((val, index) => {
-            const isActive = (val?.pageUrl !== '/')&& window.location.pathname.includes(val?.pageUrl) || (val?.pageUrl === '/' && window.location.pathname === '/');
+          {pageNavigtionLinks?.slice(0, 7).map((val, index) => {
+            const isActive =
+              (val?.pageUrl !== '/' &&
+                window.location.pathname.includes(val?.pageUrl)) ||
+              (val?.pageUrl === '/' && window.location.pathname === '/');
             return (
               <Link
                 style={{
                   textDecoration: 'none',
                   color: isActive ? '#F44336' : 'inherit',
-                  borderBottom: isActive ? '4px solid rgb(241, 128, 124)' : 'none',
+                  borderBottom: isActive
+                    ? '4px solid rgb(241, 128, 124)'
+                    : 'none',
                   padding: '10px 0 6px 0',
                 }}
                 to={`${val?.pageUrl}`}
@@ -693,72 +389,82 @@ export default function Header({ data, setIndex, selected }) {
               </Link>
             );
           })}
-          {pageNavigtionLinks?.length > 6 && (
-            <Box
-              sx={{ display: 'flex', cursor: 'pointer', padding: '0.5rem' }}
-              onClick={handleMoreClick}
-            >
-              <MoreVertIcon sx={{ fontSize: '1.2rem' }} />
+          {pageNavigtionLinks?.length > 7 && (
+            <Box sx={{ position: 'relative' }}>
+              <Box
+                sx={{ display: 'flex', cursor: 'pointer', padding: '0.5rem' }}
+                onClick={() => setShowMoreMenu((prev) => !prev)}
+              >
+                <MoreVertIcon sx={{ fontSize: '1.2rem' }} />
+              </Box>
+
+              <Card
+                sx={{
+                  minWidth: '110px',
+                  display: showMoreMenu ? 'block' : 'none',
+                  position: 'absolute',
+                }}
+              >
+                <IconButton
+                  onClick={() => handleCloseMoreMenu()}
+                  sx={{ float: 'right', p: '3px' }}
+                >
+                  <Close />
+                </IconButton>
+                <Box sx={{ mt: 1 }}>
+                  {pageNavigtionLinks?.slice(6)?.map((val, index) => (
+                    <MenuItem
+                      sx={{ fontSize: '12px', fontWeight: '600' }}
+                      onClick={() => {
+                        navigate(val?.pageUrl);
+                        handleCloseMoreMenu();
+                      }}
+                      key={index}
+                    >
+                      {val?.title}
+                    </MenuItem>
+                  ))}
+                </Box>
+              </Card>
             </Box>
           )}
         </Container>
-        <Menu
-          anchorEl={anchorEl}
-          open={Boolean(anchorEl)}
-          onClose={handleClose}
-        >
-          {pageNavigtionLinks?.slice(6).map((val, index) => (
-            <MenuItem
-              sx={{ fontSize: '12px' }}
-              onClick={() => {
-                {
-                  navigate(`/news/categories/${val?.pageUrl}`, {
-                    state: { category: val?.title },
-                  }),
-                    setIndex(index + 6);
-                }
-                handleClose();
-              }}
-              key={index}
-            >
-              {val?.title}
-            </MenuItem>
-          ))}
-        </Menu>
       </Box>
       {/* Subheader navigations */}
       {isSubNavigationMenu && (
         <Container
-          sx={{ display: 'flex', justifyContent: 'start',  padding: '0.5rem' }}
+          sx={{ display: 'flex', justifyContent: 'start', padding: '0.5rem' }}
         >
           <Box sx={{ display: 'flex', gap: '1.5rem' }}>
-            {header?.slice(0, 6).map((val, index) => (
-              <Box
-                sx={{ display: 'flex' }}
-                onClick={() => {
-                  navigate(`/news/categories/${val?.url}`, {
-                    state: { category: val?.category },
-                  }),
-                    setIndex(index);
-                }}
-                key={index}
-              >
-                <Text
-                  text={val?.category}
-                  sx={{
-                    fontSize: '0.9rem',
-                    fontWeight: 700,
-                    cursor: 'pointer',
-                    color: selected === index ? '#162eb7' : '',
-                    '&:hover': {
-                      color: '#162eb7',
-                    },
+            {subNavData?.slice(0, 6).map((val, index) => {
+              const isActive = window.location.pathname.includes(`/news/categories/${val?.url}`);
+              return (
+                <Box
+                  sx={{ display: 'flex' }}
+                  onClick={() => {
+                    navigate(`/news/categories/${val?.url}`, {
+                      state: { category: val?.category },
+                    });
                   }}
-                />
-                {val?.subhead && <ExpandMoreIcon />}
-              </Box>
-            ))}
-            {header?.length > 6 && (
+                  key={index}
+                >
+                  <Text
+                    text={val?.category}
+                    sx={{
+                      fontSize: '0.9rem',
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                      color: isActive ? '#F44336' : '',
+                      '&:hover': {
+                        color: '#F44336',
+                      },
+                    }}
+                  />
+                  {val?.subhead && <ExpandMoreIcon />}
+                </Box>
+              );
+            })}
+            {subNavData?.length > 6 && (
               <Box
                 sx={{ display: 'flex', cursor: 'pointer' }}
                 onClick={handleMoreClick}
@@ -772,15 +478,14 @@ export default function Header({ data, setIndex, selected }) {
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            {header?.slice(6).map((val, index) => (
+            {subNavData?.slice(6).map((val, index) => (
               <MenuItem
                 sx={{ fontSize: '12px' }}
                 onClick={() => {
                   {
                     navigate(`/news/categories/${val?.url}`, {
                       state: { category: val?.category },
-                    }),
-                      setIndex(index + 6);
+                    });
                   }
                   handleClose();
                 }}

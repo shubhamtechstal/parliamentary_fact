@@ -43,8 +43,6 @@ apiSliceInterceptor.baseQueryWithInterceptor = async (args, api, extraOptions) =
         })
       );
     }
-
-    console.log('result', result);
     return result;
   } catch (error) {
     console.log('error', error);

@@ -1,15 +1,32 @@
 import { Box, Chip, Container } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useEffect, useRef } from 'react';
 
 const PerformanceChips = ({ sections }) => {
   const navigate = useNavigate();
-  const handleChipClick = (id, routeUrl) => {
+  const location = useLocation();
+  const chipRefs = useRef([]);
+
+  const handleChipClick = (id, routeUrl, index) => {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
     navigate(`/parliament-performance/lok-sabha-performance/${routeUrl}`);
   };
+
+  useEffect(() => {
+    const activeIndex = sections?.findIndex((data) =>
+      location.pathname.includes(data?.routeUrl)
+    );
+    if (activeIndex !== -1 && chipRefs.current[activeIndex]) {
+      chipRefs.current[activeIndex].scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'center',
+      });
+    }
+  }, [location.pathname, sections]);
 
   return (
     <Box
@@ -18,7 +35,7 @@ const PerformanceChips = ({ sections }) => {
         top: 0,
         zIndex: 100,
         backgroundColor: '#f6f6f6',
-        padding: '0  0',
+        pl: { md: 0, xs: 2 },
       }}
     >
       <Container
@@ -33,18 +50,17 @@ const PerformanceChips = ({ sections }) => {
       >
         {sections?.map((data, index) => {
           const id = data?.title.replace(/\s+/g, '_');
-          const isSelected = window.location.pathname.includes(data?.routeUrl);
+          const isSelected = location.pathname.includes(data?.routeUrl);
 
           return (
             <Chip
               key={index}
+              ref={(el) => (chipRefs.current[index] = el)}
               label={data?.title}
-              onClick={() => handleChipClick(id, data?.routeUrl)}
+              onClick={() => handleChipClick(id, data?.routeUrl, index)}
               variant={isSelected ? 'filled' : 'outlined'}
               sx={{
-                backgroundColor: isSelected
-                  ? 'rgb(255, 147, 111)'
-                  : 'transparent',
+                backgroundColor: isSelected ? 'rgb(255, 147, 111)' : 'transparent',
                 color: isSelected ? '#fff' : 'black',
                 borderColor: isSelected ? 'orange' : 'rgba(0, 0, 0, 0.23)',
                 '&:hover': {
@@ -54,6 +70,7 @@ const PerformanceChips = ({ sections }) => {
                 },
                 cursor: 'pointer',
                 justifyContent: 'center',
+                flexShrink: 0, // important to prevent shrinking in scroll
               }}
             />
           );

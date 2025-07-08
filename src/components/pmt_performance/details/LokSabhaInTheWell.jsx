@@ -5,7 +5,7 @@ import { fetchInteruptionData } from 'stores/redux/apiSlices/pmt_PerformanceSlic
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from 'components/common/Loader';
 
-function LokSabhaQuoramBell() {
+function LokSabhaInTheWell() {
   const dispatch = useDispatch();
   const { interuptionData, interuptionLoading } = useSelector(
     (state) => state.pmtPerformance
@@ -20,19 +20,19 @@ function LokSabhaQuoramBell() {
       ) : (
         <AdjiurnmentUIComponent
           heroData={{
-            title: 'Lok Sabha Quoram Bell',
-            cardTitle: 'Quoram Bell',
+            title: 'Lok Sabha IN THE WELL',
+            cardTitle: 'IN THE WELL',
             subtitle: 'Till Now',
-            type: 'quoram_bell',
+            type: 'in_the_well',
           }}
           showListAsCard={true}
-          dataList={interuptionData?.data?.coram_bell}
-          totalCount={interuptionData?.total_coram_bell_count || ''}
-          sectionInfo={interuptionData?.coram_bell_info || []}
+          dataList={interuptionData?.data?.in_the_wall}
+          totalCount={interuptionData?.total_in_the_wall_count || ''}
+          sectionInfo={interuptionData?.in_the_wall_info || []}
         />
       )}
     </Container>
   );
 }
 
-export default LokSabhaQuoramBell;
+export default LokSabhaInTheWell;

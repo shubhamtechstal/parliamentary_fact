@@ -38,7 +38,7 @@ const headers = {
 function LokSabhaQuestionToMinistery() {
   return (
     <Container>
-        <LS_attendance attendance_details={attendance_details} percentageValue={'73.02%'} />
+        <LS_attendance attendance_details={attendance_details} percentageValue={'73.02%'} titleHeadign='Lok Sabha Question To Ministery' />
         <Divider sx={{ my: 2 }} />
       <ListTableComponent headers={headers} ministries={ministries} />
     </Container>

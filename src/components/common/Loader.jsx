@@ -11,7 +11,8 @@ const Loader = ({ position, loading, size }) => {
     return (
         <Stack
             sx={{
-                background: 'rgba(255, 255, 255, 0.25)',
+                // background: 'rgba(255, 255, 255, 0.25)',
+                display:'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
                 position: position,
@@ -23,7 +24,7 @@ const Loader = ({ position, loading, size }) => {
                 visibility: loading ? 'visible' : 'hidden',
             }}
         >
-            <CircularProgress color="secondary" size={sizes[size]} />
+            <CircularProgress sx={{color:"#ed5122"}} size={sizes[size]} />
         </Stack>
     );
 };

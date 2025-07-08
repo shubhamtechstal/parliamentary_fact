@@ -1,57 +1,39 @@
 import { Container } from '@mui/material';
-import React from 'react'
+import React, { useEffect } from 'react';
 import AdjiurnmentUIComponent from '../AdjiurnmentUIComponent';
+import { fetchInteruptionData } from 'stores/redux/apiSlices/pmt_PerformanceSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import Loader from 'components/common/Loader';
 
-const agendaData = [
-    {
-      date: '25 NOV 2024',
-      items: [
-        {
-          adjournment: '1',
-          time: '11:15 AM',
-          subject:
-            'Local infrastructure, such as roads and water/wastewater networks, form Local Infrastructure, such as roads and water/wastewater networks, form Local infrastructure, such as roads and water/wastewater networks, form',
-        },
-        {
-          adjournment: '2',
-          time: '11:15 AM',
-          subject:
-            'Local infrastructure, such as roads and water/wastewater networks, form Local Infrastructure, such as roads and water/wastewater networks, form Local infrastructure, such as roads and water/wastewater networks, form',
-        },
-        {
-          adjournment: '3',
-          time: '11:15 AM',
-          subject:
-            'Local infrastructure, such as roads and water/wastewater networks, form Local Infrastructure, such as roads and water/wastewater networks, form Local infrastructure, such as roads and water/wastewater networks, form',
-        },
-      ],
-    },
-    {
-      date: '26 NOV 2024',
-      items: [
-        {
-          adjournment: '1',
-          time: '11:15 AM',
-          subject:
-            'Local infrastructure, such as roads and water/wastewater networks, form Local Infrastructure, such as roads and water/wastewater networks, form Local infrastructure, such as roads and water/wastewater networks, form',
-        },
-      ],
-    },
-  ];
 function LokSabhaNotRecorded() {
+  const dispatch = useDispatch();
+  const { interuptionData, interuptionLoading } = useSelector(
+    (state) => state.pmtPerformance
+  );
+  useEffect(() => {
+    dispatch(fetchInteruptionData());
+  }, [dispatch]);
+
   return (
     <Container>
-       <AdjiurnmentUIComponent
-        heroData={{
-          title: 'Lok Sabha Not Recorded',
-          cardTitle: 'Not Recorded',
-          subtitle: 'Till 20 March 2024',
-          numCount: '490',
-        }}
-        dataList={agendaData}
-      />
+      {interuptionLoading ? (
+        <Loader loading position="absolute" />
+      ) : (
+        <AdjiurnmentUIComponent
+          heroData={{
+            title: 'Lok Sabha Not Recorded',
+            cardTitle: 'Not Recorded',
+            subtitle: 'Till Now',
+            type: 'not_recorded',
+          }}
+          showListAsCard={true}
+          dataList={interuptionData?.data?.not_recorded || []}
+          totalCount={interuptionData?.total_not_recorded_count || ''}
+          sectionInfo={interuptionData?.not_recorded_info || []}
+        />
+      )}
     </Container>
-  )
+  );
 }
 
-export default LokSabhaNotRecorded
+export default LokSabhaNotRecorded;

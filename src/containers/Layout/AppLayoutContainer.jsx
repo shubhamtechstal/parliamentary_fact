@@ -1,19 +1,63 @@
 import { useEffect, useState } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import '../../App.css';
-import { Box, Stack } from '@mui/material';
+import { Box, Container, Stack } from '@mui/material';
 import Header from 'components/header/Header';
 import Footer from 'components/footer/Footer';
 import MobileHeader from 'components/header/MobileHeader';
 import Text from 'components/common/Text';
 import { dashboardNewsApiAction } from 'stores/redux/apiSlices/DashboardNewsSlice/dashboardNewsApiSlice';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
+const pageNavigtionLinks = [
+  {
+    title: 'Home',
+    pageUrl: '/',
+  },
+  {
+    title: 'Parliament Performance',
+    pageUrl: '/parliament-performance/lok-sabha-performance',
+  },
+  {
+    title: 'MPs Parliament Performance',
+    pageUrl: '/mps-performance',
+  },
+  {
+    title: 'MPs Constituency Performance',
+    pageUrl: '/mps-constituency',
+  },
+  // {
+  //   title: 'MPs Public Rating',
+  //   pageUrl: '/mps-public-rating',
+  // },
+  {
+    title: 'News & Videos',
+    pageUrl: '/news',
+  },
+  {
+    title: 'Your MPs',
+    pageUrl: '/your-mps',
+  },
+  // {
+  //   title: 'Newsletter',
+  //   pageUrl: '//newsletter/loksabha',
+  // },
+];
 const AppLayoutContainer = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [headerSelectedIndex, setHeaderSelectedIndex] = useState(-1);
+  // const [headerSelectedIndex, setHeaderSelectedIndex] = useState(-1);
   const navigate = useNavigate();
   const { data: headerCategoryApi, isLoading } =
     dashboardNewsApiAction.getHeaderCategories();
+
+  const [isSubNavigationMenu, setisSubNavigationMenu] = useState(false);
+  useEffect(() => {
+    if (window.location.pathname.includes('news')) {
+      setisSubNavigationMenu(true);
+    } else {
+      setisSubNavigationMenu(false);
+    }
+  }, []);
   return (
     <Stack
       className="MainContainer"
@@ -63,92 +107,111 @@ const AppLayoutContainer = () => {
         </Box>
       </Box>
 
-      <Box className="MobileViewRemove">
+      <Box className="MobileViewRemove"  zIndex={'2'} opacity={1}>
         <Header
-          data={headerCategoryApi?.categories}
-          setIndex={setHeaderSelectedIndex}
-          selected={headerSelectedIndex}
+          subNavData={headerCategoryApi?.categories}
+          pageNavigtionLinks={pageNavigtionLinks}
+          isSubNavigationMenu={isSubNavigationMenu}
         />
       </Box>
       <Box className="mobileHeader">
         <MobileHeader
           menuOpen={setMenuOpen}
-          data={headerCategoryApi?.categories}
+          pageNavigtionLinks={pageNavigtionLinks}
         />
       </Box>
-      <Box className="mobileHeader">
+      <Box className="mobileHeader" zIndex={'2'}>
         <Box
           sx={{
             display: 'flex',
             gap: '1.5rem',
-            overflowX: 'auto', // or 'scroll' if you want to always show the scrollbar
+            overflowX: 'auto',
             width: '100%',
             boxShadow: '0 2px 0px rgba(0, 0, 0, 0.1)',
-            // marginBottom:'1rem',
             zIndex: 2,
             position: 'relative',
-            padding: '0 1rem 0.3rem 1rem',
+            padding: '0 1rem 0rem 1rem',
             '&::-webkit-scrollbar': {
-              display: 'none', // Hides the scrollbar for webkit browsers (Chrome, Safari)
+              display: 'none',
             },
-            msOverflowStyle: 'none', // Hides scrollbar for IE and Edge
-            scrollbarWidth: 'none', // Hides scrollbar for Firefox
+            msOverflowStyle: 'none',
+            scrollbarWidth: 'none',
           }}
         >
-          <Box
-            sx={{ display: 'flex' }}
-            onClick={() => {
-              navigate('/'), setHeaderSelectedIndex(-1);
-            }}
-          >
-            <Text
-              text={'Home'}
-              sx={{
-                fontSize: '0.9rem',
-                fontWeight: 700,
-                cursor: 'pointer',
-                color: headerSelectedIndex === -1 ? '#162eb7' : '',
-                '&:hover': {
-                  color: '#162eb7',
-                },
-              }}
-            />
-          </Box>
-          {headerCategoryApi?.categories?.map((val, index) => (
-            <Box
-              sx={{ display: 'flex' }}
-              onClick={() => {
-                navigate(`/news/categories/${val?.url}`, {
-                  state: { category: val?.category },
-                });
-                setHeaderSelectedIndex(index);
-              }}
-              key={index}
-            >
-              <Text
-                text={val?.category}
-                sx={{
-                  fontSize: '0.9rem',
-                  fontWeight: 700,
-                  cursor: 'pointer',
-                  textWrap: 'nowrap',
-                  color: headerSelectedIndex === index ? '#162eb7' : '',
-                  '&:hover': {
-                    color: '#162eb7',
-                  },
+          {pageNavigtionLinks?.map((val, index) => {
+            const isActive =
+              (val?.pageUrl !== '/' &&
+                window.location.pathname.includes(val?.pageUrl)) ||
+              (val?.pageUrl === '/' && window.location.pathname === '/');
+            return (
+              <Link
+                style={{
+                  textDecoration: 'none',
+                  color: isActive ? '#F44336' : 'inherit',
+                  borderBottom: isActive
+                    ? '4px solid rgb(241, 128, 124)'
+                    : 'none',
+                  padding: '10px 0 6px 0',
                 }}
-              />
-              {val?.subhead && <ExpandMoreIcon />}
-            </Box>
-          ))}
+                to={`${val?.pageUrl}`}
+                key={index}
+              >
+                <Text
+                  text={val?.title}
+                  sx={{
+                    fontSize: '0.9rem',
+                    fontWeight: 500,
+                    cursor: 'pointer',
+                    textWrap: 'nowrap',
+                  }}
+                />
+                {val?.subhead && <ExpandMoreIcon />}
+              </Link>
+            );
+          })}
         </Box>
+        {/* Subheader navigations */}
+        {isSubNavigationMenu && (
+          <Container
+            sx={{ display: 'flex', justifyContent: 'start', padding: '0.5rem' }}
+          >
+            <Box sx={{ display: 'flex', gap: '1.5rem' }}>
+              {headerCategoryApi?.categories?.map((val, index) => (
+                <Box
+                  sx={{ display: 'flex' }}
+                  onClick={() => {
+                    navigate(`/news/categories/${val?.url}`, {
+                      state: { category: val?.category },
+                    })
+                  }}
+                  key={index}
+                >
+                  <Text
+                    text={val?.category}
+                    sx={{
+                      fontSize: '0.9rem',
+                      fontWeight: 700,
+                      textWrap:'nowrap',
+                      cursor: 'pointer',
+                      // color: selected === index ? '#162eb7' : '',
+                      '&:hover': {
+                        color: '#162eb7',
+                      },
+                    }}
+                  />
+                  {val?.subhead && <ExpandMoreIcon />}
+                </Box>
+              ))}
+            </Box>
+          </Container>
+        )}
       </Box>
       <Stack sx={{ overflow: 'visible', zIndex: 1 }}>
         <Outlet />
       </Stack>
       <Footer
         data={headerCategoryApi?.categories}
-        setIndex={setHeaderSelectedIndex}
+        // setIndex={setHeaderSelectedIndex}
       />
     </Stack>
   );

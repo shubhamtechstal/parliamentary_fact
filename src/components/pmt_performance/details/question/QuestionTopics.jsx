@@ -53,7 +53,7 @@ export default function LokSabhaQuestionTopics() {
               textAlign: { xs: 'center', md: 'left' },
             }}
             font={'Sora'}
-            text={'Till 20 March 2024'}
+            text={'Till Now'}
           />
         </Box>
         <Box

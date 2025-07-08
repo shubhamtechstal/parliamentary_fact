@@ -1,10 +1,10 @@
 import React from 'react'
 import Text from './Text'
 
-function SectionHeading({title}) {
+function SectionHeading({title, fontSize}) {
   return (
     <div style={{display:'flex', alignItems:'center', gap:'10px'}}>
-        <Text variant='h3' sx={{fontSize:'1rem', fontWeight: '600', my:1}} >  <span
+        <Text variant='h3' sx={{fontSize: fontSize? fontSize: '1rem', fontWeight: '600', my:1}} >  <span
             style={{
               display: 'inline-block',
               width: '14px',

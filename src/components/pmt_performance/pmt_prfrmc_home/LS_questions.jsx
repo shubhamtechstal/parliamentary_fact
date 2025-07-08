@@ -94,6 +94,8 @@ function LS_QuestionsComponent({
   pageData,
   questionsData,
   BottomRightChip,
+  sectionDetailName,
+  chipLabal
 }) {
   return (
     <>
@@ -118,8 +120,8 @@ function LS_QuestionsComponent({
             titleText={questionsListData?.progressTitle}
             subTiteText={questionsListData?.progressSubTitle}
             centerDate={questionsListData?.date}
-            percentText={'100.'}
-            subPercentText={'20%'}
+            percentText={`${extractPercentage(pageData?.questions_percentage?.question_percentage)?.a}`}
+            subPercentText={`${extractPercentage(pageData?.questions_percentage?.question_percentage)?.b}`}
             width={230}
             height={250}
             innerRadius={98}
@@ -249,8 +251,8 @@ function LS_QuestionsComponent({
         {BottomRightChip && (
           <Box sx={{ position: 'relative', bottom: '1rem' }}>
             <BottomRightChip
-              sectionDetailName={'lok-sabha-question'}
-              chipLabal={'MPs Participation in Lok Sabha Questions'}
+              sectionDetailName={sectionDetailName}
+              chipLabal={chipLabal}
             />
           </Box>
         )}
@@ -331,8 +333,8 @@ function LS_QuestionsComponent({
         {BottomRightChip && (
           <Box sx={{ position: 'absolute', right: '2rem', bottom: '15%' }}>
             <BottomRightChip
-              sectionDetailName={'lok-sabha-question'}
-              chipLabal={'MPs Participation in Lok Sabha Questions'}
+              sectionDetailName={sectionDetailName}
+              chipLabal={chipLabal}
             />
           </Box>
         )}

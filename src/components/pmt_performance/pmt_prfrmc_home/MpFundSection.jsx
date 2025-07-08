@@ -3,6 +3,7 @@ import GrayDot from 'components/common/GrayDot';
 import ProgressMeter from 'components/common/ProgressMeter';
 import SectionHeading from 'components/common/SectionHeading';
 import Text from 'components/common/Text';
+import { extractPercentage } from 'helpers/utills/utilityFunctions';
 
 // const FundSpentInTopAreaTextGroup = ({ category, value, date, index }) => {
 //   return (
@@ -68,7 +69,7 @@ const FundDataTextGroup = ({ index, title, unit, percentage }) => {
   );
 };
 
-function MpFundSection({ MpFundSection, mpsFundData, BottomRightChip }) {
+function MpFundSection({ MpFundSection, pageData, mpsFundData, BottomRightChip }) {
   return (
     <>
       {/* **** Mobile *** */}
@@ -82,14 +83,26 @@ function MpFundSection({ MpFundSection, mpsFundData, BottomRightChip }) {
           width: '100%',
         }}
       >
-        <h3 style={{ textAlign: 'center', margin:'0 ' }}>{MpFundSection.title}</h3>
+        <h3 style={{ textAlign: 'center', margin: '0 ' }}>
+          {MpFundSection.title}
+        </h3>
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           <ProgressMeter
             titleText={MpFundSection.progressTitle}
             isMultiSubtitle={true}
             centerDate={MpFundSection.date}
-            percentText={'100.'}
-            subPercentText={'20%'}
+            percentText={
+              `${extractPercentage(pageData?.mpLads_percentage?.mpLads_percentage?.toString())?.a}` ||
+              '110.'
+            }
+            subPercentText={
+              `${extractPercentage(pageData?.mpLads_percentage?.mpLads_percentage?.toString())?.b}` ||
+              '20%'
+            }
+            value={pageData?.passed_govt_bills_data?.passed_bill_percentage?.replaceAll(
+              '%',
+              ''
+            )}
             width={230}
             height={250}
             innerRadius={98}
@@ -109,8 +122,8 @@ function MpFundSection({ MpFundSection, mpsFundData, BottomRightChip }) {
             margin: '2rem 0 0',
             gap: '2rem 0',
             alignItems: 'start',
-            flexWrap:'wrap',
-            justifyContent: "space-around"
+            flexWrap: 'wrap',
+            justifyContent: 'space-around',
           }}
         >
           {mpsFundData?.map((item, index) => (
@@ -146,15 +159,19 @@ function MpFundSection({ MpFundSection, mpsFundData, BottomRightChip }) {
             <FundSpentInTopAreaTextGroup index={index} {...item} />
           ))}
         </Box> */}
-        {BottomRightChip&&
-        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-          <BottomRightChip sectionDetailName={"lok-sabha-private-member-bills"} chipLabal={'MPs Participation in Lok Sabha pvt member Bills'} />
-        </Box>
-        }
+        {BottomRightChip && (
+          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+            <BottomRightChip
+              sectionDetailName={'lok-sabha-private-member-bills'}
+              chipLabal={'MPs Participation in Lok Sabha pvt member Bills'}
+            />
+          </Box>
+        )}
       </Box>
 
       {/* ****Desktop*** */}
-      <Box className="performanceSection"
+      <Box
+        className="performanceSection"
         sx={{
           // padding: '2rem 10rem',
           position: 'relative',
@@ -278,10 +295,14 @@ function MpFundSection({ MpFundSection, mpsFundData, BottomRightChip }) {
             </Box> */}
           </Grid>
         </Grid>
-        {BottomRightChip&&
-        <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <BottomRightChip sectionDetailName={"lok-sabha-private-member-bills"} chipLabal={'MPs Participation in Lok Sabha pvt member Bills'} />
-        </Box>}
+        {BottomRightChip && (
+          <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <BottomRightChip
+              sectionDetailName={'lok-sabha-private-member-bills'}
+              chipLabal={'MPs Participation in Lok Sabha pvt member Bills'}
+            />
+          </Box>
+        )}
       </Box>
     </>
   );

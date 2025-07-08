@@ -35,19 +35,19 @@ export const performace_chipList = [
   },
   {
     title: 'Lok Sabha Adjiurnment',
-    routeUrl: 'lok-sabha-adjiurnment',
+    routeUrl: 'lok-sabha-adjourned',
   },
   {
     title: 'Lok Sabha Walkout',
     routeUrl: 'lok-sabha-walkout',
   },
   {
-    title: 'Lok Sabha on the floor',
-    routeUrl: 'lok-sabha-on-the-floor',
+    title: 'Lok Sabha In The Well',
+    routeUrl: 'lok-sabha-in-the-well',
   },
   {
-    title: 'Lok Sabha Interruption',
-    routeUrl: 'lok-sabha-interruption',
+    title: 'Lok Sabha Interruptions',
+    routeUrl: 'lok-sabha-interruptions',
   },
   {
     title: 'Lok Sabha Quoram Bell',
@@ -57,10 +57,10 @@ export const performace_chipList = [
     title: 'Lok Sabha Not Recorded',
     routeUrl: 'lok-sabha-not-recorded',
   },
-  {
-    title: 'Govt Bill',
-    routeUrl: 'govt-bill',
-  },
+  // {
+  //   title: 'Govt Bill',
+  //   routeUrl: 'govt-bill',
+  // },
 ];
 
 export const productivity_schedule = [
@@ -99,45 +99,58 @@ export const productivity_bottomCardsdata = [
     title: 'INTERRUPTIONS',
     value: '16500',
     linkText: 'Know More >>',
+    page_url:'/parliament-performance/lok-sabha-performance/lok-sabha-interruptions'
   },
   {
     title: 'ADJOURNED',
     value: '540',
     linkText: 'Know More >>',
+    page_url:'/parliament-performance/lok-sabha-performance/lok-sabha-adjourned'
   },
   {
     title: 'WALK OUT',
     value: '79',
     linkText: 'Know More >>',
+    page_url:'/parliament-performance/lok-sabha-performance/lok-sabha-walkout'
   },
   {
     title: 'IN THE WELL',
     value: '134',
     linkText: 'Know More >>',
+    page_url:'/parliament-performance/lok-sabha-performance/lok-sabha-in-the-well'
   },
   {
     title: 'NOT RECORDED',
     value: '50',
     linkText: 'Know More >>',
+    page_url:'/parliament-performance/lok-sabha-performance/lok-sabha-not-recorded'
   },
   {
     title: 'QUORAM BELL',
     value: 'TBA',
     linkText: 'Know More >>',
+    page_url:'/parliament-performance/lok-sabha-performance/lok-sabha-quoram-bell'
   },
 ];
 export const questionsListData = {
   title: 'Lok Sabha Questions',
   percentage: '100.28%',
-  date: 'Till 20 March 2024',
+  date: 'Till Now',
   progressTitle: 'QUESTIONS',
+  progressSubTitle: 'OREL',
+};
+export const privateMemberBillListData = {
+  title: 'Lok Sabha Private Member Bill',
+  percentage: '90.28%',
+  date: 'Till Now',
+  progressTitle: 'Private Member Bill',
   progressSubTitle: 'OREL',
 };
 export const debateListData = {
   title: 'Debate in Lok Sabha',
   progressTitle: 'IN DEBATE',
   progressSubTitle: 'PERFORMANCE',
-  date: 'Till 20 March 2024',
+  date: 'Till Now',
   listData: [
     {
       title: 'GOVERNMENT BILL',
@@ -279,7 +292,7 @@ export const MpFundsectionData = {
   readBeforeCheck: 'Read before check performance',
   fundAllocated: '2715 CR',
   percentage: '100.28%',
-  date: 'Till 20 March 2024',
+  date: 'Till Now',
   progressTitle: 'LOCAL',
   progressSubTitle: 'DEVELOPMENT FUND SPENT (MP FUND)',
   // localDevelopmentFund: {
@@ -884,3 +897,39 @@ export const attendance_details = [
 //     image: 'https://via.placeholder.com/50',
 //   },
 // ];
+const agendaData = [
+  {
+    date: '25 NOV 2024',
+    items: [
+      {
+        adjournment: '1',
+        time: '11:15 AM',
+        subject:
+          'Local infrastructure, such as roads and water/wastewater networks, form Local Infrastructure, such as roads and water/wastewater networks, form Local infrastructure, such as roads and water/wastewater networks, form',
+      },
+      {
+        adjournment: '2',
+        time: '11:15 AM',
+        subject:
+          'Local infrastructure, such as roads and water/wastewater networks, form Local Infrastructure, such as roads and water/wastewater networks, form Local infrastructure, such as roads and water/wastewater networks, form',
+      },
+      {
+        adjournment: '3',
+        time: '11:15 AM',
+        subject:
+          'Local infrastructure, such as roads and water/wastewater networks, form Local Infrastructure, such as roads and water/wastewater networks, form Local infrastructure, such as roads and water/wastewater networks, form',
+      },
+    ],
+  },
+  {
+    date: '26 NOV 2024',
+    items: [
+      {
+        adjournment: '1',
+        time: '11:15 AM',
+        subject:
+          'Local infrastructure, such as roads and water/wastewater networks, form Local Infrastructure, such as roads and water/wastewater networks, form Local infrastructure, such as roads and water/wastewater networks, form',
+      },
+    ],
+  },
+];

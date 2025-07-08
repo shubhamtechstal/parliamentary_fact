@@ -10,11 +10,12 @@ import XIcon from '@mui/icons-material/X';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import images from 'helpers/images';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../../components/common/cards/NewsCard.css';
 import { BorderRight } from '@mui/icons-material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-export default function MobileHeader({ menuOpen, data }) {
+export default function MobileHeader({ menuOpen, data, pageNavigtionLinks }) {
   const [keyword, setKeyword] = useState('');
   const [searchShow, setSearchShow] = useState(false);
 
@@ -35,10 +36,10 @@ export default function MobileHeader({ menuOpen, data }) {
     left: 0;
   }
 `;
-  const options = data;
+  // const options = data;
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [Search, setSearch] = useState(false);
-  const open = Boolean(anchorEl);
+  // const open = Boolean(anchorEl);
   const handleClick = () => {
     setAnchorEl(!anchorEl);
     menuOpen(!anchorEl);
@@ -88,10 +89,6 @@ export default function MobileHeader({ menuOpen, data }) {
         </Box>
         <Box onClick={() => navigate('/')}>
           <img src="/pfLogo.png" alt="logo" className="pfLogo" />
-          {/* <Text
-            text={'Local Coronavirus informations'}
-            sx={{ color: '#767676', fontSize: '0.75rem' }}
-          /> */}
         </Box>
         <Box
           onClick={() => {
@@ -112,11 +109,6 @@ export default function MobileHeader({ menuOpen, data }) {
             width: '100%',
             top: 0,
             left: 0,
-            // backgroundImage:
-            //   'url(https://demo.tagdiv.com/newspaper_covid19_news_pro/wp-content/uploads/2020/03/17.jpg)', // Add your image URL here
-            // backgroundSize: 'cover',
-            // backgroundRepeat: 'no-repeat',
-            // backgroundPosition: 'center',
             zIndex: 999,
             animation: Search
               ? `${slideInFromRight} 0.5s ease-out forwards`
@@ -186,17 +178,6 @@ export default function MobileHeader({ menuOpen, data }) {
                   }}
                 >
                   <Box display="flex" gap="8px">
-                    {/* <FacebookIcon
-                  onClick={()=>window.location.href="https://www.facebook.com/profile.php?id=100088959852699"}
-                    sx={{
-                      fontSize: '24px',
-                      borderRadius:'12px',
-                      padding:'0.2rem',
-                      color: '#fff',
-                      cursor: 'pointer',
-                      background:'#cfcfcf'
-                    }}
-                  /> */}
                     <img
                       style={{ height: '25px', cursor: 'pointer' }}
                       onClick={() =>
@@ -228,41 +209,6 @@ export default function MobileHeader({ menuOpen, data }) {
                       }
                       src="/Assets/icons/youtube.png"
                     />
-                    {/* <XIcon
-                  onClick={()=>window.location.href="https://x.com/parliamentaryf7"}
-                    sx={{
-                      fontSize: '20px',
-                      color: '#fff',
-                      background: '#000',
-                      padding: '0.2rem',
-                      borderRadius: '5px',
-                      marginTop: '3px',
-                      cursor: 'pointer',
-                    }}
-                  />
-                  <InstagramIcon
-                  onClick={()=>window.location.href="https://www.instagram.com/parliamentaryfacts/?hl=en"}
-                    sx={{
-                      fontSize: '20px',
-                      color: '#fff',
-                      background: 'linear-gradient(45deg, #f58529, #dd2a7b, #8134af, #515bd4)', 
-                      padding: '0.1rem',
-                      borderRadius: '5px',
-                      marginTop: '3px',
-                      cursor: 'pointer',
-                    }}
-                  />
-                  <YouTubeIcon
-                  onClick={()=>window.location.href="https://www.youtube.com/channel/UCmiD-5GplSufIcKYQ-fHNUQ"}
-                    sx={{
-                      background: '#fff',
-                      color: '#FF0000',
-                      fontSize: '20px',
-                      borderRadius: '5px',
-                      marginTop: '3px',
-                      cursor: 'pointer',
-                    }}
-                  /> */}
                   </Box>
 
                   {searchShow && (
@@ -295,23 +241,37 @@ export default function MobileHeader({ menuOpen, data }) {
                     </Box>
                   )}
                 </Box>
-                <Box
-                  sx={{ display: 'flex', marginTop: '1rem' }}
-                  onClick={() => {
-                    navigate('/'), handleClose();
-                  }}
-                >
-                  <Text
-                    text={'Home'}
-                    sx={{
-                      width: '100%',
-                      cursor: 'pointer',
-                      color: '#000',
-                      fontWeight: 400,
-                    }}
-                  />
-                </Box>
-                {options.map((val) => (
+                {pageNavigtionLinks?.map((val, index) => {
+                  const isActive =
+                    (val?.pageUrl !== '/' &&
+                      window.location.pathname.includes(val?.pageUrl)) ||
+                    (val?.pageUrl === '/' && window.location.pathname === '/');
+                  return (
+                    <Link
+                      style={{
+                        textDecoration: 'none',
+                        color: isActive ? '#F44336' : 'inherit',
+                        borderBottom: isActive
+                          ? '4px solid rgb(241, 128, 124)'
+                          : 'none',
+                        padding: '10px 0 6px 0',
+                      }}
+                      to={`${val?.pageUrl}`}
+                      key={index}
+                    >
+                      <Text
+                        text={val?.title}
+                        sx={{
+                          fontSize: '0.9rem',
+                          fontWeight: 500,
+                          cursor: 'pointer',
+                        }}
+                      />
+                      {val?.subhead && <ExpandMoreIcon />}
+                    </Link>
+                  );
+                })}
+                {/* {options.map((val) => (
                   <Box
                     onClick={() => {
                       navigate(`/news/categories/${val?.url}`, {
@@ -330,7 +290,7 @@ export default function MobileHeader({ menuOpen, data }) {
                       text={val?.category}
                     ></Text>
                   </Box>
-                ))}
+                ))} */}
                 <Divider
                   sx={{ borderBottom: '1px solid #cfcfcf', marginTop: '1rem' }}
                 />
@@ -341,33 +301,83 @@ export default function MobileHeader({ menuOpen, data }) {
                     cursor: 'pointer',
                     marginTop: '1rem',
                   }}
-                  onClick={() => {navigate('/');handleClose()}}
+                  onClick={() => {
+                    navigate('/');
+                    handleClose();
+                  }}
                   src="/Assets/mobilemenulogo.png"
                 />
-                <Text 
-                 sx={{fontSize:'0.75rem',marginTop:'0.5rem'}}
+                <Text
+                  sx={{ fontSize: '0.75rem', marginTop: '0.5rem' }}
                   text={
                     'Parliamentary fact is an specialized research and media platform which is working as a think tank on parliamentary system, promoting parliamentary values. platform is working as a watchdog and create performance of Parliament, state assemblies and its members Parliamentarian (MPs) and legislature (MLAs).'
                   }
                 ></Text>
-                <Box sx={{display:'flex',flexWrap:'wrap',gap:'0.2rem',marginTop:'0.5rem'}}>
-                <Box onClick={()=>{navigate('/about-us');handleClose()}} sx={{borderRight:'1px solid #000000DE'}}>
-                  <Text sx={{fontSize:'0.9rem',padding:'0 0.5rem 0 0',BorderRight:'1px solid #000 !important'}} text={"About Us"}/>
-                </Box>
-                <Box onClick={()=>{navigate('/about-us/our-vision');handleClose()}} sx={{borderRight:'1px solid #000000DE'}}>
-                    <Text sx={{fontSize:'0.9rem',padding:'0 0.5rem'}} text={"Our Vision"}/>
-                </Box>
-                <Box onClick={()=>{navigate('/about-us/leadership');handleClose()}} sx={{borderRight:'1px solid #000000DE'}}>
-                  <Text sx={{fontSize:'0.9rem',padding:'0 0.5rem '}} text={"Leadership"}/>
-                </Box>
-                  <Text onClick={()=>{navigate('/about-us/research-endorsement');handleClose()}} sx={{fontSize:'0.9rem',padding:'0 0.5rem 0 0'}} text={"Research Endorsement"}/>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    gap: '0.2rem',
+                    marginTop: '0.5rem',
+                  }}
+                >
+                  <Box
+                    onClick={() => {
+                      navigate('/about-us');
+                      handleClose();
+                    }}
+                    sx={{ borderRight: '1px solid #000000DE' }}
+                  >
+                    <Text
+                      sx={{
+                        fontSize: '0.9rem',
+                        padding: '0 0.5rem 0 0',
+                        BorderRight: '1px solid #000 !important',
+                      }}
+                      text={'About Us'}
+                    />
+                  </Box>
+                  <Box
+                    onClick={() => {
+                      navigate('/about-us/our-vision');
+                      handleClose();
+                    }}
+                    sx={{ borderRight: '1px solid #000000DE' }}
+                  >
+                    <Text
+                      sx={{ fontSize: '0.9rem', padding: '0 0.5rem' }}
+                      text={'Our Vision'}
+                    />
+                  </Box>
+                  <Box
+                    onClick={() => {
+                      navigate('/about-us/leadership');
+                      handleClose();
+                    }}
+                    sx={{ borderRight: '1px solid #000000DE' }}
+                  >
+                    <Text
+                      sx={{ fontSize: '0.9rem', padding: '0 0.5rem ' }}
+                      text={'Leadership'}
+                    />
+                  </Box>
+                  <Text
+                    onClick={() => {
+                      navigate('/about-us/research-endorsement');
+                      handleClose();
+                    }}
+                    sx={{ fontSize: '0.9rem', padding: '0 0.5rem 0 0' }}
+                    text={'Research Endorsement'}
+                  />
                 </Box>
                 <Divider
                   sx={{ borderBottom: '1px solid #cfcfcf', marginTop: '1rem' }}
                 />
-                <Box sx={{textAlign:'center'}}>
-                <Text sx={{fontSize:'0.75rem',}} text={"Copyright @ParliamentaryFact.com"}/>
-
+                <Box sx={{ textAlign: 'center' }}>
+                  <Text
+                    sx={{ fontSize: '0.75rem' }}
+                    text={'Copyright @ParliamentaryFact.com'}
+                  />
                 </Box>
               </Box>
             )}

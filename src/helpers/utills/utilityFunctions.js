@@ -1,17 +1,14 @@
 export const getDateInMonthNameFormate = (dateStr) => {
-  // Regular expression to match valid date formats (YYYY-MM-DD)
   const datePattern = /^\d{4}-\d{2}-\d{2}$/;
 
-  // Check if input matches the correct date format
   if (!datePattern.test(dateStr)) {
-    return dateStr; // Return original string if it's not a valid date format
+    return dateStr;
   }
 
   const dateObj = new Date(dateStr);
 
-  // Validate if the date object is correctly created
   if (isNaN(dateObj.getTime())) {
-    return dateStr; // Return original string if Date conversion fails
+    return dateStr;
   }
 
   return dateObj.toLocaleDateString('en-GB', {
@@ -26,4 +23,21 @@ export const extractPercentage = (value = '') => {
     a: a + '.', // Integer part
     b: b ? b : '0%', // Decimal part with "%"
   };
+};
+
+// utils/groupByParty.js
+export const groupMpsByParty = (mpsList = []) => {
+  return mpsList.reduce((acc, mp) => {
+    const party = mp.party_short_name || 'Independent';
+    if (!acc[party]) acc[party] = [];
+    acc[party].push(mp);
+    return acc;
+  }, {});
+};
+export const extractMpList = (mpsList) => {
+  return mpsList.map((mp) => ({
+    mp_id: mp.mp_id,
+    full_name: mp.full_name,
+    image: mp.image,
+  }));
 };

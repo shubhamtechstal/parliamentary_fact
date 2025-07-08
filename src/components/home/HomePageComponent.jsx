@@ -6,11 +6,11 @@ import AdvertiseSection from 'components/addLayout/HorizontalAdvertiseSection';
 import NewsSectionHome from 'components/news/NewsSectionHome';
 import HomePmtPerformanceSection from './HomePmtPerformanceSection';
 import HomeMpsPerformanceSection from './HomeMpsPerformanceSection';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchPerformanceData } from 'stores/redux/apiSlices/pmt_PerformanceSlice';
 import { useEffect } from 'react';
 import { fetchMpsPerformanceData } from 'stores/redux/apiSlices/mps_PerformanceSlice';
-
+import Loader from 'components/common/Loader';
 
 function HomePageComponent() {
   // const data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
@@ -22,17 +22,62 @@ function HomePageComponent() {
     dispatch(fetchPerformanceData());
     dispatch(fetchMpsPerformanceData());
   }, [dispatch]);
+  const {
+    mp_fund_data = [],
+    top_performance = [],
+    popular_mps,
+    loading
+  } = useSelector((state) => state?.mpsPerformance);
   return (
     <div>
-      <Box sx={{ display: 'flex', gap: 2, overflow: 'auto', p:{md : '1rem 2rem 0 3rem', xs : '1rem'}, textAlign:'center', backgroundColor:'#fff', alignItems:'center', borderBottom:'2px solid #d3d2d2' }}>
-        {Array.from({ length: 20 }, (_, index) => (
-        <Box key={index}>
-          <Avatar sx={{height:'60px', width:'60px'}} alt="Test" src={"kk"} />
-          <p style={{fontSize:'12px', marginTop:'5px'}}>Rahul Gandhi</p>
-        </Box>
-        ))}
+      <Box sx={{ backgroundColor: '#fff', borderBottom: '2px solid #d3d2d2' }}>
+        <Container
+          sx={{
+            display: 'flex',
+            gap: 2,
+            overflow: 'auto',
+            pt: 2,
+            textAlign: 'center',
+            alignItems: 'top',
+          }}
+        >
+          {loading ?
+          <Box sx={{display: 'flex', justifyContent: 'center', width: '100%', height: '100px'}}>
+            <Loader loading position='relative'/> 
+          </Box>
+          :
+          popular_mps?.map((mps) => (
+            <Link style={{textDecoration:'none', color:"inherit"}} to={mps?.mp_id ? `/mps-details/${mps?.name.replaceAll(" ", '-')?.toLowerCase() }_${mps?.mp_id}` : '#'}>
+             <Box
+                key={mps.mp_id}
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                }}
+              >
+                <Avatar
+                  sx={{ height: '50px', width: '50px' }}
+                  alt="Test"
+                  src={mps?.image}
+                />
+                <p
+                  style={{
+                    fontSize: '10px',
+                    marginTop: '5px',
+                    maxHeight: '2rem',
+                    width: '90px',
+                    textAlign: 'center',
+                  }}
+                >
+                  {mps?.name}
+                </p>
+              </Box>
+            </Link>
+          ))}
+        </Container>
       </Box>
-      <Container sx={{ mt: 5,}}>
+      <Container sx={{ mt: 5 }}>
         <HomePmtPerformanceSection />
         <Container sx={{ display: { xs: 'block', md: 'none' }, mb: 4 }}>
           <HomeHeroSection />
@@ -45,7 +90,11 @@ function HomePageComponent() {
             justifyContent: 'flex-end',
           }}
         >
-          <Link to={'/parliament-performance'}>
+          <Link
+            to={
+              '/parliament-performance/lok-sabha-performance/lok-sabha-productivity'
+            }
+          >
             <Button
               sx={{
                 background: 'gray',
@@ -66,7 +115,10 @@ function HomePageComponent() {
         </Box>
       </Container>
       <AdvertiseSection />
-      <HomeMpsPerformanceSection />
+      <HomeMpsPerformanceSection
+        mp_fund_data={mp_fund_data}
+        top_performance={top_performance}
+      />
       <Box
         style={{
           background: '#fff',
