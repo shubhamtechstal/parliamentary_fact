@@ -150,7 +150,7 @@ function MpsPerformanceCard({
               </Box>
               <MoreVertIcon
                 cursor={'pointer'}
-                onClick={() => handleOpenSharePopup()}
+                onClick={() => handleOpenSharePopup(mp)}
               />
             </Box>
             <h3

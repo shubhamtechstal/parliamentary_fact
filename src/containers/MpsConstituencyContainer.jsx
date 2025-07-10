@@ -1,15 +1,16 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
-import PopulerMpsDetailsComponent from 'components/Mps_performance/details/PopulerMPsDetails';
+import MpsListComponent from 'components/Mps_performance/details/MpsListComponent';
 import AdvertisementLayout from 'components/addLayout/AdvertisementLayout';
 import IconButton from 'components/common/IconButton';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import ShareModal from 'components/common/modals/ShareModal';
 import AutocompleteSearchBox from 'components/common/modals/AutoCompleateSearchBox';
 import MpsConstituencyPageComponent from 'components/mps_constituency/MpsConstituencyPageComponent';
-import { Box } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchMpsPerformanceData } from 'stores/redux/apiSlices/mps_PerformanceSlice';
+import { Box, Container } from '@mui/material';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { fetchMpsPerformanceData } from 'stores/redux/apiSlices/mps_PerformanceSlice';
+// import { mpsDataNetionalRank, mpsDataStateRank } from 'helpers/performanceConstants';
 
 const MpsConstituencyContainer = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -17,6 +18,7 @@ const MpsConstituencyContainer = () => {
   const initialSection = searchParams.get('section');
   const [activeSection, setActiveSection] = useState(initialSection);
   const [openShare, setOpenShare] = useState(false);
+  const [shareMpInfo, setshareMpInfo] = useState({});
   const [filterParams, setFilterParams] = useState({});
   const onSelectSearchBox = (value) => {
     setFilterParams((prev) => ({
@@ -25,16 +27,9 @@ const MpsConstituencyContainer = () => {
     }));
   };
 
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchMpsPerformanceData());
-  }, [dispatch]);
-  const { mps_attendance_data, mp_fund_data } = useSelector(
-    (state) => state?.mpsPerformance
-  );
-
-  const handleOpenSharePopup = () => {
+  const handleOpenSharePopup = (mp_Info) => {
     setOpenShare((prev) => !prev);
+    setshareMpInfo(mp_Info);
   };
 
   useEffect(() => {
@@ -53,48 +48,19 @@ const MpsConstituencyContainer = () => {
     setActiveSection(null);
     navigate('/mps-constituency');
   };
-  const mpsDataNetionalRank =
-    mps_attendance_data?.map((data) => {
-      return {
-        rank: data.national_rank,
-        name: data.name,
-        constituency: data.constituency,
-        state: data.state_name,
-        performance: data.national_percentage,
-        rankTitle: 'National Rank:',
-        party: data.party_short_name,
-        mp_id: data.mp_id,
-        presence: data.attendance_days,
-        imageUrl: data.image,
-      };
-    }) ?? [];
-  const mpsDataStateRank =
-    mps_attendance_data?.map((data) => {
-      return {
-        rank: data.national_rank,
-        name: data.name,
-        constituency: data.constituency,
-        state: data.state_name,
-        performance: data.national_percentage,
-        rankTitle: 'State Rank:',
-        party: data.party_short_name,
-        mp_id: data.mp_id,
-        presence: data.attendance_days,
-        imageUrl: data.image,
-      };
-    }) ?? [];
 
   const sectionsComponets = [
     {
       id: 'popular-mps',
       component: (
-        <PopulerMpsDetailsComponent
+        <MpsListComponent
           handleBack={handleBack}
           handleOpenSharePopup={handleOpenSharePopup}
-          mps_data={mps_attendance_data}
+          // mps_data={popular_mps}
           pageTitle={'Populer Mps Performance'}
-          mpsDataNetionalRank={mpsDataNetionalRank}
-          mpsDataStateRank={mpsDataStateRank}
+          datasetsKey={'popular_mps'}
+          // mpsDataNetionalRank={mpsDataNetionalRank(popular_mps)}
+          // mpsDataStateRank={mpsDataStateRank(popular_mps)}
           // onFilterClick={onFilterClick}
         />
       ),
@@ -102,25 +68,23 @@ const MpsConstituencyContainer = () => {
     {
       id: 'top-performer-mps',
       component: (
-        <PopulerMpsDetailsComponent
+        <MpsListComponent
           handleBack={handleBack}
           handleOpenSharePopup={handleOpenSharePopup}
-          mps_data={mps_attendance_data}
-          pageTitle={'Populer Mps Performance'}
-          mpsDataNetionalRank={mpsDataNetionalRank}
-          mpsDataStateRank={mpsDataStateRank}
+          // mps_data={mp_fund_data}
+          pageTitle={'Top Performer MPs Rating and Ranking'}
+          datasetsKey={'mp_fund_data'}
+          // mpsDataNetionalRank={mpsDataNetionalRank(mp_fund_data)}
+          // mpsDataStateRank={mpsDataStateRank(mp_fund_data)}
           // onFilterClick={onFilterClick}
         />
       ),
     },
-    { id: 'health', component: 'Healthcare_Development' },
-    { id: 'infrastructure', component: 'Infrastructure_Growth' },
-    { id: 'defense', component: 'Defense_Policies' },
   ];
   return (
     <AdvertisementLayout>
       {activeSection && (
-        <Box
+        <Container
           sx={{
             display: 'flex',
             justifyContent: { xs: 'start', md: 'space-between' },
@@ -130,10 +94,10 @@ const MpsConstituencyContainer = () => {
           <IconButton onClick={handleBack}>
             <KeyboardBackspaceIcon />
           </IconButton>
-          <Box sx={{ width: { xs: '80%', md: 'auto' } }}>
+          <Box sx={{ width: { xs: '60%', md: 'auto' }, }}>
             <AutocompleteSearchBox onSelectMP={onSelectSearchBox} />
           </Box>
-        </Box>
+        </Container>
       )}
       {activeSection ? (
         sectionsComponets.find((s) => s.id === activeSection)?.component
@@ -146,6 +110,7 @@ const MpsConstituencyContainer = () => {
 
       <ShareModal
         open={openShare}
+        shareMpInfo={shareMpInfo}
         handleOpenSharePopup={handleOpenSharePopup}
       />
     </AdvertisementLayout>

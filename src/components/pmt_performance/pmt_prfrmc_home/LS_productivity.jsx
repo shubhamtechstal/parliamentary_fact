@@ -236,7 +236,7 @@ function LS_productivity({
             titleText={'Productivity'}
             percentText={`${extractPercentage(productivity_schedule[3]?.value?.toString())?.a}`|| '100'}
             subPercentText={`${extractPercentage(productivity_schedule[3]?.value?.toString())?.b}` || '.20%'}
-            value={productivity_schedule[3].value.replaceAll('%', '')}
+            value={productivity_schedule[3]?.value.replaceAll('%', '')}
             percentNumFontSize={'3.5rem'}
             dotPercentFontSize={'1.5rem'}
             width={230}

@@ -363,7 +363,8 @@ export default function Header({
             const isActive =
               (val?.pageUrl !== '/' &&
                 window.location.pathname.includes(val?.pageUrl)) ||
-              (val?.pageUrl === '/' && window.location.pathname === '/');
+              (val?.pageUrl === '/' && window.location.pathname === '/')  ||
+              (val?.pageUrl === '/your-mps' && window.location.pathname.includes(`/mps-details`));
             return (
               <Link
                 style={{

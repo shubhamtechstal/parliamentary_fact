@@ -6,9 +6,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Paper,
   Avatar,
-  Button,
   IconButton,
   Box,
   Typography,
@@ -18,6 +16,7 @@ import {
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import GrayButton from '../GrayButton';
 import AdvertiseSection from 'components/addLayout/HorizontalAdvertiseSection';
+import { Link } from 'react-router-dom';
 
 const rankingSkelaton = () => {
   return (
@@ -169,9 +168,9 @@ const RankingTable = ({
                       </Box>
 
                       {/* MP Name */}
-                      <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                      <Link to={`/mps-details/${row?.name.replaceAll(' ', '-')?.toLowerCase()}_${row?.mp_id}`} style={{ display: 'flex', alignItems: 'center' }}>
                         <Avatar
-                          src={row.imageUrl}
+                          src={row.image}
                           sx={{ width: 50, height: 50, marginRight: 2 }}
                         />
                         {row?.name?.length > 40 ? (
@@ -215,10 +214,10 @@ const RankingTable = ({
                             {row.name}
                           </Typography>
                         )}
-                      </Box>
+                      </Link>
 
                       {/* Party */}
-                      <Box>{row.party}</Box>
+                      <Box>{row.party ?? row?.partyName}</Box>
 
                       {/* Constituency */}
                       <Box>{row.constituency}</Box>
@@ -246,7 +245,7 @@ const RankingTable = ({
                       <Box>
                         <GrayButton
                           fontSize="0.6rem"
-                          onClick={() => handleOpenSharePopup(row.mp_id)}
+                          onClick={() => handleOpenSharePopup(row)}
                         >
                           Share Now
                         </GrayButton>
