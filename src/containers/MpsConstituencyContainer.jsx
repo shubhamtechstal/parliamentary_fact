@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
-import PopulerMpsDetailsComponent from 'components/Mps_performance/details/PopulerMPsDetails';
+import MpsListComponent from 'components/Mps_performance/details/MpsListComponent';
 import AdvertisementLayout from 'components/addLayout/AdvertisementLayout';
 import IconButton from 'components/common/IconButton';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
@@ -8,9 +8,9 @@ import ShareModal from 'components/common/modals/ShareModal';
 import AutocompleteSearchBox from 'components/common/modals/AutoCompleateSearchBox';
 import MpsConstituencyPageComponent from 'components/mps_constituency/MpsConstituencyPageComponent';
 import { Box, Container } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchMpsPerformanceData } from 'stores/redux/apiSlices/mps_PerformanceSlice';
-import { mpsDataNetionalRank, mpsDataStateRank } from 'helpers/performanceConstants';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { fetchMpsPerformanceData } from 'stores/redux/apiSlices/mps_PerformanceSlice';
+// import { mpsDataNetionalRank, mpsDataStateRank } from 'helpers/performanceConstants';
 
 const MpsConstituencyContainer = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -53,7 +53,7 @@ const MpsConstituencyContainer = () => {
     {
       id: 'popular-mps',
       component: (
-        <PopulerMpsDetailsComponent
+        <MpsListComponent
           handleBack={handleBack}
           handleOpenSharePopup={handleOpenSharePopup}
           // mps_data={popular_mps}
@@ -68,11 +68,11 @@ const MpsConstituencyContainer = () => {
     {
       id: 'top-performer-mps',
       component: (
-        <PopulerMpsDetailsComponent
+        <MpsListComponent
           handleBack={handleBack}
           handleOpenSharePopup={handleOpenSharePopup}
           // mps_data={mp_fund_data}
-          pageTitle={'Populer Mps Performance'}
+          pageTitle={'Top Performer MPs Rating and Ranking'}
           datasetsKey={'mp_fund_data'}
           // mpsDataNetionalRank={mpsDataNetionalRank(mp_fund_data)}
           // mpsDataStateRank={mpsDataStateRank(mp_fund_data)}

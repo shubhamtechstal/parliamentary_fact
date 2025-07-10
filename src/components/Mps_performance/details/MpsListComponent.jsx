@@ -35,7 +35,7 @@ const mpsSkeleton = () => {
     </Box>
   );
 };
-function PopulerMpsDetailsComponent({
+function MpsListComponent({
   handleOpenSharePopup,
   pageTitle,
   cardName,
@@ -238,4 +238,4 @@ function PopulerMpsDetailsComponent({
   );
 }
 
-export default PopulerMpsDetailsComponent;
+export default MpsListComponent;

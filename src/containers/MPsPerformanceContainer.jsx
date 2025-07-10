@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import MpsPerformancePageComponent from 'components/Mps_performance/MpsPerformancePageComponent';
-import PopulerMpsDetailsComponent from 'components/Mps_performance/details/PopulerMPsDetails';
+import MpsListComponent from 'components/Mps_performance/details/MpsListComponent';
 import AdvertisementLayout from 'components/addLayout/AdvertisementLayout';
 import ShareModal from 'components/common/modals/ShareModal';
 import AutocompleteSearchBox from 'components/common/modals/AutoCompleateSearchBox';
@@ -88,7 +88,7 @@ const MPsPerformanceContainer = () => {
     {
       id: 'popular-mps',
       component: (
-        <PopulerMpsDetailsComponent
+        <MpsListComponent
           datasetsKey={'popular_mps'}
           handleBack={handleBack}
           handleOpenSharePopup={handleOpenSharePopup}
@@ -99,7 +99,7 @@ const MPsPerformanceContainer = () => {
     {
       id: 'top-performer-mps',
       component: (
-        <PopulerMpsDetailsComponent
+        <MpsListComponent
           datasetsKey={'top_performance'}
           handleBack={handleBack}
           handleOpenSharePopup={handleOpenSharePopup}
@@ -111,7 +111,7 @@ const MPsPerformanceContainer = () => {
     {
       id: 'mps-attendance',
       component: (
-        <PopulerMpsDetailsComponent
+        <MpsListComponent
           datasetsKey={'attendance_data'}
           handleBack={handleBack}
           handleOpenSharePopup={handleOpenSharePopup}
@@ -124,7 +124,7 @@ const MPsPerformanceContainer = () => {
     {
       id: 'mps-questions',
       component: (
-        <PopulerMpsDetailsComponent
+        <MpsListComponent
           datasetsKey={'question_data'}
           handleBack={handleBack}
           handleOpenSharePopup={handleOpenSharePopup}
@@ -137,7 +137,7 @@ const MPsPerformanceContainer = () => {
     {
       id: 'mps-debates',
       component: (
-        <PopulerMpsDetailsComponent
+        <MpsListComponent
           datasetsKey={'mp_debate_data'}
           handleBack={handleBack}
           handleOpenSharePopup={handleOpenSharePopup}
@@ -150,7 +150,7 @@ const MPsPerformanceContainer = () => {
     {
       id: 'mps-private-member-bill',
       component: (
-        <PopulerMpsDetailsComponent
+        <MpsListComponent
           datasetsKey={'private_bill_data'}
           handleBack={handleBack}
           handleOpenSharePopup={handleOpenSharePopup}
