@@ -1,7 +1,10 @@
-import { Box, Skeleton } from '@mui/material';
+import { Box, Container, Skeleton } from '@mui/material';
 import SectionHeading from 'components/common/SectionHeading';
-import { questionsDetailsData } from 'helpers/performanceConstants';
-import { useState } from 'react';
+import {
+  mpsDataNetionalRank,
+  mpsDataStateRank,
+} from 'helpers/performanceConstants';
+import { useEffect, useState } from 'react';
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 import GrayButton from 'components/common/GrayButton';
 import RankingTable from 'components/common/modals/RankingTable';
@@ -10,6 +13,8 @@ import AdvertiseSection from 'components/addLayout/HorizontalAdvertiseSection';
 import FilterController from 'components/common/modals/FilterController';
 import IconButton from 'components/common/IconButton';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
+import { fetchMpsPerformanceData } from 'stores/redux/apiSlices/mps_PerformanceSlice';
+import { useDispatch, useSelector } from 'react-redux';
 const mpsSkeleton = () => {
   return (
     <Box
@@ -31,14 +36,24 @@ const mpsSkeleton = () => {
   );
 };
 function PopulerMpsDetailsComponent({
-  // onFilterClick,
   handleOpenSharePopup,
-  // mps_data,
   pageTitle,
   cardName,
-  mpsDataNetionalRank,
-  mpsDataStateRank,
+  // mpsDataNetionalRank,
+  // mpsDataStateRank,
+  datasetsKey,
 }) {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchMpsPerformanceData({ datasets: [datasetsKey] }));
+  }, [dispatch]);
+  const mpsData = useSelector(
+    (state) => state?.mpsPerformance?.partial?.[datasetsKey] || []
+  );
+  
+  const mpsDataNetional_Rank = mpsDataNetionalRank(mpsData);
+  const mpsDataState_Rank = mpsDataStateRank(mpsData);
+
   const [isStateRank, setIsStateRank] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const handleStateRankClick = () => {
@@ -48,7 +63,7 @@ function PopulerMpsDetailsComponent({
       setIsLoading(false);
     }, 300);
   };
-  const mpsdata = isStateRank ? mpsDataStateRank : mpsDataNetionalRank;
+  const mpsdata = isStateRank ? mpsDataState_Rank : mpsDataNetional_Rank;
 
   const [loadMoreMpsData, setloadMoreMpsData] = useState(10);
   const [showMoreLoder, setShowMoreLoder] = useState(false);
@@ -86,7 +101,7 @@ function PopulerMpsDetailsComponent({
           ></span>{' '}
           {pageTitle}
         </h3>
-        <Box sx={{ position: 'absolute', top: '-2rem', right: '1rem' }}>
+        <Box sx={{ position: 'absolute', top: '-3rem', right: '1rem' }}>
           <FilterController />
         </Box>
         <Box mb={2}>
@@ -125,7 +140,7 @@ function PopulerMpsDetailsComponent({
       </Box>
 
       {/* ******Desktop**** */}
-      <Box
+      <Container
         sx={{
           position: 'relative',
           marginBottom: '10rem',
@@ -138,8 +153,9 @@ function PopulerMpsDetailsComponent({
             justifyContent: 'space-between',
             alignItems: 'center',
             display: { md: 'flex', xs: 'none' },
-            px: 5,
+            px: 2,
             fontSize: '1.2rem',
+            mt: 2,
           }}
         >
           <SectionHeading title={pageTitle} />
@@ -153,7 +169,7 @@ function PopulerMpsDetailsComponent({
             display: { md: 'flex', xs: 'none' },
             pr: 5,
           }}
-          mb={2}
+          my={2}
         >
           <GrayButton
             onClick={() => handleStateRankClick(false)}
@@ -217,7 +233,7 @@ function PopulerMpsDetailsComponent({
             />
           )}
         </Box>
-      </Box>
+      </Container>
     </>
   );
 }

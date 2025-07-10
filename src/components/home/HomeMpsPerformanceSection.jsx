@@ -5,8 +5,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchMpsPerformanceData } from 'stores/redux/apiSlices/mps_PerformanceSlice';
 
 function HomeMpsPerformanceSection(props) {
-    const { mp_fund_data =[], top_performance=[] } = props;
-
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(
+      fetchMpsPerformanceData({
+        datasets: ['top_performance', 'mp_fund_data'],
+        limit: 20,
+      })
+    );
+  }, [dispatch]);
+  const {
+    mp_fund_data = [],
+    top_performance = [],
+  } = useSelector((state) => state?.mpsPerformance?.partial || {});
+  // const { mp_fund_data = [], top_performance = [] } = props;
   return (
     <div>
       <MpsSectionDynamic

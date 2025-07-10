@@ -1,4 +1,4 @@
-import { Box, Button, Container } from '@mui/material';
+import { Box, Button, CircularProgress, Container } from '@mui/material';
 import AdvertiseSection from 'components/addLayout/HorizontalAdvertiseSection';
 import Text from 'components/common/Text';
 import MPPerformance from 'components/Mps_performance/MPPerformance';
@@ -8,7 +8,8 @@ import {
   mpsDataStateRank,
 } from 'helpers/performanceConstants';
 import { useEffect, useMemo, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchMpsPerformanceData } from 'stores/redux/apiSlices/mps_PerformanceSlice';
 
 const sections = [
   { id: 'top-performer', title: 'Top Performer' },
@@ -37,49 +38,23 @@ const sortByPerformance = (data, type) => {
 function MpsPerformancePageComponent({
   handleDetailsClick,
   handleOpenSharePopup,
-  mps_attendance_data,
-  mp_debate_data,
-  mp_fund_data,
-  popular_mps,
-  top_performance,
-  private_bill_data,
-  question_data,
 }) {
-  // const {
-  //   mps_attendance_data,
-  //   mp_debate_data,
-  //   mp_fund_data,
-  //   private_bill_data,
-  //   question_data,
-  // } = useSelector((state) => state?.mpsPerformance);
-
-
-  // const mpsDataNetionalRank =
-  //   mps_attendance_data?.map((data) => {
-  //     return {
-  //       rank: data.national_rank,
-  //       name: data.name,
-  //       constituency: data.constituency,
-  //       state_name: data.state_name,
-  //       performance: data.national_percentage,
-  //       partyName: data.party_short_name,
-  //       rankTitle: 'National Rank:',
-  //       image: data.image,
-  //     };
-  //   }) ?? [];
-  // const mpsDataStateRank =
-  //   mps_attendance_data?.map((data) => {
-  //     return {
-  //       rank: data.state_rank,
-  //       name: data.name,
-  //       constituency: data.constituency,
-  //       state_name: data.state_name,
-  //       performance: data.state_percentage,
-  //       partyName: data.party_short_name,
-  //       rankTitle: 'State Rank:',
-  //       image: data.image,
-  //     };
-  //   }) ?? [];
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchMpsPerformanceData({ datasets: ['popular_mps'], limit: 20 }));
+    dispatch(fetchMpsPerformanceData({ limit: 20 }));
+  }, [dispatch]);
+  const {
+    attendance_data,
+    mp_debate_data,
+    private_bill_data,
+    question_data,
+    top_performance,
+    partial,
+    loading,
+  } = useSelector((state) => state?.mpsPerformance);
+  const popular_mps = partial?.popular_mps || [];
+  console.log('mps_attendance_datamps_attendance_data', partial);
 
   const [activeSections, setActiveSections] = useState({
     Attendance: sections[0].id,
@@ -111,23 +86,31 @@ function MpsPerformancePageComponent({
     return Object.fromEntries(
       performanceTitles.map((title) => {
         // console.log('titletitle', title);
-        var data=[];
+        var data = [];
         switch (title) {
           case 'Attendance':
-            data = rankView[title] ? mpsDataStateRank(mps_attendance_data) : mpsDataNetionalRank(mps_attendance_data);
+            data = rankView[title]
+              ? mpsDataStateRank(attendance_data)
+              : mpsDataNetionalRank(attendance_data);
             break;
           case 'Questions':
-            data = rankView[title] ? mpsDataStateRank(question_data) : mpsDataNetionalRank(question_data);
+            data = rankView[title]
+              ? mpsDataStateRank(question_data)
+              : mpsDataNetionalRank(question_data);
             break;
           case 'Debates':
-            data = rankView[title] ? mpsDataStateRank(mp_debate_data) : mpsDataNetionalRank(mp_debate_data);
+            data = rankView[title]
+              ? mpsDataStateRank(mp_debate_data)
+              : mpsDataNetionalRank(mp_debate_data);
             break;
           case 'Private Member Bill':
-            data = rankView[title] ? mpsDataStateRank(private_bill_data) : mpsDataNetionalRank(private_bill_data);
+            data = rankView[title]
+              ? mpsDataStateRank(private_bill_data)
+              : mpsDataNetionalRank(private_bill_data);
             break;
 
           default:
-            data = mps_attendance_data;
+            data = attendance_data;
             break;
         }
 
@@ -136,8 +119,8 @@ function MpsPerformancePageComponent({
         return [title, sortByPerformance(data, activeSections[title])];
       })
     );
-  }, [rankView, activeSections, mps_attendance_data]);
-// console.log('performanceData', performanceData, mps_attendance_data)
+  }, [rankView, activeSections, attendance_data]);
+  // console.log('performanceData', performanceData, mps_attendance_data)
   // const performanceData = useMemo(() => {
   //   return Object.fromEntries(
   //     Object.entries(activeSections).map(([key, sectionId]) => [
@@ -151,7 +134,19 @@ function MpsPerformancePageComponent({
     setActiveSections((prev) => ({ ...prev, [section]: sectionId }));
   };
 
-  return (
+  return loading ? (
+    <Box
+      sx={{
+        height: '100vh',
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      <CircularProgress />
+    </Box>
+  ) : (
     <Box sx={{ py: 4, backgroundColor: '#EEF3F7', color: '#00000080' }}>
       {/* Rank Toggle */}
 
@@ -252,7 +247,7 @@ function MpsPerformancePageComponent({
             activeSection={activeSections[title]}
             handleStateRankClick={() => handleRankViewToggle(title)}
             isStateRank={rankView[title]}
-            mps_attendance_data={mps_attendance_data}
+            mps_attendance_data={attendance_data}
             handleStepperChange={(sectionId) =>
               handleSectionChange(title, sectionId)
             }

@@ -121,7 +121,7 @@ const MpProfileSection = ({ mp_profile_detail, homeInfo }) => {
         <Box sx={{ display: 'flex', gap: '3rem', flexWrap: 'wrap' }}>
           <LabeledItem
             label="Educational Qualification"
-            value={mp_profile_detail?.education ?? 'Na'}
+            value={mp_profile_detail?.education?.replaceAll("<br/>", ' (') + ( mp_profile_detail?.education?.includes('<br/>') && ' )') ?? 'Na'}
           />
           <LabeledItem label="Profession" value="Strategy Consultant" />
         </Box>
@@ -131,11 +131,11 @@ const MpProfileSection = ({ mp_profile_detail, homeInfo }) => {
         <Box sx={{ display: 'flex', gap: '3rem', flexWrap: 'wrap' }}>
           <LabeledItem
             label="Hobbies"
-            value={mp_profile_detail?.hobbies ?? 'Na'}
+            value={mp_profile_detail?.hobbies !=='' ? mp_profile_detail?.hobbies : 'Na'}
           />
           <LabeledItem
             label="Countries Visited"
-            value={mp_profile_detail?.countries_visited ?? 'Na'}
+            value={mp_profile_detail?.countries_visited !=='' ? mp_profile_detail?.countries_visited : 'Na'}
           />
         </Box>
         <Divider sx={{ my: 3 }} />

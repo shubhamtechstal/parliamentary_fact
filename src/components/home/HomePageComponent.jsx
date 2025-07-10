@@ -11,6 +11,7 @@ import { fetchPerformanceData } from 'stores/redux/apiSlices/pmt_PerformanceSlic
 import { useEffect } from 'react';
 import { fetchMpsPerformanceData } from 'stores/redux/apiSlices/mps_PerformanceSlice';
 import Loader from 'components/common/Loader';
+import HomeTopSectionMpsList from './HomeTopSectionMpsList';
 
 function HomePageComponent() {
   // const data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
@@ -20,63 +21,10 @@ function HomePageComponent() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchPerformanceData());
-    dispatch(fetchMpsPerformanceData());
-  }, [dispatch]);
-  const {
-    mp_fund_data = [],
-    top_performance = [],
-    popular_mps,
-    loading
-  } = useSelector((state) => state?.mpsPerformance);
+}, [dispatch]);
   return (
     <div>
-      <Box sx={{ backgroundColor: '#fff', borderBottom: '2px solid #d3d2d2' }}>
-        <Container
-          sx={{
-            display: 'flex',
-            gap: 2,
-            overflow: 'auto',
-            pt: 2,
-            textAlign: 'center',
-            alignItems: 'top',
-          }}
-        >
-          {loading ?
-          <Box sx={{display: 'flex', justifyContent: 'center', width: '100%', height: '100px'}}>
-            <Loader loading position='relative'/> 
-          </Box>
-          :
-          popular_mps?.map((mps) => (
-            <Link style={{textDecoration:'none', color:"inherit"}} to={mps?.mp_id ? `/mps-details/${mps?.name.replaceAll(" ", '-')?.toLowerCase() }_${mps?.mp_id}` : '#'}>
-             <Box
-                key={mps.mp_id}
-                sx={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                }}
-              >
-                <Avatar
-                  sx={{ height: '50px', width: '50px' }}
-                  alt="Test"
-                  src={mps?.image}
-                />
-                <p
-                  style={{
-                    fontSize: '10px',
-                    marginTop: '5px',
-                    maxHeight: '2rem',
-                    width: '90px',
-                    textAlign: 'center',
-                  }}
-                >
-                  {mps?.name}
-                </p>
-              </Box>
-            </Link>
-          ))}
-        </Container>
-      </Box>
+      <HomeTopSectionMpsList />
       <Container sx={{ mt: 5 }}>
         <HomePmtPerformanceSection />
         <Container sx={{ display: { xs: 'block', md: 'none' }, mb: 4 }}>
@@ -115,10 +63,7 @@ function HomePageComponent() {
         </Box>
       </Container>
       <AdvertiseSection />
-      <HomeMpsPerformanceSection
-        mp_fund_data={mp_fund_data}
-        top_performance={top_performance}
-      />
+      <HomeMpsPerformanceSection/>
       <Box
         style={{
           background: '#fff',

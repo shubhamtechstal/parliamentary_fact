@@ -13,11 +13,11 @@ import {
 import { Facebook, Twitter, Instagram, WhatsApp, Telegram, Link as LinkIcon, Close } from "@mui/icons-material";
 import GrayButton from "../GrayButton";
 
-const ShareModal = ({open, shareMpId, handleOpenSharePopup}) => {
+const ShareModal = ({open, shareMpInfo, handleOpenSharePopup}) => {
 //   const [open, setOpen] = useState(false);
   const [copied, setCopied] = useState(false);
   const inputRef = useRef(null);
-
+console.log('shareMpInfo', shareMpInfo)
   const handleCopy = () => {
     const input = inputRef.current;
     input.select();
@@ -51,7 +51,7 @@ const ShareModal = ({open, shareMpId, handleOpenSharePopup}) => {
             </InputAdornment>
             <TextField
               inputRef={inputRef}
-              value={`${window.location.origin}/mps-profile/${shareMpId}`}
+              value={`${window.location.origin}/mps-details/${ shareMpInfo?.name?.replaceAll(" ", '-')?.toLowerCase()}_${shareMpInfo?.mp_id}`}
               variant="standard"
               fullWidth
               InputProps={{ disableUnderline: true, readOnly: true }}

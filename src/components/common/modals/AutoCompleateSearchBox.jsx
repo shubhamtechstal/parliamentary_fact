@@ -40,7 +40,7 @@ export default function AutocompleteSearchBox({ onSelectMP }) {
   }, [searchQuery]);
 
   return (
-    <Stack  sx={{ width: { md: 500, xs: '80%' } }} mt={2}  >
+    <Stack  sx={{ width: { md: 500, xs: '80%' } }} my={2} mr={2}>
       <Autocomplete
         id="mp-autocomplete"
         options={suggestions}

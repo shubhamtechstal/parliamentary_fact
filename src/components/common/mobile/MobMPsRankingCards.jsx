@@ -177,8 +177,8 @@ function MobMPsRankingCards({
             cornerRadius="50%"
             sx={{
               [`& .${gaugeClasses.valueText}`]: {
-                fontSize: '1em',
-                fontWeight: '',
+                fontSize: '0.7em',
+                fontWeight: '700',
                 transform: 'translate(0px, 0px)',
                 fontFamily: "'Saira', sans-serif",
               },
@@ -189,7 +189,7 @@ function MobMPsRankingCards({
             text={({ value }) => `${value}%`}
           />
           <Avatar
-            src={mp.imageUrl}
+            src={mp.image}
             alt={mp.name}
             sx={{ width: 60, height: 60 }}
           />
@@ -213,7 +213,7 @@ function MobMPsRankingCards({
               sx={{ width: '30px', height: '30px' }}
               src="/Assets/icons/shareYellowIcon.png"
               alt="icon3dot"
-              onClick={() => handleOpenSharePopup()}
+              onClick={() => handleOpenSharePopup(mp)}
             />
           </Box>
         </Box>

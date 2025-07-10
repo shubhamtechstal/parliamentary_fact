@@ -2,75 +2,32 @@ import { Box, Button, Container } from '@mui/material';
 import AdvertiseSection from 'components/addLayout/HorizontalAdvertiseSection';
 import Text from 'components/common/Text';
 import MPPerformance from 'components/Mps_performance/MPPerformance';
-import MpsPerformanceSectionComponent from 'components/Mps_performance/MpsPerformanceSectionComponent';
-import {
-  mpsDataNetionalRank,
-  mpsDataStateRank,
-} from 'helpers/performanceConstants';
-import { useEffect, useMemo, useState } from 'react';
+// import MpsPerformanceSectionComponent from 'components/Mps_performance/MpsPerformanceSectionComponent';
+// import {
+//   mpsDataNetionalRank,
+//   mpsDataStateRank,
+// } from 'helpers/performanceConstants';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchMpsPerformanceData } from 'stores/redux/apiSlices/mps_PerformanceSlice';
 
-const sections = [
-  { id: 'top-performer', title: 'Top Performer' },
-  { id: 'bottom-performer', title: 'Bottom Performer' },
-  { id: 'non-performer', title: 'Non Performer' },
-];
-
-const performanceTitles = [
-  'Attendance',
-  'Questions',
-  'Debates',
-  'Private Member Bill',
-];
-
-const sortByPerformance = (data, type) => {
-  const sorted = [...data];
-  if (type === 'top-performer')
-    return sorted.sort((a, b) => b.performance - a.performance);
-  return sorted.sort((a, b) => a.performance - b.performance);
-};
 
 function MpsConstituencyPageComponent({
   handleDetailsClick,
   handleOpenSharePopup,
 }) {
-  const [activeSections, setActiveSections] = useState({
-    Attendance: sections[0].id,
-    Questions: sections[0].id,
-    Debates: sections[0].id,
-    'Private Member Bill': sections[0].id,
-  });
-  const [rankView, setRankView] = useState(
-    performanceTitles.reduce((acc, title) => {
-      acc[title] = false; // false = national, true = state
-      return acc;
-    }, {})
-  );
-  const handleRankViewToggle = (title) => {
-    setRankView((prev) => ({
-      ...prev,
-      [title]: !prev[title],
-    }));
-    setActiveSections((prev) => ({
-      ...prev,
-      [title]: sections[0].id,
-    }));
-  };
-
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchMpsPerformanceData());
+    dispatch(
+      fetchMpsPerformanceData({
+        datasets: ['mp_fund_data', 'popular_mps'],
+        limit: 20,
+      })
+    );
   }, [dispatch]);
-  const {
-    mps_attendance_data,
-    mp_debate_data,
-    mp_fund_data,
-    private_bill_data,
-    question_data,
-    top_performance,
-    popular_mps,
-  } = useSelector((state) => state?.mpsPerformance);
+  const { mp_fund_data, popular_mps } = useSelector(
+    (state) => state?.mpsPerformance.partial || {}
+  );
   const sorted = [...mp_fund_data];
   return (
     <Box sx={{ py: 4, backgroundColor: '#EEF3F7', color: '#00000080' }}>

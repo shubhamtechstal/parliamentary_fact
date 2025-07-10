@@ -1,17 +1,25 @@
 import { Box, Card, Container, Typography } from '@mui/material';
 import Divider from 'components/common/Divider';
+import GrayButton from 'components/common/GrayButton';
 import GrayDot from 'components/common/GrayDot';
 import FilterController from 'components/common/modals/FilterController';
 import Text from 'components/common/Text';
 import LineCharts from 'components/LineCharts';
 // import { attendance_details } from 'helpers/performanceConstants';
 import { getDateInMonthNameFormate } from 'helpers/utills/utilityFunctions';
+import { useState } from 'react';
 
 export const AgendaList = ({
   data = [],
   type = 'adjournment',
   showListAsCard,
 }) => {
+  const [visibleCount, setVisibleCount] = useState(5); // initial items to show
+
+  const handleLoadMore = () => {
+    setVisibleCount((prev) => prev + 10);
+  };
+
   const getDateKey = (day) => {
     return (
       day?.adjourned_date ||
@@ -77,32 +85,32 @@ export const AgendaList = ({
           </>
         );
 
-        case 'interruptions':
-          return (
-            <Card
-              variant="outlined"
-              sx={{
-                mb: 2,
-                p: 2,
-                backgroundColor: '#f9f9f9',
-                transition: '0.3s',
-                '&:hover': { boxShadow: 3 },
-              }}
-            >
-              <Typography variant="h6" color="#F15A29" gutterBottom>
-                🔇 Interruptions: {item?.interruptions?.toLocaleString()}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                🗓️ <strong>Session:</strong> {item.session_name}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                📅 <strong>Year:</strong> {item.year_name}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                🏛️ <strong>Loksabha:</strong> {item.loksabha_name}
-              </Typography>
-            </Card>
-          );        
+      case 'interruptions':
+        return (
+          <Card
+            variant="outlined"
+            sx={{
+              mb: 2,
+              p: 2,
+              backgroundColor: '#f9f9f9',
+              transition: '0.3s',
+              '&:hover': { boxShadow: 3 },
+            }}
+          >
+            <Typography variant="h6" color="#F15A29" gutterBottom>
+              🔇 Interruptions: {item?.interruptions?.toLocaleString()}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              🗓️ <strong>Session:</strong> {item.session_name}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              📅 <strong>Year:</strong> {item.year_name}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              🏛️ <strong>Loksabha:</strong> {item.loksabha_name}
+            </Typography>
+          </Card>
+        );
 
       case 'quoram_bell':
         return (
@@ -158,32 +166,32 @@ export const AgendaList = ({
           </Card>
         );
 
-        case 'in_the_well':
-          return (
-            <Card
-              variant="outlined"
-              sx={{
-                mb: 2,
-                p: 2,
-                backgroundColor: '#f9f9f9',
-                transition: '0.3s',
-                '&:hover': { boxShadow: 3 },
-              }}
-            >
-              <Typography variant="h6" color="#F15A29" gutterBottom>
-                🧱 In The Well: {item?.in_the_well?.toLocaleString()}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                🗓️ <strong>Session:</strong> {item?.session_name}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                📅 <strong>Year:</strong> {item?.year_name}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                🏛️ <strong>Loksabha:</strong> {item?.loksabha_name}
-              </Typography>
-            </Card>
-          );        
+      case 'in_the_well':
+        return (
+          <Card
+            variant="outlined"
+            sx={{
+              mb: 2,
+              p: 2,
+              backgroundColor: '#f9f9f9',
+              transition: '0.3s',
+              '&:hover': { boxShadow: 3 },
+            }}
+          >
+            <Typography variant="h6" color="#F15A29" gutterBottom>
+              🧱 In The Well: {item?.in_the_wall?.toLocaleString()}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              🗓️ <strong>Session:</strong> {item?.session_name}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              📅 <strong>Year:</strong> {item?.year_name}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              🏛️ <strong>Loksabha:</strong> {item?.loksabha_name}
+            </Typography>
+          </Card>
+        );
 
       default:
         return (
@@ -192,9 +200,12 @@ export const AgendaList = ({
     }
   };
 
+  // Get only visible items
+  const visibleItems = data.slice(0, visibleCount);
+
   return (
-    <Box maxWidth="lg" mx="auto" sx={{ opacity: 0.7 }} px={2} py={4}>
-      {data?.map((day, index) => (
+    <Box maxWidth="lg" mx="auto" sx={{ opacity: 0.7 }} px={0} py={4}>
+      {visibleItems?.map((day, index) => (
         <Box key={index} mb={6}>
           <Typography
             variant="subtitle2"
@@ -218,9 +229,37 @@ export const AgendaList = ({
               <Box key={idx}>{renderByType(item, idx)}</Box>
             ))}
           </Box>
-          {index < data.length - 1 && <Divider sx={{ mt: 3 }} />}
+          {index < visibleItems.length - 1 && <Divider sx={{ mt: 3 }} />}
         </Box>
       ))}
+      <Box
+        sx={{
+          mt: 4,
+          display: 'flex',
+          justifyContent: 'end',
+          alignItems: 'center',
+          gap: { md: 5, xs: 2 },
+          flexDirection: { xs: 'column', md: 'row' },
+        }}
+      >
+        <Typography variant={'h6'}>
+          Total MPs: {data.length} (Showing: {visibleItems.length})
+        </Typography>
+
+        {visibleCount < data.length && (
+          <GrayButton
+            variant="contained"
+            onClick={handleLoadMore}
+            sx={{
+              backgroundColor: '#F15A29',
+              color: '#fff',
+              '&:hover': { backgroundColor: '#d84b1a' },
+            }}
+          >
+            Load More
+          </GrayButton>
+        )}
+      </Box>
     </Box>
   );
 };
@@ -228,8 +267,8 @@ export const AgendaList = ({
 function AdjiurnmentUIComponent({
   dataList = [],
   heroData,
-  sectionInfo=[],
-  totalCount='0',
+  sectionInfo = [],
+  totalCount = '0',
   showListAsCard = false,
 }) {
   return (
@@ -382,7 +421,7 @@ function AdjiurnmentUIComponent({
             </Box>
           ))}
         </Box>
-        <Box display={{ md: 'none', xs:'block' }}>
+        <Box display={{ md: 'none', xs: 'block' }}>
           <LineCharts
             data={[10, 4, 6, 5, 14, 15]}
             labels={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul']}
