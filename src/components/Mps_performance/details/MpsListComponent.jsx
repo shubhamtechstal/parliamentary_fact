@@ -5,16 +5,18 @@ import {
   mpsDataStateRank,
 } from 'helpers/performanceConstants';
 import { useEffect, useState } from 'react';
-import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 import GrayButton from 'components/common/GrayButton';
 import RankingTable from 'components/common/modals/RankingTable';
 import MobMPsRankingCards from 'components/common/mobile/MobMPsRankingCards';
 import AdvertiseSection from 'components/addLayout/HorizontalAdvertiseSection';
 import FilterController from 'components/common/modals/FilterController';
-import IconButton from 'components/common/IconButton';
-import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
-import { fetchMpsPerformanceData } from 'stores/redux/apiSlices/mps_PerformanceSlice';
+import {
+  fetchConstituencyPopulerMps,
+  fetchMpsPerformanceData,
+  fetchPopulerMpsData,
+} from 'stores/redux/apiSlices/mps_PerformanceSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { useSearchParams } from 'react-router-dom';
 const mpsSkeleton = () => {
   return (
     <Box
@@ -39,18 +41,47 @@ function MpsListComponent({
   handleOpenSharePopup,
   pageTitle,
   cardName,
+  filterParams,
   // mpsDataNetionalRank,
   // mpsDataStateRank,
   datasetsKey,
 }) {
+  const mapShortByToApiKey = {
+    'top-performer': 'default',
+    'bottom-performer': 'bottom',
+    'non-performer': 'non_performer',
+  };
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const shortByParam = searchParams.get('shortBy');
+  const [shortingKey, setshortingKey] = useState(
+    mapShortByToApiKey[shortByParam] || 'default'
+  );
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchMpsPerformanceData({ datasets: [datasetsKey] }));
-  }, [dispatch]);
-  const mpsData = useSelector(
-    (state) => state?.mpsPerformance?.partial?.[datasetsKey] || []
+    if (datasetsKey === 'constituency_popular_mps') {
+      dispatch(fetchConstituencyPopulerMps());
+    } else if (datasetsKey === 'popular_mps') {
+      dispatch(fetchPopulerMpsData());
+    } else {
+      dispatch(
+        fetchMpsPerformanceData({
+          datasets: [datasetsKey],
+          key: shortingKey,
+          ...(shortingKey === 'bottom' && { bottom: 1 }),
+          ...(shortingKey === 'non_performer' && { non_percentage: 1 }),
+        })
+      );
+    }
+  }, [datasetsKey, shortingKey, dispatch]);
+  const mpsData = useSelector((state) =>
+    datasetsKey === 'constituency_popular_mps'
+      ? state?.constituencyPopulerMps?.constituency_popular_mps
+      : datasetsKey === 'popular_mps'
+        ? state?.populerMps?.popular_mps
+        : state?.mpsPerformance?.partial?.[datasetsKey]?.[shortingKey] || []
   );
-  
+
   const mpsDataNetional_Rank = mpsDataNetionalRank(mpsData);
   const mpsDataState_Rank = mpsDataStateRank(mpsData);
 
@@ -74,6 +105,25 @@ function MpsListComponent({
       setShowMoreLoder(false);
     }, 500);
   };
+
+  const performerOptions = [
+    {
+      label: 'Top Performer',
+      shortKey: 'default',
+      queryValue: 'top-performer',
+    },
+    {
+      label: 'Bottom Performer',
+      shortKey: 'bottom',
+      queryValue: 'bottom-performer',
+    },
+    {
+      label: 'Non Performer',
+      shortKey: 'non_performer',
+      queryValue: 'non-performer',
+    },
+  ];
+
   return (
     <>
       {/* **********Mobile********** */}
@@ -164,13 +214,55 @@ function MpsListComponent({
         <Box
           sx={{
             display: 'flex',
-            justifyContent: { xs: 'center', md: 'end' },
+            justifyContent: { xs: 'center', md: 'space-between' },
             alignItems: 'center',
             display: { md: 'flex', xs: 'none' },
             pr: 5,
           }}
           my={2}
         >
+          {' '}
+          {datasetsKey.includes('popular_mps') ? (
+            <h1></h1>
+          ) : (
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                gap: '0.5rem',
+                m: 2,
+                flexWrap: 'wrap',
+              }}
+            >
+              {performerOptions.map(({ label, shortKey, queryValue }) => (
+                <GrayButton
+                  key={shortKey}
+                  onClick={() => {
+                    setSearchParams((prev) => {
+                      const params = new URLSearchParams(prev);
+
+                      // Always keep section
+                      const section =
+                        params.get('section') || 'mps-private-member-bill';
+
+                      // Set new shortBy while preserving other params
+                      params.set('section', section);
+                      params.set('shortBy', queryValue);
+
+                      return Object.fromEntries(params.entries());
+                    });
+
+                    setshortingKey(shortKey);
+                  }}
+                  fontWeight="600"
+                  bgColor={shortingKey === shortKey ? '#f1807c' : '#fff'}
+                  textColor={shortingKey === shortKey ? '#fff' : '#00000080'}
+                >
+                  {label}
+                </GrayButton>
+              ))}
+            </Box>
+          )}
           <GrayButton
             onClick={() => handleStateRankClick(false)}
             fontWeight="600"
@@ -188,6 +280,7 @@ function MpsListComponent({
               loadMoreMpsData={loadMoreMpsData}
               cardName={cardName}
               isLoading={isLoading}
+              pageTitle={pageTitle}
             />
           ) : (
             mpsSkeleton()

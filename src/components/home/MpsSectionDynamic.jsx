@@ -21,6 +21,7 @@ function MpsSectionDynamic({
   topMinisters_Data,
   topMinisterTitle,
   isRatingCard,
+  cardCatagory,
 }) {
   const [isStateRank, setIsStateRank] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -84,7 +85,7 @@ function MpsSectionDynamic({
               {isRatingCard ? (
                 <MpsStartRatingCard isLoading={isLoading} mpInfo={mp} />
               ) : (
-                <MpsPerformanceCard isLoading={isLoading} mpInfo={mp} />
+                <MpsPerformanceCard cardCatagory={cardCatagory} isLoading={isLoading} mpInfo={mp} />
               )}
             </Grid>
           ))
@@ -107,7 +108,7 @@ function MpsSectionDynamic({
               {isRatingCard ? (
                 <MpsStartRatingCard isLoading={isLoading} mpInfo={mp} />
               ) : (
-                <MpsPerformanceCard isLoading={isLoading} mpInfo={mp} />
+                <MpsPerformanceCard cardCatagory={cardCatagory} isLoading={isLoading} mpInfo={mp} />
               )}
             </Grid>
           ))
@@ -130,7 +131,7 @@ function MpsSectionDynamic({
               {isRatingCard ? (
                 <MpsStartRatingCard isLoading={isLoading} mpInfo={mp} />
               ) : (
-                <MpsPerformanceCard isLoading={isLoading} mpInfo={mp} />
+                <MpsPerformanceCard cardCatagory={cardCatagory} isLoading={isLoading} mpInfo={mp} />
               )}
             </Grid>
           ))
@@ -161,7 +162,7 @@ function MpsSectionDynamic({
                 {isRatingCard ? (
                   <MpsStartRatingCard isLoading={isLoading} mpInfo={mp} />
                 ) : (
-                  <MpsPerformanceCard isLoading={isLoading} mpInfo={mp} />
+                  <MpsPerformanceCard cardCatagory={cardCatagory} isLoading={isLoading} mpInfo={mp} />
                 )}
               </Grid>
             ))}

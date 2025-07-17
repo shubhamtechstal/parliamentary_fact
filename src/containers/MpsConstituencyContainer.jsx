@@ -26,7 +26,7 @@ const MpsConstituencyContainer = () => {
       mp_full_name: value?.full_name,
     }));
   };
-
+  console.log('filterParams', filterParams);
   const handleOpenSharePopup = (mp_Info) => {
     setOpenShare((prev) => !prev);
     setshareMpInfo(mp_Info);
@@ -38,10 +38,13 @@ const MpsConstituencyContainer = () => {
       setActiveSection(section);
     }
   }, [searchParams, initialSection]);
-
-  const handleSectionChange = (sectionId) => {
+  const handleSectionChange = (sectionId, shortBy) => {
     setActiveSection(sectionId);
-    setSearchParams({ section: sectionId });
+    if (shortBy) {
+      setSearchParams({ section: sectionId, shortBy });
+    } else {
+      setSearchParams({ section: sectionId });
+    }
   };
 
   const handleBack = () => {
@@ -57,11 +60,9 @@ const MpsConstituencyContainer = () => {
           handleBack={handleBack}
           handleOpenSharePopup={handleOpenSharePopup}
           // mps_data={popular_mps}
-          pageTitle={'Populer Mps Performance'}
-          datasetsKey={'popular_mps'}
-          // mpsDataNetionalRank={mpsDataNetionalRank(popular_mps)}
-          // mpsDataStateRank={mpsDataStateRank(popular_mps)}
-          // onFilterClick={onFilterClick}
+          pageTitle={'Populer Mps Performance In Mp Led Fund'}
+          datasetsKey={'constituency_popular_mps'}
+          filterParams={filterParams}
         />
       ),
     },
@@ -71,12 +72,10 @@ const MpsConstituencyContainer = () => {
         <MpsListComponent
           handleBack={handleBack}
           handleOpenSharePopup={handleOpenSharePopup}
+          filterParams={filterParams}
           // mps_data={mp_fund_data}
           pageTitle={'Top Performer MPs Rating and Ranking'}
           datasetsKey={'mp_fund_data'}
-          // mpsDataNetionalRank={mpsDataNetionalRank(mp_fund_data)}
-          // mpsDataStateRank={mpsDataStateRank(mp_fund_data)}
-          // onFilterClick={onFilterClick}
         />
       ),
     },
@@ -94,7 +93,7 @@ const MpsConstituencyContainer = () => {
           <IconButton onClick={handleBack}>
             <KeyboardBackspaceIcon />
           </IconButton>
-          <Box sx={{ width: { xs: '60%', md: 'auto' }, }}>
+          <Box sx={{ width: { xs: '60%', md: 'auto' } }}>
             <AutocompleteSearchBox onSelectMP={onSelectSearchBox} />
           </Box>
         </Container>

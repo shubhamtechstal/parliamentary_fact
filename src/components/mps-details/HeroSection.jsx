@@ -170,7 +170,7 @@ export default function PerformanceUI({ mpBasicInfo }) {
             {CardsScroll([
               { title: 'Age', value: `${mpBasicInfo?.age} Years Old` },
               { title: 'Gender', value: mpBasicInfo?.gender },
-              { title: 'Category', value: mpBasicInfo?.category ?? 'Test General'},
+              { title: 'Category', value: mpBasicInfo?.category ?? 'General'},
               { title: 'Term', value: mpBasicInfo?.term_count },
               { title: 'Winning Margin', value: mpBasicInfo?.winning_margin },
             ])}

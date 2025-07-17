@@ -183,7 +183,10 @@ function MpsTopPerformanceCard({
                         {mp.rankTitle}{' '}
                       </h2>
                       <IconButton
-                        onClick={() => handleOpenSharePopup()}
+                        onClick={(e)=>{
+                          e.stopPropagation();
+                           handleOpenSharePopup(mp)
+                          }}
                         sx={{ position: 'absolute', right: 0, top: 0 }}
                       >
                         <MoreVertIcon />

@@ -85,8 +85,8 @@ function LokSabhaAdjiurnment() {
       ) : (
         <AdjiurnmentUIComponent
           heroData={{
-            title: 'Adjunment in Lok Sabha',
-            cardTitle: 'Adjunment',
+            title: 'Adjournment in Lok Sabha',
+            cardTitle: 'Adjournment',
             subtitle: 'Till Now',
             type: 'adjournment', // 👈 Only this decides rendering now
           }}

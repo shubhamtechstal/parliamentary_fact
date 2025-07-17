@@ -20,18 +20,41 @@ function MpsConstituencyPageComponent({
 }) {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(
-      fetchMpsPerformanceData({ datasets: ['mp_fund_data'], limit: 20 })
-    );
+    // dispatch(fetchMpsPerformanceData({ datasets: ['mp_fund_data'], limit: 20, bottom:1 }));
     dispatch(fetchConstituencyPopulerMps());
   }, [dispatch]);
-  const { mp_fund_data } = useSelector(
-    (state) => state?.mpsPerformance.partial || {}
-  );
+  useEffect(() => {
+    dispatch(fetchMpsPerformanceData({
+      datasets: ['mp_fund_data'],
+      limit: 20,
+      key: 'default',
+    }));
+  
+    dispatch(fetchMpsPerformanceData({
+      datasets: ['mp_fund_data'],
+      limit: 20,
+      bottom: 1,
+      key: 'bottom',
+    }));
+  
+    dispatch(fetchMpsPerformanceData({
+      datasets: ['mp_fund_data'],
+      limit: 20,
+      non_percentage: 1,
+      key: 'non_performer',
+    }));
+  }, []);
+  
+  const { partial } = useSelector((state) => state.mpsPerformance);
+
+  const mp_fund_data = partial.mp_fund_data.default || [];
+  const bottommp_fund_data = partial.mp_fund_data.bottom || [];
+  const nonPerformer_mp_fund_data = partial.mp_fund_data.non_performer || [];
+
   const { constituency_popular_mps, populerMpsLoading } = useSelector(
     (state) => state?.constituencyPopulerMps || {}
   );
-  const sorted = [...mp_fund_data];
+  // const sorted = [...mp_fund_data];
   return (
     <Box sx={{ py: 4, backgroundColor: '#EEF3F7', color: '#00000080' }}>
       {/* Rank Toggle */}
@@ -106,8 +129,6 @@ function MpsConstituencyPageComponent({
         mps_Data={constituency_popular_mps}
         cardCatagory={'Mp LD fund'}
         isLoading={populerMpsLoading}
-        // mpsDataNetionalRank={mpsDataNetionalRank}
-        // mpsDataStateRank={mpsDataStateRank}
       />
       <AdvertiseSection />
 
@@ -119,32 +140,26 @@ function MpsConstituencyPageComponent({
         handleOpenSharePopup={handleOpenSharePopup}
         cardCatagory={'Mp LD fund'}
         mps_Data={mp_fund_data}
-        // mpsDataNetionalRank={mpsDataNetionalRank}
-        // mpsDataStateRank={mpsDataStateRank}
       />
       <AdvertiseSection />
       {/* Bottom Performer Section */}
       <MPPerformance
         title="Bottom Performer MPs Rating and Ranking"
         detailsPage="top-performer-mps"
-        handleDetailsClick={handleDetailsClick}
+        handleDetailsClick={(e)=>handleDetailsClick(e, 'bottom-performer') }
         handleOpenSharePopup={handleOpenSharePopup}
         cardCatagory={'Mp LD fund'}
-        mps_Data={sorted.sort((a, b) => a.performance - b.performance)}
-        // mpsDataNetionalRank={mpsDataNetionalRank}
-        // mpsDataStateRank={mpsDataStateRank}
+        mps_Data={bottommp_fund_data}
       />
       <AdvertiseSection />
       {/* Non Performer Section */}
       <MPPerformance
         title="Non Performer MPs Rating and Ranking"
         detailsPage="top-performer-mps"
-        handleDetailsClick={handleDetailsClick}
-        mps_Data={mp_fund_data}
+        handleDetailsClick={(e)=>handleDetailsClick(e, 'non-performer')}
+        mps_Data={nonPerformer_mp_fund_data}
         cardCatagory={'Mp LD fund'}
         handleOpenSharePopup={handleOpenSharePopup}
-        // mpsDataNetionalRank={mpsDataNetionalRank}
-        // mpsDataStateRank={mpsDataStateRank}
       />
     </Box>
   );

@@ -66,6 +66,7 @@ export const AgendaList = ({
               fontWeight={500}
               color="text.primary"
               mb={0.5}
+              mt={ idx==0 ? 0 : 4}
             >
               WALKOUT - {idx + 1}
               <Typography
@@ -77,9 +78,9 @@ export const AgendaList = ({
                 TIME - {item.time || 'N/A'}
               </Typography>
             </Typography>
-            <Typography variant="body2" color="text.secondary">
+            {/* <Typography variant="body2" color="text.secondary">
               <strong>MP:</strong> {item.mp_name || '—'}
-            </Typography>
+            </Typography> */}
             <Typography variant="body2" color="text.secondary">
               <strong>Subject:</strong> {item.subject || '—'}
             </Typography>
