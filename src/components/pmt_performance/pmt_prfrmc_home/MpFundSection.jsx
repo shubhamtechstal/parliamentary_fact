@@ -92,12 +92,10 @@ function MpFundSection({ MpFundSection, pageData, mpsFundData, BottomRightChip }
             isMultiSubtitle={true}
             centerDate={MpFundSection.date}
             percentText={
-              `${extractPercentage(pageData?.mpLads_percentage?.mpLads_percentage?.toString())?.a}` ||
-              '110.'
+              `${extractPercentage(pageData?.mpLads_percentage?.mpLads_percentage ?? '11' )?.a}`
             }
             subPercentText={
-              `${extractPercentage(pageData?.mpLads_percentage?.mpLads_percentage?.toString())?.b}` ||
-              '20%'
+              `${extractPercentage(pageData?.mpLads_percentage?.mpLads_percentage ?? '11')?.b}`
             }
             value={pageData?.passed_govt_bills_data?.passed_bill_percentage?.replaceAll(
               '%',
@@ -240,17 +238,12 @@ function MpFundSection({ MpFundSection, pageData, mpsFundData, BottomRightChip }
               isMultiSubtitle={true}
               centerDate={MpFundSection.date}
               percentText={
-                `${extractPercentage(pageData?.mpLads_percentage?.mpLads_percentage?.toString())?.a}` ||
-                '110.'
+                `${extractPercentage(pageData?.mpLads_percentage?.mpLads_percentage ?? '33.33' )?.a}`
               }
               subPercentText={
-                `${extractPercentage(pageData?.mpLads_percentage?.mpLads_percentage?.toString())?.b}` ||
-                '20%'
+                `${extractPercentage(pageData?.mpLads_percentage?.mpLads_percentage ?? '33.33%')?.b}`
               }
-              value={pageData?.passed_govt_bills_data?.passed_bill_percentage?.replaceAll(
-                '%',
-                ''
-              )}
+              value={pageData?.passed_govt_bills_data?.passed_bill_percentage?.replaceAll( '%','') ?? '33.33'}
               width={230}
               height={250}
               innerRadius={98}

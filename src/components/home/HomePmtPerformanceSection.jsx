@@ -377,7 +377,7 @@ const HomePmtPerformanceSection = () => {
               >
                 <ChartProgressTextgroup
                   title={'DEBATES'}
-                  percentage={'89.5'}
+                  percentage={`${pageData?.debate_percentage?.debate_percentage}` || '89.5'}
                   isRight={true}
                   chartColor={'#b979a4'}
                 />

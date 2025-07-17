@@ -16,7 +16,7 @@ export default function ProgressMeter(props) {
         innerRadius={innerRadius || 58}
         sx={{ position: 'relative' }}
         endAngle={125}
-        value={value || 70}
+        value={Number(value) || 70}
       >
         <GaugeReferenceArc style={{ fill: '#DCDCDC' }} />{' '}
         {/* Set the color here */}

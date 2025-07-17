@@ -22,7 +22,6 @@ function LS_attendance({
   chipLabal,
   chartData = [],
 }) {
-  console.log('ChartDataChartDataChartData', chartData)
   return (
     <>
       {/* **********Mobile********** */}
@@ -206,7 +205,12 @@ function LS_attendance({
             {attendance_details?.map((item, index) => (
               <Box
                 key={index}
-                sx={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.8rem',
+                  width: { md: '48%', xs: '100%' },
+                }}
               >
                 {index == 0 || index == 1 ? (
                   <GrayDot icon_url={'/Assets/icons/small_arrow_Up.png'} />
@@ -217,7 +221,7 @@ function LS_attendance({
                   <Text
                     sx={{
                       color: '#00000080',
-                      fontSize: '0.6em',
+                      fontSize: '0.8em',
                       fontWeight: 600,
                     }}
                     text={item?.title}
