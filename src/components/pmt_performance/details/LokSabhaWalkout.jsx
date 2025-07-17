@@ -13,6 +13,8 @@ function LokSabhaWalkout() {
   useEffect(() => {
     dispatch(fetchwalkoutData());
   }, [dispatch]);
+  console.log('chartDataadjurnmentsData', walkoutData)
+
   return (
     <Container>
       {walkoutLoading ? (
@@ -28,6 +30,7 @@ function LokSabhaWalkout() {
           dataList={walkoutData?.data}
           totalCount={walkoutData?.total_walkout_count || ''}
           sectionInfo={walkoutData?.walkout_info || []}
+          chartData={walkoutData?.session_wise_walkout_percentage || []}
         />
       )}
     </Container>

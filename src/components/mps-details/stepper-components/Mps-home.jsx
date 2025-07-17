@@ -15,7 +15,7 @@ import {
 import MpsHomeChartSection from '../commonfiles/MpsHomeChartSection';
 import { LabeledItem, ProfileSection } from '../commonfiles/HelperComponents';
 import SectionHeading from 'components/common/SectionHeading';
-
+import AdvertiseSection from 'components/addLayout/HorizontalAdvertiseSection';
 
 function MpsHomeComponent({ mpsHome }) {
   // const [isRankLoading, setIsRankLoading] = useState(false);
@@ -39,12 +39,13 @@ function MpsHomeComponent({ mpsHome }) {
   // };
   let mps_Home = {
     overall_performance: mpsHome?.national_percentage,
+    parliament_performance: mpsHome?.national_percentage,
     national_ranking: mpsHome?.national_rank,
     total_mps: 496,
     parliament_stats: [
       {
-        title: 'State Performance',
-        value: mpsHome?.state_percentage,
+        title: 'Netional Ranking',
+        value: mpsHome?.national_rank,
         ranking: 421,
         total: 496,
       },
@@ -57,57 +58,71 @@ function MpsHomeComponent({ mpsHome }) {
     ],
   };
   return (
-    <Container sx={{ padding: { md: '2rem', xs: '1rem' } }}>
-      <MpsHomeChartSection
-        sectionTitle={` ${mpsHome?.name} Parliament Performance`}
-        mpsHome={mps_Home}
-        performanceTitle={'Parliament Performance'}
-      />
-      <MpsHomeChartSection
-        sectionTitle={` ${mpsHome?.name} Constituency Performance`}
-        mpsHome={mps_Home}
-        performanceTitle={'Constituancy Performance'}
-      />
-      <SectionHeading title={`${mpsHome?.name} Profile`} />
-      <ProfileSection isSectionHeading={false} title="Electoral Profile">
-        <Box sx={{ display: 'flex', gap: '3rem', flexWrap: 'wrap' }}>
-          <LabeledItem label="Total Electorate" value="Na" />
-          <LabeledItem label="Total Vote" value="Na" />
-          <LabeledItem label="Winning Margin" value={mpsHome?.winning_margin} />
-          <LabeledItem label="Winning Percentage" value={'Na'} />
-        </Box>
-      </ProfileSection>
-
-      <ProfileSection isSectionHeading={false} title="Parliamentary Profile">
-        <Box sx={{ display: 'flex', gap: '3rem', flexWrap: 'wrap' }}>
-          <LabeledItem label="Term" value={mpsHome?.term_count} />
-          <LabeledItem
-            label="Current Position"
-            value={mpsHome.current_position}
-          />
-          <LabeledItem label="Ministry" value={mpsHome.ministry} />
-        </Box>
-      </ProfileSection>
-      <Box mt={2}>
-        <Typography variant="body2" fontWeight="bold" mb={1}>
-          Member of Parliament Committee
-        </Typography>
-        <div>
-          {' '}
-          <span
-            style={{
-              border: '4px solid red',
-              opacity: '0.6',
-              marginRight: '10px',
-              height: '18px',
-              width: '18px',
-              borderRadius: '50%',
-              display: 'inline-block',
-            }}
-          ></span>
-          {mpsHome?.current_position} - {mpsHome?.ministry}
-        </div>
-        {/* <ul style={{ margin: 0, paddingLeft: '1.2rem' }}>
+    <>
+      <Container sx={{ padding: { md: '2rem', xs: '1rem' } }}>
+        <MpsHomeChartSection
+          sectionTitle={` ${mpsHome?.name} Parliament Performance`}
+          mpsHome={mps_Home}
+          rankingTitle={'Parliament Ranking'}
+          performanceTitle={'Parliament Performance'}
+        />
+      </Container>
+      <AdvertiseSection />
+      <Container sx={{ padding: { md: '2rem', xs: '1rem',  } }}>
+        <MpsHomeChartSection
+          sectionTitle={` ${mpsHome?.name} Constituency Performance`}
+          mpsHome={mps_Home}
+          rankingTitle={'Constituancy Ranking'}
+          performanceTitle={'Constituancy Performance'}
+        />
+      </Container>
+      <AdvertiseSection />
+      <Container sx={{ padding: { md: '2rem', xs: '1rem',  } }}>
+        <SectionHeading bgColor="#FF6B9F" title={`${mpsHome?.name} Profile`} />
+        <ProfileSection isSectionHeading={false} title="Electoral Profile">
+          <Box sx={{ display: 'flex', gap: '3rem', flexWrap: 'wrap' }}>
+            <LabeledItem label="Total Electorate" value="Na" />
+            <LabeledItem label="Total Vote" value="Na" />
+            <LabeledItem
+              label="Winning Margin"
+              value={mpsHome?.winning_margin}
+            />
+            <LabeledItem label="Winning Percentage" value={'Na'} />
+          </Box>
+        </ProfileSection>
+      </Container>
+      <AdvertiseSection />
+      <Container sx={{ padding: { md: '2rem', xs: '1rem',  } }}>
+        <ProfileSection isSectionHeading={false} title="Parliamentary Profile">
+          <Box sx={{ display: 'flex', gap: '3rem', flexWrap: 'wrap' }}>
+            <LabeledItem label="Term" value={mpsHome?.term_count} />
+            <LabeledItem
+              label="Current Position"
+              value={mpsHome.current_position}
+            />
+            <LabeledItem label="Ministry" value={mpsHome.ministry} />
+          </Box>
+        </ProfileSection>
+        <Box mt={2}>
+          <Typography variant="body2" fontWeight="bold" mb={1}>
+            Member of Parliament Committee
+          </Typography>
+          <div>
+            {' '}
+            <span
+              style={{
+                border: '4px solid red',
+                opacity: '0.6',
+                marginRight: '10px',
+                height: '18px',
+                width: '18px',
+                borderRadius: '50%',
+                display: 'inline-block',
+              }}
+            ></span>
+            {mpsHome?.current_position} - {mpsHome?.ministry}
+          </div>
+          {/* <ul style={{ margin: 0, paddingLeft: '1.2rem' }}>
             <li>
               Cabinet Minister - Ministry of Defence Govt of India (25 Apr 2024
               – 24 Mar 2025)
@@ -117,8 +132,8 @@ function MpsHomeComponent({ mpsHome }) {
               – 24 Mar 2025)
             </li>
           </ul> */}
-      </Box>
-      {/* <Box
+        </Box>
+        {/* <Box
         sx={{
           display: 'flex',
           gap: 3,
@@ -181,7 +196,7 @@ function MpsHomeComponent({ mpsHome }) {
           </Button>
         </Box>
       </Box> */}
-      {/* <Box
+        {/* <Box
         sx={{
           display: 'flex',
           overflow: 'auto',
@@ -201,7 +216,7 @@ function MpsHomeComponent({ mpsHome }) {
           );
         })}
       </Box> */}
-      {/* <Box
+        {/* <Box
         sx={{
           display: 'flex',
           overflow: 'auto',
@@ -221,7 +236,8 @@ function MpsHomeComponent({ mpsHome }) {
           );
         })}
       </Box> */}
-    </Container>
+      </Container>
+    </>
   );
 }
 

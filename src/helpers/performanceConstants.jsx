@@ -34,7 +34,7 @@ export const performace_chipList = [
     routeUrl: 'lok-sabha-private-member-bills',
   },
   {
-    title: 'Lok Sabha Adjiurnment',
+    title: 'Lok Sabha Adjournment',
     routeUrl: 'lok-sabha-adjourned',
   },
   {
@@ -517,7 +517,7 @@ export const questionsDetailsData = {
     },
   ],
 };
-export const mpsDataNetionalRank = (mps__data) => {
+export const mpsDataNetionalRank = (mps__data =[]) => {
   const result = [];
   mps__data?.forEach((data) => {
     result.push({
@@ -526,8 +526,10 @@ export const mpsDataNetionalRank = (mps__data) => {
       name: data.name,
       constituency: data.constituency,
       state_name: data.state_name,
+      state_shortName: data.state_short_name,
       performance: data.national_percentage,
       partyName: data.party_short_name,
+      participation: data.participation,
       rankTitle: 'National Rank:',
       image: data.image,
     });
@@ -543,7 +545,9 @@ export const mpsDataStateRank = (mps__data) => {
       name: data.name,
       constituency: data.constituency,
       state_name: data.state_name,
+      state_shortName: data.state_short_name,
       performance: data.state_percentage,
+      participation: data.participation,
       partyName: data.party_short_name,
       rankTitle: 'State Rank:',
       image: data.image,

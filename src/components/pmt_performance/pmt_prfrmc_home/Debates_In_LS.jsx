@@ -311,8 +311,8 @@ function Debates_In_LS({ debateListData, pageData, questionsData, BottomRightChi
               titleText={debateListData?.progressTitle}
               subTiteText={debateListData?.progressSubTitle}
               centerDate={debateListData?.date}
-              percentText={'100.'}
-              subPercentText={'20%'}
+              percentText={`${extractPercentage(pageData?.debate_percentage?.debate_percentage?.toString())?.a}` || '110.'}
+              subPercentText={`${extractPercentage(pageData?.debate_percentage?.debate_percentage?.toString())?.b}` || '20%'}
               width={230}
               height={250}
               innerRadius={98}

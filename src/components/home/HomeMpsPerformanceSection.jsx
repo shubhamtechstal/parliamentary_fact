@@ -13,12 +13,21 @@ function HomeMpsPerformanceSection(props) {
         limit: 20,
       })
     );
+    // dispatch(
+    //   fetchMpsPerformanceData({
+    //     datasets: ['top_performance', 'mp_fund_data'],
+    //     limit: 20,
+    //   })
+    // );
   }, [dispatch]);
-  const {
-    mp_fund_data = [],
-    top_performance = [],
-  } = useSelector((state) => state?.mpsPerformance?.partial || {});
-  // const { mp_fund_data = [], top_performance = [] } = props;
+
+  const { partial } = useSelector((state) => state.mpsPerformance);
+  const mp_fund_data = partial?.mp_fund_data?.default || [];
+  const top_performance = partial?.top_performance?.default || [];
+  // const {
+  //   mp_fund_data = [],
+  //   top_performance = [],
+  // } = useSelector((state) => state?.mpsPerformance?.partial || {});
   return (
     <div>
       <MpsSectionDynamic
@@ -33,8 +42,9 @@ function HomeMpsPerformanceSection(props) {
         title={'MPs Constituency Performance'}
         subTitle={'Top Ranking MPs in Fund Spending'}
         linkTo={'/mps-constituency'}
-        topMinisters_Data={mp_fund_data}
-        topMinisterTitle={'Top Ranking Ministers'}
+        cardCatagory={'Mp LD fund'}
+        // topMinisters_Data={mp_fund_data}
+        // topMinisterTitle={'Top Ranking Ministers'}
       />
       <AdvertiseSection />
 

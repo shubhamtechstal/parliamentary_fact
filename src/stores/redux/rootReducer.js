@@ -9,7 +9,7 @@ import { performanceReducer } from './apiSlices/pmt_PerformanceSlice';
 import { dashboardNewsApiAction, dashboardNewsApiReducer } from './apiSlices/DashboardNewsSlice/dashboardNewsApiSlice';
 import { newsLetterApiAction, newsLetterApiReducer } from './apiSlices/newsLetterApiSlice';
 import { pmtSessionsReducer } from './apiSlices/commonSlice';
-import { mpsPerformanceReducer } from './apiSlices/mps_PerformanceSlice';
+import { mpsPerformanceReducer, populerMpsConstituencyReducer, populerMpsReducer } from './apiSlices/mps_PerformanceSlice';
 import { yourMpsReducer } from './apiSlices/yourMpsSlice';
 
 const rootReducers = combineReducers({
@@ -20,6 +20,8 @@ const rootReducers = combineReducers({
   [newsLetterApiAction.reducerPath]:newsLetterApiReducer,
   pmtPerformance: performanceReducer,
   mpsPerformance: mpsPerformanceReducer,
+  populerMps: populerMpsReducer,
+  constituencyPopulerMps: populerMpsConstituencyReducer,
   pmtSessions :pmtSessionsReducer,
   yourMps: yourMpsReducer,
 });

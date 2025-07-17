@@ -1,10 +1,11 @@
 import { Box, Typography, Container } from '@mui/material';
 import { LabeledItem, ProfileSection } from '../commonfiles/HelperComponents';
 import Divider from 'components/common/Divider';
+import parse from 'html-react-parser';
 
 const MpProfileSection = ({ mp_profile_detail, homeInfo }) => {
   return (
-    <Container sx={{ display: 'flex', flexDirection: 'column', gap: 2, pt: 4 }}>
+    <Container sx={{ display: 'flex', flexDirection: 'column', gap: 2, pt: 4, fontFamily:'"Sora", sans-serif' }}>
       <ProfileSection title="Electoral Profile">
         <Box sx={{ display: 'flex', gap: '3rem', flexWrap: 'wrap' }}>
           <LabeledItem label="Total Electorate" value="Na" />
@@ -121,7 +122,8 @@ const MpProfileSection = ({ mp_profile_detail, homeInfo }) => {
         <Box sx={{ display: 'flex', gap: '3rem', flexWrap: 'wrap' }}>
           <LabeledItem
             label="Educational Qualification"
-            value={mp_profile_detail?.education?.replaceAll("<br/>", ' (') + ( mp_profile_detail?.education?.includes('<br/>') && ' )') ?? 'Na'}
+            value={parse(mp_profile_detail?.education) ?? 'Na'}
+            // value={mp_profile_detail?.education?.replaceAll("<br/>", ' (') + ( mp_profile_detail?.education?.includes('<br/>') && ' )') ?? 'Na'}
           />
           <LabeledItem label="Profession" value="Strategy Consultant" />
         </Box>

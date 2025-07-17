@@ -12,7 +12,7 @@ export const MpsSmallCardsSkeleton = () => {
                 key={i}
                 variant="rounded"
                 sx={{ borderRadius: '20px' }}
-                width={170}
+                // width={170}
                 height={170}
               />
             </Grid>
@@ -75,14 +75,13 @@ export const MpsBigCardsSkeleton = () => {
         .fill({ id: 10 })
         .map((i) => {
           return (
-            <Box>
+            <Grid item xs={12} sm={6} md={4} lg={4} key={i}>
               <Skeleton
                 variant="rounded"
                 sx={{ borderRadius: '20px' }}
-                width={340}
                 height={250}
               />
-            </Box>
+            </Grid>
           );
         })}
     </>

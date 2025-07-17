@@ -74,9 +74,13 @@ const MPsPerformanceContainer = () => {
     }
   }, [searchParams, initialSection]);
 
-  const handleSectionChange = (sectionId) => {
+  const handleSectionChange = (sectionId, shortBy) => {
     setActiveSection(sectionId);
-    setSearchParams({ section: sectionId });
+    if (shortBy) {
+      setSearchParams({ section: sectionId, shortBy });
+    } else {
+      setSearchParams({ section: sectionId });
+    }
   };
 
   const handleBack = () => {
@@ -91,6 +95,7 @@ const MPsPerformanceContainer = () => {
         <MpsListComponent
           datasetsKey={'popular_mps'}
           handleBack={handleBack}
+          filterParams={filterParams}
           handleOpenSharePopup={handleOpenSharePopup}
           pageTitle={'Populer Mps Performance'}
         />
@@ -102,6 +107,7 @@ const MPsPerformanceContainer = () => {
         <MpsListComponent
           datasetsKey={'top_performance'}
           handleBack={handleBack}
+          filterParams={filterParams}
           handleOpenSharePopup={handleOpenSharePopup}
           pageTitle={'Top performer Mps Rating and Ranking'}
           // onFilterClick={onFilterClick}
@@ -114,6 +120,7 @@ const MPsPerformanceContainer = () => {
         <MpsListComponent
           datasetsKey={'attendance_data'}
           handleBack={handleBack}
+          filterParams={filterParams}
           handleOpenSharePopup={handleOpenSharePopup}
           pageTitle={'MPs Performance In Attendance'}
           cardName={'Attendance'}
@@ -127,6 +134,7 @@ const MPsPerformanceContainer = () => {
         <MpsListComponent
           datasetsKey={'question_data'}
           handleBack={handleBack}
+          filterParams={filterParams}
           handleOpenSharePopup={handleOpenSharePopup}
           pageTitle={'MPs Performance In Questions'}
           cardName={'Questions'}
@@ -140,6 +148,7 @@ const MPsPerformanceContainer = () => {
         <MpsListComponent
           datasetsKey={'mp_debate_data'}
           handleBack={handleBack}
+          filterParams={filterParams}
           handleOpenSharePopup={handleOpenSharePopup}
           pageTitle={'MPs Performance In Debates'}
           cardName={'Private Member Bill'}
@@ -153,6 +162,7 @@ const MPsPerformanceContainer = () => {
         <MpsListComponent
           datasetsKey={'private_bill_data'}
           handleBack={handleBack}
+          filterParams={filterParams}
           handleOpenSharePopup={handleOpenSharePopup}
           pageTitle={'MPs Performance In Private Member Bill'}
           cardName={'Private Member Bill'}
@@ -179,33 +189,35 @@ const MPsPerformanceContainer = () => {
           </Box>
         </Container>
       )}
-      {activeSection ? (
-        sectionsComponets.find((s) => s.id === activeSection)?.component
-      ) : 
-        <MpsPerformancePageComponent
-          handleDetailsClick={handleSectionChange}
-          handleOpenSharePopup={handleOpenSharePopup}
-          // mps_attendance_data={attendance_data}
-          // top_performance={top_performance}
-          // popular_mps={popular_mps}
-          // mp_debate_data={mp_debate_data}
-          // mp_fund_data={mp_fund_data}
-          // private_bill_data={private_bill_data}
-          // question_data={question_data}
-        />
-      // ) : (
-      //   <Box
-      //     sx={{
-      //       height: '100vh',
-      //       width: '100%',
-      //       display: 'flex',
-      //       justifyContent: 'center',
-      //       alignItems: 'center',
-      //     }}
-      //   >
-      //     <CircularProgress />
-      //   </Box>
-      // )
+      {
+        activeSection ? (
+          sectionsComponets.find((s) => s.id === activeSection)?.component
+        ) : (
+          <MpsPerformancePageComponent
+            handleDetailsClick={handleSectionChange}
+            handleOpenSharePopup={handleOpenSharePopup}
+            // mps_attendance_data={attendance_data}
+            // top_performance={top_performance}
+            // popular_mps={popular_mps}
+            // mp_debate_data={mp_debate_data}
+            // mp_fund_data={mp_fund_data}
+            // private_bill_data={private_bill_data}
+            // question_data={question_data}
+          />
+        )
+        // ) : (
+        //   <Box
+        //     sx={{
+        //       height: '100vh',
+        //       width: '100%',
+        //       display: 'flex',
+        //       justifyContent: 'center',
+        //       alignItems: 'center',
+        //     }}
+        //   >
+        //     <CircularProgress />
+        //   </Box>
+        // )
       }
 
       <ShareModal

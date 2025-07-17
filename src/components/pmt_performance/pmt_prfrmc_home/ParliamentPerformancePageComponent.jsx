@@ -157,6 +157,7 @@ function ParliamentPerformancePageComponent(props) {
     if (scrollRef.current)
       scrollRef.current.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
+  console.log('pageDatapageData', pageData?.session_wise_attendance_percentage)
   return loading ? (
     <Box
       sx={{
@@ -199,6 +200,7 @@ function ParliamentPerformancePageComponent(props) {
               titleHeadign={'Lok Sabha Attendance'}
               BottomRightChip={BottomRightChip}
               className="performanceSection"
+              chartData = {pageData?.session_wise_attendance_percentage}
             />
           </div>
           <AdvertiseSection />
@@ -210,6 +212,7 @@ function ParliamentPerformancePageComponent(props) {
               BottomRightChip={BottomRightChip}
               sectionDetailName={'lok-sabha-question'}
               chipLabal={'MPs Participation in Lok Sabha Questions'}
+              chartData={pageData?.session_wise_question_percentage}
             />
           </div>
           <AdvertiseSection />
@@ -236,6 +239,7 @@ function ParliamentPerformancePageComponent(props) {
               titleHeadign={'Lok Sabha Pvt. Member Bill'}
               className="performanceSection"
               meterTitleText={"Pvt. Member Bill"}
+              chartData={pageData?.session_wise_private_bill_status}
             />
           </div>
           <AdvertiseSection />

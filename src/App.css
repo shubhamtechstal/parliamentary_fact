@@ -84,7 +84,7 @@ input:focus-visible {
 }
 a {
   text-decoration: none;
-  color: inherit;
+  color: black;
 }
 @media (min-width: 1300px) and (max-width: 1400px) {
   /* .performanceSection {

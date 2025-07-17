@@ -20,12 +20,11 @@ const stapperTitles = [
   { id: 'lok-sabha-questions-topics', title: 'Lok Sabha Question Topics' },
 ];
 
-  
 const LokSabhaQuestionContainer = ({ question }) => {
   const [searchParams, setSearchParams] = useSearchParams({
     section: 'mps-participation-in-question',
   });
-  const [filterParams, setFilterParams] = useState({});
+  // const [filterParams, setFilterParams] = useState({});
   // useEffect(() => {
   //   const section = searchParams.get('section');
   //   if (section) {
@@ -39,33 +38,54 @@ const LokSabhaQuestionContainer = ({ question }) => {
   const sectionComponets = [
     {
       id: 'questions-list',
-      component: (
-        <QuestionsDetail_Component
-          filterParams={filterParams}
-        />
-      ),
+      component: <QuestionsDetail_Component />,
     },
     {
       id: 'mps-participation-in-question',
-      component: (
-        <MpsParticipationinQuestions/>
-      ),
+      component: <MpsParticipationinQuestions />,
     },
     {
       id: 'lok-sabha-question-to-ministery',
       component: (
-        <LokSabhaQuestionToMinistery agendaList={[]}/>
+        <>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              minHeight: '40vh',
+            }}
+          >
+            <h1> Coming Soon </h1>
+          </div>
+          {/* Commenting this becouse api is pending for this section */}
+          {/* <LokSabhaQuestionToMinistery agendaList={[]} />), */}
+        </>
       ),
     },
     {
       id: 'lok-sabha-questions-topics',
       component: (
-        <LokSabhaQuestionTopics />
+        <>
+          {' '}
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              minHeight: '40vh',
+            }}
+          >
+            <h1> Coming Soon </h1>
+          </div>
+          {/* Commenting this becouse api is pending for this section */}
+          {/* <LokSabhaQuestionTopics /> */}
+        </>
       ),
     },
   ];
   return (
-    <Box  minHeight={'80vh'}>
+    <Box minHeight={'80vh'}>
       <Container
         sx={{
           margin: 'auto',

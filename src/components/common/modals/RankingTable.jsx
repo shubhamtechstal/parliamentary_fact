@@ -52,7 +52,7 @@ const rankingSkelaton = () => {
           </Box>
 
           {/* MP Name */}
-          <Box sx={{ display: 'flex', alignItems: 'center', gap:2 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
             <Skeleton height={50} width={50} variant="circular" />
             <Skeleton height={20} width={90} variant="text" />
           </Box>
@@ -81,6 +81,7 @@ const RankingTable = ({
   isLoading,
   loadMoreMpsData,
   handleOpenSharePopup,
+  pageTitle,
 }) => {
   return (
     <TableContainer>
@@ -92,7 +93,7 @@ const RankingTable = ({
                 sx={{
                   display: 'grid',
                   gridTemplateColumns:
-                    '2fr 2fr 2fr 1.5fr 1fr 1.5fr 1.5fr 1.5fr 0.5fr',
+                    '2fr 2fr 1fr 1.5fr 1fr 1.5fr 1.5fr 1.5fr 0.5fr',
                   gap: 2,
                   color: '#455A64',
                   fontWeight: 'bold',
@@ -106,7 +107,13 @@ const RankingTable = ({
                 <div>Constituency</div>
                 <div>State</div>
                 <div>Performance</div>
-                <div>Presence</div>
+                {pageTitle?.includes('Top performer') ||
+                pageTitle?.includes('Populer ') ? (
+                  <span></span>
+                ) : (
+                  <div>Participation</div>
+                )}
+                {/* <div>Presence</div> */}
                 <div>Sharing</div>
                 <div>More</div>
               </Box>
@@ -129,7 +136,7 @@ const RankingTable = ({
                       sx={{
                         display: 'grid',
                         gridTemplateColumns:
-                          '1fr 2fr 2fr 1fr 1fr 1fr 1fr 1.5fr 0.5fr',
+                          '1fr 2fr 1fr 1fr 1fr 1fr 1fr 1.5fr 0.5fr',
                         gap: 2,
                         alignItems: 'center',
                         backgroundColor: '#fff',
@@ -138,7 +145,7 @@ const RankingTable = ({
                         boxShadow: '0 2px 6px rgba(0,0,0,0.05)',
                         fontSize: '0.8rem',
                         px: 2,
-                        fontSize:'0.7rem'
+                        fontSize: '0.7rem',
                       }}
                     >
                       {/* Ranking */}
@@ -168,7 +175,14 @@ const RankingTable = ({
                       </Box>
 
                       {/* MP Name */}
-                      <Link to={`/mps-details/${row?.name.replaceAll(' ', '-')?.toLowerCase()}_${row?.mp_id}`} style={{ display: 'flex', alignItems: 'center' }}>
+                      <Link
+                        to={`/mps-details/${row?.name.replaceAll(' ', '-')?.toLowerCase()}_${row?.mp_id}`}
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          width: '200px',
+                        }}
+                      >
                         <Avatar
                           src={row.image}
                           sx={{ width: 50, height: 50, marginRight: 2 }}
@@ -223,7 +237,7 @@ const RankingTable = ({
                       <Box>{row.constituency}</Box>
 
                       {/* State */}
-                      <Box>{row.state}</Box>
+                      <Box>{row.state_shortName}</Box>
 
                       {/* Performance */}
                       <Box sx={{ color: '#e7a917', fontSize: '1rem' }}>
@@ -234,12 +248,22 @@ const RankingTable = ({
                       </Box>
 
                       {/* Presence */}
-                      <Box sx={{ whiteSpace: 'nowrap' }}>
-                        <span style={{ fontSize: '1.5rem' }}>
-                          {row.presence}
-                        </span>{' '}
-                        Days
-                      </Box>
+                      {pageTitle?.includes('Top performer') ||
+                      pageTitle?.includes('Populer ') ? (
+                        <span></span>
+                      ) : (
+                        <Box sx={{ whiteSpace: 'nowrap' }}>
+                          <span
+                            style={{
+                              fontSize: '1.5rem',
+                              fontFamily: '"Sora", sans-serif',
+                            }}
+                          >
+                            {row?.participation}
+                          </span>{' '}
+                          {pageTitle?.includes('Attendance') ? 'Days' : pageTitle?.includes('Private Member Bill') ? 'Bills' : pageTitle?.includes('Debates') ? 'Debates' : pageTitle?.includes('Questions') ? 'Qn' :  ''}
+                        </Box>
+                      )}
 
                       {/* Share Button */}
                       <Box>

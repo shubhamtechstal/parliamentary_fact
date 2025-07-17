@@ -1,6 +1,8 @@
 import { Box, Typography } from '@mui/material';
+import ProgressMeter from 'components/common/ProgressMeter';
 import SectionHeading from 'components/common/SectionHeading';
-const HalfCircleProgress = ({value, boxHeight, isMobile }) => {
+import { extractPercentage } from 'helpers/utills/utilityFunctions';
+const HalfCircleProgress = ({ value, boxHeight, isMobile }) => {
   const arcStyles = [
     { value: 90, color: '#FF6B9F' },
     { value: 90, color: '#FF6B9F' },
@@ -187,9 +189,15 @@ const StatBlock = ({ stat }) => (
   </Box>
 );
 
-function MpsHomeChartSection({ mpsHome, performanceTitle, sectionTitle }) {
+function MpsHomeChartSection({
+  mpsHome,
+  rankingTitle,
+  performanceTitle,
+  sectionTitle,
+}) {
   const {
     overall_performance = '0.0%',
+    parliament_performance = '0.0%',
     national_ranking = 0,
     total_mps = 0,
     parliament_stats = [],
@@ -197,7 +205,7 @@ function MpsHomeChartSection({ mpsHome, performanceTitle, sectionTitle }) {
 
   return (
     <div>
-      <SectionHeading title={sectionTitle ?? ''} />
+      <SectionHeading bgColor='#FF6B9F' title={sectionTitle ?? ''} />
       {/* Mobile view */}
       <Box
         sx={{
@@ -221,16 +229,18 @@ function MpsHomeChartSection({ mpsHome, performanceTitle, sectionTitle }) {
             }}
           >
             <Typography sx={{ fontSize: '13px' }}>
-              Overall Performance
+              {performanceTitle}
             </Typography>
             <Typography
               sx={{ fontWeight: 600, fontSize: '2rem', color: '#FF6B9F' }}
             >
               {overall_performance}%
             </Typography>
-            <Typography sx={{ fontSize: '13px' }}>National Ranking</Typography>
+            <Typography sx={{ fontSize: '13px' }}>
+              National Performance
+            </Typography>
             <Typography sx={{ fontWeight: 600, fontSize: '18px', mt: 1 }}>
-              {national_ranking}
+              {parliament_performance}
             </Typography>
             <Typography sx={{ fontSize: '13px' }}>
               {total_mps} Out of {total_mps}
@@ -272,8 +282,37 @@ function MpsHomeChartSection({ mpsHome, performanceTitle, sectionTitle }) {
         }}
       >
         <Box position={'relative'}>
-          <HalfCircleProgress value={overall_performance} isMobile={false} />
+          {/* <HalfCircleProgress value={overall_performance} isMobile={false} /> */}
           <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              minWidth: '300px',
+            }}
+          >
+            <ProgressMeter
+              titleText={'Overall Performance'}
+              // subTiteText={`LOK SABHA`}
+              centerDate={'Till Now'}
+              value={Number(`${overall_performance}`?.replaceAll('%', ''))}
+              percentText={`${extractPercentage(overall_performance?.toString())?.a}`}
+              subPercentText={`${extractPercentage(overall_performance?.toString())?.b}`}
+              // percentText={'100.'}
+              // subPercentText={'20%'}
+              width={230}
+              height={250}
+              innerRadius={98}
+              percentNumFontSize={'2.5rem'}
+              percent_x="42%"
+              percent_y="55%"
+              dotPercentFontSize={'1.5rem'}
+              dotPercent_x="68%"
+              dotPercent_y="57%"
+              chartColor ='#FF6B9F'
+            />
+          </Box>
+          {/* <Box
             sx={{
               position: 'absolute',
               left: '50%',
@@ -289,19 +328,17 @@ function MpsHomeChartSection({ mpsHome, performanceTitle, sectionTitle }) {
               {overall_performance}%
             </Typography>
             <Typography sx={{ fontSize: '18px' }}>
-              Overall Performance
+              {performanceTitle}
             </Typography>
-          </Box>
+          </Box> */}
         </Box>
 
         <Box>
           <Box sx={{ display: 'flex', gap: 5 }}>
-            <Typography sx={{ fontSize: '18px', width: '200px' }}>
-              Overall Performance
-            </Typography>
-            <Typography sx={{ fontSize: '18px' }}>
+            <Typography sx={{ fontSize: '18px', width: '250px' }}>
               {performanceTitle}
             </Typography>
+            <Typography sx={{ fontSize: '18px' }}>{rankingTitle}</Typography>
           </Box>
           <Box sx={{ display: 'flex', gap: 5 }}>
             <Box width={200}>
@@ -310,7 +347,9 @@ function MpsHomeChartSection({ mpsHome, performanceTitle, sectionTitle }) {
               >
                 {overall_performance}
               </Typography>
-              <Typography sx={{ fontSize: '12px' }}>National Ranking</Typography>
+              <Typography sx={{ fontSize: '12px' }}>
+                National Ranking
+              </Typography>
               <Typography sx={{ fontWeight: 600, fontSize: '22px', mt: 1 }}>
                 {national_ranking}
               </Typography>
@@ -327,12 +366,12 @@ function MpsHomeChartSection({ mpsHome, performanceTitle, sectionTitle }) {
                   sx={{
                     borderBottom: '1px solid gray',
                     display: 'flex',
-                    alignItems:'center',
+                    alignItems: 'center',
                     gap: 3,
                     pb: 1,
                     mb: 1,
                     width: 150,
-                    minHeight:50
+                    minHeight: 50,
                   }}
                 >
                   <Typography
@@ -353,6 +392,5 @@ function MpsHomeChartSection({ mpsHome, performanceTitle, sectionTitle }) {
     </div>
   );
 }
-
 
 export default MpsHomeChartSection;

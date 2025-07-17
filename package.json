@@ -31,7 +31,7 @@
     "@reduxjs/toolkit": "^2.0.1",
     "axios": "^1.6.2",
     "date-fns": "^4.1.0",
-    "html-react-parser": "^5.1.10",
+    "html-react-parser": "^5.2.5",
     "localforage": "^1.10.0",
     "lodash.get": "^4.4.2",
     "match-sorter": "^6.3.1",

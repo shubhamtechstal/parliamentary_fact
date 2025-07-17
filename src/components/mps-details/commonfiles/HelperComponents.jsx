@@ -7,7 +7,7 @@ export const ProfileSection = ({
   title,
   children,
 }) => (
-  <Box>
+  <Box sx={{ fontFamily:'"Sora", sans-serif' }}>
     {isSectionHeading ? (
       <SectionHeading fontSize={'1.2rem'} title={title} />
     ) : (
@@ -19,11 +19,11 @@ export const ProfileSection = ({
 );
 
 export const LabeledItem = ({ label, value }) => (
-  <Box>
-    <Typography variant="body2" sx={{ color: '#555', fontSize: '0.9rem', mb:1}}>
+  <Box sx={{ fontFamily:'"Sora", sans-serif' }}>
+    <Typography variant="body2" sx={{ color: '#555', fontSize: '0.9rem', mb:1,  fontFamily:'"Sora", sans-serif' }}>
       {label}
     </Typography>
-    <Typography variant="body2" fontWeight="bold" fontSize={'1.2rem'}>
+    <Typography variant="body2" sx={{ fontFamily:'"Sora", sans-serif', fontWeight:'bold', fontSize: '1.2rem'}}>
       {value}
     </Typography>
   </Box>

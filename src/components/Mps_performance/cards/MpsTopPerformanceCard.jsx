@@ -3,7 +3,7 @@ import { Gauge, gaugeClasses } from '@mui/x-charts';
 import IconButton from 'components/common/IconButton';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { Link } from 'react-router-dom';
-
+import parse from 'html-react-parser';
 function AttandanceSkeletonCard(index) {
   return (
     <Grid item xs={12} sm={6} md={4} lg={4} key={index}>
@@ -179,11 +179,14 @@ function MpsTopPerformanceCard({
                         alignItems: 'center',
                       }}
                     >
-                      <h2 style={{ fontSize: '1rem', margin: '0 0' }}>
+                      <h2 style={{ fontSize: '0.8rem', margin: '0 0' }}>
                         {mp.rankTitle}{' '}
                       </h2>
                       <IconButton
-                        onClick={() => handleOpenSharePopup()}
+                        onClick={(e)=>{
+                          e.stopPropagation();
+                           handleOpenSharePopup(mp)
+                          }}
                         sx={{ position: 'absolute', right: 0, top: 0 }}
                       >
                         <MoreVertIcon />
@@ -205,7 +208,7 @@ function MpsTopPerformanceCard({
               </Box>
               <h3
                 style={{
-                  fontSize: '1rem',
+                  fontSize: '0.8rem',
                   width: '80%',
                   margin: '0.5rem 0 0 0',
                   lineHeight: '1.3',

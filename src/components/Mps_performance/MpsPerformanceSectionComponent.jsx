@@ -23,7 +23,7 @@ export default function MpsPerformanceInAttandance({
   detailsPage,
 }) {
   const [isRankLoading, setIsRankLoading] = useState(false);
-
+console.log('activeSection', activeSection)
   useEffect(() => {
     setIsRankLoading(true);
     setTimeout(() => {
@@ -130,7 +130,7 @@ export default function MpsPerformanceInAttandance({
         )}
       </Grid>
       <Box textAlign={{ xs: 'center', md: 'right' }} mt={3} mr={1}>
-        <GrayButton onClick={() => handleDetailsClick(detailsPage)}>
+        <GrayButton onClick={() => handleDetailsClick(detailsPage, activeSection)}>
           Load More
         </GrayButton>
       </Box>

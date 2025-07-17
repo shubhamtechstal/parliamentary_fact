@@ -2,7 +2,7 @@ import Box from './Box';
 import { GaugeContainer, GaugeReferenceArc, GaugeValueArc } from '@mui/x-charts';
 
 export default function ProgressMeter(props) {
-  const { width, height, innerRadius, value, percentText, subPercentText, centerDate, titleText, isMultiSubtitle, subTiteText,percentNumFontSize, percent_x, percent_y, dotPercentFontSize, dotPercent_x, dotPercent_y } = props;
+  const { width, height, chartColor, innerRadius, value, percentText, subPercentText, centerDate, titleText, isMultiSubtitle, subTiteText,percentNumFontSize, percent_x, percent_y, dotPercentFontSize, dotPercent_x, dotPercent_y } = props;
   return (
     <Box
       sx={{
@@ -20,14 +20,14 @@ export default function ProgressMeter(props) {
       >
         <GaugeReferenceArc style={{ fill: '#DCDCDC' }} />{' '}
         {/* Set the color here */}
-        <GaugeValueArc style={{ fill: '#FF936F' }} /> {/* Set the color here */}
+        <GaugeValueArc style={{ fill: chartColor || '#FF936F' }} /> {/* Set the color here */}
         <text
           x={percent_x ||"50%"}
           y={percent_y ||"55%"}
           textAnchor="middle"
           dominantBaseline="middle"
           style={{
-            fill: '#FF936F',
+            fill: chartColor || '#FF936F',
             fontSize: percentNumFontSize || '1.5rem',
             fontWeight: '800',
             fontFamily: '"Sora", sans-serif',
@@ -41,7 +41,7 @@ export default function ProgressMeter(props) {
           textAnchor="middle"
           dominantBaseline="middle"
           style={{
-            fill: '#FF936F',
+            fill: chartColor || '#FF936F',
             fontSize: dotPercentFontSize|| '1rem',
             fontWeight: '400',
             fontFamily: '"Sora", sans-serif',

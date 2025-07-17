@@ -369,7 +369,7 @@ export default function Header({
               <Link
                 style={{
                   textDecoration: 'none',
-                  color: isActive ? '#F44336' : 'inherit',
+                  color: isActive ? '#F44336' : 'black',
                   borderBottom: isActive
                     ? '4px solid rgb(241, 128, 124)'
                     : 'none',

@@ -51,13 +51,7 @@ const questionSkeleton = () => {
     </Box>
   );
 };
-function QuestionsDetail_Component(
-  {
-    // questionDetails=[],
-    // filterParams,
-    // isLoading,
-  }
-) {
+function QuestionsDetail_Component() {
   const [filterParams, setFilterParams] = useState({});
   const [expandedItems, setExpandedItems] = useState({});
   const [loadMoreQuestions, setloadMoreQuestions] = useState(10);
