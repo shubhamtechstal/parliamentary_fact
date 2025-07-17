@@ -187,9 +187,10 @@ const StatBlock = ({ stat }) => (
   </Box>
 );
 
-function MpsHomeChartSection({ mpsHome, performanceTitle, sectionTitle }) {
+function MpsHomeChartSection({ mpsHome, rankingTitle, performanceTitle, sectionTitle }) {
   const {
     overall_performance = '0.0%',
+    parliament_performance = '0.0%',
     national_ranking = 0,
     total_mps = 0,
     parliament_stats = [],
@@ -221,16 +222,16 @@ function MpsHomeChartSection({ mpsHome, performanceTitle, sectionTitle }) {
             }}
           >
             <Typography sx={{ fontSize: '13px' }}>
-              Overall Performance
+              {performanceTitle}
             </Typography>
             <Typography
               sx={{ fontWeight: 600, fontSize: '2rem', color: '#FF6B9F' }}
             >
               {overall_performance}%
             </Typography>
-            <Typography sx={{ fontSize: '13px' }}>National Ranking</Typography>
+            <Typography sx={{ fontSize: '13px' }}>National Performance</Typography>
             <Typography sx={{ fontWeight: 600, fontSize: '18px', mt: 1 }}>
-              {national_ranking}
+              {parliament_performance}
             </Typography>
             <Typography sx={{ fontSize: '13px' }}>
               {total_mps} Out of {total_mps}
@@ -289,18 +290,18 @@ function MpsHomeChartSection({ mpsHome, performanceTitle, sectionTitle }) {
               {overall_performance}%
             </Typography>
             <Typography sx={{ fontSize: '18px' }}>
-              Overall Performance
+              {performanceTitle}
             </Typography>
           </Box>
         </Box>
 
         <Box>
           <Box sx={{ display: 'flex', gap: 5 }}>
-            <Typography sx={{ fontSize: '18px', width: '200px' }}>
-              Overall Performance
+            <Typography sx={{ fontSize: '18px', width: '250px' }}>
+              {performanceTitle}
             </Typography>
             <Typography sx={{ fontSize: '18px' }}>
-              {performanceTitle}
+              {rankingTitle}
             </Typography>
           </Box>
           <Box sx={{ display: 'flex', gap: 5 }}>

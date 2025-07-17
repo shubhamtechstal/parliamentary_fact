@@ -23,8 +23,10 @@ const PartyWiseMpsList = ({ mpsList, loading, error, MemberCard }) => {
   const groupedMps = groupMpsByParty(mpsList);
 
   return (
-    <Box p={3}>
-      <h1>Trending MPs (Party Wise)</h1>
+    <Box >
+      <Typography variant="h6" sx={{ fontWeight: 600, mb: 3, mt: 2 }}>
+        Trending MPs (Party Wise)
+      </Typography>
 
       {Object.entries(groupedMps).map(([party, mps]) => (
         <Box key={party} mb={5}>

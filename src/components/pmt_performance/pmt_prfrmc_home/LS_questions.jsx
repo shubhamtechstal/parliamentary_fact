@@ -1,9 +1,10 @@
 import { Box, Grid } from '@mui/material';
+import MUIBarChart from 'components/common/charts/MUIBarChart';
 import GrayDot from 'components/common/GrayDot';
 import ProgressMeter from 'components/common/ProgressMeter';
 import SectionHeading from 'components/common/SectionHeading';
 import Text from 'components/common/Text';
-import LineCharts from 'components/LineCharts';
+// import LineCharts from 'components/LineCharts';
 import {
   getDateInMonthNameFormate,
   extractPercentage,
@@ -21,11 +22,11 @@ const QuestionTextGroup = ({ title, value, date, index }) => {
           ? 'none'
           : '2px solid #E0E0E0',
         padding: '1rem',
-        width: [6,8].includes(index) ? '40%' : '30%',
+        width: [6, 8].includes(index) ? '40%' : '30%',
         maxWidth: '21rem',
       }}
     >
-      {[3,4,5,8,9].includes(index) ? (
+      {[3, 4, 5, 8, 9].includes(index) ? (
         <GrayDot icon_url={'/Assets/icons/small_arrow_Down.png'} />
       ) : (
         <GrayDot icon_url={'/Assets/icons/small_arrow_Up.png'} />
@@ -52,7 +53,8 @@ const QuestionTextGroup = ({ title, value, date, index }) => {
                 sx={{
                   fontSize: '1rem',
                   fontWeight: 600,
-                  lineHeight: 1, textTransform:"uppercase",
+                  lineHeight: 1,
+                  textTransform: 'uppercase',
                 }}
                 text={getDateInMonthNameFormate(date)}
               />
@@ -70,7 +72,8 @@ const QuestionTextGroup = ({ title, value, date, index }) => {
                 sx={{
                   fontSize: '1rem',
                   fontWeight: 600,
-                  lineHeight: 1, textTransform:"uppercase",
+                  lineHeight: 1,
+                  textTransform: 'uppercase',
                 }}
                 text={value}
               />
@@ -95,12 +98,14 @@ function LS_QuestionsComponent({
   questionsData,
   BottomRightChip,
   sectionDetailName,
-  chipLabal
+  chipLabal,
+  chartData,
 }) {
   return (
     <>
       {/* **********Mobile********** */}
-      <Box className="performanceSection"
+      <Box
+        className="performanceSection"
         sx={{
           position: 'relative',
           display: { xs: 'flex', md: 'none' },
@@ -138,8 +143,8 @@ function LS_QuestionsComponent({
             display: 'flex',
             flexDirection: 'row',
             flexWrap: 'wrap',
-            justifyContent:'center',
-            gap:"2rem 2%"
+            justifyContent: 'center',
+            gap: '2rem 2%',
           }}
         >
           {questionsData?.slice(0, 6).map((item, index) => (
@@ -165,7 +170,7 @@ function LS_QuestionsComponent({
                 />
                 <Box
                   sx={{
-                     display: 'flex',
+                    display: 'flex',
                     gap: '5px',
                     alignItems: 'center',
                     marginTop: '0.3rem',
@@ -246,7 +251,8 @@ function LS_QuestionsComponent({
         </Box>
 
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-          <LineCharts width={350} data={[10, 4, 6, 5, 14, 14, 15]} labels={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul']}/>
+          <MUIBarChart data={chartData} barName={'Questions %'} width={300} />
+          {/* <LineCharts width={350} data={lineChartData} labels={lineChartLabels}/> */}
         </Box>
         {BottomRightChip && (
           <Box sx={{ position: 'relative', bottom: '1rem' }}>
@@ -325,10 +331,11 @@ function LS_QuestionsComponent({
         <Box
           sx={{ display: 'flex', justifyContent: 'center', marginTop: '-2rem' }}
         >
-          <LineCharts  
-            data={[10, 4, 6, 5, 14, 14, 15]}
-            labels={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul']}
-            width={540} />
+          <MUIBarChart data={chartData} barName={'Questions'} width={540} />
+          {/* <LineCharts  
+            data={lineChartData}
+            labels={lineChartLabels}
+            width={540} /> */}
         </Box>
         {BottomRightChip && (
           <Box sx={{ position: 'absolute', right: '2rem', bottom: '15%' }}>

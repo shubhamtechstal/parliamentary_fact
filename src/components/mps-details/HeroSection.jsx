@@ -6,7 +6,7 @@ const CardsScroll = (list = []) => {
   return (
     <Box
       sx={{
-        gap: '1rem',
+        gap: '0.8rem',
         overflow: 'auto',
         width: '100%',
         display: 'flex',
@@ -28,8 +28,8 @@ const CardsScroll = (list = []) => {
               textWrap: 'nowrap',
             }}
           >
-            <p style={{ margin: '0 0' }}>{item.title}</p>
-            <h3 style={{ margin: '0 0' }}>{item.value}</h3>
+            <p style={{ margin: '0 0', fontSize:'0.9rem' }}>{item.title}</p>
+            <h3 style={{ margin: '0 0',  fontSize:'1.2rem'}}>{item.value}</h3>
           </Box>
         );
       })}
@@ -154,7 +154,7 @@ export default function PerformanceUI({ mpBasicInfo }) {
               </p>
               <span>
                 {' '}
-                Star <br /> MP{' '}
+                 Rank's <br /> MP{' '}
               </span>
             </Box>
           </Box>

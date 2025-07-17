@@ -194,6 +194,8 @@ export default function ParticipationUiComponent({
           }
           titleHeadign={`Lok Sabha ${pageName}`}
           meterTitleText ={pageName}
+          // need to pass chart data but it's not available in the current state
+          chartData = {[]}
         />
 
         {/* State Wise Section */}

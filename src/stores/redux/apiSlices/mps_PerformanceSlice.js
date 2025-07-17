@@ -10,10 +10,46 @@ export const fetchMpsPerformanceData = createAsyncThunk(
 
       const url = `https://parliamentryfact.revanshrenewable.com/API/mps_performance_data.php?${params.toString()}`;
       const response = await fetch(url);
-      if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+      if (!response.ok)
+        throw new Error(`HTTP error! Status: ${response.status}`);
 
       const result = await response.json();
       return { data: result, datasets }; // ensure datasets is always returned
+    } catch (err) {
+      return rejectWithValue(err.message);
+    }
+  }
+);
+
+export const fetchPopulerMpsData = createAsyncThunk(
+  'populerMpsPerformance/fetchData',
+  async (param, { rejectWithValue }) => {
+    try {
+      const url = `http://parliamentryfact.revanshrenewable.com/API/popular_mps.php`;
+      const response = await fetch(url);
+      if (!response.ok)
+        throw new Error(`HTTP error! Status: ${response.status}`);
+
+      const result = await response.json();
+      return { data: result }; // ensure datasets is always returned
+    } catch (err) {
+      return rejectWithValue(err.message);
+    }
+  }
+);
+
+export const fetchConstituencyPopulerMps = createAsyncThunk(
+  'constituencyPopulerMps/fetchData',
+  async (param, { rejectWithValue }) => {
+    try {
+      const url = `http://parliamentryfact.revanshrenewable.com/API/popular_mps_constituency_performance.php`;
+      const response = await fetch(url);
+      if (!response.ok)
+        throw new Error(`HTTP error! Status: ${response.status}`);
+
+      const result = await response.json();
+      console.log('constituency_popular_mps result', result)
+      return { data: result }; // ensure datasets is always returned
     } catch (err) {
       return rejectWithValue(err.message);
     }
@@ -41,7 +77,7 @@ const mpsPerformanceSlice = createSlice({
       question_data: [],
       top_performance: [],
       popular_mps: [],
-    }
+    },
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -53,7 +89,7 @@ const mpsPerformanceSlice = createSlice({
       .addCase(fetchMpsPerformanceData.fulfilled, (state, action) => {
         state.loading = false;
         const { datasets = [], data } = action.payload;
-      
+
         // If no datasets, update all top-level state (full page load)
         if (datasets.length === 0) {
           state.attendance_data = data.attendance_data ?? [];
@@ -76,7 +112,7 @@ const mpsPerformanceSlice = createSlice({
           }
         }
       })
-      
+
       .addCase(fetchMpsPerformanceData.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
@@ -84,7 +120,64 @@ const mpsPerformanceSlice = createSlice({
   },
 });
 
+
+const populerMpsSlice = createSlice({
+  name: 'PopulerMpsData',
+  initialState: {
+    popular_mps: [],
+    isLoading: false,
+    isError: null,
+  },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchPopulerMpsData.pending, (state) => {
+        state.isLoading = true;
+        state.isError = null;
+      })
+      .addCase(fetchPopulerMpsData.fulfilled, (state, action) => {
+        state.isError = false;
+        state.popular_mps = action.payload.data.popular_mps ?? [];
+        state.isLoading = false;
+      })
+
+      .addCase(fetchPopulerMpsData.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = action.payload;
+      });
+  },
+});
+
+const populerMpsConstituencySlice = createSlice({
+  name: 'mpsConstituencyPerformance',
+  initialState: {
+    constituency_popular_mps: [],
+    populerMpsLoading: false,
+    populerMpsError: null,
+  },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchConstituencyPopulerMps.pending, (state) => {
+        state.populerMpsLoading = true;
+        state.populerMpsError = null;
+      })
+      .addCase(fetchConstituencyPopulerMps.fulfilled, (state, action) => {
+        state.populerMpsError = false;
+        state.constituency_popular_mps = action.payload.data?.constituency_popular_mps ?? [];
+        state.populerMpsLoading = false;
+        // state.mp_fund_data = data.mp_fund_data ?? [];
+      })
+      .addCase(fetchConstituencyPopulerMps.rejected, (state, action) => {
+        state.populerMpsLoading = false;
+        state.populerMpsError = action.payload;
+      });
+  },
+});
+
 export const mpsPerformanceReducer = mpsPerformanceSlice.reducer;
+export const populerMpsConstituencyReducer = populerMpsConstituencySlice.reducer;
+export const populerMpsReducer = populerMpsSlice.reducer;
 
 // import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 

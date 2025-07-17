@@ -30,6 +30,7 @@ function LokSabhaNotRecorded() {
           dataList={interuptionData?.data?.not_recorded || []}
           totalCount={interuptionData?.total_not_recorded_count || ''}
           sectionInfo={interuptionData?.not_recorded_info || []}
+          chartData={interuptionData?.not_recorded_sessionwise_data || []}
         />
       )}
     </Container>

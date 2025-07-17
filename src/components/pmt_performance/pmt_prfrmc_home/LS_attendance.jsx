@@ -1,10 +1,11 @@
 import { Box, Grid } from '@mui/material';
+import MUIBarChart from 'components/common/charts/MUIBarChart';
 // import BasicBarChart from 'components/common/charts/BasicBarChart';
 import GrayDot from 'components/common/GrayDot';
 import ProgressMeter from 'components/common/ProgressMeter';
 import SectionHeading from 'components/common/SectionHeading';
 import Text from 'components/common/Text';
-import LineCharts from 'components/LineCharts';
+// import LineCharts from 'components/LineCharts';
 import {
   getDateInMonthNameFormate,
   extractPercentage,
@@ -19,9 +20,9 @@ function LS_attendance({
   meterTitleText,
   sectionDetailName,
   chipLabal,
+  chartData = [],
 }) {
-  
-
+  console.log('ChartDataChartDataChartData', chartData)
   return (
     <>
       {/* **********Mobile********** */}
@@ -33,9 +34,7 @@ function LS_attendance({
           flexDirection: 'column',
         }}
       >
-        <h3 style={{ textAlign: 'center', margin: '0' }}>
-         {titleHeadign}
-        </h3>
+        <h3 style={{ textAlign: 'center', margin: '0' }}>{titleHeadign}</h3>
         <Box
           sx={{
             width: '100%',
@@ -47,7 +46,7 @@ function LS_attendance({
             titleText={meterTitleText ?? 'ATTENDANCE'}
             subTiteText={`LOK SABHA`}
             centerDate={'Till Now'}
-            value={Number(`${percentageValue}`?.replaceAll("%",""))}
+            value={Number(`${percentageValue}`?.replaceAll('%', ''))}
             percentText={`${extractPercentage(percentageValue?.toString())?.a}`}
             subPercentText={`${extractPercentage(percentageValue?.toString())?.b}`}
             width={230}
@@ -126,11 +125,12 @@ function LS_attendance({
           ))}
         </Box>
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-          <LineCharts
-            data={[10, 4, 6, 5, 14, 14, 15]}
-            labels={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul']}
+          <MUIBarChart data={chartData} barName={meterTitleText} width={350} />
+          {/* <LineCharts
+            data={lineChartData}
+            labels={lineChartLabels || ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul']}
             width={350}
-          />
+          /> */}
         </Box>
         {BottomRightChip && (
           <Box
@@ -143,7 +143,9 @@ function LS_attendance({
           >
             <BottomRightChip
               sectionDetailName={sectionDetailName ?? 'lok-sabha-attandance'}
-              chipLabal={chipLabal ?? 'MPs Participation in Lok Sabha Attendance'}
+              chipLabal={
+                chipLabal ?? 'MPs Participation in Lok Sabha Attendance'
+              }
             />
           </Box>
         )}
@@ -174,7 +176,7 @@ function LS_attendance({
               titleText={meterTitleText ?? 'ATTENDANCE'}
               subTiteText={`LOK SABHA`}
               centerDate={'Till Now'}
-              value={Number(`${percentageValue}`?.replaceAll("%",""))}
+              value={Number(`${percentageValue}`?.replaceAll('%', ''))}
               percentText={`${extractPercentage(percentageValue?.toString())?.a}`}
               subPercentText={`${extractPercentage(percentageValue?.toString())?.b}`}
               // percentText={'100.'}
@@ -252,19 +254,25 @@ function LS_attendance({
             ))}
           </Grid>
           <Grid md={5}>
-            <LineCharts
-              data={[10, 4, 6, 5, 14, 14, 15]}
-              labels={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul']}
+            {/* <LineCharts
+              data={lineChartData}
+              labels={lineChartLabels}
               width={440}
+            /> */}
+            <MUIBarChart
+              width={440}
+              data={chartData}
+              barName={meterTitleText}
             />
-            {/* <BasicBarChart/> */}
           </Grid>
         </Grid>
         {BottomRightChip && (
           <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
             <BottomRightChip
               sectionDetailName={sectionDetailName ?? 'lok-sabha-attandance'}
-              chipLabal={chipLabal ?? 'MPs Participation in Lok Sabha Attendance'}
+              chipLabal={
+                chipLabal ?? 'MPs Participation in Lok Sabha Attendance'
+              }
             />
           </Box>
         )}

@@ -9,7 +9,10 @@ import {
 } from 'helpers/performanceConstants';
 import { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchMpsPerformanceData } from 'stores/redux/apiSlices/mps_PerformanceSlice';
+import {
+  fetchMpsPerformanceData,
+  fetchPopulerMpsData,
+} from 'stores/redux/apiSlices/mps_PerformanceSlice';
 
 const sections = [
   { id: 'top-performer', title: 'Top Performer' },
@@ -41,9 +44,10 @@ function MpsPerformancePageComponent({
 }) {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchMpsPerformanceData({ datasets: ['popular_mps'], limit: 20 }));
+    dispatch(fetchPopulerMpsData());
     dispatch(fetchMpsPerformanceData({ limit: 20 }));
   }, [dispatch]);
+  const { popular_mps } = useSelector((state) => state?.populerMps);
   const {
     attendance_data,
     mp_debate_data,
@@ -53,7 +57,6 @@ function MpsPerformancePageComponent({
     partial,
     loading,
   } = useSelector((state) => state?.mpsPerformance);
-  const popular_mps = partial?.popular_mps || [];
   console.log('mps_attendance_datamps_attendance_data', partial);
 
   const [activeSections, setActiveSections] = useState({

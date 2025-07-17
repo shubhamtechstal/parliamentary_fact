@@ -9,8 +9,10 @@ import MPPerformance from 'components/Mps_performance/MPPerformance';
 // } from 'helpers/performanceConstants';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchMpsPerformanceData } from 'stores/redux/apiSlices/mps_PerformanceSlice';
-
+import {
+  fetchMpsPerformanceData,
+  fetchConstituencyPopulerMps,
+} from 'stores/redux/apiSlices/mps_PerformanceSlice';
 
 function MpsConstituencyPageComponent({
   handleDetailsClick,
@@ -19,14 +21,15 @@ function MpsConstituencyPageComponent({
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(
-      fetchMpsPerformanceData({
-        datasets: ['mp_fund_data', 'popular_mps'],
-        limit: 20,
-      })
+      fetchMpsPerformanceData({ datasets: ['mp_fund_data'], limit: 20 })
     );
+    dispatch(fetchConstituencyPopulerMps());
   }, [dispatch]);
-  const { mp_fund_data, popular_mps } = useSelector(
+  const { mp_fund_data } = useSelector(
     (state) => state?.mpsPerformance.partial || {}
+  );
+  const { constituency_popular_mps, populerMpsLoading } = useSelector(
+    (state) => state?.constituencyPopulerMps || {}
   );
   const sorted = [...mp_fund_data];
   return (
@@ -100,8 +103,9 @@ function MpsConstituencyPageComponent({
         detailsPage="popular-mps"
         handleDetailsClick={handleDetailsClick}
         handleOpenSharePopup={handleOpenSharePopup}
-        mps_Data={popular_mps}
+        mps_Data={constituency_popular_mps}
         cardCatagory={'Mp LD fund'}
+        isLoading={populerMpsLoading}
         // mpsDataNetionalRank={mpsDataNetionalRank}
         // mpsDataStateRank={mpsDataStateRank}
       />

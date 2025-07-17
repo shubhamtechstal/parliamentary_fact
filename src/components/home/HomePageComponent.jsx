@@ -9,8 +9,6 @@ import HomeMpsPerformanceSection from './HomeMpsPerformanceSection';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPerformanceData } from 'stores/redux/apiSlices/pmt_PerformanceSlice';
 import { useEffect } from 'react';
-import { fetchMpsPerformanceData } from 'stores/redux/apiSlices/mps_PerformanceSlice';
-import Loader from 'components/common/Loader';
 import HomeTopSectionMpsList from './HomeTopSectionMpsList';
 
 function HomePageComponent() {

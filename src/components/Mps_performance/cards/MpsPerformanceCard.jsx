@@ -132,7 +132,7 @@ function MpsPerformanceCard({
                   style={{
                     margin: '0 0',
                     color: '#E19B00',
-                    fontSize: '0.6rem',
+                    fontSize: '0.7rem',
                   }}
                 >
                   {' '}
@@ -155,12 +155,12 @@ function MpsPerformanceCard({
             </Box>
             <h3
               style={{
-                fontSize: '0.8rem',
+                fontSize: '0.7rem',
                 maxWidth: '70%',
                 margin: '10px 0 0 0',
                 height: '3rem',
                 overflow: 'hidden',
-                lineHeight: '1rem',
+                lineHeight: '0.8rem',
                 textOverflow: 'ellipsis',
                 // whiteSpace: 'nowrap',
               }}
@@ -182,6 +182,7 @@ function MpsPerformanceCard({
                   style={{
                     color: '#E59B00',
                     fontSize: '18px',
+                    fontFamily: "'Saira', sans-serif",
                     margin: '0 0',
                   }}
                 >

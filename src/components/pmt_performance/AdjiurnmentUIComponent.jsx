@@ -1,10 +1,11 @@
 import { Box, Card, Container, Typography } from '@mui/material';
+import MUIBarChart from 'components/common/charts/MUIBarChart';
 import Divider from 'components/common/Divider';
 import GrayButton from 'components/common/GrayButton';
 import GrayDot from 'components/common/GrayDot';
 import FilterController from 'components/common/modals/FilterController';
 import Text from 'components/common/Text';
-import LineCharts from 'components/LineCharts';
+// import LineCharts from 'components/LineCharts';
 // import { attendance_details } from 'helpers/performanceConstants';
 import { getDateInMonthNameFormate } from 'helpers/utills/utilityFunctions';
 import { useState } from 'react';
@@ -270,7 +271,11 @@ function AdjiurnmentUIComponent({
   sectionInfo = [],
   totalCount = '0',
   showListAsCard = false,
+  chartData,
 }) {
+  // const lineChartData = chartData?.map(item => Number(item.percentage.replace("%", ""))) || [10, 4, 6, 5, 14, 14, 15];
+  // const lineChartLabels = chartData?.map(item => item.session_name) || [10, 4, 6, 5, 14, 14, 15];
+
   return (
     <Container sx={{ fontFamily: 'Sora, sans-serif' }}>
       <Box
@@ -422,18 +427,20 @@ function AdjiurnmentUIComponent({
           ))}
         </Box>
         <Box display={{ md: 'none', xs: 'block' }}>
-          <LineCharts
-            data={[10, 4, 6, 5, 14, 15]}
-            labels={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul']}
+        <MUIBarChart data={chartData} barName={heroData.cardTitle} width={300} />
+          {/* <LineCharts
+            data={lineChartData || [10, 4, 6, 5, 14, 15]}
+            labels={lineChartLabels || ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul']}
             width={300}
-          />
+          /> */}
         </Box>
         <Box display={{ xs: 'none', md: 'block' }}>
-          <LineCharts
-            data={[10, 4, 6, 5, 14, 15]}
-            labels={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul']}
+        <MUIBarChart data={chartData} barName={heroData.cardTitle} width={400} />
+          {/* <LineCharts
+            data={lineChartData || [10, 4, 6, 5, 14, 15]}
+            labels={lineChartLabels || ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul']}
             width={400}
-          />
+          /> */}
         </Box>
       </Box>
       <Divider sx={{ my: 3 }} />

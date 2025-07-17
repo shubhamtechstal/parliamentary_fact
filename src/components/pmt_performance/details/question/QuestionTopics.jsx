@@ -1,6 +1,5 @@
 import React from 'react';
-import { Box, Button, Typography, Chip, Divider } from '@mui/material';
-import LineCharts from 'components/LineCharts';
+import { Box, Divider } from '@mui/material';
 import FilterController from 'components/common/modals/FilterController';
 import Text from 'components/common/Text';
 import LS_attendance from 'components/pmt_performance/pmt_prfrmc_home/LS_attendance';

@@ -29,6 +29,7 @@ function LokSabhaInTheWell() {
           dataList={interuptionData?.data?.in_the_wall}
           totalCount={interuptionData?.total_in_the_wall_count || ''}
           sectionInfo={interuptionData?.in_the_wall_info || []}
+          chartData={interuptionData?.interruptions_sessionwise_data || []}
         />
       )}
     </Container>

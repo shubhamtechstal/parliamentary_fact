@@ -39,12 +39,13 @@ function MpsHomeComponent({ mpsHome }) {
   // };
   let mps_Home = {
     overall_performance: mpsHome?.national_percentage,
+    parliament_performance: mpsHome?.national_percentage,
     national_ranking: mpsHome?.national_rank,
     total_mps: 496,
     parliament_stats: [
       {
-        title: 'State Performance',
-        value: mpsHome?.state_percentage,
+        title: 'Netional Ranking',
+        value: mpsHome?.national_rank,
         ranking: 421,
         total: 496,
       },
@@ -61,11 +62,13 @@ function MpsHomeComponent({ mpsHome }) {
       <MpsHomeChartSection
         sectionTitle={` ${mpsHome?.name} Parliament Performance`}
         mpsHome={mps_Home}
+        rankingTitle={'Parliament Ranking'}
         performanceTitle={'Parliament Performance'}
       />
       <MpsHomeChartSection
         sectionTitle={` ${mpsHome?.name} Constituency Performance`}
         mpsHome={mps_Home}
+        rankingTitle={'Constituancy Ranking'}
         performanceTitle={'Constituancy Performance'}
       />
       <SectionHeading title={`${mpsHome?.name} Profile`} />

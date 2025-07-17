@@ -10,6 +10,7 @@ import { fetchYourMpsList } from 'stores/redux/apiSlices/yourMpsSlice';
 import Avatar from 'components/common/Avatar';
 import { ArrowDropDown, ArrowDropUp } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
+import SectionHeading from 'components/common/SectionHeading';
 
 function YourMpsPage() {
   const dispatch = useDispatch();
@@ -23,21 +24,48 @@ function YourMpsPage() {
   return (
     <AdvertisementLayout>
       <Container>
-        <h1>Search Your MP</h1>
-        <Autocomplete
-          disablePortal
-          options={simplifiedMpList}
-          getOptionLabel={(option) => `${option.full_name}${option.mp_id}`}
-          sx={{ width: 300 }}
-          renderInput={(params) => (
-            <TextField {...params} label="Search Your Mps" />
-          )}
-          onChange={(event, newValue) => {
-            if (newValue) {
-              setFilterParams(newValue);
-            }
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            my: 3,
+            justifyContent: 'space-between',
           }}
-        />
+        >
+          <SectionHeading title={'Search your MP'} fontSize={'1.2rem'} />
+          <Autocomplete
+            disablePortal
+            options={simplifiedMpList}
+            getOptionLabel={(option) => `${option.full_name}${option.mp_id}`}
+            // sx={{ width: 300 }}
+            sx={{
+              width: 300,
+              '& .MuiOutlinedInput-root': {
+                borderRadius: '50px',
+                padding: '0 2rem',
+                backgroundColor: '#f5f5f5',
+                '&:hover fieldset': {
+                  borderColor: '#ccc',
+                },
+              },
+              '& .MuiInputBase-input': {
+                padding: '1rem 0',
+              },
+              '.MuiInputLabel-root ': {
+                fontSize: '0.8rem',
+                top: '-0.5rem',
+              },
+            }}
+            renderInput={(params) => (
+              <TextField {...params} label="Search Your Mps" />
+            )}
+            onChange={(event, newValue) => {
+              if (newValue) {
+                setFilterParams(newValue);
+              }
+            }}
+          />
+        </Box>
         {filterParams && (
           <Box sx={{ p: 3, width: '200px' }}>
             <MemberCard mp={filterParams} />
@@ -66,12 +94,13 @@ const MemberCard = ({ mp }) => {
     >
       <Card
         sx={{
-          p: 2,
+          py: 1.5,
+          px: 1,
           textAlign: 'center',
-          borderRadius: 3,
-          border: '1px solid #f5f5f5',
-          boxShadow: 'none',
-          width: '150px',
+          borderRadius: 6,
+          boxShadow: 2,
+          color: 'rgb(0 0 0 / 50%)',
+          width: '10rem',
           height: 160,
         }}
       >
@@ -105,7 +134,10 @@ const MemberCard = ({ mp }) => {
             </Box>
           )}
         </Box>
-        <Typography variant="body2" sx={{ mt: 1, fontWeight: 500 }}>
+        <Typography
+          variant="body2"
+          sx={{ mt: 1, fontWeight: 500, height: '40px', overflow: 'hidden' }}
+        >
           {mp.full_name}
         </Typography>
         <Typography variant="caption" color="text.secondary">
