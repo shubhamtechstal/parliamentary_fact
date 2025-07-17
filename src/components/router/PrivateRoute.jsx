@@ -1,12 +1,8 @@
-import React from 'react';
 import PropTypes from 'prop-types'
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 
 const PrivateRoute = (props) => {
-    const isAuthenticated = useSelector((state) => state?.toast?.isAuthenticated);
-    const navigate = useNavigate();
-    console.log("isAuthenticated", isAuthenticated)
+    // const isAuthenticated = useSelector((state) => state?.toast?.isAuthenticated);
+    // console.log("isAuthenticated", isAuthenticated)
 
     // React.useEffect(() => {
     //     if (!isAuthenticated) {

@@ -38,10 +38,10 @@ const pageNavigtionLinks = [
     title: 'Your MPs',
     pageUrl: '/your-mps',
   },
-  // {
-  //   title: 'Newsletter',
-  //   pageUrl: '//newsletter/loksabha',
-  // },
+  {
+    title: 'Newsletter',
+    pageUrl: '/newsletter/loksabha',
+  },
 ];
 const AppLayoutContainer = () => {
   const [menuOpen, setMenuOpen] = useState(false);

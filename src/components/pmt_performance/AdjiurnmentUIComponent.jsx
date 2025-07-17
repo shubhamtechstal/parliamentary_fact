@@ -41,6 +41,7 @@ export const AgendaList = ({
               fontWeight={500}
               color="text.primary"
               mb={0.5}
+              mt={ idx==0 ? 0 : 4}
             >
               ADJOURNMENT - {idx + 1}
               <Typography
