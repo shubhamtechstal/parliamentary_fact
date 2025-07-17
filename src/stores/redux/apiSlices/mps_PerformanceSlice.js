@@ -59,7 +59,7 @@ export const fetchPopulerMpsData = createAsyncThunk(
   'populerMpsPerformance/fetchData',
   async (param, { rejectWithValue }) => {
     try {
-      const url = `http://parliamentryfact.revanshrenewable.com/API/popular_mps.php`;
+      const url = `https://parliamentryfact.revanshrenewable.com/API/popular_mps.php`;
       const response = await fetch(url);
       if (!response.ok)
         throw new Error(`HTTP error! Status: ${response.status}`);
@@ -76,7 +76,7 @@ export const fetchConstituencyPopulerMps = createAsyncThunk(
   'constituencyPopulerMps/fetchData',
   async (param, { rejectWithValue }) => {
     try {
-      const url = `http://parliamentryfact.revanshrenewable.com/API/popular_mps_constituency_performance.php`;
+      const url = `https://parliamentryfact.revanshrenewable.com/API/popular_mps_constituency_performance.php`;
       const response = await fetch(url);
       if (!response.ok)
         throw new Error(`HTTP error! Status: ${response.status}`);
