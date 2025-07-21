@@ -38,10 +38,10 @@ const pageNavigtionLinks = [
     title: 'Your MPs',
     pageUrl: '/your-mps',
   },
-  {
-    title: 'Newsletter',
-    pageUrl: '/newsletter/loksabha',
-  },
+  // {
+  //   title: 'Newsletter',
+  //   pageUrl: '//newsletter/loksabha',
+  // },
 ];
 const AppLayoutContainer = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -173,11 +173,13 @@ const AppLayoutContainer = () => {
         {/* Subheader navigations */}
         {isSubNavigationMenu && (
           <Container
-            sx={{ display: 'flex', justifyContent: 'start', padding: '0.5rem' }}
+            sx={{ display: 'flex', justifyContent: 'start', padding: '0.5rem', overflowX: 'auto' }}
           >
             <Box sx={{ display: 'flex', gap: '1.5rem' }}>
-              {headerCategoryApi?.categories?.map((val, index) => (
-                <Box
+              {headerCategoryApi?.categories?.map((val, index) => {
+                 const isActive = window.location.pathname.includes( `/news/categories/${val?.url}`);
+                 return (
+                   <Box
                   sx={{ display: 'flex' }}
                   onClick={() => {
                     navigate(`/news/categories/${val?.url}`, {
@@ -193,15 +195,37 @@ const AppLayoutContainer = () => {
                       fontWeight: 700,
                       textWrap:'nowrap',
                       cursor: 'pointer',
-                      // color: selected === index ? '#162eb7' : '',
+                      color: isActive ? '#F44336' : '',
                       '&:hover': {
-                        color: '#162eb7',
+                        color: '#F44336',
                       },
                     }}
                   />
                   {val?.subhead && <ExpandMoreIcon />}
                 </Box>
-              ))}
+              )})}
+                <Box
+                  sx={{ display: 'flex' }}
+                  onClick={() => {
+                    navigate(`/newsletter/loksabha`, {
+                      state: { category: '/newsletter/loksabha' },
+                    })
+                  }}
+                >
+                  <Text
+                    text={'Newsletter'}
+                    sx={{
+                      fontSize: '0.9rem',
+                      fontWeight: 700,
+                      textWrap:'nowrap',
+                      cursor: 'pointer',
+                      color:  window.location.pathname.includes( `/newsletter/loksabha`) ? '#F44336' : '',
+                      '&:hover': {
+                        color: '#F44336',
+                      },
+                    }}
+                  />
+                </Box>
             </Box>
           </Container>
         )}

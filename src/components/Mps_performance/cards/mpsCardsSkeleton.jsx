@@ -11,8 +11,7 @@ export const MpsSmallCardsSkeleton = () => {
               <Skeleton
                 key={i}
                 variant="rounded"
-                sx={{ borderRadius: '20px' }}
-                // width={170}
+                sx={{ borderRadius: '20px',  width: { xs: '10rem', md: 'auto' } }}
                 height={170}
               />
             </Grid>

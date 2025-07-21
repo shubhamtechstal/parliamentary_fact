@@ -15,7 +15,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useEffect, useRef, useState } from 'react';
 import images from 'helpers/images';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../../components/common/cards/NewsCard.css';
 import { dashboardNewsApiAction } from 'stores/redux/apiSlices/DashboardNewsSlice/dashboardNewsApiSlice';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
@@ -363,8 +363,9 @@ export default function Header({
             const isActive =
               (val?.pageUrl !== '/' &&
                 window.location.pathname.includes(val?.pageUrl)) ||
-              (val?.pageUrl === '/' && window.location.pathname === '/')  ||
-              (val?.pageUrl === '/your-mps' && window.location.pathname.includes(`/mps-details`));
+              (val?.pageUrl === '/' && window.location.pathname === '/') ||
+              (val?.pageUrl === '/your-mps' &&
+                window.location.pathname.includes(`/mps-details`));
             return (
               <Link
                 style={{
@@ -438,7 +439,7 @@ export default function Header({
         >
           <Box sx={{ display: 'flex', gap: '1.5rem' }}>
             {subNavData?.slice(0, 6).map((val, index) => {
-              const isActive = window.location.pathname.includes(`/news/categories/${val?.url}`);
+              const isActive = window.location.pathname.includes( `/news/categories/${val?.url}`);
               return (
                 <Box
                   sx={{ display: 'flex' }}
@@ -465,6 +466,28 @@ export default function Header({
                 </Box>
               );
             })}
+            <Box
+              sx={{ display: 'flex' }}
+              onClick={() => {
+                navigate(`/newsletter/loksabha`, {
+                  state: { category: '/newsletter/loksabha' },
+                });
+              }}
+            >
+              <Text
+                text={'Newsletter'}
+                sx={{
+                  fontSize: '0.9rem',
+                  fontWeight: 700,
+                  textWrap: 'nowrap',
+                  cursor: 'pointer',
+                  color:  window.location.pathname.includes( `/newsletter/loksabha`) ? '#F44336' : '',
+                  '&:hover': {
+                    color: '#F44336',
+                  },
+                }}
+              />
+            </Box>
             {subNavData?.length > 6 && (
               <Box
                 sx={{ display: 'flex', cursor: 'pointer' }}

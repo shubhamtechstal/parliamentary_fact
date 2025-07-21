@@ -17,7 +17,7 @@ import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 import React, { useEffect, useState } from 'react';
 import TopQuestionPerformerCard from 'components/common/cards/TopQuestionPerformerCard';
 import { newsLetterApiAction } from 'stores/redux/apiSlices/newsLetterApiSlice';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function NewsLetterContainer() {
   const navigate = useNavigate();
@@ -156,64 +156,70 @@ export default function NewsLetterContainer() {
     }
     setFilter(!filter);
   };
+  const location = useLocation();
+ // 1. Update start and end date from session
+useEffect(() => {
+  setSelectedDropDown((prevState) => ({
+    ...prevState,
+    startDate: new Date(selectedDropDown?.session?.start_date),
+    endDate: new Date(selectedDropDown?.session?.end_date),
+  }));
+}, [selectedDropDown?.session]);
 
-  useEffect(() => {
-    setSelectedDropDown((prevState) => ({
-      ...prevState,
-      ['startDate']: new Date(selectedDropDown?.session?.start_date),
-      ['endDate']: new Date(selectedDropDown?.session?.end_date),
-    }));
-  }, [selectedDropDown?.session]);
+// 2. Reset selectedDate if dates change
+useEffect(() => {
+  setSelectedDate(0);
+}, [selectedDropDown?.dates]);
 
-  useEffect(() => {
-    setSelectedDate(0);
-  }, [selectedDropDown?.dates]);
+// 3. Fetch newsletter data when session or selected date changes
+useEffect(() => {
+  const obj = {};
+  if (selectedDropDown?.session?.id) {
+    obj['session'] = selectedDropDown.session.id;
+    obj['date'] =
+      selectedDropDown?.dates[selectedDate]?.actualDate?.split('T')[0];
+  }
 
-  useEffect(() => {
-    const obj = {};
-    if (selectedDropDown?.session?.id) {
-      obj['session'] = selectedDropDown.session.id;
-      obj['date'] =
-        selectedDropDown?.dates[selectedDate]?.actualDate?.split('T')[0];
-    }
-    const url = window.location.href;
-    const parts = url.split('/').filter(Boolean);
-    const datePattern = /^\d{4}-\d{2}-\d{2}$/;
-    if (datePattern.test(parts[parts.length - 1])) {
-      obj['date'] = parts[parts.length - 1];
-    }
+  const url = location.pathname;
+  const parts = url.split('/').filter(Boolean);
+  const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+
+  if (datePattern.test(parts[parts.length - 1])) {
+    obj['date'] = parts[parts.length - 1];
+  }
+
+  if (obj.session && obj.date) {
     getNewsLetterData({ ...obj });
-  }, [selectedDropDown?.dates, window.location.href]);
-  useEffect(() => {
-    navigate(selectedDropDown?.dates[selectedDate]?.actualDate?.split('T')[0]);
-    setLoading(true);
-  }, [selectedDropDown?.dates, selectedDate]);
-  useEffect(() => {
-    const months = [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'May',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dec',
-    ];
-    const date = new Date(newsLetterData?.date_session?.date);
-    const day = date.getDate();
-    const month = months[date.getMonth()];
-    const year = date.getFullYear();
-    setFormatedDate(
-      `${newsLetterData?.date_session?.day_name ?? ''} ${isNaN(day) ? 'Invalid date' : day} ${month ?? ''} ${isNaN(year) ? '' : year}`
-    );
-    setLoading(false);
-  }, [newsLetterData?.date_session?.date]);
+  }
+}, [selectedDropDown?.session?.id, selectedDate, location.pathname]);
 
-  
+// 4. Navigate only if URL mismatch
+useEffect(() => {
+  const newDate = selectedDropDown?.dates[selectedDate]?.actualDate?.split('T')[0];
+  const currentPath = location.pathname.split('/').pop();
+  if (newDate && newDate !== currentPath) {
+    navigate(newDate);
+    setLoading(true);
+  }
+}, [selectedDate, selectedDropDown?.dates]);
+
+// 5. Format newsletter date
+useEffect(() => {
+  const months = [
+    'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+  ];
+  const date = new Date(newsLetterData?.date_session?.date);
+  const day = date.getDate();
+  const month = months[date.getMonth()];
+  const year = date.getFullYear();
+
+  setFormatedDate(
+    `${newsLetterData?.date_session?.day_name ?? ''} ${isNaN(day) ? 'Invalid date' : day} ${month ?? ''} ${isNaN(year) ? '' : year}`
+  );
+  setLoading(false);
+}, [newsLetterData?.date_session?.date]);
+
 
   return (
     <>

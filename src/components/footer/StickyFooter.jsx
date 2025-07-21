@@ -1,6 +1,7 @@
 import LeaderboardOutlinedIcon from '@mui/icons-material/LeaderboardOutlined';
-import StarBorderPurple500OutlinedIcon from '@mui/icons-material/StarBorderPurple500Outlined';
-import PlayArrowOutlinedIcon from '@mui/icons-material/PlayArrowOutlined';
+// import StarBorderPurple500OutlinedIcon from '@mui/icons-material/StarBorderPurple500Outlined';
+// import PlayArrowOutlinedIcon from '@mui/icons-material/PlayArrowOutlined';
+import Groups2Icon from '@mui/icons-material/Groups2';
 import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
 import { Box } from '@mui/material';
 import { Link } from 'react-router-dom';
@@ -10,14 +11,23 @@ export const StickyFooter = () => {
     <Box display={{ xs: 'flex', md: 'none' }} className="sticky-footer">
       <Link
         className="footer-tab"
-        to="/mps-performance"
+        to="/parliament-performance/lok-sabha-performance"
       >
         <p style={{ margin: '0 0' }}>
           <LeaderboardOutlinedIcon />
         </p>
-        <p style={{ margin: '0 10px', textWrap: 'nowrap' }}>MPs Performance</p>
+        <p style={{ margin: '0 10px', textWrap: 'nowrap' }}>Parliament Performance</p>
       </Link>
       <Link
+        className="footer-tab"
+        to="/mps-performance"
+      >
+        <p style={{ margin: '0 0' }}>
+          <Groups2Icon />
+        </p>
+        <p style={{ margin: '0 10px', textWrap: 'nowrap' }}>MPs Performance</p>
+      </Link>
+      {/* <Link
         className="footer-tab"
         to="/rate-your-mp"
       >
@@ -35,7 +45,7 @@ export const StickyFooter = () => {
           <PlayArrowOutlinedIcon />
         </p>{' '}
         Video
-      </div>
+      </div> */}
       <Link to={'/news'} className="footer-tab">
         <p style={{ margin: '0 0' }}>
           <ArticleOutlinedIcon />
