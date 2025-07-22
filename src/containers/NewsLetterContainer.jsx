@@ -78,7 +78,7 @@ export default function NewsLetterContainer() {
     ];
 
     const currentDate = new Date();
-    currentDate.setHours(0, 0, 0, 0); // Reset current date time to midnight
+    currentDate.setHours(0, 0, 0, 0);
 
     const dateArray = [];
     for (
@@ -86,13 +86,9 @@ export default function NewsLetterContainer() {
       current <= end;
       current.setDate(current.getDate() + 1)
     ) {
-      const isWeekend = current.getDay() === 0 || current.getDay() === 6; // Check if Sunday or Saturday
-      const isFuture = current > currentDate; // Check if date is greater than today
-
-      // If today is the current iteration date, we should not disable it regardless of istoday
+      const isWeekend = current.getDay() === 0 || current.getDay() === 6;
+      const isFuture = current > currentDate;
       const isToday = current.toDateString() === currentDate.toDateString();
-
-      // Disable condition: If it's a weekend or a future date and istoday is false, disable it.
       const disable = (isWeekend || isFuture) && !(istoday && isToday);
 
       dateArray.push({
@@ -188,9 +184,9 @@ useEffect(() => {
     obj['date'] = parts[parts.length - 1];
   }
 
-  if (obj.session && obj.date) {
+  // if (obj.session && obj.date) {
     getNewsLetterData({ ...obj });
-  }
+  // }
 }, [selectedDropDown?.session?.id, selectedDate, location.pathname]);
 
 // 4. Navigate only if URL mismatch

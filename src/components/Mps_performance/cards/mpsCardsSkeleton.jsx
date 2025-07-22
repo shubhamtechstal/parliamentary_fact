@@ -80,9 +80,8 @@ export const MpsBigCardsSkeleton = () => {
             <Grid item xs={12} sm={6} md={4} lg={4} key={i}>
               <Skeleton
                 variant="rounded"
-                sx={{ borderRadius: '20px' }}
+                sx={{ borderRadius: '20px', width: {xs: 300, md :'100%'} }}
                 height={220}
-                width={300}
               />
             </Grid>
           );
