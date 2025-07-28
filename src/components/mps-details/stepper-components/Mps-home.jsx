@@ -44,7 +44,7 @@ function MpsHomeComponent({ mpsHome }) {
     total_mps: 496,
     parliament_stats: [
       {
-        title: 'Netional Ranking',
+        title: 'National Ranking',
         value: mpsHome?.national_rank,
         ranking: 421,
         total: 496,

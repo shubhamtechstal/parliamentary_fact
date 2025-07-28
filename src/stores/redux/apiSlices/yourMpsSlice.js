@@ -1,12 +1,13 @@
 // src/redux/slices/yourMpsSlice.js
 
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { BASE_URL } from 'helpers/utills/apiUtils';
 
 export const fetchYourMpsList = createAsyncThunk(
   'yourMps/fetchList',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await fetch('https://parliamentryfact.revanshrenewable.com/API/mps_list_api.php');
+      const response = await fetch(`${BASE_URL}/mps_list_api.php`);
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
@@ -22,7 +23,7 @@ export const fetchMpDetailsById = createAsyncThunk(
   async (mpId, { rejectWithValue }) => {
     try {
       const response = await fetch(
-        `https://parliamentryfact.revanshrenewable.com/API/fetch_mps_details.php?mp_id=${mpId}`
+        `${BASE_URL}/fetch_mps_details.php?mp_id=${mpId}`
       );
 
       if (!response.ok) {

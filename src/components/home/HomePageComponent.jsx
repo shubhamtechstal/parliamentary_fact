@@ -38,7 +38,7 @@ function HomePageComponent() {
         >
           <Link
             to={
-              '/parliament-performance/lok-sabha-performance/lok-sabha-productivity'
+              '/parliament-performance/lok-sabha-performance'
             }
           >
             <Button

@@ -127,6 +127,7 @@ function LS_QuestionsComponent({
             centerDate={questionsListData?.date}
             percentText={`${extractPercentage(pageData?.questions_percentage?.question_percentage)?.a}`}
             subPercentText={`${extractPercentage(pageData?.questions_percentage?.question_percentage)?.b}`}
+            value={pageData?.questions_percentage?.question_percentage?.replaceAll('%', '')}
             width={230}
             height={250}
             innerRadius={98}
@@ -300,6 +301,7 @@ function LS_QuestionsComponent({
               centerDate={questionsListData?.date}
               percentText={`${extractPercentage(pageData?.questions_percentage?.question_percentage)?.a}`}
               subPercentText={`${extractPercentage(pageData?.questions_percentage?.question_percentage)?.b}`}
+              value={pageData?.questions_percentage?.question_percentage?.replaceAll('%', '')}
               // percentText={'100.'}
               // subPercentText={'20%'}
               width={230}

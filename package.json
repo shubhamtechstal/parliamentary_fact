@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "NODE_ENV=local vite",
-    "dev": " NODE_ENV=development vite --host",
+    "dev": "cross-env NODE_ENV=development vite --host",
     "prod": "NODE_ENV=production vite",
     "build:dev": "NODE_ENV=development vite build",
     "build:prod": "NODE_ENV=production vite build",

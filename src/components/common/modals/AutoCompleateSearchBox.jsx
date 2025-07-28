@@ -3,6 +3,7 @@ import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Autocomplete from '@mui/material/Autocomplete';
 import CircularProgress from '@mui/material/CircularProgress';
+import { BASE_URL } from 'helpers/utills/apiUtils';
 
 export default function AutocompleteSearchBox({ onSelectMP }) {
   const [selectedValue, setSelectedValue] = React.useState(null); // holds full object
@@ -20,7 +21,8 @@ export default function AutocompleteSearchBox({ onSelectMP }) {
       setLoading(true);
       try {
         const response = await fetch(
-          `https://parliamentryfact.revanshrenewable.com/API/mp_minister_seacrh_api.php?search=${searchQuery}`
+          `${BASE_URL}/mp_minister_seacrh_api.php?search=${searchQuery}`
+          // `https://parliamentryfact.revanshrenewable.com/API/mp_minister_seacrh_api.php?search=${searchQuery}`
         );
         const data = await response.json();
 

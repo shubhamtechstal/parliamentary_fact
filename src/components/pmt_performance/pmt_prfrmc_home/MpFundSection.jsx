@@ -97,10 +97,7 @@ function MpFundSection({ MpFundSection, pageData, mpsFundData, BottomRightChip }
             subPercentText={
               `${extractPercentage(pageData?.mpLads_percentage?.mpLads_percentage ?? '11')?.b}`
             }
-            value={pageData?.passed_govt_bills_data?.passed_bill_percentage?.replaceAll(
-              '%',
-              ''
-            )}
+            value={pageData?.passed_govt_bills_data?.passed_bill_percentage?.replaceAll('%','')}
             width={230}
             height={250}
             innerRadius={98}

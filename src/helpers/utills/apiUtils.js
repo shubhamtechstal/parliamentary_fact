@@ -1,4 +1,5 @@
-export const BASE_URL = "https://parliamentryfact.revanshrenewable.com/API";
+export const BASE_URL = "https://admin.parliamentaryfact.com/API";
+// export const BASE_URL = "https://parliamentryfact.revanshrenewable.com/API";
 
 export const fetchFromAPI = async (endpoint, params, rejectWithValue) => {
   try {

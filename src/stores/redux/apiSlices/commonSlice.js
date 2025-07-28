@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { BASE_URL } from 'helpers/utills/apiUtils';
 
 export const fetchSessionsFilterData = createAsyncThunk(
   'pmtPerformance/sessionsFilterData',
@@ -6,7 +7,7 @@ export const fetchSessionsFilterData = createAsyncThunk(
     try {
       const queryString = new URLSearchParams(params).toString();
       const response = await fetch(
-        `https://parliamentryfact.revanshrenewable.com/API/date_session_filter_api.php?${queryString}`,
+        `${BASE_URL}/date_session_filter_api.php?${queryString}`,
         {
           method: 'GET',
           headers: {
@@ -35,7 +36,7 @@ export const fetchStatesNameData = createAsyncThunk(
     try {
       const queryString = new URLSearchParams(params).toString();
       const response = await fetch(
-        `https://parliamentryfact.revanshrenewable.com/API/state_list.php`,
+        `${BASE_URL}/state_list.php`,
         {
           method: 'GET',
           headers: {
