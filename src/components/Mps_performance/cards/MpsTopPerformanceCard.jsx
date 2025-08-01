@@ -10,7 +10,7 @@ function AttandanceSkeletonCard(index) {
       <Card
         sx={{
           p: 1.5,
-          textAlign: 'center',
+          textAlign: 'left',
           borderRadius: 5,
           boxShadow: 0,
           color: 'rgb(0 0 0 / 50%)',
@@ -136,7 +136,7 @@ function MpsTopPerformanceCard({
             <Card
               sx={{
                 p: 1.5,
-                textAlign: 'center',
+                textAlign: 'left',
                 borderRadius: 5,
                 color: 'rgb(0 0 0 / 50%)',
                 // background: '#f9f9f9',

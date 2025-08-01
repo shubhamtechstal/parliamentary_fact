@@ -10,7 +10,7 @@ const MpsPerformanceCardSkeleton = () => {
       sx={{
         py: 1.5,
         px: 1,
-        textAlign: 'center',
+        textAlign: 'left',
         borderRadius: 6,
         boxShadow: 2,
         color: 'rgb(0 0 0 / 50%)',
@@ -95,7 +95,7 @@ function MpsPerformanceCard({
             sx={{
               py: 1.5,
               px: 1,
-              textAlign: 'center',
+              textAlign: 'left',
               borderRadius: 6,
               boxShadow: 2,
               color: 'rgb(0 0 0 / 50%)',
@@ -130,7 +130,7 @@ function MpsPerformanceCard({
                   style={{
                     margin: '0 0',
                     color: '#E19B00',
-                    fontSize: '0.7rem',
+                    fontSize: '0.6rem',
                   }}
                 >
                   {' '}
