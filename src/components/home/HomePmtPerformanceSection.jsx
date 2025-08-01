@@ -237,7 +237,7 @@ const HomePmtPerformanceSection = () => {
               display: { xs: 'block', md: 'none' },
             }}
             font={'Sora'}
-            text={'MPs Parliament Performance' + loksabhaName ?? ''}
+            text={'MPs Parliament Performance' + loksabhaName}
           />
           <Text
             sx={{

@@ -145,7 +145,6 @@ const RankingTable = ({
                         boxShadow: '0 2px 6px rgba(0,0,0,0.05)',
                         fontSize: '0.8rem',
                         px: 2,
-                        fontSize: '0.7rem',
                       }}
                     >
                       {/* Ranking */}

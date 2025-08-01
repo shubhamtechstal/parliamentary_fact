@@ -41,7 +41,7 @@ export const AgendaList = ({
               fontWeight={500}
               color="text.primary"
               mb={0.5}
-              mt={ idx==0 ? 0 : 4}
+              mt={idx == 0 ? 0 : 4}
             >
               ADJOURNMENT - {idx + 1}
               <Typography
@@ -67,7 +67,7 @@ export const AgendaList = ({
               fontWeight={500}
               color="text.primary"
               mb={0.5}
-              mt={ idx==0 ? 0 : 4}
+              mt={idx == 0 ? 0 : 4}
             >
               WALKOUT - {idx + 1}
               <Typography
@@ -208,33 +208,39 @@ export const AgendaList = ({
 
   return (
     <Box maxWidth="lg" mx="auto" sx={{ opacity: 0.7 }} px={0} py={4}>
-      {visibleItems?.map((day, index) => (
-        <Box key={index} mb={6}>
-          <Typography
-            variant="subtitle2"
-            sx={{
-              color: '#F15A29',
-              fontWeight: '600',
-              textTransform: 'uppercase',
-              mb: 2,
-            }}
-          >
-            {getDateKey(day)}
-          </Typography>
-          <Box
-            sx={{
-              display: showListAsCard ? 'flex' : 'block',
-              flexWrap: 'wrap',
-              gap: 3,
-            }}
-          >
-            {day?.records?.map((item, idx) => (
-              <Box key={idx}>{renderByType(item, idx)}</Box>
-            ))}
+      {visibleItems.length > 0 ? (
+        visibleItems?.map((day, index) => (
+          <Box key={index} mb={6}>
+            <Typography
+              variant="subtitle2"
+              sx={{
+                color: '#F15A29',
+                fontWeight: '600',
+                textTransform: 'uppercase',
+                mb: 2,
+              }}
+            >
+              {getDateKey(day)}
+            </Typography>
+            <Box
+              sx={{
+                display: showListAsCard ? 'flex' : 'block',
+                flexWrap: 'wrap',
+                gap: 3,
+              }}
+            >
+              {day?.records?.map((item, idx) => (
+                <Box key={idx}>{renderByType(item, idx)}</Box>
+              ))}
+            </Box>
+            {index < visibleItems.length - 1 && <Divider sx={{ mt: 3 }} />}
           </Box>
-          {index < visibleItems.length - 1 && <Divider sx={{ mt: 3 }} />}
-        </Box>
-      ))}
+        ))
+      ) : (
+        <Typography variant="body2" color="text.secondary" textAlign="center">
+          No records found.
+        </Typography>
+      )}
       <Box
         sx={{
           mt: 4,
@@ -246,7 +252,7 @@ export const AgendaList = ({
         }}
       >
         <Typography variant={'h6'}>
-          Total MPs: {data.length} (Showing: {visibleItems.length})
+          Total Records: {data.length} (Showing: {visibleItems.length})
         </Typography>
 
         {visibleCount < data.length && (
@@ -271,7 +277,7 @@ function AdjiurnmentUIComponent({
   dataList = [],
   heroData,
   sectionInfo = [],
-  totalCount = '0',
+  totalCount = 'Na',
   showListAsCard = false,
   chartData,
 }) {
@@ -429,7 +435,11 @@ function AdjiurnmentUIComponent({
           ))}
         </Box>
         <Box display={{ md: 'none', xs: 'block' }}>
-        <MUIBarChart data={chartData} barName={heroData.cardTitle} width={300} />
+          <MUIBarChart
+            data={chartData}
+            barName={heroData.cardTitle}
+            width={300}
+          />
           {/* <LineCharts
             data={lineChartData || [10, 4, 6, 5, 14, 15]}
             labels={lineChartLabels || ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul']}
@@ -437,7 +447,11 @@ function AdjiurnmentUIComponent({
           /> */}
         </Box>
         <Box display={{ xs: 'none', md: 'block' }}>
-        <MUIBarChart data={chartData} barName={heroData.cardTitle} width={400} />
+          <MUIBarChart
+            data={chartData}
+            barName={heroData.cardTitle}
+            width={400}
+          />
           {/* <LineCharts
             data={lineChartData || [10, 4, 6, 5, 14, 15]}
             labels={lineChartLabels || ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul']}

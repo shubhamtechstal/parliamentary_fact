@@ -29,7 +29,7 @@ function LokSabhaInterruption() {
           }}
           dataList={interuptionData?.data?.interruptions || []}
           showListAsCard={true}
-          totalCount={interuptionData?.total_interruptions_count || ''}
+          totalCount={interuptionData?.total_interruptions_count}
           sectionInfo={interuptionData?.interruptions_info || []}
           chartData={interuptionData?.interruptions_sessionwise_data || []}
         />

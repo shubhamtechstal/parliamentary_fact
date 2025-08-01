@@ -11,7 +11,6 @@ const AdvertisementLayout = ({ children }) => {
         position: 'relative',
         width: '100%',
         justifyContent: 'center',
-        backgroundColor: '#f6f6f6'
       }}
     >
       <Box

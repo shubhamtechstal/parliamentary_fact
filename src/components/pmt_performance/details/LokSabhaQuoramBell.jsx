@@ -27,7 +27,7 @@ function LokSabhaQuoramBell() {
           }}
           showListAsCard={true}
           dataList={interuptionData?.data?.coram_bell}
-          totalCount={interuptionData?.total_coram_bell_count || ''}
+          totalCount={interuptionData?.total_coram_bell_count}
           sectionInfo={interuptionData?.coram_bell_info || []}
           chartData={interuptionData?.coram_bell_sessionwise_data || []}
         />

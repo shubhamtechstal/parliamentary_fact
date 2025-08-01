@@ -134,7 +134,6 @@ function MpsTopPerformanceRatingCard({
               p: 1.5,
               textAlign: 'center',
               borderRadius: 5,
-              textAlign: 'left',
               color: 'rgb(0 0 0 / 50%)',
               // background: '#f9f9f9',
               fontFamily: '"Sora", sans-serif',

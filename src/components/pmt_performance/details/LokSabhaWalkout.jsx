@@ -28,7 +28,7 @@ function LokSabhaWalkout() {
             type: 'walkout', // 👈 Only this decides rendering now
           }}
           dataList={walkoutData?.data}
-          totalCount={walkoutData?.total_walkout_count || ''}
+          totalCount={walkoutData?.total_walkout_count}
           sectionInfo={walkoutData?.walkout_info || []}
           chartData={walkoutData?.session_wise_walkout_percentage || []}
         />

@@ -91,7 +91,7 @@ function LokSabhaAdjiurnment() {
             type: 'adjournment', // 👈 Only this decides rendering now
           }}
           dataList={adjurnmentsData?.data}
-          totalCount={adjurnmentsData?.total_adjourned_count || ''}
+          totalCount={adjurnmentsData?.total_adjourned_count}
           sectionInfo={adjurnmentsData?.adjourned_info || []}
           chartData={adjurnmentsData?.session_wise_adjournment_percentage || []}
         />

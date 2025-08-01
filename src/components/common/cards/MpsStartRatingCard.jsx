@@ -25,7 +25,6 @@ export default function MpsRatingCard({ mpInfo, cardCatagory,handleOpenSharePopu
         sx={{
           py: 1.5,
           px: 1,
-          textAlign: 'center',
           borderRadius: 6,
           boxShadow: 2,
           textAlign: 'left',

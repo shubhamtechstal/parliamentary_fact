@@ -199,7 +199,6 @@ function MpsListComponent({
         <Box
           // className="performanceSection"
           sx={{
-            display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
             display: { md: 'flex', xs: 'none' },
@@ -213,7 +212,6 @@ function MpsListComponent({
         </Box>
         <Box
           sx={{
-            display: 'flex',
             justifyContent: { xs: 'center', md: 'space-between' },
             alignItems: 'center',
             display: { md: 'flex', xs: 'none' },
