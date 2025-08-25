@@ -235,12 +235,12 @@ function MpFundSection({ MpFundSection, pageData, mpsFundData, BottomRightChip }
               isMultiSubtitle={true}
               centerDate={MpFundSection.date}
               percentText={
-                `${extractPercentage(pageData?.mpLads_percentage?.mpLads_percentage ?? '33.33' )?.a}`
+                `${extractPercentage(pageData?.mpLads_percentage?.mpLads_percentage ?? '00.00' )?.a}`
               }
               subPercentText={
-                `${extractPercentage(pageData?.mpLads_percentage?.mpLads_percentage ?? '33.33%')?.b}`
+                `${extractPercentage(pageData?.mpLads_percentage?.mpLads_percentage ?? '00.00%')?.b}`
               }
-              value={pageData?.passed_govt_bills_data?.passed_bill_percentage?.replaceAll( '%','') ?? '33.33'}
+              value={pageData?.passed_govt_bills_data?.passed_bill_percentage?.replaceAll( '%','') ?? '00.00'}
               width={230}
               height={250}
               innerRadius={98}
