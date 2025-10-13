@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 const appConstants = {
-  apiBaseURL: 'https://admin.parliamentaryfact.com/API/',
-  // apiBaseURL: 'https://parliamentryfact.revanshrenewable.com/API/',
+  // apiBaseURL: 'https://admin.parliamentaryfact.com/API/',
+  apiBaseURL: 'https://parliamentryfact.revanshrenewable.com/API/',
 
   BACKEND_IMAGE_URL: 'https://admin.parliamentaryfact.com/admin/DO4U/uploads/',
 
